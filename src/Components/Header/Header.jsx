@@ -3,7 +3,7 @@ import React from 'react'
 import Navbar from './Navbar/Navbar'
 
 import { useNavigate } from 'react-router-dom'
-import  Button  from '@mui/material/Button'
+// import  Button  from '@mui/material/Button'
 
 
 export default function Header() {
@@ -11,13 +11,7 @@ export default function Header() {
   return (
 
     <div className='header'>
-      <Navbar />
-      <>
-        <div className='header'>
-          <h1>Header</h1>
-          <Button onClick={()=>navigate('/BackOffice')} variant="outlined">BackOffice</Button>
-        </div>
-      </>
+      <Navbar navigate={navigate}/>
     </div>
   )
 }
