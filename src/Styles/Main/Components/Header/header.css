@@ -1,0 +1,124 @@
+div.header {
+  @apply relative bg-white;
+}
+
+nav.Navbar {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8
+}
+
+nav.Navbar div.NavbarDiv {
+  @apply border-b border-gray-200
+}
+
+nav.Navbar div.NavbarDiv div.NavbarFlex {
+  @apply flex items-center justify-between h-16;
+}
+
+nav.Navbar div.NavbarDiv div.NavbarFlex::lastChild {
+  @apply flex-grow gap-x-5;
+}
+
+
+div.Navbar__profile {
+  @apply border-solid border-2 rounded-full px-5 py-1 hover:shadow-[0_5px_5px_5px_(0,0,0,0.8)] hover:bg-sky-300;
+}
+
+div.Navbar__profile a.Navbar__profile-link {
+  @apply flex font-medium text-gray-700 gap-x-2 hover:text-gray-800 lg:flex lg:items-center hover:scale-110;
+}
+
+div.Navbar__profile .Navbar__profile-image {
+  @apply w-6 h-6;
+}
+
+div.Navbar__profile p.Navbar__profile-name {
+  @apply font-semibold gap-x-2;
+}
+
+
+div.Navbar__logo {
+  @apply items-center mr-10 ml-28;
+}
+
+div.Navbar__logo a.logo-link {
+  @apply flex flex-row items-center no-underline cursor-pointer;
+}
+
+div.Navbar__logo img {
+  @apply w-12 h-12;
+}
+
+div.Navbar__logo p.title {
+  font-family: 'lovely_nathalie', cursive;
+  @apply p-3 text-3xl font-semibold leading-3 tracking-wider text-red-600;
+}
+
+
+div.Navbar__nav {
+  @apply flex flex-row px-4 py-6 border-t border-gray-200 gap-x-5;
+}
+
+div.Navbar__nav a.nav-link {
+  @apply text-base font-medium text-gray-700 hover:text-gray-800 hover:scale-125;
+}
+
+
+
+div.lastChild {
+  @apply flex items-center justify-end flex-1;
+}
+
+a.Navbar__currency {
+  @apply hidden text-gray-700 hover:text-gray-800 lg:flex lg:items-center hover:scale-110;
+}
+
+a.Navbar__currency img.currency-flag {
+  @apply flex-shrink-0 block h-auto w-7;
+}
+
+a.Navbar__currency span.currency-name {
+  @apply block ml-3 text-sm font-medium;
+}
+
+a.Navbar__currency span.currency-change {
+  @apply sr-only;
+}
+
+
+a.Navbar__search {
+  @apply hidden p-2 ml-6 text-gray-400 hover:text-gray-500 lg:block hover:scale-110;
+}
+
+a.Navbar__search span.search {
+  @apply sr-only;
+}
+
+a.Navbar__search .search-icon {
+  @apply w-6 h-6;
+}
+
+
+
+
+
+
+
+div.Navbar__cart {
+  @apply flow-root ml-4 lg:ml-6;
+}
+
+div.Navbar__cart a.cart {
+  @apply flex items-center p-2 -m-2 text-gray-400 hover:scale-110 hover:text-gray-500;
+}
+
+div.Navbar__cart a.cart .cart__icon {
+  @apply flex-shrink-0 w-6 h-6;
+}
+
+div.Navbar__cart a.cart span.cart__count {
+  @apply ml-2 text-sm font-medium hover:text-gray-700;
+}
+
+div.Navbar__cart a.cart span.view-cart {
+  @apply sr-only;
+}
