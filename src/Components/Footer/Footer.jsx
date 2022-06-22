@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className="footer">
       <small className="small">
-        2022 <FontAwesomeIcon icon={faCopyright} /> <span className="icon">VOD Player</span>
+        2022 <FontAwesomeIcon icon={faCopyright} /> <span className="icon">Kiddo</span>
       </small>
     </footer>
   )
