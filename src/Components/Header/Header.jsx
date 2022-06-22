@@ -12,12 +12,12 @@ export default function Header() {
 
     <div className='header'>
       <Navbar />
-        <>
-          <div className='header'>
-            <h1>Header</h1>
-            <Button onClick={()=>navigate('/BackOffice')} variant="outlined">BackOffice</Button>
-          </div>
-        </>
+      <>
+        <div className='header'>
+          <h1>Header</h1>
+          <Button onClick={()=>navigate('/BackOffice')} variant="outlined">BackOffice</Button>
+        </div>
+      </>
     </div>
   )
 }
