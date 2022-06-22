@@ -22,17 +22,7 @@ root.render(
   <React.StrictMode>
     <ApolloProvider client={apollo}>
       <Router>
-        {/* <Header isAdmin={isAdmin}/> */}
-        {isAdmin & isUser ? 
-          <Fragment>
-            <AdminDashboard />
-          </Fragment>
-        :
-          <Fragment>
-            <Header isAdmin={isAdmin}/>
-            <App isAdmin={isAdmin}/>
-          </Fragment> 
-        }
+        <Header isAdmin={isAdmin}/>
         <App isAdmin={isAdmin}/>
         <Footer />
       </Router>
