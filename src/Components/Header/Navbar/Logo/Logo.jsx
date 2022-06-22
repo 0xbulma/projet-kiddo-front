@@ -6,8 +6,8 @@ export default function Logo({ home }) {
     <div className="Navbar__logo">
       <a href={home.path} className="logo-link">
         <Fragment key={titleProp.title}>
-          <img src={titleProp.imgSrc} alt={titleProp.imgAlt} />
-          <p className="title">My Shop</p>
+          {/* <img src={titleProp.imgSrc} alt={titleProp.imgAlt} /> */}
+          <p className="title">titleProp.title</p>
         </Fragment>
       </a>
     </div>
