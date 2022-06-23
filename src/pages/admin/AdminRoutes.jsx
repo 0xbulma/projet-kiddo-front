@@ -8,6 +8,7 @@ import EventsAdmin from './events/Events.admin'
 import ExtraAdmin from './extra/Extra.admin'
 import SignalAdmin from './signal/Signal.admin'
 import NotFound from '../notFound/NotFound'
+import ArticlesAdmin from './articles/Articles.admin'
 
 export default function AdminRoutes() {
   return (
@@ -15,9 +16,10 @@ export default function AdminRoutes() {
       <Route path="/Admin" element={<HomeAdmin />} />
       <Route path="/Admin/users" element={<UsersAdmin />} />
       <Route path="/Admin/events" element={<EventsAdmin />} />
+      <Route path="/Admin/aricles" element={<ArticlesAdmin />} />
       <Route path="/Admin/extra" element={<ExtraAdmin />} />
       <Route path="/Admin/signal" element={<SignalAdmin />} />
-      <Route path="/Admin/404" element={<NotFound />} />
+      <Route path="/404" element={<NotFound />} />
     </Routes>
   )
 }

@@ -15,11 +15,12 @@ export const titleProp = {
 
 export const navigationAdmin = {
   pages: [
-    { name: 'Home', path: '/' },
-    { name: 'Articles', path: '/Articles' },
-    { name: 'Events', path: '/Events' },
-    { name: 'Users', path: '/Users' },
-    { name: 'Extra', path: '/Extra' }
+    { name: 'Home', path: '/Admin' },
+    { name: 'Articles', path: '/Admin/Articles' },
+    { name: 'Events', path: '/Admin/Events' },
+    { name: 'Users', path: '/Admin/Users' },
+    { name: 'Extra', path: '/Admin/Extra' },
+    { name: 'Signal', path: '/Admin/Signal' }
   ],
   // titleProp: titleProp
 };
