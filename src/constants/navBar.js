@@ -10,6 +10,6 @@ export const navigation = {
 
 export const titleProp = {
   title: 'Kiddo',
-  imgSrc: 'src/assets/images/logo.png',
+  imgSrc: 'media/Images/Logo.png',
   imgAlt: 'Kiddo Logo'
 };
