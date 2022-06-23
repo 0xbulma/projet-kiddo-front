@@ -4,8 +4,8 @@
 
 @font-face {
   font-family: 'lovely_nathalie';
-  src: url('/src/Assets/Fonts/lovely_nathalie_-_dafont-webfont.woff2') format('woff2'),
-       url('/src/Assets/Fonts/lovely_nathalie_-_dafont-webfont.woff') format('woff');
+  src: url('/src/assets/fonts/lovely_nathalie_-_dafont-webfont.woff2') format('woff2'),
+       url('/src/assets/fonts/lovely_nathalie_-_dafont-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
