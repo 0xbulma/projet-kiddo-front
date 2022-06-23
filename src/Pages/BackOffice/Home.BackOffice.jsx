@@ -1,12 +1,11 @@
 import React from "react";
-import { CssBaseline, Container } from "@mui/material";
-import OfficeBar from "../../Components/BackOffice/OfficeBar";
+import { Container } from "@mui/material";
+// import OfficeBar from "../../Components/BackOffice/OfficeBar";
+// import NavBarAdmin from "../../Components/BackOffice/NavBarAdmin";
 
-export default function Contact() {
+export default function HomeAdmin() {
   return (
     <>
-      <CssBaseline />
-      <OfficeBar />
       <main>
         <div>
           <Container maxWidth="sm"></Container>

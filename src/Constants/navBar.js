@@ -3,7 +3,8 @@ export const navigation = {
     { name: 'Home', path: '/' },
     { name: 'Articles', path: '/Articles' },
     { name: 'Events', path: '/Events' },
-    { name: 'Users', path: '/Users' }
+    { name: 'Users', path: '/Users' },
+    // { name: 'Contact', path: '/Contact' }
   ],
 };
 

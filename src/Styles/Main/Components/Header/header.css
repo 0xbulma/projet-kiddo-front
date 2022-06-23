@@ -37,7 +37,7 @@ div.Navbar__profile p.Navbar__profile-name {
 
 
 div.Navbar__logo {
-  @apply items-center mr-10 -ml-28;
+  @apply items-center mr-10 ml-28;
 }
 
 div.Navbar__logo a.logo-link {
@@ -55,11 +55,11 @@ div.Navbar__logo p.title {
 
 
 div.Navbar__nav {
-  @apply px-4 py-6 space-y-6 border-t border-gray-200;
+  @apply flex flex-row px-4 py-6 border-t border-gray-200 gap-x-5;
 }
 
 div.Navbar__nav a.nav-link {
-  @apply text-base font-medium text-gray-700 gap-x-3 hover:text-gray-800;
+  @apply text-base font-medium text-gray-700 hover:text-gray-800 hover:scale-125;
 }
 
 
