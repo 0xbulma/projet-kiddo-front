@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';
 
@@ -10,12 +10,13 @@ import './styles/global.css';
 import App from './pages/App';
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
-import AdminDashboard from './pages/AdminDashboard';
+// import AdminDashboard from './pages/AdminDashboard';
 
 import { apollo } from './graphQL/apollo';
+import AdminDashboard from './pages/AdminDashboard';
 
 let isAdmin = true;
-let isUser = true;
+// let isUser = true;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -24,6 +25,7 @@ root.render(
       <Router>
         <Header isAdmin={isAdmin}/>
         <App isAdmin={isAdmin}/>
+        <AdminDashboard />
         <Footer />
       </Router>
     </ApolloProvider>
