@@ -1,5 +1,5 @@
 import React from 'react'
-import { navigation } from '../../Constants/navBar';
+import { navigation } from '../../constants/navBar';
 import OfficeBar from './OfficeBar/OfficeBar'
 import Logo from '../Header/Navbar/Logo/Logo'
 

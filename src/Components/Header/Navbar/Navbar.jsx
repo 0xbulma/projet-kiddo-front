@@ -3,7 +3,7 @@ import Logo from './Logo/Logo'
 import Nav from './Nav/Nav'
 // import Profile from './Profile/Profile'
 // import Search from './Search/Search'
-import { navigation } from '../../../Constants/navBar';
+import { navigation } from '../../../constants/navBar';
 import { Button } from '@mui/material'
 
 const home = navigation.pages[0];

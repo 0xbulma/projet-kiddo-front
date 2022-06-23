@@ -1,5 +1,5 @@
 import { Fragment } from 'react'
-import { titleProp } from '../../../../Constants/navBar'
+import { titleProp } from '../../../../constants/navBar'
 
 export default function Logo({ home }) {
   return (

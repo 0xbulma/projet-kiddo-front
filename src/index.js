@@ -6,11 +6,11 @@ import { ApolloProvider } from '@apollo/client';
 
 import reportWebVitals from './reportWebVitals';
 
-import './Styles/global.css';
-import App from './Pages/App';
-import Header from './Components/Header/Header';
-import Footer from './Components/Footer/Footer';
-import AdminDashboard from './Pages/AdminDashboard';
+import './styles/global.css';
+import App from './pages/App';
+import Header from './components/header/Header';
+import Footer from './components/footer/Footer';
+import AdminDashboard from './pages/AdminDashboard';
 
 import { apollo } from './GraphQL/apollo';
 

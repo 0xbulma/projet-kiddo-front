@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 // import { Route } from 'react-router'
-import NavBarAdmin from '../Components/BackOffice/NavBarAdmin'
+import NavBarAdmin from '../components/BackOffice/NavBarAdmin'
 // import NavBarAdmin from '../Components/BackOffice/NavBarAdmin'
 // import EventsBackOffice from './BackOffice/Events.BackOffice'
 // import ExtraBackOffice from './BackOffice/Extra.BackOffice'
