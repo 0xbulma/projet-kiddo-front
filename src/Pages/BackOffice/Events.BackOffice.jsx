@@ -1,4 +1,3 @@
-import { Typography } from "@mui/material";
 import React from "react";
 import NavBarAdmin from "../../Components/BackOffice/NavBarAdmin";
 // import OfficeBar from "../../Components/BackOffice/OfficeBar/OfficeBar";
@@ -6,9 +5,8 @@ import NavBarAdmin from "../../Components/BackOffice/NavBarAdmin";
 const EventsBackOffice = () => {
   return (
     <>
-      
       <NavBarAdmin />
-      <Typography>List of events</Typography>
+      <p>List of events</p>
     </>
   );
 };

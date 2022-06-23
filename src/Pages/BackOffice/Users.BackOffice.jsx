@@ -9,7 +9,7 @@ const UsersBackOffice = () => {
       {/* <CssBaseline />
       <OfficeBar /> */}
       <NavBarAdmin />
-      <Typography>List of users</Typography>
+      <p>List of users</p>
     </>
   );
 };

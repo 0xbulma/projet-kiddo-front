@@ -11,17 +11,15 @@ import Home from "./home/Home";
 // import SignalBackOffice from "./backOffice/Signal.BackOffice";
 import NotFound from "./notFound/NotFound";
 
-// import Header from "../Components/Header/Header";
-
 // const isUser = true;
 
-export default function App({isAdmin}) {
+export default function App({ isAdmin }) {
   return (
     <div className="index">
-      <Routes>     
+      <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
-        
+
         {/* {isAdmin ? <Route path="/BackOffice" element={<HomeAdmin />} /> : <Route path="/404" element={<NotFound />} />} */}
         {/* <Route path="/backOffice" element={<HomeAdmin />} />
         <Route path="/backOffice/Users" element={<UsersBackOffice />} />
