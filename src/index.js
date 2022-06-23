@@ -12,7 +12,7 @@ import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
 import AdminDashboard from './pages/AdminDashboard';
 
-import { apollo } from './GraphQL/apollo';
+import { apollo } from './graphQL/apollo';
 
 let isAdmin = true;
 let isUser = true;
