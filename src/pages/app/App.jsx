@@ -1,18 +1,15 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
 
-import Home from "./home/Home";
-import Contact from "./Contact/Contact";
-import NotFound from "../notFound/NotFound";
+import Header from "../../components/app/header/Header";
+import Footer from "../../components/app/footer/Footer";
+import AppRoutes from "./AppRoutes";
 
 export default function App() {
   return (
     <div className="index">
-      <Routes>     
-        <Route path="/" element={<Home />} />
-        <Route path="/Contact" element={<Contact />} />
-        <Route path="/404" element={<NotFound />} />
-      </Routes>
+      <Header />
+      <AppRoutes />
+      <Footer />
     </div>
   );
 }

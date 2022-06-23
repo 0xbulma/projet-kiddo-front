@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCopyright } from '@fortawesome/free-solid-svg-icons'
 
-export default function Footer() {
+export default function FooterAdmin() {
   return (
     <footer className="footer">
       <small className="small">

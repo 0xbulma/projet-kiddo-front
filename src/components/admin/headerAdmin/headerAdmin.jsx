@@ -1,7 +1,7 @@
 import React from 'react'
 
-export default function headerAdmin() {
+export default function HeaderAdmin() {
   return (
-    <div>headerAdmin</div>
+    <div>HeaderAdmin</div>
   )
 }

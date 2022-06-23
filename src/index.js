@@ -10,12 +10,13 @@ import './styles/global.css';
 import App from './pages/app/App';
 
 import { apollo } from './graphql/apollo';
+
 // import AdminDashboard from './pages/admin/AdminDashboard';
 
-// const [AppRouter, AdminRouter] = [Router, Router].map(router =>
-//   router({
+// const [AppRouter, AdminRouter] = [Router, Routes].map(Routes =>
+//   Routes({
 //     baseUrl: '/',
-//     routes: [
+//     Route: [
 //       { path: '/', element: <App /> },
 //       { path: '/admin', element: <AdminDashboard /> },
 //     ],
@@ -27,16 +28,16 @@ import { apollo } from './graphql/apollo';
 //   return token && token.split('.')[1] === 'admin';
 // }
 
+// const isAdmin = false;
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <ApolloProvider client={apollo}>
       <Router>
-        {/* 
-        {isAdmin() ? <AdminRouter /> : <AppRouter />} 
-        */}
+        
         <App />
-        {/* <AdminDashboard /> */}
+        
       </Router>
     </ApolloProvider>
   </React.StrictMode>
