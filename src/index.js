@@ -10,7 +10,7 @@ import './styles/global.css';
 import App from './pages/app/App';
 
 import { apollo } from './graphql/apollo';
-import AdminDashboard from './pages/admin/AdminDashboard';
+// import AdminDashboard from './pages/admin/AdminDashboard';
 
 // const [AppRouter, AdminRouter] = [Router, Router].map(router =>
 //   router({
@@ -36,7 +36,7 @@ root.render(
         {isAdmin() ? <AdminRouter /> : <AppRouter />} 
         */}
         <App />
-        <AdminDashboard />
+        {/* <AdminDashboard /> */}
       </Router>
     </ApolloProvider>
   </React.StrictMode>
