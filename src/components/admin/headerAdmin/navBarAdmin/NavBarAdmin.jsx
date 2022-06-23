@@ -1,5 +1,5 @@
 import React from 'react'
-import { navigation } from '../../../../constants/navBar';
+import { navigation, navigationAdmin } from '../../../../constants/navBar';
 import Logo from '../../../app/header/navBar/logo/Logo'
 import NavAdmin from './navAdmin/NavAdmin';
 
@@ -11,7 +11,7 @@ export default function NavBarAdmin() {
       <div className="NavbarDiv">
         <Logo home={home} className="-ml-28"/>
         <span>Dashboard</span>
-        <NavAdmin />
+        <NavAdmin navigationAdmin={navigationAdmin} />
       </div>
     </nav>
   )

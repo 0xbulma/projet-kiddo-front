@@ -7,11 +7,11 @@ import { ApolloProvider } from '@apollo/client';
 import reportWebVitals from './reportWebVitals';
 
 import './styles/global.css';
-import App from './pages/app/App';
+// import App from './pages/app/App';
 
 import { apollo } from './graphql/apollo';
 
-// import AdminDashboard from './pages/admin/AdminDashboard';
+import AdminDashboard from './pages/admin/AdminDashboard';
 
 // const [AppRouter, AdminRouter] = [Router, Routes].map(Routes =>
 //   Routes({
@@ -28,7 +28,7 @@ import { apollo } from './graphql/apollo';
 //   return token && token.split('.')[1] === 'admin';
 // }
 
-const isAdmin = true;
+// const isAdmin = true;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -36,7 +36,8 @@ root.render(
     <ApolloProvider client={apollo}>
       <Router>
         
-        <App isAdmin={isAdmin} />
+        {/* <App isAdmin={isAdmin} /> */}
+        <AdminDashboard />
         
       </Router>
     </ApolloProvider>

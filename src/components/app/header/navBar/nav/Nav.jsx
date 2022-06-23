@@ -1,6 +1,6 @@
 import NavItem from "./navItem/NavItem"
 
-export default function Nav({ navigation, isAdmin }) {
+export default function Nav({ navigation }) {
   return (
     <div className="Navbar__nav">
       {

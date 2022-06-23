@@ -15,7 +15,7 @@ export default function NavBar({isAdmin}) {
       <div className="NavbarDiv">
         <div className="NavbarFlex">
         <Logo home={home} className="-ml-28"/>
-        <Nav navigation={navigation} isAdmin={isAdmin}/>
+        <Nav navigation={navigation} />
         <div className="lastChild">
             {/* <Search /> */}
             {/* <Profile /> */}

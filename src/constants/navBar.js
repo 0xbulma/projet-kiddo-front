@@ -13,7 +13,7 @@ export const titleProp = {
   imgAlt: 'Kiddo Logo'
 };
 
-export const navBarAdmin = {
+export const navigationAdmin = {
   pages: [
     { name: 'Home', path: '/' },
     { name: 'Articles', path: '/Articles' },
@@ -21,5 +21,5 @@ export const navBarAdmin = {
     { name: 'Users', path: '/Users' },
     { name: 'Extra', path: '/Extra' }
   ],
-  titleProp: titleProp
+  // titleProp: titleProp
 };
