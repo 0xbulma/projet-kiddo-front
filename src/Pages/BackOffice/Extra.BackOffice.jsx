@@ -1,4 +1,3 @@
-import { Typography } from "@mui/material";
 import React from "react";
 import NavBarAdmin from "../../Components/BackOffice/NavBarAdmin";
 // import OfficeBar from "../../Components/BackOffice/OfficeBar/OfficeBar";
@@ -8,8 +7,8 @@ const ExtraBackOffice = () => {
     <>
       {/* <CssBaseline />
       <OfficeBar /> */}
-      <NavBarAdmin /> 
-      <Typography>List of extra</Typography>
+      <NavBarAdmin />
+      <p>List of extra</p>
     </>
   );
 };
