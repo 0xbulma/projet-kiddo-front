@@ -1,7 +1,10 @@
 import React from 'react'
+import NavBarAdmin from './navBarAdmin/NavBarAdmin'
 
 export default function HeaderAdmin() {
   return (
-    <div>HeaderAdmin</div>
+    <div className="header">
+      <NavBarAdmin />
+    </div>
   )
 }

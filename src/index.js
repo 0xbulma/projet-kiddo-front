@@ -28,7 +28,7 @@ import { apollo } from './graphql/apollo';
 //   return token && token.split('.')[1] === 'admin';
 // }
 
-// const isAdmin = false;
+const isAdmin = true;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -36,7 +36,7 @@ root.render(
     <ApolloProvider client={apollo}>
       <Router>
         
-        <App />
+        <App isAdmin={isAdmin} />
         
       </Router>
     </ApolloProvider>

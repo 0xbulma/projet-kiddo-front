@@ -1,7 +1,11 @@
 import React from 'react'
 
-export default function header() {
+import NavBar from './navBar/NavBar'
+
+export default function header(isAdmin) {
   return (
-    <div>header</div>
+    <div claxssName='header'>
+      <NavBar isAdmin={isAdmin} />
+    </div>
   )
 }
