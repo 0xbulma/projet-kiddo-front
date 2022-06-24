@@ -11,12 +11,12 @@ export default function NavBar({isAdmin}) {
   const navigate = useNavigate()
   
   return (
-    <nav aria-label='top' className='Navbar'>
+    <nav aria-label='top' className='header__Navbar'>
       <div className="NavbarDiv">
         <div className="NavbarFlex">
-        <Logo home={home} className="-ml-28"/>
-        <Nav navigation={navigation} />
-        <div className="lastChild">
+          <Logo home={home} className="-ml-28"/>
+          <Nav navigation={navigation} />
+          <div className="lastChild">
             {/* <Search /> */}
             {/* <Profile /> */}
             {
