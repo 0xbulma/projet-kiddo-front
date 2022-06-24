@@ -1,6 +1,6 @@
 import React from 'react'
-import FooterAdmin from '../../components/admin/footerAdmin/FooterAdmin'
-import HeaderAdmin from '../../components/admin/headerAdmin/HeaderAdmin'
+import FooterAdmin from '../../components/admin/footeradmin/FooterAdmin'
+import HeaderAdmin from '../../components/admin/headeradmin/HeaderAdmin'
 import AdminRoutes from './AdminRoutes'
 
 
