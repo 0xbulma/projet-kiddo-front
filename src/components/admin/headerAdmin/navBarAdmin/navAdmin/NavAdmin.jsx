@@ -1,5 +1,5 @@
 import React from 'react'
-import NavItemAdmin from './navItemAdmin/NavItemAdmin'
+import NavItemAdmin from './navitemadmin/NavItemAdmin'
 
 export default function Nav({ navigationAdmin }) {
   return (
@@ -9,6 +9,7 @@ export default function Nav({ navigationAdmin }) {
           <NavItemAdmin key={page.name} page={page} />
         ))
       }
+      {console.log("coucou")}
     </div>
   )
 }

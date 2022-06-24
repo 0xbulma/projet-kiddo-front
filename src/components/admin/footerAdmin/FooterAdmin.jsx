@@ -6,6 +6,7 @@ export default function FooterAdmin() {
     <footer className="footer">
       <small className="small">
         2022 <FontAwesomeIcon icon={faCopyright} /> <span className="icon">Kiddo Admin DashBoard</span>
+        {console.log("coucou")}
       </small>
     </footer>
   )
