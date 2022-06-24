@@ -7,7 +7,7 @@
 
 # testing
 /coverage
-
+/src-copie
 .env
 
 # production
