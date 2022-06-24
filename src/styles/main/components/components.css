@@ -13,7 +13,7 @@ div.header {
 }
 
 nav.header__Navbar {
-  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8
+  @apply px-4 mx-auto max-w-7xl sm:px-6 lg:px-8;
 }
 
 nav.header__Navbar > div.header__Navbar#div {
