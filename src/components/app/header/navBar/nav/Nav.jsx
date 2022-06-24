@@ -1,4 +1,4 @@
-import NavItem from "./navItem/NavItem"
+import NavItem from "./navitem/NavItem"
 
 export default function Nav({ navigation }) {
   return (

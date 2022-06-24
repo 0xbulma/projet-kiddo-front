@@ -1,6 +1,6 @@
 import React from 'react'
 
-import NavBar from './navBar/NavBar'
+import NavBar from './navbar/NavBar'
 
 export default function header(isAdmin) {
   return (

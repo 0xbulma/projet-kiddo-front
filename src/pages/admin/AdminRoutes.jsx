@@ -7,7 +7,7 @@ import UsersAdmin from './users/Users.admin'
 import EventsAdmin from './events/Events.admin'
 import ExtraAdmin from './extra/Extra.admin'
 import SignalAdmin from './signal/Signal.admin'
-import NotFound from '../notFound/NotFound'
+import NotFound from '../notfound/NotFound'
 import ArticlesAdmin from './articles/Articles.admin'
 
 export default function AdminRoutes() {
