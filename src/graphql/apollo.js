@@ -1,4 +1,4 @@
-import { ApolloClient, InMemoryCache } from "@apollo/client";
+import { ApolloClient, InMemoryCache } from '@apollo/client';
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -6,47 +6,47 @@ const cache = new InMemoryCache({
       fields: {
         // Automatically fetch the user when we encounter it in a query.
         users: {
-          keyFields: ["id"],
+          keyFields: ['id'],
           merge(existing, incoming) {
             return {
               ...existing,
               ...incoming,
             };
-          }
+          },
         },
         events: {
-          keyFields: ["id"],
+          keyFields: ['id'],
           merge(existing, incoming) {
             return {
               ...existing,
               ...incoming,
             };
-          }
+          },
         },
         articles: {
-          keyFields: ["id"],
+          keyFields: ['id'],
           merge(existing, incoming) {
             return {
               ...existing,
               ...incoming,
             };
-          }
+          },
         },
         comments: {
-          keyFields: ["id"],
+          keyFields: ['id'],
           merge(existing, incoming) {
             return {
               ...existing,
               ...incoming,
             };
-          }
+          },
         },
-      }
-    }
-  }
+      },
+    },
+  },
 });
 
 export const apollo = new ApolloClient({
   uri: process.env.REACT_APP_GRAPHQL_ENDPOINT,
-  cache,
+  cache: new InMemoryCache(),
 });

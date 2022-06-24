@@ -35,10 +35,8 @@ root.render(
   <React.StrictMode>
     <ApolloProvider client={apollo}>
       <Router>
-        
         {/* <App isAdmin={isAdmin} /> */}
         <AdminDashboard />
-        
       </Router>
     </ApolloProvider>
   </React.StrictMode>
