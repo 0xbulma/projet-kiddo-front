@@ -16,13 +16,14 @@ export default function NavBar({isAdmin}) {
         <div className="NavbarFlex">
           <Logo home={home} className="-ml-28"/>
           <Nav navigation={navigation} />
-          <div className="lastChild">
-            {/* <Search /> */}
-            {/* <Profile /> */}
+          <NavIcon />
+          {/* <div className="lastChild">
+            <Search />
+            <Profile />
             {
               isAdmin && <button onClick={()=>navigate('/admin')} variant="outlined">BackOffice</button>
             }
-          </div>
+          </div> */}
         </div>
       </div>
     </nav>
