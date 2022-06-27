@@ -67,41 +67,41 @@ export default function UsersAdmin() {
   };
   
   return (
-    <div className="flex flex-col items-center content-center justify-center align-middle mb-7">
-      <h2 className="mb-5 font-bold">UsersAdmin</h2>
+    <section className="users__section">
+      <h2 className="users__section-title">UsersAdmin</h2>
       <div className='mb-3'>
-          <input type='text' className='' placeholder='_id' onChange={(e) => handleChangeForUser(e.currentTarget.value, 0)} />
-          <input type='text' className='' placeholder='FirstName' onChange={(e) => handleChangeForUser(e.currentTarget.value, 1)} />
-          <input type='text' className='' placeholder='LastName' onChange={(e) => handleChangeForUser(e.currentTarget.value, 2)} />
-          <button className="button" onClick={() => modifyUserRequest(modifyUserRequestVariables)}>
-            Modifier l'utilisateur
-          </button>
-        </div>
-        <div>
-          <input type='text' className='' placeholder='Email' onChange={(e) => setEmail(e.target.value)} />
-          <button className="button" onClick={() => getUserRequest(getUserRequestVariables)}>
-            Consulter un utilisateur par son email
-          </button>
-        </div>
-        <div className='my-3'>
-          <input
-            type='text'
-            className=''
-            placeholder='Sender Email'
-            onChange={(e) => setFriendRequest(friendRequest.senderEmail(e.currentTarget.value))}
-          />
-          <input
-            type='text'
-            className=''
-            placeholder='Target Email'
-            onChange={(e) => setFriendRequest(friendRequest.targetEmail(e.currentTarget.value))}
-          />
-          <button className="button" onClick={() => sendFriendRequest(friendRequestVariables)}>
-            Envoyer une demande d'amis
-          </button>
-        </div>
+        <input type='text' className='input' placeholder='_id' onChange={(e) => handleChangeForUser(e.currentTarget.value, 0)} />
+        <input type='text' className='input' placeholder='FirstName' onChange={(e) => handleChangeForUser(e.currentTarget.value, 1)} />
+        <input type='text' className='input' placeholder='LastName' onChange={(e) => handleChangeForUser(e.currentTarget.value, 2)} />
+        <button className="button" onClick={() => modifyUserRequest(modifyUserRequestVariables)}>
+          Modifier l'utilisateur
+        </button>
+      </div>
+      <div>
+        <input type='text' className='input' placeholder='Email' onChange={(e) => setEmail(e.target.value)} />
+        <button className="button" onClick={() => getUserRequest(getUserRequestVariables)}>
+          Consulter un utilisateur par son email
+        </button>
+      </div>
+      <div className='my-3'>
+        <input
+          type='text'
+          className='input'
+          placeholder='Sender Email'
+          onChange={(e) => setFriendRequest(friendRequest.senderEmail(e.currentTarget.value))}
+        />
+        <input
+          type='text'
+          className='input'
+          placeholder='Target Email'
+          onChange={(e) => setFriendRequest(friendRequest.targetEmail(e.currentTarget.value))}
+        />
+        <button className="button" onClick={() => sendFriendRequest(friendRequestVariables)}>
+          Envoyer une demande d'amis
+        </button>
+      </div>
         <h2 className='mt-5'>Résultat des requêtes</h2>
         <textarea name='Toto' id='userResult' cols='80' rows='20' value={requestData}></textarea>
-    </div>
+    </section>
   )
 }
