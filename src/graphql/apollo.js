@@ -48,5 +48,5 @@ const cache = new InMemoryCache({
 
 export const apollo = new ApolloClient({
   uri: process.env.REACT_APP_GRAPHQL_ENDPOINT,
-  cache: new InMemoryCache(),
+  cache,
 });

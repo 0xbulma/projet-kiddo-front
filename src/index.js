@@ -11,7 +11,7 @@ import './global.scss';
 
 import { apollo } from './graphql/apollo';
 
-import AdminDashboard from './pages/admin/AdminDashboard';
+import DashboardRoutes from './pages/administration/DashboardRoutes';
 
 // const [AppRouter, AdminRouter] = [Router, Routes].map(Routes =>
 //   Routes({
@@ -36,7 +36,8 @@ root.render(
     <ApolloProvider client={apollo}>
       <Router>
         {/* <App isAdmin={isAdmin} /> */}
-        <AdminDashboard />
+        {/* <AdminDashboard /> */}
+        <DashboardRoutes />
       </Router>
     </ApolloProvider>
   </React.StrictMode>
