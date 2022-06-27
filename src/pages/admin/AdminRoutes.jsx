@@ -13,12 +13,12 @@ import ArticlesAdmin from './articles/Articles.admin'
 export default function AdminRoutes() {
   return (
     <Routes>
-      <Route path="/Admin" element={<HomeAdmin />} />
-      <Route path="/Admin/users" element={<UsersAdmin />} />
-      <Route path="/Admin/events" element={<EventsAdmin />} />
-      <Route path="/Admin/aricles" element={<ArticlesAdmin />} />
-      <Route path="/Admin/extra" element={<ExtraAdmin />} />
-      <Route path="/Admin/signal" element={<SignalAdmin />} />
+      <Route path="/admin" element={<HomeAdmin />} />
+      <Route path="/admin/users" element={<UsersAdmin />} />
+      <Route path="/admin/events" element={<EventsAdmin />} />
+      <Route path="/admin/aricles" element={<ArticlesAdmin />} />
+      <Route path="/admin/extra" element={<ExtraAdmin />} />
+      <Route path="/admin/signal" element={<SignalAdmin />} />
       <Route path="/404" element={<NotFound />} />
     </Routes>
   )

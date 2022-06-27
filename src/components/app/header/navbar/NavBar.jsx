@@ -20,7 +20,7 @@ export default function NavBar({isAdmin}) {
             {/* <Search /> */}
             {/* <Profile /> */}
             {
-              isAdmin && <button onClick={()=>navigate('/BackOffice')} variant="outlined">BackOffice</button>
+              isAdmin && <button onClick={()=>navigate('/admin')} variant="outlined">BackOffice</button>
             }
           </div>
         </div>
