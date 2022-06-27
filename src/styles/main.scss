@@ -4,8 +4,7 @@
 
 @font-face {
   font-family: 'lovely_nathalie';
-  src: url('/src/assets/fonts/lovely_nathalie_-_dafont-webfont.woff2') format('woff2'),
-       url('/src/assets/fonts/lovely_nathalie_-_dafont-webfont.woff') format('woff');
+  src: local('lovely_nathalie') url('../assets/fonts/Lovely_Nathalie_Dafont.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -16,11 +15,10 @@ div.index {
   @apply flex flex-col justify-between w-full h-full min-h-screen bg-gray-200;
 }
 
-
 /* ----------------------------------------------------------- Components ------------------------------------------------------------ */
 
-@import url('../components/components.css');
+@import url('../components/components.scss');
 
 /* ----------------------------------------------------------- Pages ------------------------------------------------------------ */
 
-@import url('../pages/pages.css');
+@import url('../pages/pages.scss');

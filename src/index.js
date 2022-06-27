@@ -6,7 +6,7 @@ import { ApolloProvider } from '@apollo/client';
 
 import reportWebVitals from './reportWebVitals';
 
-import './global.css';
+import './global.scss';
 // import App from './pages/app/App';
 
 import { apollo } from './graphql/apollo';
