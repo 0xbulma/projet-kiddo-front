@@ -2,8 +2,8 @@ import React from 'react'
 import { Route, Routes } from 'react-router'
 
 import Home from "./home/Home";
-import Contact from "./Contact/Contact";
-import NotFound from "../notFound/NotFound";
+import Contact from "./contact/Contact";
+import NotFound from "../notfound/NotFound";
 import Events from './events/Events';
 
 export default function AppRoutes() {
