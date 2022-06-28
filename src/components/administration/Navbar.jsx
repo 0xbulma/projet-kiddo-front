@@ -5,7 +5,7 @@ import { faDashboard, faUser } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
 // Import scss
-import './_navbar.scss';
+import './_navbar.css';
 
 function Navbar() {
   return (

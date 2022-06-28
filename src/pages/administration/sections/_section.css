@@ -1,21 +1,21 @@
 .section_tab {
   @apply text-xl;
+}
 
-  span {
-    @apply mx-5;
-  }
+.section_tab span {
+  @apply mx-5;
 }
 
 .table {
   @apply w-full border-b border-gray-200 shadow;
+}
 
-  th {
-    @apply px-6 py-2 text-xs text-gray-500;
-  }
+.table th {
+  @apply px-6 py-2 text-xs text-gray-500;
+}
 
-  td {
-    @apply px-6 py-4 text-sm text-gray-500;
-  }
+.table td {
+  @apply px-6 py-4 text-sm text-gray-500;
 }
 
 .table-show-btn {

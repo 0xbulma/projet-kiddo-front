@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 // Import assets
-import './_dashboard.scss';
+import './_dashboard.css';
 
 export default function Dashboard() {
   return (
