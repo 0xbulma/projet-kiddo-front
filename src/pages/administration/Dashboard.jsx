@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom';
 
-// Import assets
-import './_dashboard.css';
-
+// VARIABLE NAV WIDTH DYNAMIC POUR UN admin-container RESPONSIVE
 export default function Dashboard() {
   return (
     <div className='flex'>
@@ -16,6 +14,7 @@ export default function Dashboard() {
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis totam, suscipit aliquam adipisci magnam, ex ratione similique in
             natus, consequatur omnis eveniet. Non nulla nobis eveniet eum harum tempora voluptatum.
           </p>
+
           <Link to='/' className='admin-section__button'>
             Retourner sur le site Kiddo.fr
           </Link>

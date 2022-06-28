@@ -12,5 +12,9 @@
 }
 
 .admin-section__button {
-  @apply bg-[#2b96fa] px-4 py-2 rounded-md shadow-md shadow-slate-400 text-white hover:bg-[#2788e2] transition-all;
+  @apply bg-[#2b96fa] px-4 py-3 rounded-md shadow-md shadow-slate-400 text-white hover:bg-[#2788e2] transition-all;
+}
+
+.admin-section__input {
+  @apply bg-[#2b96fa];
 }

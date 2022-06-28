@@ -8,10 +8,9 @@ import reportWebVitals from './reportWebVitals';
 
 import './global.css';
 // import App from './pages/app/App';
+import DashboardRoutes from './pages/administration/DashboardRoutes';
 
 import { apollo } from './graphql/apollo';
-
-import DashboardRoutes from './pages/administration/DashboardRoutes';
 
 // const [AppRouter, AdminRouter] = [Router, Routes].map(Routes =>
 //   Routes({
@@ -32,15 +31,16 @@ import DashboardRoutes from './pages/administration/DashboardRoutes';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <ApolloProvider client={apollo}>
-      <Router>
-        {/* <App isAdmin={isAdmin} /> */}
-        {/* <AdminDashboard /> */}
-        <DashboardRoutes />
-      </Router>
-    </ApolloProvider>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <ApolloProvider client={apollo}>
+    <Router>
+      {/* <App isAdmin={isAdmin} /> */}
+      {/* <AdminDashboard /> */}
+      <DashboardRoutes />
+      {/* <App /> */}
+    </Router>
+  </ApolloProvider>
+  // </React.StrictMode>
 );
 
 reportWebVitals();
