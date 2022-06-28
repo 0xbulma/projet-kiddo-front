@@ -1,8 +1,0 @@
-section.users__section {
-  @apply flex flex-col items-center content-center justify-center align-middle mb-7;
-}
-
-
-h2.users__section-title {
-  @apply mb-5 text-xl font-bold text-center;
-}
