@@ -1,0 +1,24 @@
+/* ----------------------------------------------------------- Fonts ------------------------------------------------------------ */
+
+@import url('https://fonts.googleapis.com/css2?family=Mandali&family=Raleway:ital,wght@0,300;0,400;0,700;1,400&family=Tapestry&display=swap');
+
+@font-face {
+  font-family: 'lovely_nathalie';
+  src: local('lovely_nathalie') url('../assets/fonts/Lovely_Nathalie_Dafont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* ----------------------------------------------------------- Additionnal Styles ------------------------------------------------------------ */
+
+div.index {
+  @apply flex flex-col justify-between w-full h-full min-h-screen bg-gray-200;
+}
+
+/* ----------------------------------------------------------- Components ------------------------------------------------------------ */
+
+@use '../components/components.scss';
+
+/* ----------------------------------------------------------- Pages ------------------------------------------------------------ */
+
+@use '../pages/pages.scss';

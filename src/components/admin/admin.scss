@@ -1,0 +1,7 @@
+.button {
+  @apply px-3 py-2 mx-3 text-white transition-all rounded-sm bg-slate-500 drop-shadow-lg hover:bg-slate-400 hover:text-black;
+}
+
+.input {
+  @apply hover:ring-sky-500 rounded-xl ring-2;
+}

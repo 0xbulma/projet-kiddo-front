@@ -7,8 +7,11 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "node-sass": "^7.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router": "^6.3.0",
+    "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
@@ -49,11 +52,7 @@
     "autoprefixer": "^10.4.7",
     "axios": "^0.27.2",
     "postcss": "^8.4.14",
-    "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-import": "^14.1.0",
-    "postcss-preset-env": "^7.7.1",
-    "react-router": "^6.3.0",
-    "react-router-dom": "^6.3.0",
     "tailwind-scrollbar-hide": "^1.1.7",
     "tailwindcss": "^3.1.4",
     "tailwindcss-gradient": "^1.0.1"

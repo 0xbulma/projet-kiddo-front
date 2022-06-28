@@ -1,0 +1,48 @@
+/* ----------------------------------------------------------- App ------------------------------------------------------------ */
+
+@use './app/app.scss';
+
+/* ----------------------------------------------------------- Admin ------------------------------------------------------------ */
+
+@use './admin/admin';
+@use './administration/_navbar';
+
+/* ----------------------------------------------------------- Header ------------------------------------------------------------ */
+
+div.header {
+  @apply relative bg-white;
+}
+
+nav.Navbar {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+nav.header__Navbar {
+  @apply px-4 mx-auto max-w-7xl sm:px-6 lg:px-8;
+}
+
+nav.header__Navbar > div.header__Navbar#div {
+  @apply border-b border-gray-200;
+}
+
+nav.header__Navbar > div.header__Navbar#Flex {
+  @apply border-b border-gray-200;
+}
+
+div.header__Navbar > div:first-child {
+  @apply flex items-center justify-between h-16;
+}
+
+/* ----------------------------------------------------------- Footer ------------------------------------------------------------ */
+
+footer.footer {
+  @apply m-0 p-0 w-full text-center text-white mt-0 bg-[#6E8E9B] py-5 px-0;
+}
+
+footer.footer small.small {
+  @apply space-x-2 text-base font-bold;
+}
+
+footer.footer small .icon {
+  @apply text-2xl text-red-700 font-['Tapestry'];
+}

@@ -1,0 +1,15 @@
+.admin-navbar {
+  @apply w-64 h-screen fixed translate-x-0 bg-cyan-200 border-r-2 border-cyan-400;
+
+  &__header {
+    @apply flex mx-8 my-4 pb-4 border-b-2;
+
+    img {
+      @apply w-12 h-12 mr-2 transition-all hover:scale-105 hover:-rotate-6;
+    }
+  }
+
+  &__item {
+    @apply px-6 py-5 text-xl cursor-pointer transition-all hover:bg-pink-200 hover:bg-opacity-50;
+  }
+}
