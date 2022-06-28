@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 
-import NavBar from './navbar/NavBar'
+import NavBar from "./navbar/NavBar";
 
 export default function header(isAdmin) {
   return (
-    <div claxssName='header'>
+    <div className="header">
       <NavBar isAdmin={isAdmin} />
     </div>
-  )
+  );
 }
