@@ -2,36 +2,36 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import Home from './pages/app/Home';
-import Header from './components/app/header/Header';
-import Footer from './components/app/footer/Footer';
+import { ApolloProvider } from '@apollo/client';
+import reportWebVitals from './reportWebVitals';
+import { apollo } from './graphql/apollo';
 
+import UserLayout from './pages/layout/UserLayout';
+import AdminLayout from './pages/layout/AdminLayout';
+import Home from './pages/app/Home';
 import Contact from './pages/app/Contact.jsx';
 import Events from './pages/app/Events.jsx';
 import NotFound from './pages/app/NotFound.jsx';
-
-
-import { ApolloProvider } from '@apollo/client';
-import reportWebVitals from './reportWebVitals';
+import Dashboard from './pages/administration/Dashboard';
 
 import './global.css';
-// import App from './pages/app/App';
-
-import { apollo } from './graphql/apollo';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
   <React.StrictMode>
     <ApolloProvider client={apollo}>
       <Router>
-        <Header />
         <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/contact' element={<Contact />} />
-          <Route path='/events' element={<Events />} />
-          <Route path='*' element={<NotFound />} />
+          <Route path='/' element={<UserLayout composant={Home} />} />
+          <Route path='/contact' element={<UserLayout composant={Contact} />} />
+          <Route path='/events' element={<UserLayout composant={Events} />} />
+          <Route path='*' element={<UserLayout composant={NotFound} />} />
+          <Route path='/administration' element={<AdminLayout composant={Dashboard} />} />
+          {/* <Route path="/users" element={<User />} /> */}
+          {/* <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} /> */}
         </Routes>
-        <Footer />
       </Router>
     </ApolloProvider>
   </React.StrictMode>
