@@ -1,6 +1,6 @@
 import React from "react";
 
-const StepTwo = () => {
+const StepTwoLogin = () => {
   return (
     <>
       <div>Connection Réussie</div>
@@ -8,4 +8,4 @@ const StepTwo = () => {
   );
 };
 
-export default StepTwo;
+export default StepTwoLogin;

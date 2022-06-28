@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-import Form from "../register/Form";
-import StepTwo from "../register/StepTwo";
+import FormRegister from "./FormRegister";
+import StepTwoRegister from "./StepTwoRegister";
 
 function Register() {
   const [username, setUsername] = useState("");
@@ -12,7 +12,7 @@ function Register() {
   return (
     <div>
       {step === 1 ? (
-        <Form
+        <FormRegister
           username={username}
           setUsername={setUsername}
           email={email}
@@ -25,7 +25,7 @@ function Register() {
           setStep={setStep}
         />
       ) : (
-        <StepTwo />
+        <StepTwoRegister />
       )}
     </div>
   );
