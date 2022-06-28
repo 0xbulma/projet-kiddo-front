@@ -6,6 +6,7 @@ import Dashboard from './Dashboard';
 import User from './sections/user/User';
 
 import Navbar from '../../components/administration/Navbar';
+import App from '../app/App';
 
 export default function DashboardRoutes() {
   return (
@@ -13,6 +14,7 @@ export default function DashboardRoutes() {
       <Navbar />
 
       <Routes>
+        <Route path='/' element={<App />} />
         <Route path='/administration' element={<Dashboard />} />
         <Route path='/administration/users' element={<User />} />
       </Routes>

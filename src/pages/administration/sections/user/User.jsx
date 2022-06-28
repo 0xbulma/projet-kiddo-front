@@ -5,7 +5,7 @@ import { useQuery } from '@apollo/client';
 import * as gqlQueryRequest from '../../../../graphql/query/users.query';
 
 // Import asset
-import '../_section.scss';
+import '../_section.css';
 
 export default function User() {
   const [users, setUsers] = useState([]);
@@ -29,7 +29,7 @@ export default function User() {
 
         <article className='mt-10 flex-col'>
           <table className='table'>
-            <thead class='bg-gray-50'>
+            <thead className='bg-gray-50'>
               <tr>
                 <th>ID</th>
                 <th>Email</th>
@@ -40,24 +40,24 @@ export default function User() {
                 <th>Supprimer</th>
               </tr>
             </thead>
-            <tbody class='bg-white'>
+            <tbody className='bg-white'>
               {users.map((user) => (
-                <tr class='whitespace-nowrap'>
+                <tr className='whitespace-nowrap'>
                   <td>{user._id}</td>
                   <td>{user.email}</td>
                   <td>{user.created_at}</td>
                   <td>{user.updated_at}</td>
-                  <td class='px-6 py-4'>
+                  <td className='px-6 py-4'>
                     <Link to='/administration/users' className='table-show-btn'>
                       Consulter
                     </Link>
                   </td>
-                  <td class='px-6 py-4'>
+                  <td className='px-6 py-4'>
                     <Link to='/administration/users' className='table-edit-btn'>
                       Modifier
                     </Link>
                   </td>
-                  <td class='px-6 py-4'>
+                  <td className='px-6 py-4'>
                     <Link to='/administration/users' className='table-delete-btn'>
                       Supprimer
                     </Link>

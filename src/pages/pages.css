@@ -1,11 +1,11 @@
 /* ----------------------------------------------------------- App ------------------------------------------------------------ */
 
-@import './app/app.scss';
+@import './app/app.css';
 
 /* ----------------------------------------------------------- Admin ------------------------------------------------------------ */
 
-@import './admin/admin.scss';
-@import './administration/_dashboard.scss';
+@import './admin/admin.css';
+@import './administration/_dashboard.css';
 
 /* ----------------------------------------------------------- NotFound ------------------------------------------------------------ */
-@import './notfound/notFound.scss';
+@import './notfound/notFound.css';

@@ -1,0 +1,16 @@
+.admin-container {
+  /* -64 equals navbar width defined in _navbar.css */
+  @apply ml-64 w-screen flex flex-col justify-center content-center align-middle items-center;
+}
+
+.admin-section {
+  @apply bg-gray-200 p-5 rounded-md shadow-sm shadow-slate-800;
+}
+
+.admin-section__title {
+  @apply font-bold text-xl;
+}
+
+.admin-section__button {
+  @apply bg-[#2b96fa] px-4 py-2 rounded-md shadow-md shadow-slate-400 text-white hover:bg-[#2788e2] transition-all;
+}
