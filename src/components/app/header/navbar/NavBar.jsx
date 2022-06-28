@@ -1,9 +1,9 @@
 import React from "react";
 // import { useNavigate } from 'react-router';
 
-import { navigation } from "../../../../constants/navBar";
-import Logo from "./logo/Logo";
-import Nav from "./nav/Nav";
+import { navigation } from "../../../../utils/constants/navBar";
+import Logo from "./Logo";
+import Nav from "./Nav";
 
 const home = navigation.pages[0];
 

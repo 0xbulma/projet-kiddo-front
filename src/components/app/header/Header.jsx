@@ -11,6 +11,7 @@ const Header = (isAdmin) => {
         <NavBar isAdmin={isAdmin} />
         <button onClick={() => navigate("/register")}>S'incrire</button>
         <button onClick={() => navigate("/login")}> Se connecter</button>
+        <a href='/administration'>Allez sur la page Admin</a>
       </div>
     </>
   );
