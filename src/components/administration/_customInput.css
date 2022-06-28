@@ -1,0 +1,8 @@
+[class*='input-']:focus ~ label,
+[class*='input-']:valid ~ label {
+  transform: translateY(-36px);
+  left: 0px;
+  padding: 0 10px;
+  transition: all 0.25s ease-out;
+  border-radius: 5px;
+}

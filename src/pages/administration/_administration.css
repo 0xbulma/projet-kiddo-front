@@ -15,7 +15,7 @@
 }
 
 .table td {
-  @apply px-6 py-4 text-sm text-gray-500;
+  @apply px-6 text-center py-4 text-sm text-gray-500;
 }
 
 .table-show-btn {

@@ -5,9 +5,12 @@ import { useQuery } from '@apollo/client';
 import * as gqlQueryRequest from '../../../../graphql/query/users.query';
 
 // Import asset
-import '../_section.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBackwardStep } from '@fortawesome/free-solid-svg-icons';
 
 export default function User() {
+  const returnArrowPath = '/administration';
+
   const [users, setUsers] = useState([]);
 
   useQuery(gqlQueryRequest.GET_ALL, {
@@ -18,7 +21,12 @@ export default function User() {
   return (
     <div className='flex'>
       <div className='admin-container'>
-        <h2 className='text-2xl self-start my-5 ml-5'>Gestion des utilisateurs</h2>
+        <h2 className='text-2xl self-start my-5 ml-5'>
+          <Link to={returnArrowPath}>
+            <FontAwesomeIcon icon={faBackwardStep} className='hover:text-fuchsia-600 transition-all cursor-pointer select-none' />
+          </Link>{' '}
+          | Gestion des utilisateurs
+        </h2>
         <article className='section_tab'>
           <span>Consultation</span>
           <span>|</span>
@@ -36,25 +44,19 @@ export default function User() {
                 <th>Crée le</th>
                 <th>Modifié le</th>
                 <th>Consulter</th>
-                <th>Modifier</th>
                 <th>Supprimer</th>
               </tr>
             </thead>
             <tbody className='bg-white'>
-              {users.map((user) => (
-                <tr className='whitespace-nowrap'>
+              {users.map((user, index) => (
+                <tr key={index} className='whitespace-nowrap text-center'>
                   <td>{user._id}</td>
                   <td>{user.email}</td>
                   <td>{user.created_at}</td>
                   <td>{user.updated_at}</td>
                   <td className='px-6 py-4'>
-                    <Link to='/administration/users' className='table-show-btn'>
+                    <Link to={`/administration/users/${user._id}`} className='table-show-btn'>
                       Consulter
-                    </Link>
-                  </td>
-                  <td className='px-6 py-4'>
-                    <Link to='/administration/users' className='table-edit-btn'>
-                      Modifier
                     </Link>
                   </td>
                   <td className='px-6 py-4'>

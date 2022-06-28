@@ -12,17 +12,18 @@ export const GET_ALL = gql`
 `;
 
 export const GET_BY_ID = gql`
-  query Query($email: EmailAddress) {
-    getUserByEmail(email: $email) {
+  query Query($id: ObjectID!) {
+    getUserById(_id: $id) {
       _id
       created_at
       updated_at
       rank
       token
       email
-      password
+      pseudo
       first_name
       last_name
+      birthdate
     }
   }
 `;
