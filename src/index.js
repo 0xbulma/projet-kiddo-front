@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { Route, Routes } from 'react-router';
 
 import { ApolloProvider } from '@apollo/client';
 
@@ -11,6 +12,7 @@ import './global.scss';
 
 import { apollo } from './graphql/apollo';
 
+import AppRoutes from './pages/app/AppRoutes';
 import DashboardRoutes from './pages/administration/DashboardRoutes';
 
 // const [AppRouter, AdminRouter] = [Router, Routes].map(Routes =>
@@ -37,7 +39,10 @@ root.render(
       <Router>
         {/* <App isAdmin={isAdmin} /> */}
         {/* <AdminDashboard /> */}
-        <DashboardRoutes />
+        <Routes>
+          <Route path='/' element={<AppRoutes />} />
+          <Route path='/administration' element={<DashboardRoutes />} />
+        </Routes>
       </Router>
     </ApolloProvider>
   </React.StrictMode>
