@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router';
+// import { useNavigate } from 'react-router';
 
 import { navigation } from '../../../../constants/navBar';
 import Logo from './logo/Logo';
@@ -8,7 +8,7 @@ import Nav from './nav/Nav';
 const home = navigation.pages[0];
 
 export default function NavBar({ isAdmin }) {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   return (
     <nav aria-label='top' className='header__Navbar'>
