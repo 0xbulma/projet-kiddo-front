@@ -1,5 +1,5 @@
 .admin-container {
-  /* -64 equals navbar width defined in _navbar.css */
+  /* -64 equals navbar width */
   @apply ml-64 w-screen flex flex-col justify-center content-center align-middle items-center;
 }
 

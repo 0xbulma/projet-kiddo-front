@@ -26,6 +26,7 @@ export default function UserProfil() {
     onError: (err) => console.log(JSON.stringify(err, null, 4)),
   });
 
+  console.log(user);
   return (
     <div className='flex'>
       <div className='admin-container'>
@@ -82,9 +83,9 @@ function ProfilInfo() {
         <span className='admin-section__title'>Catégories : </span>
         <div className='mt-5'>
           <ul>
-            <li>-> Événements</li>
-            <li>-> Commentaires</li>
-            <li>-> Signalements</li>
+            <li>Événements</li>
+            <li>Commentaires</li>
+            <li>Signalements</li>
           </ul>
         </div>
       </article>
@@ -95,6 +96,7 @@ function ProfilInfo() {
 function ProfilModifier() {
   const [inputValue, setInputValue] = useState();
 
+  console.log(inputValue);
   return (
     <section className='w-full px-10 mt-5 grid grid-cols-2 gap-4'>
       <article className='admin-section'>

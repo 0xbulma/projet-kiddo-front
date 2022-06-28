@@ -7,7 +7,6 @@ import * as gqlQueryRequest from '../../../../graphql/query/users.query';
 // Import asset
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBackwardStep } from '@fortawesome/free-solid-svg-icons';
-import '../_section.css';
 
 export default function User() {
   const returnArrowPath = '/administration';

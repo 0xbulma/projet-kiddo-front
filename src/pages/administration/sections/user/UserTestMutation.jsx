@@ -25,6 +25,7 @@ export default function UserTestMutation() {
     onError: (err) => console.log(JSON.stringify(err, null, 4)),
   });
 
+  console.log(user);
   console.log(displayUser);
 
   return (
