@@ -1,4 +1,4 @@
-import { useLazyQuery, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import React, { useState } from "react";
 import ActivityCard from "../../components/shared/ActivityCard";
 import CategoryCard from "../../components/shared/CategoryCard";
@@ -80,7 +80,8 @@ export default function Home() {
                   key={index}
                   // a enelver quand vrai titre
                   title={event.content.title}
-                  category={event.categories}
+                  // category={event.categories}
+                  category={"sport"}
                   description={event.content.description}
                   lieu={event.adress}
                   date={event.event_date.start}

@@ -14,9 +14,8 @@
 }
 
 .card-thumb {
-    height: 235px;
-    background-color: #000;
-    
+    height: 15rem;
+    background-color: #000;    
 } 
 
  img {
@@ -24,8 +23,6 @@
     opacity: 1;
     transition: opacity 6ms;
     border-radius: 20px 20px 0px 0px;
-    z-index: -1;
-    
 }
  img:hover {
     opacity: 0.8;
@@ -54,6 +51,11 @@
 .card-body{
     position: relative;
     padding: 1rem;
+    height: 10rem;
+}
+.card-description {
+    overflow-x: hidden;
+    text-overflow: ellipsis;
 }
 .card-category{
     position: absolute;
@@ -71,7 +73,6 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-
 }
 .card-bottom {
     display: flex;
@@ -83,5 +84,6 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    padding-top: 1.6rem;
     padding-bottom: 1.6rem;
 }

@@ -9,15 +9,13 @@ import { faCalendarDay } from "@fortawesome/free-solid-svg-icons";
 import { faMapPin } from "@fortawesome/free-solid-svg-icons";
 
 const ActivityCard = ({ title, category, description, lieu, date, prix }) => {
+  const formatedDate = new Date(date).toLocaleDateString("fr");
+
   return (
     <>
       <article className="card">
         <div className="card_thumb">
-          <img
-            src={activityPic}
-            alt="acitivty"
-            // style={{ width: "370px", height: "235px" }}
-          />
+          <img src={activityPic} alt="acitivty" />
         </div>
         <div className="card-icons">
           <span className="card-icon-price">
@@ -44,7 +42,7 @@ const ActivityCard = ({ title, category, description, lieu, date, prix }) => {
             </span>
             <span className="card-date">
               <FontAwesomeIcon icon={faCalendarDay} />
-              {date}
+              {formatedDate}
             </span>
           </div>
         </div>
