@@ -7,6 +7,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 // import AppMap from '../../components/shared/AppMap';
+import MapLeaflet from '../../components/shared/MapLeaflet';
 
 import {
   GridCol3,
@@ -116,7 +117,7 @@ function CategoryPage(props) {
             </GridItemSpan2>
           </GridCol2>
           <div className='sticky top-0 right-0 bg-yellow-300 h-64 w-92'>
-            {/* <AppMap /> */}
+            <MapLeaflet />
           </div>
         </GridCol3>
       )}
