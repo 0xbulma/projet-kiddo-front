@@ -23,10 +23,9 @@ export default function UserProfil() {
   useQuery(gqlQueryRequest.GET_BY_ID, {
     variables: { id: userId },
     onCompleted: (data) => setUser(data.getUserById),
-    onError: (err) => console.log(JSON.stringify(err, null, 4)),
+    onError: (err) => console.log('err : ', JSON.stringify(err, null, 4)),
   });
 
-  console.log(user);
   return (
     <div className='flex'>
       <div className='admin-container'>
@@ -96,7 +95,6 @@ function ProfilInfo() {
 function ProfilModifier() {
   const [inputValue, setInputValue] = useState();
 
-  console.log(inputValue);
   return (
     <section className='w-full px-10 mt-5 grid grid-cols-2 gap-4'>
       <article className='admin-section'>
