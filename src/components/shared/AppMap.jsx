@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Helmet } from 'react-helmet';
+// import { Helmet } from 'react-helmet';
 import { useRef, useState, useEffect } from 'react';
 
 const AppMap = () => {

@@ -6,7 +6,7 @@ import {
   faFilter,
 } from '@fortawesome/free-solid-svg-icons';
 
-import AppMap from '../../components/shared/AppMap';
+// import AppMap from '../../components/shared/AppMap';
 
 import {
   GridCol3,
