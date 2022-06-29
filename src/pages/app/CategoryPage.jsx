@@ -6,7 +6,7 @@ import {
   faFilter,
 } from '@fortawesome/free-solid-svg-icons';
 
-//import AppMap from '../../components/shared/AppMap';
+import AppMap from '../../components/shared/AppMap';
 
 import {
   GridCol3,
@@ -14,6 +14,8 @@ import {
   GridItemSpan2,
   GridItemSpan1,
 } from '../../components/shared/GridCol';
+
+import LoadIconBtn from '../../components/shared/LoadIconBtn';
 
 import './_categoryPage.css';
 import getGeoLoc from '../../utils/getGeoLoc';
@@ -38,9 +40,17 @@ function CategoryPage(props) {
   const onClickHandler = () => {
     setGeoLoc(geoLoc => ({ ...geoLoc, isLoading: true }));
     getGeoLoc()
-    .then(res => {
-      return setGeoLoc(geoLoc => ({ ...geoLoc, isLoading: false, coords: res }));
-    });
+      .then(res => {
+        return setGeoLoc(geoLoc => ({
+          ...geoLoc,
+          isLoading: false,
+          coords: res,
+        }));
+      })
+      .catch(err => {
+        alert(err.message);
+        return setGeoLoc(geoLoc => ({ ...geoLoc, isLoading: false }));
+      });
   };
 
   useEffect(() => {
@@ -55,19 +65,21 @@ function CategoryPage(props) {
           Subtitle: Se depenser en s’amuser, rien de mieux pour lier le plaisir
           et la santé en famille{' '}
         </p>
-
-        <div className='h-60 w-60'>{/* <AppMap /> */}</div>
       </div>
 
       {loading && <div>LOADING</div>}
       {error && <div>ERROR</div>}
       {data && (
-        <GridCol3 className='bg-red-500'>
+        <GridCol3 className='bg-red-500 relative)'>
           <GridCol2 className='col-span-2'>
             <GridItemSpan2>
               <div className='filter__group'>
                 <button className='filter__container' onClick={onClickHandler}>
-                  {geoLoc.isLoading ? (<div>isLoading</div>) : (<FontAwesomeIcon icon={faLocationCrosshairs} />)}
+                  {geoLoc.isLoading ? (
+                    <LoadIconBtn />
+                  ) : (
+                    <FontAwesomeIcon icon={faLocationCrosshairs} />
+                  )}
                   <div className='filter__text'>Activités autour de moi</div>
                 </button>
                 <div className='filter__container'>
@@ -78,23 +90,34 @@ function CategoryPage(props) {
             </GridItemSpan2>
 
             <GridItemSpan1>
-              <div>EVENT CARD COMPONENT</div>
-            </GridItemSpan1>
-
-            <GridItemSpan1>
-              <div>EVENT CARD COMPONENT</div>
+              <div className='h-64'>EVENT CARD COMPONENT</div>
             </GridItemSpan1>
             <GridItemSpan1>
-              <div>EVENT CARD COMPONENT</div>
+              <div className='h-64'>EVENT CARD COMPONENT</div>
             </GridItemSpan1>
             <GridItemSpan1>
-              <div>EVENT CARD COMPONENT</div>
+              <div className='h-64'>EVENT CARD COMPONENT</div>
+            </GridItemSpan1>
+            <GridItemSpan1>
+              <div className='h-64'>EVENT CARD COMPONENT</div>
+            </GridItemSpan1>
+            <GridItemSpan1>
+              <div className='h-64'>EVENT CARD COMPONENT</div>
+            </GridItemSpan1>
+            <GridItemSpan1>
+              <div className='h-64'>EVENT CARD COMPONENT</div>
+            </GridItemSpan1>
+            <GridItemSpan1>
+              <div className='h-64'>EVENT CARD COMPONENT</div>
             </GridItemSpan1>
 
             <GridItemSpan2>
               <Pagination />
             </GridItemSpan2>
           </GridCol2>
+          <div className='sticky top-0 right-0 bg-yellow-300 h-64 w-92'>
+            {/* <AppMap /> */}
+          </div>
         </GridCol3>
       )}
     </>
