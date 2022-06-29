@@ -1,31 +1,31 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import { ApolloProvider } from '@apollo/client';
-import reportWebVitals from './reportWebVitals';
-import { apollo } from './graphql/apollo';
+import { ApolloProvider } from "@apollo/client";
+import reportWebVitals from "./reportWebVitals";
+import { apollo } from "./graphql/apollo";
 
-import UserLayout from './pages/layout/UserLayout';
-import AdminLayout from './pages/layout/AdminLayout';
+import UserLayout from "./pages/layout/UserLayout";
+import AdminLayout from "./pages/layout/AdminLayout";
 
 //App layout components
-import Home from './pages/app/Home';
-import Contact from './pages/app/Contact.jsx';
-import Events from './pages/app/Events.jsx';
-import NotFound from './pages/app/NotFound.jsx';
+import Home from "./pages/app/Home";
+import Contact from "./pages/app/Contact.jsx";
+import Events from "./pages/app/Events.jsx";
+import NotFound from "./pages/app/NotFound.jsx";
 
 import CategoryPage from './pages/app/CategoryPage';
 
 //Admin layout components
-import AdminDashboard from './pages/administration/Dashboard';
-import AdminUser from './pages/administration/sections/user/User';
-import AdminUserProfil from './pages/administration/sections/user/UserProfil';
-import AdminUserTestMutation from './pages/administration/sections/user/UserTestMutation';
+import AdminDashboard from "./pages/administration/Dashboard";
+import AdminUser from "./pages/administration/sections/user/User";
+import AdminUserProfil from "./pages/administration/sections/user/UserProfil";
+import AdminUserTestMutation from "./pages/administration/sections/user/UserTestMutation";
 
-import './global.css';
+import "./global.css";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
