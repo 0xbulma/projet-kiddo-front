@@ -1,0 +1,22 @@
+.activity-card-container{
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+
+}
+
+.category-card-container{
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+}
+.hero {
+    height: 40vh;
+}
+
+.title-hero-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
