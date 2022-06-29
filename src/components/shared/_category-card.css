@@ -1,0 +1,30 @@
+.card-categ-contain {
+    background: #C4C4C4;
+    line-height: 1.5;
+    font-size: 1rem;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px;
+    overflow-y: hidden;
+    margin: 2rem;
+    position: relative;
+}
+
+.category-card-footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-bottom: 1.6rem;
+}
+
+.category-card-icons {
+    position: absolute;
+    display: flex;
+    justify-content: space-around;
+    top: 20px;
+    right: 20px;
+    font-size: 2rem;
+}
+.category-card-icon{
+    height: 2rem;
+    color: white;
+}
