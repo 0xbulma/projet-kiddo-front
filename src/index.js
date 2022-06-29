@@ -15,6 +15,8 @@ import Contact from './pages/app/Contact.jsx';
 import Events from './pages/app/Events.jsx';
 import NotFound from './pages/app/NotFound.jsx';
 
+import CategoryPage from './pages/app/CategoryPage';
+
 //Admin layout components
 import AdminDashboard from './pages/administration/Dashboard';
 import AdminUser from './pages/administration/sections/user/User';
@@ -32,6 +34,9 @@ root.render(
         <Routes>
           <Route path='/' element={<UserLayout composant={<Home />} />} />
           <Route path='/contact' element={<UserLayout composant={<Contact />} />} />
+
+          <Route path='/category/:category' element={<UserLayout composant={<CategoryPage />} />} />
+
           <Route path='/events' element={<UserLayout composant={<Events />} />} />
           <Route path='*' element={<UserLayout composant={<NotFound />} />} />
           <Route path='/administration' element={<AdminLayout composant={<AdminDashboard />} />} />
