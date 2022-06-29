@@ -7,7 +7,7 @@ import "./_category-card.css";
 const CategoryCard = ({ category }) => {
   return (
     <div>
-      <article className="card">
+      <article className="card-categ-contain">
         <div className="card_thumb">
           <img
             src={activityPic}

@@ -1,13 +1,14 @@
 .activity-card-container{
-display: flex;
-flex-wrap: wrap;
-justify-content: space-around;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+
 }
 
 .category-card-container{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
 }
 .hero {
     height: 40vh;

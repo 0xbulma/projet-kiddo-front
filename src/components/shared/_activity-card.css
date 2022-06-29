@@ -6,10 +6,10 @@
     line-height: 1.5;
     font-size: 1rem;
     border-radius: 20px;
-    width: 400px;
+    display: flex;
+    flex-direction: column;
     box-shadow: 0px 0px 10px;
     overflow-y: hidden;
-    margin: 2rem;
     position: relative;
 }
 
@@ -44,13 +44,7 @@
     height: 2rem;
     color: white;
 }
-.card-icon:hover .card-icon-price-show {
-visibility: visible;
-    
-}
-.card-icon-price-show{
-    visibility: hidden;
-}
+
 .card-icon-price {
     display: flex;
     flex-direction: column;
@@ -74,6 +68,16 @@ visibility: visible;
 }
 .card-title {
     font-size: 1.7rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+.card-bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
 }
 .card-footer{
     display: flex;

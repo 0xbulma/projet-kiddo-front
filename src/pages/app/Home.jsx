@@ -1,9 +1,26 @@
-import React from "react";
+import { useLazyQuery, useQuery } from "@apollo/client";
+import React, { useState } from "react";
 import ActivityCard from "../../components/shared/ActivityCard";
 import CategoryCard from "../../components/shared/CategoryCard";
+import { GET_EVENTS_BASE } from "../../graphql/query/events.query";
 import "./home.css";
 
 export default function Home() {
+  const [events, setEvents] = useState();
+  useQuery(GET_EVENTS_BASE, {
+    onCompleted: (data) => {
+      setEvents(
+        data.events
+          .sort((a, b) => {
+            return new Date(b.event_date.start) - new Date(a.event_date.start);
+          })
+          .slice(0, 10)
+      );
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
   const categories = [
     "sportives",
     "artistiques",
@@ -12,7 +29,20 @@ export default function Home() {
     "d'éveil corporel",
     "autre",
   ];
+  console.log(events);
+  // console.log(events);
+  // const [GET_EVENTS_BY_ID] = useLazyQuery(GET_EVENTS_BASE, )
 
+  //onClick={() => openEvent(event._id)}
+  // const openEvent = (eventId)=> {
+  // navigate vers element donné
+  // const clickedEvent = GET_EVENTS_BY_ID({variables: {
+  //   _id: eventId
+  // }});
+
+  //navigate ta page > clickedEvent
+  //EventPage -> props.event -> requête
+  // }
   return (
     <>
       <section className="hero">
@@ -42,43 +72,22 @@ export default function Home() {
       <section>
         <h2>Activités prévues cette semaine</h2>
         <article className="activity-card-container">
-          <ActivityCard
-            title={"Sortie randonnée"}
-            category={"sport"}
-            description={
-              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore nesciunt, officia animi eligendi nulla architecto debitis ut qui asperiores."
-            }
-            lieu={"Paris"}
-            date={"29 mai"}
-            prix={"22€"}
-          />
-          <ActivityCard
-            title={"Sortie randonnée"}
-            category={"sport"}
-            description={
-              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore nesciunt, officia animi eligendi nulla architecto debitis ut qui asperiores."
-            }
-            lieu={"Paris"}
-            date={"29 mai"}
-          />
-          <ActivityCard
-            title={"Sortie randonnée"}
-            category={"sport"}
-            description={
-              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore nesciunt, officia animi eligendi nulla architecto debitis ut qui asperiores."
-            }
-            lieu={"Paris"}
-            date={"29 mai"}
-          />
-          <ActivityCard
-            title={"Sortie randonnée"}
-            category={"sport"}
-            description={
-              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore nesciunt, officia animi eligendi nulla architecto debitis ut qui asperiores."
-            }
-            lieu={"Paris"}
-            date={"29 mai"}
-          />
+          {events &&
+            events.map((event, index) => {
+              console.log("event", event);
+              return (
+                <ActivityCard
+                  key={index}
+                  // a enelver quand vrai titre
+                  title={event.content.title}
+                  category={event.categories}
+                  description={event.content.description}
+                  lieu={event.adress}
+                  date={event.event_date.start}
+                  prix={event.price.adult}
+                />
+              );
+            })}
         </article>
       </section>
     </>
