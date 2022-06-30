@@ -50,8 +50,6 @@
 
 .card-body{
     position: relative;
-    padding: 1rem;
-    height: 10rem;
 }
 .card-description {
     overflow-x: hidden;
@@ -69,21 +67,17 @@
     top : -25px;
 }
 .card-title {
-    font-size: 1.7rem;
+    padding: 0.4rem 0.5rem 0 0.5rem;
+    font-size: 1.5rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.card-bottom {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    flex: 1;
-}
+
 .card-footer{
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding-top: 1.6rem;
-    padding-bottom: 1.6rem;
+     justify-content: space-around; 
+     align-items: center; 
+    padding-top: 0.5rem;
+    padding-bottom: 0.7rem; 
 }

@@ -17,15 +17,18 @@ export default function NavBar({ isAdmin }) {
           <Logo home={home} className="-ml-28" />
           <Nav navigation={navigation} />
           {/* <NavIcon /> */}
-          {/* <div className="lastChild">
-            <Search />
-            <Profile />
-            {
-              isAdmin && <button onClick={()=>navigate('/admin')} variant="outlined">BackOffice</button>
-            }
-          </div> */}
         </div>
       </div>
     </nav>
   );
 }
+
+/* 
+<div className="lastChild">
+  <Search />
+  <Profile />
+  {
+    isAdmin && <button onClick={()=>navigate('/admin')} variant="outlined">BackOffice</button>
+  }
+</div>
+*/

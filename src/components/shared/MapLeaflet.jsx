@@ -1,6 +1,6 @@
 import { MapContainer, TileLayer, Popup, Marker, ZoomControl } from 'react-leaflet';
 
-export default function MapLeaflet() {
+export default function MapLeaflet(props) {
 
   return (
     <div className='rounded-lg overflow-hidden'>
