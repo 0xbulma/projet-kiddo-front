@@ -3,7 +3,12 @@ import { gql } from '@apollo/client';
 export const CREATE_COMMENT = gql`
   mutation CreateComment($input: CommentInput) {
     createComment(input: $input) {
-      parent
+      parent {
+        _id
+      }
+      child {
+        _id
+      }
       content {
         title
         message
@@ -21,7 +26,12 @@ export const CREATE_COMMENT = gql`
 export const ADD_COMMENT_CHILD = gql`
   mutation Mutation($input: CommentInput) {
     modifyComment(input: $input) {
-      parent
+      parent {
+        _id
+      }
+      child {
+        _id
+      }
       content {
         title
         message

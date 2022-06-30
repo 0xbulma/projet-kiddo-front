@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useLazyQuery, useQuery, useMutation } from '@apollo/client';
 import { useEffect, useState } from 'react';
 import ReactTooltip from 'react-tooltip';
@@ -24,10 +25,17 @@ export default function CommentSection(isEventComment, targetID) {
 
   const { loading: loading1, error: error1, data: data1 } = useQuery(GET_BY_TARGET_ID, { variables: { type: 1, id: '62bdabddfc13ae63860012a2' } });
 
-  if (data1 !== undefined && comments.length === 0) {
-    console.log('SetComments : ', data1);
-    setComments(data1.getByTargetId);
+  if (!loading1 && data1 !== undefined && comments.length === 0) {
+    if (data1.getByTargetId.length > 0) {
+      console.log('SetComments : ', data1);
+      setComments(data1.getByTargetId);
+    }
   }
+
+  // Comments > Trier par date
+  // Map > Si le commentaire à un parent ne pas l'afficher
+  // Map > Si le commentaire n'a pas de parent, on l'affiche
+  // Dans ce commentaire afficher les enfants
 
   return (
     <div>
@@ -60,6 +68,7 @@ export default function CommentSection(isEventComment, targetID) {
 
 function Comment({ user, addComment, comment }) {
   const commentId = comment._id;
+  console.log('CommentID : ', comment._id);
   const sender = comment.sender;
   const content = comment.content;
 
@@ -74,7 +83,7 @@ function Comment({ user, addComment, comment }) {
         <article className='bg-gray-300 grow rounded-lg flex flex-col '>
           <div className='pt-2 ml-3 flex justify-between'>
             <p className='font-bold'>
-              {sender.first_name} {sender.last_name}
+              {sender.first_name} {sender.last_name} {'Parent : ' + JSON.stringify(comment.parent)} {' | Child : ' + JSON.stringify(comment.child)}
             </p>
             <p className='mr-3 font-thin'>{new Date(comment.created_at).toLocaleDateString('fr')}</p>
           </div>
@@ -108,11 +117,14 @@ function Comment({ user, addComment, comment }) {
 
 function WriteComment({ user, addComment, parentId }) {
   const [areaValue, setAreaValue] = useState();
-  const [icon, setIcon] = useState(faPaperPlane);
+  const [icon] = useState(faPaperPlane); //setIcon
+
+  console.log('ParentId: ', parentId);
+  const finalParentId = parentId !== undefined ? parentId : undefined;
 
   const requestVariables = {
     input: {
-      parent: parentId,
+      parent: finalParentId,
       target_event: '62bdabddfc13ae63860012a2',
       sender: user._id,
       content: {
