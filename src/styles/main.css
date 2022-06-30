@@ -15,6 +15,14 @@ div.index {
   @apply flex flex-col justify-between w-full h-full min-h-screen bg-gray-200;
 }
 
+.container-user {
+  @apply container mx-auto lg:py-6 border-2 border-black
+}
+
+.container-section {
+  @apply py-5 
+}
+
 /* ----------------------------------------------------------- Components ------------------------------------------------------------ */
 
 @import '../components/_components.css';

@@ -40,6 +40,7 @@ function CategoryPage(props) {
 
   const onClickHandler = () => {
     setGeoLoc(geoLoc => ({ ...geoLoc, isLoading: true }));
+    
     getGeoLoc()
       .then(res => {
         return setGeoLoc(geoLoc => ({
