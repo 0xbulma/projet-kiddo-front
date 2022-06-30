@@ -32,18 +32,17 @@ const ActivityCard = ({ title, category, description, lieu, date, prix }) => {
           <div className="card-body">
             <div className="card-category">{category}</div>
             <h3 className="card-title">{title}</h3>
-            {/* <p className="card-description">{description}</p> */}
           </div>
 
           <div className="card-footer">
-            <span className="card-place">
+            <div className="card-place">
               <FontAwesomeIcon icon={faMapPin} />
               {lieu}
-            </span>
-            <span className="card-date">
+            </div>
+            <div className="card-date">
               <FontAwesomeIcon icon={faCalendarDay} />
               {formatedDate}
-            </span>
+            </div>
           </div>
         </div>
       </article>
