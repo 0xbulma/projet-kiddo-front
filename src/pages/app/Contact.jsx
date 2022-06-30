@@ -1,7 +1,11 @@
-import React from 'react'
+import React from "react";
+import LoadingComponent from "../../components/shared/LoadingComponent";
 
 export default function Contact() {
   return (
-    <div>Contact</div>
-  )
+    <>
+      <LoadingComponent />
+      <div>Contact</div>
+    </>
+  );
 }
