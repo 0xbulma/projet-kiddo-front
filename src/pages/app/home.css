@@ -1,7 +1,7 @@
 /* CONTAINER USER */
 .container-user {
-    @apply container mx-auto lg:py-6 
-  }
+  @apply container mx-auto lg:py-6
+}
 /* CARD CONTAINER GRID */
 .activity-card-container{
     display: grid;
