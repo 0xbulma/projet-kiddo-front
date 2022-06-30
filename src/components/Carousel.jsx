@@ -1,10 +1,10 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faForward, faBackward } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faForward, faBackward } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useRef, useState } from 'react';
 
 import './_carousel.css';
 
-function Carousel(props) {
+export default function Carousel(props) {
   const { images } = props;
 
   const [imgLength] = useState(images.length);
@@ -66,5 +66,3 @@ function Carousel(props) {
     </div>
   );
 }
-
-export default Carousel;

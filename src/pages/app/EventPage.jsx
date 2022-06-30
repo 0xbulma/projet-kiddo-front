@@ -103,6 +103,7 @@ function CardInfo(props) {
 
 function CardParticipant(props) {
   const { user } = props;
+  console.log(user);
   return (
     <div className='flex flex-col justify-center align-middle items-center'>
       <img src={BlankProfilPic} alt='' width='75px' className='transition-all hover:scale-105' />
@@ -146,4 +147,4 @@ function MainComment() {
   );
 }
 
-function SubComment() {}
+// function SubComment() {}
