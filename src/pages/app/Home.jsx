@@ -22,12 +22,12 @@ export default function Home() {
     },
   });
   const categories = [
-    "sportives",
-    "artistiques",
-    "culturelles",
-    "manuelles",
-    "d'éveil corporel",
-    "autre",
+    { name: "sportives", url: "/asset/img/sportives.jpg" },
+    { name: "artistiques", url: "/asset/img/art.jpg" },
+    { name: "culturelles", url: "/asset/img/culturelle.jpg" },
+    { name: "d'éveil corporel", url: "/asset/img/eveil.jpg" },
+    { name: "manuelles", url: "/asset/img/manuelles.jpg" },
+    { name: "autres", url: "/asset/img/autres.jpg" },
   ];
 
   // const [GET_EVENTS_BY_ID] = useLazyQuery(GET_EVENTS_BASE, )
@@ -65,7 +65,13 @@ export default function Home() {
 
           <article className="category-card-container">
             {categories.map((category, index) => {
-              return <CategoryCard category={category} key={index} />;
+              return (
+                <CategoryCard
+                  name={category.name}
+                  url={category.url}
+                  key={index}
+                />
+              );
             })}
           </article>
         </section>
