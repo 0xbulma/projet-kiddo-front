@@ -23,7 +23,7 @@ export default function CommentSection(isEventComment, targetID) {
     setComments([...comments, comment]);
   };
 
-  const { loading: loading1, error: error1, data: data1 } = useQuery(GET_BY_TARGET_ID, { variables: { type: 1, id: '62bdabddfc13ae63860012a2' } });
+  const { loading: loading1, data: data1 } = useQuery(GET_BY_TARGET_ID, { variables: { type: 1, id: '62bdabddfc13ae63860012a2' } });
 
   if (!loading1 && data1 !== undefined && comments.length === 0) {
     if (data1.getByTargetId.length > 0) {
