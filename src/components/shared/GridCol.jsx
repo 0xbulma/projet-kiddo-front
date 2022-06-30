@@ -11,14 +11,17 @@ export function GridCol4(props) {
       {props.children}
     </div>
   );
+
 }
 
 export function GridCol2(props) {
   return (
+
     <div className={`grid grid-cols-2 gap-2 ${props.className}`}>
       {props.children}
     </div>
   );
+
 }
 
 export function GridItemSpan1(props) {

@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import React, { useState } from "react";
+import React, { useState} from "react";
 import ActivityCard from "../../components/shared/ActivityCard";
 import CategoryCard from "../../components/shared/CategoryCard";
 import { GET_EVENTS_BASE } from "../../graphql/query/events.query";
@@ -7,6 +7,7 @@ import "./home.css";
 
 export default function Home() {
   const [events, setEvents] = useState();
+
   useQuery(GET_EVENTS_BASE, {
     onCompleted: (data) => {
       setEvents(
