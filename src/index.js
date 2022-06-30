@@ -26,7 +26,6 @@ import AdminUserProfil from './pages/administration/sections/user/UserProfil';
 import AdminUserTestMutation from './pages/administration/sections/user/UserTestMutation';
 
 import './global.css';
-import CommentSection from './components/comment/CommentSection';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -45,9 +44,6 @@ root.render(
         <Route path='/administration/users' element={<AdminLayout composant={<AdminUser />} />} />
         <Route path='/administration/users/:id' element={<AdminLayout composant={<AdminUserProfil />} />} />
         <Route path='/administration/userTest' element={<AdminLayout composant={<AdminUserTestMutation />} />} />
-
-        {/* TEMP */}
-        <Route path='/comment/:id' element={<UserLayout composant={<CommentSection />} />} />
 
         {/* <Route path="/users" element={<User />} />
         <Route path="/register" element={<Register />} />
