@@ -29,8 +29,7 @@ export default function Home() {
     "d'éveil corporel",
     "autre",
   ];
-  console.log(events);
-  // console.log(events);
+
   // const [GET_EVENTS_BY_ID] = useLazyQuery(GET_EVENTS_BASE, )
 
   //onClick={() => openEvent(event._id)}
