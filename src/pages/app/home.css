@@ -12,6 +12,7 @@
 }
 .hero {
     height: 40vh;
+    background-image: url("../../assets/img/hero.jpg");
 }
 
 .title-hero-container{
