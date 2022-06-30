@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCopyright as copyOutline } from '@fortawesome/free-regular-svg-icons'
 
-import { navigationFooter } from '../../../constants/footer';
+import { navigationFooter } from '../../../constants/navigation';
 
-import './_footer.scss';
+import './_footer.css';
 
 const about = navigationFooter.about;
 const contact = navigationFooter.contact;
@@ -33,7 +33,9 @@ export default function Footer() {
                   {
                     about.map((item, index) => (
                       <li key={index}>
-                        <a href={item.href} className="nav__items--list-item-link">
+                        <a 
+                          href={item.href} className="nav__items--list-item-link"
+                        >
                           {item.name}
                         </a>
                       </li>
@@ -92,7 +94,7 @@ export default function Footer() {
                           {item.name}
                         </p>
                         <item.icon 
-                          className="nav__social--icon h-8 w-8" aria-hidden="true" 
+                          className=" h-8 w-8" aria-hidden="true" 
                         />
                       </a>
                     </li>
