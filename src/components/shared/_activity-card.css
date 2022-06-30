@@ -51,7 +51,7 @@
 .card-body{
     position: relative;
     padding: 1rem;
-    height: 10rem;
+    max-height:2rem
 }
 .card-description {
     overflow-x: hidden;
@@ -85,5 +85,5 @@
     justify-content: space-around;
     align-items: center;
     padding-top: 1.6rem;
-    padding-bottom: 1.6rem;
+    padding-bottom: 1.6rem; 
 }
