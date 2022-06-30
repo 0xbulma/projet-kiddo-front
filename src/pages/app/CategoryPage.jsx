@@ -5,6 +5,9 @@ import {
   faLocationCrosshairs,
   faFilter,
 } from '@fortawesome/free-solid-svg-icons';
+import { useQuery, useLazyQuery } from '@apollo/client';
+import { GET_EVENTS_CATEGORY } from '../../graphql/query/events.query';
+import { GET_CATEGORY_BY_NAME } from '../../graphql/query/extra.query';
 
 // import AppMap from '../../components/shared/AppMap';
 import MapLeaflet from '../../components/shared/MapLeaflet';
@@ -17,30 +20,52 @@ import {
 } from '../../components/shared/GridCol';
 
 import LoadIconBtn from '../../components/shared/LoadIconBtn';
+import ActivityCard from '../../components/shared/ActivityCard';
 
 import './_categoryPage.css';
+
 import getGeoLoc from '../../utils/getGeoLoc';
 import Pagination from '../../components/shared/Pagination';
 
 function CategoryPage(props) {
   const { category } = useParams();
 
-  const [loading] = useState(false);
-  const [error] = useState(false);
-  const [data] = useState(true);
-
   const [geoLoc, setGeoLoc] = useState({
     isLoading: false,
     coords: null,
   });
 
+  const {
+    // loading: loading2,
+    // error: error2,
+    data: data2,
+  } = useQuery(GET_CATEGORY_BY_NAME, { variables: { name: category } });
+
+  const [getEvents, { loading, error, data }] =
+    useLazyQuery(GET_EVENTS_CATEGORY);
+
   useEffect(() => {
-    console.log('make the query');
-  }, [category]);
+    if (data2) {
+      getEvents({
+        variables: {
+          filter: data2.category._id,
+          filterKey: 'categories',
+          offset: 0,
+          limit: 12,
+        },
+      });
+    }
+  }, [data2, getEvents]);
+
+  useEffect(() => {
+    if (data) {
+      console.log(data);
+    }
+  }, [data]);
 
   const onClickHandler = () => {
     setGeoLoc(geoLoc => ({ ...geoLoc, isLoading: true }));
-    
+
     getGeoLoc()
       .then(res => {
         return setGeoLoc(geoLoc => ({
@@ -75,7 +100,7 @@ function CategoryPage(props) {
         <GridCol3 className='bg-red-500 relative)'>
           <GridCol2 className='col-span-2'>
             <GridItemSpan2>
-              <div className='filter__group'>
+              <div className='filter_group'>
                 <button className='filter__container' onClick={onClickHandler}>
                   {geoLoc.isLoading ? (
                     <LoadIconBtn />
@@ -91,28 +116,26 @@ function CategoryPage(props) {
               </div>
             </GridItemSpan2>
 
-            <GridItemSpan1>
-              <div className='h-64'>EVENT CARD COMPONENT</div>
-            </GridItemSpan1>
-            <GridItemSpan1>
-              <div className='h-64'>EVENT CARD COMPONENT</div>
-            </GridItemSpan1>
-            <GridItemSpan1>
-              <div className='h-64'>EVENT CARD COMPONENT</div>
-            </GridItemSpan1>
-            <GridItemSpan1>
-              <div className='h-64'>EVENT CARD COMPONENT</div>
-            </GridItemSpan1>
-            <GridItemSpan1>
-              <div className='h-64'>EVENT CARD COMPONENT</div>
-            </GridItemSpan1>
-            <GridItemSpan1>
-              <div className='h-64'>EVENT CARD COMPONENT</div>
-            </GridItemSpan1>
-            <GridItemSpan1>
-              <div className='h-64'>EVENT CARD COMPONENT</div>
-            </GridItemSpan1>
+            {data.events.map((data, index) => {
+              console.log("event", data);
+              return (
+                <GridItemSpan1>
+                <ActivityCard
+                  key={index}
+                  // a enelver quand vrai titre
+                  title={data.content.title}
+                  // category={data.categories}
+                  category={"sport"}
+                  description={data.content.description}
+                  lieu={data.adress}
+                  date={data.event_date.start}
+                  prix={data.price.adult}
+                />
+                 </GridItemSpan1>
+              );
+            })}
 
+    
             <GridItemSpan2>
               <Pagination />
             </GridItemSpan2>
