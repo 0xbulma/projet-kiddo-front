@@ -8,7 +8,7 @@ const CategoryCard = ({ category }) => {
   return (
     <div>
       <article className="card-categ-contain">
-        <div className="card_thumb">
+        <div>
           <img
             src={activityPic}
             alt="acitivty"
@@ -19,12 +19,14 @@ const CategoryCard = ({ category }) => {
           <FontAwesomeIcon className="category-card-icons" icon={faCopyright} />
         </div>
 
-        <footer className="category-card-footer">
+        <div className="category-card-footer">
           <div>
             <h3>Activités {category}</h3>
           </div>
-          <button>Découvrir</button>
-        </footer>
+          <div>
+            <button>Découvrir</button>
+          </div>
+        </div>
       </article>
     </div>
   );

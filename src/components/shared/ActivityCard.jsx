@@ -36,14 +36,14 @@ const ActivityCard = ({ title, category, description, lieu, date, prix }) => {
           </div>
 
           <div className="card-footer">
-            <span className="card-place">
+            <div className="card-place">
               <FontAwesomeIcon icon={faMapPin} />
               {lieu}
-            </span>
-            <span className="card-date">
+            </div>
+            <div className="card-date">
               <FontAwesomeIcon icon={faCalendarDay} />
               {formatedDate}
-            </span>
+            </div>
           </div>
         </div>
       </article>
