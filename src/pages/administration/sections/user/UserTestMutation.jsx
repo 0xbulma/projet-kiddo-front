@@ -25,9 +25,6 @@ export default function UserTestMutation() {
     onError: (err) => console.log(JSON.stringify(err, null, 4)),
   });
 
-  console.log(user);
-  console.log(displayUser);
-
   return (
     <div className='flex'>
       <div className='admin-container'>
@@ -51,21 +48,25 @@ export default function UserTestMutation() {
           </div>
         </div>
 
-        {displayUser ? <UserPanel /> : ''}
+        {displayUser ? <UserPanel user={user} /> : ''}
       </div>
     </div>
   );
 }
 
-function UserPanel() {
+function UserPanel({ user }) {
   return (
-    <div className='admin-section mt-10'>
-      <article className='flex justify-around'>
-        <span className='mx-2'>Commentaires</span>
+    <div className='w-screen'>
+      <article className='admin-section mt-10 px-10 flex justify-center w-11/12'>
+        <span className='mx-2 w-24 hover:text-fuchsia-600 cursor-pointer'>Commentaires</span>
         <span className='mx-2'>|</span>
-        <span className='mx-2'>Events</span>
+        <span className='mx-2 w-24 text-center hover:text-fuchsia-600 cursor-pointer'>Events</span>
         <span className='mx-2'>|</span>
-        <span className='mx-2'>Amis</span>
+        <span className='mx-2 w-24 text-center hover:text-fuchsia-600 cursor-pointer'>Amis</span>
+      </article>
+
+      <article className='admin-section mt-10'>
+        <span className='admin-section__title'>Utilisateur : {user._id}</span>
       </article>
     </div>
   );
