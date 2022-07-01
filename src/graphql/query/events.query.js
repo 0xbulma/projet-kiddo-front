@@ -1,8 +1,13 @@
 import { gql } from "@apollo/client";
 
 export const GET_EVENTS_BASE = gql`
-  query Query {
-    events {
+  query Query($filter: String, $filterKey: String, $first: Int, $offset: Int) {
+    events(
+      filter: $filter
+      filterKey: $filterKey
+      first: $first
+      offset: $offset
+    ) {
       _id
       content {
         title
@@ -32,7 +37,12 @@ export const GET_EVENTS_BASE = gql`
 
 export const GET_EVENTS_CATEGORY = gql`
   query Query($filter: String, $filterKey: String, $first: Int, $offset: Int) {
-    events(filter: $filter, filterKey: $filterKey, first: $first, offset: $offset) {
+    events(
+      filter: $filter
+      filterKey: $filterKey
+      first: $first
+      offset: $offset
+    ) {
       _id
       content {
         title
@@ -59,4 +69,3 @@ export const GET_EVENTS_CATEGORY = gql`
     }
   }
 `;
-

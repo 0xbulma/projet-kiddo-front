@@ -1,27 +1,25 @@
 import { useQuery } from "@apollo/client";
-import React, { useState} from "react";
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import ActivityCard from "../../components/shared/ActivityCard";
 import CategoryCard from "../../components/shared/CategoryCard";
+import LoadingComponent from "../../components/shared/LoadingComponent";
 import { GET_EVENTS_BASE } from "../../graphql/query/events.query";
 import "./home.css";
 
 export default function Home() {
-  const [events, setEvents] = useState();
-
-  useQuery(GET_EVENTS_BASE, {
-    onCompleted: (data) => {
-      setEvents(
-        data.events
-          .sort((a, b) => {
-            return new Date(b.event_date.start) - new Date(a.event_date.start);
-          })
-          .slice(0, 6)
-      );
-    },
-    onError: (error) => {
-      console.log(error);
-    },
+  const { error, loading, data } = useQuery(GET_EVENTS_BASE, {
+    variables: { first: 6, offset: 0 },
   });
+  useEffect(() => {
+    if (data) {
+      console.log("data-->", data);
+    }
+    if (error) {
+      console.log("error", error);
+    }
+  }, [data, error]);
+
   const categories = [
     { name: "sportives", url: "/asset/img/sportives.jpg" },
     { name: "artistiques", url: "/asset/img/art.jpg" },
@@ -31,19 +29,11 @@ export default function Home() {
     { name: "autres", url: "/asset/img/autres.jpg" },
   ];
 
-  // const [GET_EVENTS_BY_ID] = useLazyQuery(GET_EVENTS_BASE, )
-
-  //onClick={() => openEvent(event._id)}
-  // const openEvent = (eventId)=> {
-  // navigate vers element donné
-  // const clickedEvent = GET_EVENTS_BY_ID({variables: {
-  //   _id: eventId
-  // }});
-
-  //navigate ta page > clickedEvent
-  //EventPage -> props.event -> requête
-  // }
-  return (
+  return loading ? (
+    <>
+      <LoadingComponent />
+    </>
+  ) : (
     <>
       <section className="hero">
         <article className="title-hero-container">
@@ -84,21 +74,23 @@ export default function Home() {
           </div>
 
           <article className="activity-card-container">
-            {events &&
-              events.map((event, index) => {
+            {data &&
+              data.events.map((event, index) => {
                 console.log("event", event);
                 return (
-                  <ActivityCard
-                    key={index}
-                    // a enelver quand vrai titre
-                    title={event.content.title}
-                    // category={event.categories}
-                    category={"sport"}
-                    description={event.content.description}
-                    lieu={event.adress}
-                    date={event.event_date.start}
-                    prix={event.price.adult}
-                  />
+                  <Link to={`/event/:${event._id}`}>
+                    <ActivityCard
+                      key={index}
+                      // a enelver quand vrai titre
+                      title={event.content.title}
+                      // category={event.categories}
+                      category={"sport"}
+                      description={event.content.description}
+                      lieu={event.adress}
+                      date={event.event_date.start}
+                      prix={event.price.adult}
+                    />
+                  </Link>
                 );
               })}
           </article>
