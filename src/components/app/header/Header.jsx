@@ -1,18 +1,28 @@
-import React, { Fragment } from "react";
+import Logo from "./navbar/Logo";
+import Nav from "./navbar/Nav";
+import NavIcon from "./navbar/NavIcon";
 
-import NavBar from "./navbar/NavBar";
+import { navigationHeader } from "../../../utils/constants/navigation";
 
-const Header = (isAdmin) => {
+import './_header.css'
+
+const titleProp = navigationHeader.titleProp;
+const navigation = navigationHeader.navigation;
+const navIcon = navigationHeader.navIcon;
+
+export default function Header () {
   return (
-    <Fragment>
-      <div className="header">
-        <NavBar isAdmin={isAdmin} />
-      </div>
-    </Fragment>
+    <header className="header">
+      <nav aria-label="top" className="header__navbar">
+        <div className="header__navbar--flex">
+          <Logo titleProp={titleProp} />
+          <Nav navigation={navigation} />
+          <NavIcon navIcon={navIcon} />
+        </div>
+      </nav>
+    </header>
   );
 };
-
-export default Header;
 
 // import { useNavigate } from "react-router";
   // const navigate = useNavigate();
