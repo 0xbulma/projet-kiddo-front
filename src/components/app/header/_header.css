@@ -11,7 +11,7 @@ div.navbar__nav {
 }
 
 a.nav__icon-link {
-  @apply text-gray-600 hover:text-black hover:font-semibold active:text-black 
+  @apply text-gray-600 hover:text-black hover:font-semibold active:text-black;
 }
 
 .nav-icon {
