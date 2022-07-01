@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import ActivityCard from "../../components/shared/ActivityCard";
 import CategoryCard from "../../components/shared/CategoryCard";
 import LoadingComponent from "../../components/shared/LoadingComponent";
@@ -77,17 +78,19 @@ export default function Home() {
               data.events.map((event, index) => {
                 console.log("event", event);
                 return (
-                  <ActivityCard
-                    key={index}
-                    // a enelver quand vrai titre
-                    title={event.content.title}
-                    // category={event.categories}
-                    category={"sport"}
-                    description={event.content.description}
-                    lieu={event.adress}
-                    date={event.event_date.start}
-                    prix={event.price.adult}
-                  />
+                  <Link to={`/event/:${event._id}`}>
+                    <ActivityCard
+                      key={index}
+                      // a enelver quand vrai titre
+                      title={event.content.title}
+                      // category={event.categories}
+                      category={"sport"}
+                      description={event.content.description}
+                      lieu={event.adress}
+                      date={event.event_date.start}
+                      prix={event.price.adult}
+                    />
+                  </Link>
                 );
               })}
           </article>
