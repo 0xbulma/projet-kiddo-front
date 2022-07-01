@@ -7,6 +7,10 @@ export const GET_ALL = gql`
       created_at
       updated_at
       email
+      profil_picture {
+        hd
+        thumbnail
+      }
     }
   }
 `;
@@ -24,6 +28,10 @@ export const GET_BY_ID = gql`
       first_name
       last_name
       birthdate
+      profil_picture {
+        hd
+        thumbnail
+      }
     }
   }
 `;
@@ -40,6 +48,10 @@ export const GET_BY_EMAIL = gql`
       password
       first_name
       last_name
+      profil_picture {
+        hd
+        thumbnail
+      }
     }
   }
 `;
