@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useLazyQuery, useQuery, useMutation } from '@apollo/client';
-import { useEffect, useState } from 'react';
+import { PureComponent, useEffect, useState } from 'react';
 import ReactTooltip from 'react-tooltip';
 import { GET_BY_EMAIL } from '../../graphql/query/users.query';
 import { GET_BY_TARGET_ID } from '../../graphql/query/comments.query';
@@ -27,7 +27,9 @@ export default function CommentSection(isEventComment, targetID) {
 
   if (!loading1 && data1 !== undefined && comments.length === 0) {
     if (data1.getByTargetId.length > 0) {
-      console.log('SetComments : ', data1);
+      const datas = data1.getByTargetId;
+      console.log(datas);
+      //datas.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
       setComments(data1.getByTargetId);
     }
   }
@@ -53,25 +55,22 @@ export default function CommentSection(isEventComment, targetID) {
       </div>
       {/* END TEMP LOAD USER */}
 
-      {data !== undefined &&
-        comments.map((comment, index) => {
-          return <Comment key={index} user={data.getUserByEmail} addComment={addComment} comment={comment} />;
-        })}
+      <section className='container mx-auto'>
+        {data !== undefined &&
+          comments.map((comment, index) => {
+            return comment.parent === null ? <Comment key={index} user={data.getUserByEmail} addComment={addComment} comment={comment} /> : '';
+          })}
 
-      {!called && <p>Veuillez charger un utilisateur</p>}
-      {called && loading && <p>Chargement de l'utilisateur...</p>}
-      {data !== undefined && <WriteComment user={data.getUserByEmail} addComment={addComment} />}
-      {error !== undefined && <p>Erreur lors du chargement de l'utilisateur</p>}
+        {!called && <p>Veuillez charger un utilisateur</p>}
+        {called && loading && <p>Chargement de l'utilisateur...</p>}
+        {data !== undefined && <WriteComment user={data.getUserByEmail} addComment={addComment} />}
+        {error !== undefined && <p>Erreur lors du chargement de l'utilisateur</p>}
+      </section>
     </div>
   );
 }
 
 function Comment({ user, addComment, comment }) {
-  const commentId = comment._id;
-  console.log('CommentID : ', comment._id);
-  const sender = comment.sender;
-  const content = comment.content;
-
   const [isResponding, toggleResponding] = useToggle(false);
 
   return (
@@ -83,24 +82,26 @@ function Comment({ user, addComment, comment }) {
         <article className='bg-gray-300 grow rounded-lg flex flex-col '>
           <div className='pt-2 ml-3 flex justify-between'>
             <p className='font-bold'>
-              {sender.first_name} {sender.last_name} {'Parent : ' + JSON.stringify(comment.parent)} {' | Child : ' + JSON.stringify(comment.child)}
+              {comment.sender.first_name} {comment.sender.last_name}
             </p>
             <p className='mr-3 font-thin'>{new Date(comment.created_at).toLocaleDateString('fr')}</p>
           </div>
-          <p className='p-3 break-all overflow-hidden max-h-52'>{content.message}</p>
+          <p className='p-3 break-all overflow-hidden max-h-52'>{comment.content.message}</p>
           <div className='pt-2 ml-3 flex justify-end mr-3 pb-2'>
             <p
               className='font-bold mr-2 -mt-1 bg-gray-200 px-2 rounded-full select-none hover:text-gray-200 hover:bg-gray-700 transition-all cursor-pointer'
               onClick={toggleResponding}>
               Répondre
             </p>
-            <ReactTooltip effect='solid' />
+
+            <ReactTooltip effect='solid' place='top' />
             <FontAwesomeIcon
               icon={faHeart}
               className='mr-2 hover:text-red-600 hover:scale-125 transition-all cursor-pointer'
               data-tip='Aimer ce commentaire'
             />
-            <ReactTooltip effect='solid' />
+
+            <ReactTooltip effect='solid' place='top' />
             <FontAwesomeIcon
               icon={faFlag}
               className='mr-2 hover:text-gray-800 hover:scale-125 transition-all cursor-pointer'
@@ -110,17 +111,56 @@ function Comment({ user, addComment, comment }) {
         </article>
       </article>
 
-      {isResponding && <WriteComment user={user} addComment={addComment} parentId={commentId} />}
+      {comment.child.map((comment, index) => {
+        return (
+          <article className='flex items-center mt-5 ml-20'>
+            <div className='shrink-0'>
+              <img src={BlankProfilPic} alt='' width='60px' className='transition-all hover:scale-105 mr-3' />
+            </div>
+            <article className='bg-gray-300 grow rounded-lg flex flex-col '>
+              <div className='pt-2 ml-3 flex justify-between'>
+                <p className='font-bold'>
+                  {comment.sender.first_name} {comment.sender.last_name}
+                </p>
+                <p className='mr-3 font-thin'>{new Date(comment.created_at).toLocaleDateString('fr')}</p>
+              </div>
+              <p className='p-3 break-all overflow-hidden max-h-52'>{comment.content.message}</p>
+              <div className='pt-2 ml-3 flex justify-end mr-3 pb-2'>
+                <p
+                  className='font-bold mr-2 -mt-1 bg-gray-200 px-2 rounded-full select-none hover:text-gray-200 hover:bg-gray-700 transition-all cursor-pointer'
+                  onClick={toggleResponding}>
+                  Répondre
+                </p>
+
+                <ReactTooltip effect='solid' place='top' />
+                <FontAwesomeIcon
+                  icon={faHeart}
+                  className='mr-2 hover:text-red-600 hover:scale-125 transition-all cursor-pointer'
+                  data-tip='Aimer ce commentaire'
+                />
+
+                <ReactTooltip effect='solid' place='top' />
+                <FontAwesomeIcon
+                  icon={faFlag}
+                  className='mr-2 hover:text-gray-800 hover:scale-125 transition-all cursor-pointer'
+                  data-tip='Signaler ce commentaire'
+                />
+              </div>
+            </article>
+          </article>
+        );
+      })}
+
+      {isResponding && <WriteComment user={user} addComment={addComment} parent={comment.parent} />}
     </section>
   );
 }
 
-function WriteComment({ user, addComment, parentId }) {
+function WriteComment({ user, addComment, parent }) {
   const [areaValue, setAreaValue] = useState();
   const [icon] = useState(faPaperPlane); //setIcon
 
-  console.log('ParentId: ', parentId);
-  const finalParentId = parentId !== undefined ? parentId : undefined;
+  const finalParentId = parent !== undefined && parent !== null ? parent._id : null;
 
   const requestVariables = {
     input: {
@@ -137,7 +177,6 @@ function WriteComment({ user, addComment, parentId }) {
 
   useEffect(() => {
     if (called && !loading && data !== undefined) {
-      console.log('Data found : ', data);
       addComment(data.createComment);
     }
   }, [data]);

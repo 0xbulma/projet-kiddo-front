@@ -9,6 +9,15 @@ export const GET_BY_TARGET_ID = gql`
       }
       child {
         _id
+        sender {
+          _id
+          first_name
+          last_name
+        }
+        content {
+          message
+        }
+        created_at
       }
       sender {
         _id
