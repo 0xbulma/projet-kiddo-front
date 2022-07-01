@@ -1,0 +1,19 @@
+header.header {
+  @apply bg-white;
+}
+
+div.header__navbar--flex {
+  @apply flex flex-row items-center justify-around p-2 py-4 mx-auto;
+}
+
+div.navbar__nav {
+  @apply relative flex flex-row gap-x-9;
+}
+
+a.nav__icon-link {
+  @apply text-gray-600 hover:text-black hover:font-semibold active:text-black 
+}
+
+.nav-icon {
+  @apply w-7 h-7;
+}

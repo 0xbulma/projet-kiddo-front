@@ -7,6 +7,7 @@ import {
   FaFacebook, FaTwitter, FaInstagram, FaGooglePlus, 
   FaSearch, FaRegCalendarAlt,FaStar} from 'react-icons/fa';
 import { CgProfile } from 'react-icons/cg';
+import { MdOutlineNotificationsNone } from 'react-icons/md';
 
 export const navigationHeader = {
   titleProp: {
@@ -27,22 +28,22 @@ export const navigationHeader = {
     },
     {
       name: 'Calendar',
-      href: '/favorites',
+      href: '/',
       icon: (props) => <FaRegCalendarAlt {...props} />
     },
     {
       name: 'Notification',
       href: '/',
-      icon: (props) => <FaInstagram {...props} />
+      icon: (props) => <MdOutlineNotificationsNone {...props} />
     },
     {
       name: 'Favorite',
-      href: '/',
+      href: '/favorites',
       icon: (props) => <FaStar {...props} />
     },
     {
       name: 'Profile',
-      href: '/',
+      href: '/profile',
       icon: (props) => <CgProfile {...props} />
       
     }

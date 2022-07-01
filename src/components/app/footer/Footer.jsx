@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCopyright as copyOutline } from '@fortawesome/free-regular-svg-icons'
 
-import { navigationFooter } from '../../../constants/navigation';
+import { navigationFooter } from '../../../utils/constants/navigation';
 
 import './_footer.css';
 
@@ -94,7 +94,7 @@ export default function Footer() {
                           {item.name}
                         </p>
                         <item.icon 
-                          className=" h-8 w-8" aria-hidden="true" 
+                          className="w-8 h-8 " aria-hidden="true" 
                         />
                       </a>
                     </li>
