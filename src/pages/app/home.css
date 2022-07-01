@@ -78,6 +78,12 @@
 .lasted-activity-container{
     padding-bottom: 3rem; 
 }
+.title-activity-container {
+    padding: 3rem 0 3rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
 
 
 

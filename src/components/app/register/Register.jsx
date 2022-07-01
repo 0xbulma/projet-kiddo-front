@@ -1,17 +1,17 @@
 import { useState } from "react";
 
 import FormRegister from "./FormRegister";
-import StepTwoRegister from "./StepTwoRegister";
+import NextRegister from "./NextRegister";
 
 function Register() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [verifyPassword, setVerifyPassword] = useState("");
-  const [step, setStep] = useState(1);
+  const [next, setNext] = useState(false);
   return (
     <div>
-      {step === 1 ? (
+      {!next ? (
         <FormRegister
           username={username}
           setUsername={setUsername}
@@ -21,11 +21,11 @@ function Register() {
           setPassword={setPassword}
           verifyPassword={verifyPassword}
           setVerifyPassword={setVerifyPassword}
-          step={step}
-          setStep={setStep}
+          step={next}
+          setStep={setNext}
         />
       ) : (
-        <StepTwoRegister />
+        <NextRegister />
       )}
     </div>
   );

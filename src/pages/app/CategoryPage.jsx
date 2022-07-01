@@ -20,7 +20,7 @@ import {
 } from "../../components/shared/GridCol";
 
 import LoadIconBtn from "../../components/shared/loadingfiles/LoadIconBtn";
-import ActivityCard from "../../components/shared/ActivityCard";
+import ActivityCard from "../../components/shared/card/ActivityCard";
 
 import "./_categoryPage.css";
 
