@@ -1,4 +1,5 @@
-import React, { Fragment, ReactDOM } from 'react';
+import React, { Fragment } from 'react';
+import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { ApolloProvider } from '@apollo/client';
