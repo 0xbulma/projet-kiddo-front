@@ -13,6 +13,10 @@ export const GET_BY_TARGET_ID = gql`
           _id
           first_name
           last_name
+          profil_picture {
+            hd
+            thumbnail
+          }
         }
         content {
           message
@@ -23,6 +27,10 @@ export const GET_BY_TARGET_ID = gql`
         _id
         first_name
         last_name
+        profil_picture {
+          hd
+          thumbnail
+        }
       }
       content {
         message

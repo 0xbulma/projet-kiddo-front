@@ -6,9 +6,6 @@ export const CREATE_COMMENT = gql`
       parent {
         _id
       }
-      child {
-        _id
-      }
       content {
         title
         message
@@ -17,31 +14,32 @@ export const CREATE_COMMENT = gql`
         _id
         first_name
         last_name
+        profil_picture {
+          hd
+          thumbnail
+        }
       }
       created_at
     }
   }
 `;
 
-export const ADD_COMMENT_CHILD = gql`
-  mutation Mutation($input: CommentInput) {
+export const REMOVE_COMMENT = gql`
+  mutation RemoveComment($_id: ObjectID!) {
+    removeComment(id: $_id) {
+      _id
+    }
+  }
+`;
+
+export const ADD_REACTION = gql`
+  mutation addReaction($input: CommentInput) {
     modifyComment(input: $input) {
-      parent {
+      _id
+      reactions {
         _id
+        name
       }
-      child {
-        _id
-      }
-      content {
-        title
-        message
-      }
-      sender {
-        _id
-        first_name
-        last_name
-      }
-      created_at
     }
   }
 `;
