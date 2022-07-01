@@ -275,7 +275,7 @@ function WriteComment({ user, parent, commentTarget, targetID, refetchComments, 
       case 2:
         return 'target_article';
       default:
-        return 'toto';
+        return '';
     }
   };
 

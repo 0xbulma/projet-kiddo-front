@@ -7,8 +7,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot, faCalendar, faPeopleGroup, faEuroSign, faClock } from '@fortawesome/free-solid-svg-icons';
 
 import BlankProfilPic from '../../assets/admin/blank_profil_pic.png';
+import CommentSection from '../../components/shared/CommentSection';
 
 export default function EventPage() {
+  const eventID = window.location.href.split('/')[4];
+
   const images = [image1, image2, image3];
 
   return (
@@ -81,7 +84,7 @@ export default function EventPage() {
           </article>
         </section>
         {/* Comments */}
-        <Comment />
+        <CommentSection commentTarget={1} targetID={eventID} sectionName='Questions-réponses concernant l’activité' />
       </div>
     </>
   );

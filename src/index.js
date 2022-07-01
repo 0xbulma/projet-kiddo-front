@@ -39,16 +39,6 @@ root.render(
       <Routes>
         <Route path='/' element={<UserLayout composant={<Home />} />} />
         <Route path='/contact' element={<UserLayout composant={<Contact />} />} />
-        <Route
-          path='/comment/:id'
-          element={
-            <UserLayout
-              composant={
-                <CommentSection commentTarget={1} targetID='62bdabddfc13ae63860012a2' sectionName='Questions-réponses concernant l’activité' />
-              }
-            />
-          }
-        />
         {/* <Route path='/events' element={<UserLayout composant={<Events />} />} /> */}
         <Route path='/event/:id' element={<UserLayout composant={<EventPage />} />} />
         <Route path='/category/:category' element={<UserLayout composant={<CategoryPage />} />} />
