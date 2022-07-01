@@ -13,6 +13,9 @@ module.exports = {
       colors: {
         grape: colors.purple,
       },
+      fontFamily: {
+        lovely: ["lovely_nathalie", "sans-serif"],
+      },
     },
   },
   plugins: [

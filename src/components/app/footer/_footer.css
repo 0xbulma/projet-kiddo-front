@@ -1,0 +1,71 @@
+footer.footer {
+  @apply bg-[#6929BA];
+}
+  
+div.footer-nav {
+  @apply px-4 pt-8 pb-4 mx-auto max-w-7xl sm:px-6 lg:py-10 lg:px-8;
+}
+
+section.footer__content {
+  @apply xl:grid xl:grid-cols-3 xl:gap-8;
+}
+
+div.footer__logo {
+  @apply space-y-8 xl:col-span-1;
+}
+
+div.footer__navigation {
+  @apply grid grid-cols-2 gap-8 mt-12 xl:mt-0 xl:col-span-2;
+}
+  
+div.footer__navigation--nav {
+  @apply md:grid md:grid-cols-2 md:gap-8;
+}
+
+div.footer__navigation--nav__items {
+  @apply mt-12 md:mt-0;
+}
+
+h3.nav__items--h3 {
+  @apply text-lg font-semibold text-white font-['lovely_nathalie'] tracking-wider;
+}
+
+ul.nav__items--list {
+  @apply mt-4 space-y-4;
+}
+  
+a.nav__items--list-item-link {
+  @apply text-base text-white hover:text-gray-900 hover:scale-110;
+}
+
+ul.nav__social--list {
+  @apply grid grid-cols-2 gap-4;
+}
+
+li.nav__social-item {
+  @apply flex items-center justify-center w-10 space-y-2 h-9;
+}
+
+.nav__social--icon {
+  @apply w-8 h-8;
+}
+
+section.footer__legal {
+  @apply pt-5 mt-12 border-t border-gray-200;
+}
+ 
+div.footer__legal--nav {
+  @apply flex flex-row justify-around;
+}
+
+a.footer__legal--nav-item {
+  @apply text-base text-white hover:text-gray-900 hover:scale-125;
+}
+
+section.footer__copyright {
+  @apply pt-5 pb-5 mt-5 border-t border-gray-200;
+}
+
+p.footer__copyright__text {
+  @apply space-x-2 text-base text-white xl:text-center;
+}
