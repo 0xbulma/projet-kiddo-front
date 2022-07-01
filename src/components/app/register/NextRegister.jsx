@@ -1,6 +1,6 @@
 import React from "react";
 
-const StepTwoRegister = () => {
+const NextRegister = () => {
   return (
     <>
       <div>Vous êtes désormais incris</div>
@@ -8,4 +8,4 @@ const StepTwoRegister = () => {
   );
 };
 
-export default StepTwoRegister;
+export default NextRegister;

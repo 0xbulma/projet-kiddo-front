@@ -1,0 +1,17 @@
+.form-container{
+  height: 30vh;
+}
+.form-title{
+  padding: 2rem;
+}
+
+.form {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.input-form-register {
+   @apply rounded-3xl w-80 border border-gray-400;
+}

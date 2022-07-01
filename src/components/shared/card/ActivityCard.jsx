@@ -1,6 +1,6 @@
 import React from 'react';
-import activityPic from '../../assets/img/GDN2.jpg';
-import './_activity-card.css';
+import activityPic from '../../../assets/img/GDN2.jpg';
+import './activity-card.css';
 // fontawesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCopyright } from '@fortawesome/free-solid-svg-icons';

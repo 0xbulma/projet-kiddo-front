@@ -2,7 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopyright } from "@fortawesome/free-solid-svg-icons";
 // import activityPic from "../../assets/img/GDN2.jpg";
-import "./_category-card.css";
+import "./category-card.css";
 // import logo from "../../../public/logo.png";
 
 const CategoryCard = ({ name, url }) => {

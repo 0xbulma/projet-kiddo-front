@@ -63,8 +63,7 @@ root.render(
         )}
 
         {/* <Route path="/users" element={<User />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} /> */}
+         */}
       </Routes>
     </Router>
   </ApolloProvider>
