@@ -1,9 +1,10 @@
 import { useQuery } from "@apollo/client";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+// import Skelet from "../../components/shared/loadingfiles/Skelet";
 import ActivityCard from "../../components/shared/ActivityCard";
 import CategoryCard from "../../components/shared/CategoryCard";
-import LoadingComponent from "../../components/shared/LoadingComponent";
+import LoadingComponent from "../../components/shared/loadingfiles/LoadingComponent";
 import { GET_EVENTS_BASE } from "../../graphql/query/events.query";
 import "./home.css";
 
@@ -21,12 +22,20 @@ export default function Home() {
   }, [data, error]);
 
   const categories = [
-    { name: "sportives", url: "/asset/img/sportives.jpg" },
-    { name: "artistiques", url: "/asset/img/art.jpg" },
-    { name: "culturelles", url: "/asset/img/culturelle.jpg" },
-    { name: "d'éveil corporel", url: "/asset/img/eveil.jpg" },
-    { name: "manuelles", url: "/asset/img/manuelles.jpg" },
-    { name: "autres", url: "/asset/img/autres.jpg" },
+    { name: "sportives", url: "/asset/img/sportives.jpg", category: "sport" },
+    { name: "artistiques", url: "/asset/img/art.jpg", category: "art" },
+    {
+      name: "culturelles",
+      url: "/asset/img/culturelle.jpg",
+      category: "culture",
+    },
+    {
+      name: "d'éveil corporel",
+      url: "/asset/img/eveil.jpg",
+      category: "eveil",
+    },
+    { name: "manuelles", url: "/asset/img/manuelles.jpg", category: "manuel" },
+    { name: "autres", url: "/asset/img/autres.jpg", category: "autres" },
   ];
 
   return loading ? (
@@ -46,6 +55,7 @@ export default function Home() {
           <div className="sous-hero-div">Organiser des activités</div>
         </article>
       </section>
+
       <section className="container-user">
         <section className="category-container">
           <div className="home-title-category">
@@ -53,15 +63,16 @@ export default function Home() {
             <h2>catégories d'activités</h2>
             <div className="fleche"></div>
           </div>
-
           <article className="category-card-container">
             {categories.map((category, index) => {
               return (
-                <CategoryCard
-                  name={category.name}
-                  url={category.url}
-                  key={index}
-                />
+                <Link to={`/category/:${category.category}`}>
+                  <CategoryCard
+                    name={category.name}
+                    url={category.url}
+                    key={index}
+                  />
+                </Link>
               );
             })}
           </article>
@@ -72,7 +83,6 @@ export default function Home() {
             <h2>Activités prévues cette semaine</h2>
             <span>calendrier des activités</span>
           </div>
-
           <article className="activity-card-container">
             {data &&
               data.events.map((event, index) => {
@@ -94,6 +104,14 @@ export default function Home() {
                 );
               })}
           </article>
+        </section>
+
+        <section className="lasted-acitivty-container">
+          <div className="title-activity-container">
+            <h2>Dernières activités</h2>
+            <span>calendrier des activités</span>
+          </div>
+          <article className="activity-card-container"></article>
         </section>
       </section>
     </>
