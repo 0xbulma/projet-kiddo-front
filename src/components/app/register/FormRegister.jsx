@@ -5,7 +5,16 @@ import Button from "../../shared/Button";
 
 const Form = (props) => {
   const [addUser, { error, data, loading }] = useMutation(CREATE_USER);
-  return (
+  if (error) {
+    console.log(error);
+  }
+  if (data) {
+    console.log(data);
+  }
+
+  return loading ? (
+    <div>en chargement</div>
+  ) : (
     <>
       <div className="form-container">
         <h2 className="form-title">Bienvenu.e.s sur Kiddo</h2>
