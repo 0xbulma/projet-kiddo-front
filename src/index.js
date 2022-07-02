@@ -27,7 +27,6 @@ import AdminUserProfil from './pages/administration/sections/user/UserProfil';
 import AdminUserTestMutation from './pages/administration/sections/user/UserTestMutation';
 
 import './global.css';
-import CommentSection from './components/shared/CommentSection';
 
 let isAdmin = true;
 
