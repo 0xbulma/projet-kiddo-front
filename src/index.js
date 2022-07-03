@@ -12,6 +12,7 @@ import AdminLayout from './pages/layout/AdminLayout';
 //App layout components
 
 import Home from './pages/app/Home';
+import Kiddo from './pages/app/Kiddo';
 import Contact from './pages/app/Contact.jsx';
 import NotFound from './pages/app/NotFound.jsx';
 
@@ -26,7 +27,6 @@ import AdminUserProfil from './pages/administration/sections/user/UserProfil';
 import AdminUserTestMutation from './pages/administration/sections/user/UserTestMutation';
 
 import './global.css';
-import CommentSection from './components/shared/CommentSection';
 
 let isAdmin = true;
 
@@ -38,6 +38,7 @@ root.render(
     <Router>
       <Routes>
         <Route path='/' element={<UserLayout composant={<Home />} />} />
+        <Route path='/kiddo' element={<UserLayout composant={<Kiddo />} />} />
         <Route path='/contact' element={<UserLayout composant={<Contact />} />} />
         {/* <Route path='/events' element={<UserLayout composant={<Events />} />} /> */}
         <Route path='/event/:id' element={<UserLayout composant={<EventPage />} />} />
