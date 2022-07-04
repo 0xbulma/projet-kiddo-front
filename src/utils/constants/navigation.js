@@ -1,22 +1,23 @@
-// import Facebook from '../assets/images/svgcomponents/Facebook';
+import Facebook from '../../components/shared/icons/Facebook';
+import Instagram from '../../components/shared/icons/Instagram';
+import GooglePlus from '../../components/shared/icons/GooglePlus';
+import Twitter from '../../components/shared/icons/Twitter';
 // import Twitter from '../assets/images/svgcomponents/Twitter';
 // import Instagram from '../assets/images/svgcomponents/Instagram';
 // import GooglePlus from '../assets/images/svgcomponents/GooglePlus';
 
-import { 
-  FaFacebook, FaTwitter, FaInstagram, FaGooglePlus, 
-  FaSearch, FaRegCalendarAlt,FaStar} from 'react-icons/fa';
+import { FaSearch, FaRegCalendarAlt } from 'react-icons/fa';
 import { CgProfile } from 'react-icons/cg';
 import { MdOutlineNotificationsNone } from 'react-icons/md';
 
 export const navigationHeader = {
   titleProp: {
-    title: 'My Shop',
-    imgSrc: 'media/Images/Logo.png',
-    imgAlt: 'My Shop Logo',
+    title: 'Kiddo',
+    imgSrc: 'logo.svg',
+    imgAlt: 'Kiddo Logo',
   },
   navigation: [
-    { name: 'Découvrir Kiddo', href: '/'},
+    { name: 'Découvrir Kiddo', href: '/kiddo'},
     { 
       name: 'Participer aux activités', 
       submenu: [
@@ -45,11 +46,6 @@ export const navigationHeader = {
       name: 'Notification',
       href: '/',
       icon: (props) => <MdOutlineNotificationsNone {...props} />
-    },
-    {
-      name: 'Favorite',
-      href: '/favorites',
-      icon: (props) => <FaStar {...props} />
     },
     {
       name: 'Profile',
@@ -83,22 +79,22 @@ export const navigationFooter = {
     {
       name: 'Facebook',
       href: 'https://www.facebook.com/',
-      icon: (props) => <FaFacebook {...props} />
-    },
-    {
-      name: 'Twitter',
-      href: 'https://twitter.com/',
-      icon: (props) => <FaTwitter {...props} />
+      icon: (props) => <Facebook {...props} />
     },
     {
       name: 'Instagram',
       href: 'https://www.instagram.com/',
-      icon: (props) => <FaInstagram {...props} />
+      icon: (props) => <Instagram {...props} />
+    },
+    {
+      name: 'Twitter',
+      href: 'https://twitter.com/',
+      icon: (props) => <Twitter {...props} />
     },
     {
       name: 'Google+',
       href: 'https://plus.google.com/',
-      icon: (props) => <FaGooglePlus {...props} />
+      icon: (props) => <GooglePlus {...props} />
     }
   ]
 }

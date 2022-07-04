@@ -27,7 +27,7 @@ div.footer__navigation--nav__items {
 }
 
 h3.nav__items--h3 {
-  @apply text-lg font-semibold leading-3 tracking-widest text-white;
+  @apply font-semibold leading-3 tracking-widest text-white;
 }
 
 ul.nav__items--list {
