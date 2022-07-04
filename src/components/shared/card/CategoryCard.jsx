@@ -8,7 +8,6 @@ import "./category-card.css";
 // import logo from "../../../public/logo.png";
 
 const CategoryCard = ({ name, url }) => {
-  console.log("url", url);
   return (
     <div>
       <article className="card-categ-contain">

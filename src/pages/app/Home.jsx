@@ -6,20 +6,34 @@ import ActivityCard from "../../components/shared/card/ActivityCard";
 import CategoryCard from "../../components/shared/card/CategoryCard";
 import LoadingComponent from "../../components/shared/loadingfiles/LoadingComponent";
 import { GET_EVENTS_BASE } from "../../graphql/query/events.query";
+import { GET_LAST_EVENTS } from "../../graphql/query/events.query";
 import "./home.css";
 
 export default function Home() {
   const { error, loading, data } = useQuery(GET_EVENTS_BASE, {
     variables: { first: 6, offset: 0 },
   });
+  const {
+    error: errorLast,
+    loading: loadingLast,
+    data: dataLast,
+  } = useQuery(GET_LAST_EVENTS, {
+    variables: { first: 12, offset: 0, dateOrder: "asc" },
+  });
   useEffect(() => {
     if (data) {
-      console.log("data-->", data);
+      // console.log("data-->", data);
     }
     if (error) {
       console.log("error", error);
     }
-  }, [data, error]);
+    if (dataLast) {
+      console.log("data2-->", dataLast);
+    }
+    if (errorLast) {
+      console.log("error2", errorLast);
+    }
+  }, [data, error, dataLast, errorLast]);
 
   const categories = [
     { name: "sportives", url: "/assets/img/sportives.jpg", category: "sport" },
@@ -38,7 +52,7 @@ export default function Home() {
     { name: "autres", url: "/assets/img/autres.jpg", category: "autres" },
   ];
 
-  return loading ? (
+  return loading || loadingLast ? (
     <>
       <LoadingComponent />
     </>
@@ -86,15 +100,13 @@ export default function Home() {
           <article className="activity-card-container">
             {data &&
               data.events.map((event, index) => {
-                console.log("event", event);
+                // console.log("event", event);
                 return (
                   <Link to={`/event/${event._id}`}>
                     <ActivityCard
                       key={index}
-                      // a enelver quand vrai titre
                       title={event.content.title}
-                      // category={event.categories}
-                      category={"sport"}
+                      category={event.categories.name}
                       description={event.content.description}
                       lieu={event.adress}
                       date={event.event_date.start}
