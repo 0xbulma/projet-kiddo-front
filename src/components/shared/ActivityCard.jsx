@@ -1,5 +1,5 @@
 import React from "react";
-import activityPic from "../../assets/img/GDN2.jpg";
+import activityPic from "../../assets/images/GDN2.jpg";
 import "./_activity-card.css";
 // fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

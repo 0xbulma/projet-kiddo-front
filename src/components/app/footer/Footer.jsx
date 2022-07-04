@@ -1,9 +1,9 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCopyright as copyOutline } from '@fortawesome/free-regular-svg-icons'
+'@fortawesome/free-regular-svg-icons'
 
 import { navigationFooter } from '../../../utils/constants/navigation';
 
 import './_footer.css';
+import { FaRegCopyright } from 'react-icons/fa';
 
 const about = navigationFooter.about;
 const contact = navigationFooter.contact;
@@ -36,7 +36,9 @@ export default function Footer() {
                         <a 
                           href={item.href} className="nav__items--list-item-link"
                         >
-                          {item.name}
+                          <p className='item-text'>
+                            {item.name}
+                          </p>
                         </a>
                       </li>
                     ))
@@ -52,7 +54,9 @@ export default function Footer() {
                   contact.map((item, index) => (
                     <li key={index}>
                       <a href={item.href} className="nav__items--list-item-link">
-                        {item.name}
+                        <p className='item-text'>
+                          {item.name}
+                        </p>
                       </a>
                     </li>
                   ))
@@ -70,7 +74,9 @@ export default function Footer() {
                   faq.map((item, index) => (
                     <li key={index}>
                       <a href={item.href} className="nav__items--list-item-link">
-                        {item.name}
+                        <p className='item-text'>
+                          {item.name}
+                        </p>
                       </a>
                     </li>
                   ))
@@ -111,7 +117,9 @@ export default function Footer() {
               legal.map((item, index) => (
                 <div key={index}>
                   <a href={item.href} className="footer__legal--nav-item">
-                    {item.name}
+                    <p className='item-text'>
+                      {item.name}
+                    </p>
                   </a>
                 </div>
               ))
@@ -120,7 +128,7 @@ export default function Footer() {
         </section>
         <section className="footer__copyright">
             <p className="footer__copyright__text">
-              Copyright Kiddo <FontAwesomeIcon icon={copyOutline} /> 2022
+              Copyright Kiddo <FaRegCopyright /> 2022
             </p>
         </section>
       </div>

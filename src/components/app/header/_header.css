@@ -3,11 +3,25 @@ header.header {
 }
 
 div.header__navbar--flex {
-  @apply flex flex-row items-center justify-around p-2 py-4 mx-auto;
+  @apply flex flex-row items-center justify-around h-16 py-5 mx-auto my-0 max-w-7xl;
 }
 
-div.navbar__nav {
-  @apply relative flex flex-row gap-x-9;
+.navbar__nav {
+  @apply relative flex flex-row no-underline gap-x-9;
+}
+
+li.navbar__nar-item {
+  @apply relative text-lg;
+}
+
+li.navbar__nar-item button {
+  font-size: inherit;
+  @apply w-full bg-transparent border-none cursor-pointer text-inherit;
+}
+
+a.nav-link {
+  font-size: inherit;
+  @apply block no-underline;
 }
 
 a.nav__icon-link {
@@ -17,3 +31,7 @@ a.nav__icon-link {
 .nav-icon {
   @apply w-7 h-7;
 }
+/* 
+ul.dropdown {
+  @apply hidden;
+} */

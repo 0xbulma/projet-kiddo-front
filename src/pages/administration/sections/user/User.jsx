@@ -5,8 +5,7 @@ import { useQuery } from '@apollo/client';
 import * as gqlQueryRequest from '../../../../graphql/query/users.query';
 
 // Import asset
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBackwardStep } from '@fortawesome/free-solid-svg-icons';
+import { FaStepBackward } from 'react-icons/fa';
 
 export default function User() {
   const returnArrowPath = '/administration';
@@ -21,9 +20,9 @@ export default function User() {
   return (
     <div className='flex'>
       <div className='admin-container'>
-        <h2 className='text-2xl self-start my-5 ml-5'>
+        <h2 className='self-start my-5 ml-5 text-2xl'>
           <Link to={returnArrowPath}>
-            <FontAwesomeIcon icon={faBackwardStep} className='hover:text-fuchsia-600 transition-all cursor-pointer select-none' />
+            <FaStepBackward className='transition-all cursor-pointer select-none hover:text-fuchsia-600' />
           </Link>{' '}
           | Gestion des utilisateurs
         </h2>
@@ -35,7 +34,7 @@ export default function User() {
           <span>Item3</span>
         </article>
 
-        <article className='mt-10 flex-col'>
+        <article className='flex-col mt-10'>
           <table className='table'>
             <thead className='bg-gray-50'>
               <tr>
@@ -49,7 +48,7 @@ export default function User() {
             </thead>
             <tbody className='bg-white'>
               {users.map((user, index) => (
-                <tr key={index} className='whitespace-nowrap text-center'>
+                <tr key={index} className='text-center whitespace-nowrap'>
                   <td>{user._id}</td>
                   <td>{user.email}</td>
                   <td>{user.created_at}</td>

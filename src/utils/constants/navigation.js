@@ -17,7 +17,17 @@ export const navigationHeader = {
   },
   navigation: [
     { name: 'Découvrir Kiddo', href: '/'},
-    { name: 'Participer aux activités', href: '/events'},
+    { 
+      name: 'Participer aux activités', 
+      submenu: [
+        { name: 'Activité culturelles', href: '/category/:category' },
+        { name: 'Activité manuelles', href: '/category/:category' },
+        { name: 'Activités Sportives', href: '/category/:category' },
+        { name: 'Activités Artistiques', href: '/category/:category' },
+        { name: 'Activités d\'éveil corporel', href: '/category/:category' },
+        { name: 'Autre', href: '/category/:category' },
+      ],
+    },
     { name: 'Organiser une activité', href: '/create-event'},
   ],
   navIcon: [
@@ -52,9 +62,9 @@ export const navigationHeader = {
 
 export const navigationFooter = {
   about: [
-    { name: 'Découvrir Kiddo', href: '/'},
-    { name: 'Avis Sur Kiddo', href: '/'},
-    { name: 'Ils parlent de nous', href: '/'},
+    { name: 'Découvrir Kiddo', href: '/' },
+    { name: 'Avis Sur Kiddo', href: '/' },
+    { name: 'Ils parlent de nous', href: '/' },
   ],
   contact: [
     { name: 'Nous contacter', href: '/contact' },
