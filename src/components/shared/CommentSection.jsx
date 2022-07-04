@@ -1,8 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useLazyQuery, useQuery, useMutation } from '@apollo/client';
+
 import { useEffect, useState } from 'react';
 import useToggle from '../../hooks/useToggle';
-import { Link } from 'react-router-dom';
+import { Link, useOutletContext } from 'react-router-dom';
 
 import ReactTooltip from 'react-tooltip';
 import CustomInput from '../administration/CustomInput';
@@ -11,10 +12,13 @@ import * as CommentsMutation from '../../graphql/mutation/comments.mutation';
 import { GET_BY_EMAIL } from '../../graphql/query/users.query';
 import { GET_BY_TARGET_ID } from '../../graphql/query/comments.query';
 
+import ModalBackdrop from './modal/ModalBackdrop';
+
 //Import asset
 import BlankProfilPic from '../../assets/admin/blank_profil_pic.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane, faHeart, faFlag, faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import CommentSignalment from './Signalment';
 
 //commentTarget = 0 > user | 1 > event | 2 > article
 //targetId = userId ou eventId ou articleID
@@ -25,6 +29,7 @@ export default function CommentSection({ commentTarget, targetID, sectionName })
   const [getUser, { called, loading, error, data }] = useLazyQuery(GET_BY_EMAIL);
 
   // Chargement des commentaires depuis Mongo
+  targetID = '62bdabddfc13ae63860012a2'; //TEMP
   const { data: comments, refetch } = useQuery(GET_BY_TARGET_ID, { variables: { type: commentTarget, id: targetID } });
 
   // Fonction utilisé pour charger à nouveau les commentaires pour les fonctions enfants
@@ -53,6 +58,7 @@ export default function CommentSection({ commentTarget, targetID, sectionName })
       <section className='container mx-auto px-10 max-h-[50rem] overflow-y-auto'>
         <h2 className='font-bold text-2xl mt-5'>{sectionName}</h2>
         {data &&
+          comments &&
           comments.getByTargetId.map((comment, index) => {
             return (
               comment.parent === null && (
@@ -86,6 +92,8 @@ function Comment({ user, comment, refetchComments, commentTarget, targetID }) {
   const [isResponding, toggleResponding] = useToggle(false);
 
   const [removeComment, { called, data }] = useMutation(CommentsMutation.REMOVE_COMMENT);
+
+  const [modal, toggleModal] = useToggle(false);
 
   useEffect(() => {
     if (called && data) {
@@ -148,6 +156,7 @@ function Comment({ user, comment, refetchComments, commentTarget, targetID }) {
               icon={faFlag}
               className='mr-3 hover:text-gray-800 hover:scale-125 transition-all cursor-pointer  select-none'
               data-tip='Signaler ce commentaire'
+              onClick={toggleModal}
             />
 
             <ReactTooltip effect='solid' place='top' />
@@ -159,6 +168,9 @@ function Comment({ user, comment, refetchComments, commentTarget, targetID }) {
             <span className='-mt-1'>0</span>
             {/* FIN SECTION: Répondre - Signaler - Aimer */}
           </div>
+
+          {/* MODAL : Signalement */}
+          <ModalBackdrop composant={<CommentSignalment user={user} comment={comment} />} open={modal} onClose={toggleModal} />
         </article>
       </article>
 
@@ -237,6 +249,7 @@ function Comment({ user, comment, refetchComments, commentTarget, targetID }) {
                     icon={faFlag}
                     className='mr-2 hover:text-gray-800 hover:scale-125 transition-all cursor-pointer  select-none'
                     data-tip='Signaler ce commentaire'
+                    onClick={toggleModal}
                   />
                   {/* FIN SECTION: Répondre - Signaler - Aimer */}
                 </div>
@@ -265,6 +278,8 @@ function WriteComment({ user, parent, commentTarget, targetID, refetchComments, 
 
   //Forcer le undefined pour un enregistrement.
   const parentId = parent !== undefined && parent !== null ? parent : undefined;
+
+  console.log('CommentTarget ', commentTarget, '| TargetID :', targetID);
 
   const getTargetKey = () => {
     switch (commentTarget) {

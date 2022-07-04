@@ -55,3 +55,23 @@ export const GET_BY_EMAIL = gql`
     }
   }
 `;
+
+export const CONNECT_USER = gql`
+  query Query($email: EmailAddress, $password: String) {
+    connectUser(email: $email, password: $password) {
+      email
+      password
+    }
+  }
+`;
+
+export const GET_SIGNALMENTS = gql`
+  query Query {
+    users {
+      signalments {
+        _id
+        name
+      }
+    }
+  }
+`;

@@ -27,6 +27,7 @@ import AdminUserProfil from './pages/administration/sections/user/UserProfil';
 import AdminUserTestMutation from './pages/administration/sections/user/UserTestMutation';
 
 import './global.css';
+import Signalement from './pages/administration/sections/Report';
 
 let isAdmin = true;
 
@@ -49,6 +50,7 @@ root.render(
             <Route path='/administration' element={<AdminLayout composant={<AdminDashboard />} />} />
             <Route path='/administration/users' element={<AdminLayout composant={<AdminUser />} />} />
             <Route path='/administration/users/:id' element={<AdminLayout composant={<AdminUserProfil />} />} />
+            <Route path='/administration/reports' element={<AdminLayout composant={<Signalement />} />} />
             <Route path='/administration/userTest' element={<AdminLayout composant={<AdminUserTestMutation />} />} />
           </Fragment>
         )}
