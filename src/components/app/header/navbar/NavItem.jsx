@@ -1,7 +1,7 @@
-import React, { Fragment, useEffect, useRef, useState } from 'react'
+import React, { Fragment, useEffect, useRef, useState } from "react";
 // import Dropdown from './Dropdown';
 
-export default function NavItem({page, key}) {
+export default function NavItem({ page }) {
   const [dropdown, setDropdown] = useState(false);
 
   let ref = useRef();
@@ -28,34 +28,34 @@ export default function NavItem({page, key}) {
   const onMouseLeave = () => {
     window.innerWidth > 960 && setDropdown(false);
   };
-  
+
   return (
-      <li 
-        className={'navbar__nav-item'}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-      >
-        {
-          page.submenu ? (
-            <Fragment>
-              <button 
-                type="button"
-                aria-haspopup="menu"
-                aria-expanded={dropdown ? "true" : "false"}
-                onClick={() => {setDropdown((prev) => !prev)}}
-              >
-                <a href={page.href} className="nav-link">
-                  {page.name}
-                </a>
-              </button>
-              {/* <Dropdown submenu={page.submenu} dropdown={dropdown} /> */}
-            </Fragment>
-          ) : (
+    <li
+      className={"navbar__nav-item"}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
+      {page.submenu ? (
+        <Fragment>
+          <button
+            type="button"
+            aria-haspopup="menu"
+            aria-expanded={dropdown ? "true" : "false"}
+            onClick={() => {
+              setDropdown((prev) => !prev);
+            }}
+          >
             <a href={page.href} className="nav-link">
               {page.name}
             </a>
-          )
-        }
-      </li>
-  )
+          </button>
+          {/* <Dropdown submenu={page.submenu} dropdown={dropdown} /> */}
+        </Fragment>
+      ) : (
+        <a href={page.href} className="nav-link">
+          {page.name}
+        </a>
+      )}
+    </li>
+  );
 }
