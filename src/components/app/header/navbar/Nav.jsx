@@ -1,9 +1,6 @@
 import NavItem from "./NavItem";
 
 export default function Nav({ navigation }) {
-
-  
-  // let ref = useRef(); 
   return (
     <ul className="navbar__nav">
       {
