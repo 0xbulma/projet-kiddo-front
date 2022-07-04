@@ -118,6 +118,7 @@ function CardParticipant(props) {
   );
 }
 
+/*
 function Comment() {
   return (
     <section>
@@ -149,5 +150,6 @@ function MainComment() {
     </div>
   );
 }
+*/
 
 // function SubComment() {}
