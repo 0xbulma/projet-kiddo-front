@@ -1,6 +1,4 @@
-import { click } from '@testing-library/user-event/dist/click';
 import ReactPaginate from 'react-paginate';
-
 import './paginationComp.css'
 
 export default function PaginationComp({totalItem, itemsPerPage, onPageClick, page}) {
@@ -36,14 +34,7 @@ export default function PaginationComp({totalItem, itemsPerPage, onPageClick, pa
           console.log('nextselect', clickEvent.nextSelectedPage);
           onPageClick(clickEvent.nextSelectedPage+1);
         }
-         
-       
-       
-        // Return false to prevent standard page change,
-        // return false; // --> Will do nothing.
-        // return a number to choose the next page,
-        // return 4; --> Will go to page 5 (index 4)
-        // return nothing (undefined) to let standard behavior take place.
+
       }}
     />
 
