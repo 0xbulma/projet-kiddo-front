@@ -1,6 +1,8 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCopyright } from "@fortawesome/free-solid-svg-icons";
+import { FaCopyright } from "react-icons/fa";
+
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faCopyright } from "@fortawesome/free-solid-svg-icons";
 // import activityPic from "../../assets/img/GDN2.jpg";
 import "./category-card.css";
 // import logo from "../../../public/logo.png";
@@ -18,7 +20,7 @@ const CategoryCard = ({ name, url }) => {
           />
         </div>
         <div className="category-card-icon">
-          <FontAwesomeIcon className="category-card-icons" icon={faCopyright} />
+          <FaCopyright className="category-card-icons" />
         </div>
 
         <div className="category-card-footer">

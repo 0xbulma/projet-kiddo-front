@@ -14,7 +14,7 @@ export default function NotFound() {
           
         </h1>
         <p className='notfound__content--text'>
-          Oops ... !! Il est interdit d'aller sur le côté obscur de la force !!
+          Oops ... !! Il est interdit d'aller du côté obscur de la force !!
         </p>
         <div className="notfound__content--link">
           <a href="/" className='notfound__content--link__text-link'>

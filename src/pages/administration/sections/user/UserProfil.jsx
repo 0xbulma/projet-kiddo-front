@@ -7,8 +7,8 @@ import useToggle from '../../../../hooks/useToggle';
 import CustomInput from '../../../../components/administration/CustomInput';
 
 //Assets
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPhone, faMailBulk, faPen, faBackwardStep } from '@fortawesome/free-solid-svg-icons';
+import { FaPhone, FaMailBulk, FaStepBackward, FaPenAlt } from 'react-icons/fa';
+
 import profilPic from '../../../../assets/admin/blank_profil_pic.png';
 
 export default function UserProfil() {
@@ -31,9 +31,9 @@ export default function UserProfil() {
   return (
     <div className='flex'>
       <div className='admin-container'>
-        <h2 className='text-2xl self-start my-5 ml-5'>
+        <h2 className='self-start my-5 ml-5 text-2xl'>
           <Link to={returnArrowPath}>
-            <FontAwesomeIcon icon={faBackwardStep} className='hover:text-fuchsia-600 transition-all cursor-pointer select-none' />
+            <FaStepBackward className='transition-all cursor-pointer select-none hover:text-fuchsia-600' />
           </Link>{' '}
           | Utilisateur
         </h2>
@@ -41,20 +41,20 @@ export default function UserProfil() {
         <section className='flex self-start ml-10'>
           <img src={profilPic} alt='' className='w-40 bg-fuchsia-300' />
           <article className='flex flex-col justify-center ml-4'>
-            <span className='font-bold mb-3 text-xl'>
+            <span className='mb-3 text-xl font-bold'>
               Bob Chenapan{' | '}
-              <FontAwesomeIcon icon={faPen} className='text-gray-500 text-sm' />
-              <span className='ml-2 text-sm hover:text-fuchsia-600 transition-all cursor-pointer select-none' onClick={toggleModifiedPanel}>
+              <FaPenAlt className='text-sm text-gray-500' />
+              <span className='ml-2 text-sm transition-all cursor-pointer select-none hover:text-fuchsia-600' onClick={toggleModifiedPanel}>
                 {modifiedPanel ? 'Modifier' : 'Consulter'}
               </span>
             </span>
             <div className='mb-3'>
               <span className='mr-3'>
-                <FontAwesomeIcon icon={faMailBulk} className='mr-2 text-fuchsia-600' />
+                <FaMailBulk className='mr-2 text-fuchsia-600' />
                 totodu76@gmail.com
               </span>
               <span>
-                <FontAwesomeIcon icon={faPhone} className='mr-2 text-fuchsia-600' />
+                <FaPhone className='mr-2 text-fuchsia-600' />
                 02.35.01.02.03
               </span>
             </div>
@@ -70,7 +70,7 @@ export default function UserProfil() {
 
 function ProfilInfo() {
   return (
-    <section className='w-full grid grid-cols-3 gap-4 px-10 mt-5'>
+    <section className='grid w-full grid-cols-3 gap-4 px-10 mt-5'>
       <article className='col-span-2 admin-section'>
         <span className='admin-section__title'>Activités récentes...</span>
         <div className='mt-5'>
@@ -99,7 +99,7 @@ function ProfilModifier() {
   console.log(inputValue);
 
   return (
-    <section className='w-full px-10 mt-5 grid grid-cols-2 gap-4'>
+    <section className='grid w-full grid-cols-2 gap-4 px-10 mt-5'>
       <article className='admin-section'>
         <span className='admin-section__title'>Modification du profil</span>
 
@@ -118,11 +118,11 @@ function ProfilModifier() {
 
         <CustomInput label='Adresse' setState={setInputValue} customWidth='w-[42rem]' />
 
-        <button className='table-edit-btn mt-10'>Enregistrer</button>
-        <button className='table-delete-btn mt-10 ml-3'>Supprimer le profil</button>
+        <button className='mt-10 table-edit-btn'>Enregistrer</button>
+        <button className='mt-10 ml-3 table-delete-btn'>Supprimer le profil</button>
       </article>
 
-      <article className='admin-section flex flex-col items-start'>
+      <article className='flex flex-col items-start admin-section'>
         <span className='admin-section__title'>Modification des enfants</span>
 
         <table className='table mt-10'>
@@ -154,7 +154,7 @@ function ProfilModifier() {
           </tbody>
         </table>
 
-        <button className='table-edit-btn mt-10'>Enregistrer</button>
+        <button className='mt-10 table-edit-btn'>Enregistrer</button>
       </article>
     </section>
   );
