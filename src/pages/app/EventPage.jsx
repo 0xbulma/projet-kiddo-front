@@ -117,39 +117,3 @@ function CardParticipant(props) {
     </div>
   );
 }
-
-/*
-function Comment() {
-  return (
-    <section>
-      <h2 className='mt-5 mb-5 text-2xl font-bold'>Questions-réponses concernant l'activité</h2>
-
-      <article>
-        <MainComment user='Toto' content='toto' />
-      </article>
-    </section>
-  );
-}
-
-function MainComment() {
-  return (
-    <div className='flex items-start py-10'>
-      <img src={BlankProfilPic} alt='' width='75px' className='mr-3 transition-all hover:scale-105' />
-      <div className='flex flex-col px-3 pt-8 pb-3 bg-gray-300 rounded-md'>
-        <span className='text-xl font-bold'>Prénom</span>
-        <p className='pb-3 mt-5'>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias quibusdam accusantium nobis ut ducimus sit quod maxime sunt odio magni.
-          Expedita, accusantium sed. Dolorum quasi ullam est beatae voluptatum ducimus?
-        </p>
-        <div className='self-end font-bold'>
-          <span className='mx-2'>Répondre</span>
-          <span className='mx-2'>J'aime</span>
-          <span className='mx-2'>Signaler</span>
-        </div>
-      </div>
-    </div>
-  );
-}
-*/
-
-// function SubComment() {}
