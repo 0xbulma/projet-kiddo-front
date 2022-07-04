@@ -3,7 +3,7 @@ import { useLazyQuery, useQuery, useMutation } from '@apollo/client';
 
 import { useEffect, useState } from 'react';
 import useToggle from '../../hooks/useToggle';
-import { Link, useOutletContext } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import ReactTooltip from 'react-tooltip';
 import CustomInput from '../administration/CustomInput';
