@@ -1,18 +1,18 @@
 export default function getCategoryColor(category) {
   switch (category) {
     case "sport":
-      return "red";
+      return "bg-red-300";
     case "culture":
-      return "purple";
+      return "bg-purple-300";
     case "manuel":
-      return "green";
+      return "bg-green-300";
     case "art":
-      return "yellow";
+      return "bg-yellow-300";
     case "eveil":
-      return "blue";
+      return "bg-blue-300";
     case "autres":
-      return "orange";
+      return "bg-orange-300";
     default:
-      return "gray";
+      return "bg-gray-300";
   }
 }
