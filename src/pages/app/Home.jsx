@@ -5,33 +5,37 @@ import { Link } from "react-router-dom";
 import ActivityCard from "../../components/shared/card/ActivityCard";
 import CategoryCard from "../../components/shared/card/CategoryCard";
 import LoadingComponent from "../../components/shared/loadingfiles/LoadingComponent";
-import { GET_EVENTS_BASE } from "../../graphql/query/events.query";
-import { GET_LAST_EVENTS } from "../../graphql/query/events.query";
+import {
+  GET_EVENTS_BASE,
+  GET_LAST_EVENTS,
+} from "../../graphql/query/events.query";
+
 import "./home.css";
 
 export default function Home() {
   const { error, loading, data } = useQuery(GET_EVENTS_BASE, {
     variables: { first: 6, offset: 0 },
   });
+
   const {
     error: errorLast,
     loading: loadingLast,
     data: dataLast,
   } = useQuery(GET_LAST_EVENTS, {
-    variables: { first: 12, offset: 0, dateOrder: "asc" },
+    variables: { first: 6, offset: 0 },
   });
   useEffect(() => {
     if (data) {
-      // console.log("data-->", data);
+      console.log("data-->", data);
     }
     if (error) {
       console.log("error", error);
     }
     if (dataLast) {
-      console.log("data2-->", dataLast);
+      console.log("dataLast-->", dataLast);
     }
     if (errorLast) {
-      console.log("error2", errorLast);
+      console.log("errorLast", errorLast);
     }
   }, [data, error, dataLast, errorLast]);
 
@@ -123,7 +127,25 @@ export default function Home() {
             <h2>Dernières activités</h2>
             <span>calendrier des activités</span>
           </div>
-          <article className="activity-card-container"></article>
+          <article className="activity-card-container">
+            {dataLast &&
+              dataLast.events.map((event, index) => {
+                // console.log("event", event);
+                return (
+                  <Link to={`/event/${event._id}`}>
+                    <ActivityCard
+                      key={index}
+                      title={event.content.title}
+                      category={event.categories.name}
+                      description={event.content.description}
+                      lieu={event.adress}
+                      date={event.event_date.start}
+                      prix={event.price.adult}
+                    />
+                  </Link>
+                );
+              })}
+          </article>
         </section>
       </section>
     </>
