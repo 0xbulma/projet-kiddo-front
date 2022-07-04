@@ -19,8 +19,10 @@ import ActivityCard from '../../components/shared/card/ActivityCard';
 import './_categoryPage.css';
 import getGeoLoc from '../../utils/getGeoLoc';
 import PaginationComp from '../../components/shared/PaginationComp';
+import { useNavigate } from "react-router-dom";
 
 function CategoryPage(props) {
+  let navigate = useNavigate();
   const ITEMS_PER_PAGE = 12;
   const [page, setPage] = useState(1);
 
@@ -31,17 +33,20 @@ function CategoryPage(props) {
   });
 
   const {
-    // loading: loading2,
-    // error: error2,
+   // loading: loading2,
+   // error: error2,
     data: data2,
   } = useQuery(GET_CATEGORY_BY_NAME, { variables: { name: category } });
 
   const [getEvents, { loading, error, data, refetch }] =
     useLazyQuery(GET_EVENTS_CATEGORY);
 
-  useEffect(() => {
-    if (data2 && !data) {
-      console.log(data2);
+    useEffect(() => {
+    if(data2?.category === null){
+      navigate('/404');
+    }
+
+    if (data2?.category && !data) {
       getEvents({
         variables: {
           first: ITEMS_PER_PAGE,
@@ -59,13 +64,8 @@ function CategoryPage(props) {
       console.log('offset', page * ITEMS_PER_PAGE - ITEMS_PER_PAGE)
       refetch({ offset: page * ITEMS_PER_PAGE - ITEMS_PER_PAGE });
     }
-  }, [data2, getEvents, page, data, refetch]);
+  }, [data2, getEvents, page, data, refetch, navigate]);
 
-  useEffect(() => {
-    if (data) {
-      console.log(data.eventsComplexQuery.count);
-    }
-  }, [data]);
 
   const onClickHandler = () => {
     setGeoLoc(geoLoc => ({ ...geoLoc, isLoading: true }));
