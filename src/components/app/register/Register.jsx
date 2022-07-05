@@ -3,7 +3,7 @@ import Button from "../../shared/Button";
 import ModalBackdrop from "../../shared/modal/ModalBackdrop";
 import Login from "../login/Login";
 import { useMutation } from "@apollo/client";
-import { CREATE_USER } from "../../../graphql/mutation/register.mutation";
+import { CREATE_USER } from "../../../graphql/mutation/createUser.mutation";
 import "./register.css";
 
 function Register() {
