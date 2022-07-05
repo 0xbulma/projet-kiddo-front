@@ -34,13 +34,13 @@ export default function Nav({ submenu }) {
               <Popover.Panel className="absolute inset-x-0 z-10 hidden transform bg-white shadow-lg md:block top-full">
                 <div className="bg-white">
                   <div className="px-4 py-5 mx-auto space-y-6 max-w-7xl sm:flex sm:space-y-0 sm:space-x-10 sm:px-6 lg:px-8">
-                    {submenu.map((item) => (
-                      <div key={item.name} className="flow-root">
+                    {submenu.map((category) => (
+                      <div key={category.name} className="flow-root">
                         <a
-                          href={item.href}
+                          href={`/category/${category.category}`}
                           className="flex items-center p-3 -m-3 text-base font-medium text-gray-900 rounded-md hover:bg-gray-100"
                         >
-                          <span className="ml-3">{item.name}</span>
+                          <span className="ml-3">{category.name}</span>
                         </a>
                       </div>
                     ))}

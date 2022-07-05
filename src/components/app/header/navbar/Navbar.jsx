@@ -8,12 +8,12 @@ import Logo from './Logo';
 import Nav from './Nav';
 
 const submenu = [
-  { name: 'Activité culturelles', href: '/category/:category' },
-  { name: 'Activité manuelles', href: '/category/:category' },
-  { name: 'Activités Sportives', href: '/category/:category' },
-  { name: 'Activités Artistiques', href: '/category/:category' },
-  { name: 'Activités d\'éveil corporel', href: '/category/:category' },
-  { name: 'Autre', href: '/category/:category' },
+  { name: 'Activité culturelles', category:'culture' },
+  { name: 'Activité manuelles', category:'manuel' },
+  { name: 'Activités Sportives', category:'sport' },
+  { name: 'Activités Artistiques', category:'art' },
+  { name: 'Activités d\'éveil corporel', category:'eveil' },
+  { name: 'Autres', category:'zutres' },
 ]
 
 const titleProp = navigationHeader.titleProp;
