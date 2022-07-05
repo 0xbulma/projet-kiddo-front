@@ -1,132 +1,119 @@
-import Carousel from "../../components/Carousel";
+import Carousel from '../../components/Carousel';
 
-import image1 from "../../assets/images/carouselTest/1.jpg";
-import image2 from "../../assets/images/carouselTest/2.jpg";
-import image3 from "../../assets/images/carouselTest/3.jpg";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faLocationDot,
-  faCalendar,
-  faPeopleGroup,
-  faEuroSign,
-  faClock,
-} from "@fortawesome/free-solid-svg-icons";
+import image1 from '../../assets/images/carouselTest/1.jpg';
+import image2 from '../../assets/images/carouselTest/2.jpg';
+import image3 from '../../assets/images/carouselTest/3.jpg';
 
-import BlankProfilPic from "../../assets/admin/blank_profil_pic.png";
-import CommentSection from "../../components/shared/CommentSection";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLocationDot, faCalendar, faPeopleGroup, faEuroSign, faClock } from '@fortawesome/free-solid-svg-icons';
+import { GET_BY_ID } from '../../graphql/query/events.query';
+
+import BlankProfilPic from '../../assets/admin/blank_profil_pic.png';
+import CommentSection from '../../components/shared/CommentSection';
+import { useParams } from 'react-router';
+import { useQuery } from '@apollo/client';
+import { useEffect, useState } from 'react';
+import * as dateManager from '../../utils/DateManager';
+import MapLeaflet from '../../components/shared/MapLeaflet';
+import { Link } from 'react-router-dom';
 
 export default function EventPage() {
-  const eventID = window.location.href.split("/")[4];
+  const { eventId } = useParams();
+  const [event, setEvent] = useState();
 
-  const images = [image1, image2, image3];
+  const { loading, error, data } = useQuery(GET_BY_ID, { variables: { eventId: eventId } });
+
+  useEffect(() => {
+    if (data) {
+      console.log('Data : ', data);
+      setEvent(data.event);
+    } else if (error) {
+      console.log('Error : ', error);
+    }
+  }, [error, data]);
+
+  const images = [image1, image2, image3, image1, image2, image3];
 
   return (
     <>
-      {/* CONTAINER MX-AUTO TEMP */}
-      <div className="container mx-auto">
-        <h2>EventPage</h2>
-        <div className="flex flex-col">
-          <span className="text-green-500 sm:text-red-500">SM TEXT</span>
-          <span className="text-green-500 md:text-red-500">MD TEXT</span>
-          <span className="text-green-500 lg:text-red-500">LG TEXT</span>
-          <span className="text-green-500 xl:text-red-500">XL TEXT</span>
-        </div>
-        <section className="flex flex-col items-center">
+      {!loading && event && (
+        <div className=''>
+          <article className='flex flex-col items-center grow container mx-auto text-center mt-5 mb-3'>
+            <h2 className='text-bold text-4xl'>{event.content.title}</h2>
+            <h3 className='text-bold text-xl'>{event.content.subtitle}</h3>
+          </article>
+
           <Carousel images={images} />
-          <article className="grid grid-cols-1 gap-8 mx-32 my-10 xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2">
-            <CardInfo
-              icon={faLocationDot}
-              line1="Parc Accrobranches"
-              line2="Chaville (92)"
-            />
-            <CardInfo
-              icon={faCalendar}
-              line1="Samedi 02/07/2022"
-              line2="à 13H30"
-            />
-            <CardInfo
-              icon={faPeopleGroup}
-              line1="A partir de 4 ans"
-              line2="Taille minimale 1m"
-            />
-            <CardInfo
-              icon={faEuroSign}
-              line1="9.50€ par endant"
-              line2="18€ par Adulte"
-            />
-            <CardInfo icon={faClock} line1="2 heures" />
-          </article>
 
-          <button className="py-2 my-3 font-bold text-white rounded-full bg-slate-700 px-14">
-            S'inscrire à l'activité
-          </button>
-        </section>
-        <section className="flex flex-col items-center w-full my-10 bg-gray-300">
-          <div className="grid w-full grid-cols-2 px-56 my-10 gap-11">
-            <article>
-              <h2 className="text-xl font-bold">Description de l'activité</h2>
-              <p className="mt-5 mr-10">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ad
-                perferendis quis tempore rem quasi dicta architecto qui itaque
-                cupiditate? Accusamus qui quibusdam consequatur doloribus
-                laudantium excepturi maxime possimus at temporibus. Lorem ipsum,
-                dolor sit amet consectetur adipisicing elit. Ad perferendis quis
-                tempore rem quasi dicta architecto qui itaque cupiditate?
-                Accusamus qui quibusdam consequatur doloribus laudantium
-                excepturi maxime possimus at temporibus. Lorem ipsum, dolor sit
-                amet consectetur adipisicing elit. Ad perferendis quis tempore
-                rem quasi dicta architecto qui itaque cupiditate? Accusamus qui
-                quibusdam consequatur doloribus laudantium excepturi maxime
-                possimus at temporibus.
-              </p>
+          {/* Carte d'information de l'événement */}
+          <section className='flex flex-col items-center grow'>
+            <article className='grid grid-cols-1 gap-8 my-10 xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2'>
+              <CardInfo icon={faLocationDot} line1={event.adress.city} line2={event.adress.adress_line} />
+              <CardInfo
+                icon={faCalendar}
+                line1={dateManager.getDate(event.event_date.start)}
+                line2={'à ' + dateManager.getHHMM(event.event_date.start)}
+              />
+              <CardInfo
+                icon={faPeopleGroup}
+                line1={event.group_size + (event.group_size > 1 ? ' places' : ' place')}
+                line2={'A partir de ' + event.minChildAge + ' ans'}
+              />
+              <CardInfo icon={faEuroSign} line1={event.price.child + '€ par enfant'} line2={event.price.adult + '€ par adulte'} />
+              <CardInfo icon={faClock} line1={dateManager.getTimeBetweenDates(event.event_date.start, event.event_date.end) + ' heures'} />
             </article>
-            <article className="flex flex-col">
-              {/* Activité organisé par */}
-              <div className="flex items-start self-end">
-                <span className="mt-4 mr-5">Activité organisé par</span>
-                <div className="flex flex-col items-center">
-                  <img src={BlankProfilPic} alt="" width="75px" />
-                  <span>Michel, 44 ans</span>
-                  <span>Marié, 2 enfants</span>
+
+            {/* Bouton s'inscrire ou notification inscrit.e à l'activité */}
+            <div>
+              <button className='py-2 my-3 font-bold text-white rounded-full bg-slate-700 px-14'>S'inscrire à l'activité</button>
+            </div>
+          </section>
+          <section className='flex flex-col items-center w-full my-10 bg-[#F6F5FE]'>
+            <div className='grid w-full grid-cols-2 px-56 my-10 gap-11'>
+              <article>
+                <h2 className='text-2xl font-bold'>Description de l'activité</h2>
+                <p className='mt-8 mr-10'>{event.content.description}</p>
+              </article>
+              <article className='flex flex-col justify-around'>
+                {/* Activité organisé par */}
+                <div className='flex justify-center items-center'>
+                  <span className='mr-3'>Activité organisé par </span>
+                  <div className='flex flex-col items-center'>
+                    <Link to={`/user/${event.main_owner._id}`}>
+                      <img src={BlankProfilPic} alt='' width='75px' className='hover:scale-105 transition-all' />
+                    </Link>
+                    <span>{event.main_owner.first_name + ', ' + dateManager.getUserAge(event.main_owner.birthdate) + ' ans'}</span>
+                    <span>{event.main_owner.children.length + (event.main_owner.children.length > 1 ? ' enfants' : ' enfant')}</span>
+                  </div>
                 </div>
-              </div>
-              {/* Rendu de la carte */}
-              <span className="my-20 text-center">CARTE</span>
-              {/* Adresse */}
-              <p className="self-center">
-                Parc Forestier de la Mare Adam, Rte des Huit Bouteilles, 98370
-                Chaville
-              </p>
-            </article>
-          </div>
+                {/* Rendu de la carte */}
+                <div className='bg-yellow-300'>
+                  <MapLeaflet inputGPS={event.gps} />
+                </div>
+                {/* Adresse */}
+                <p className='text-center'>Parc Forestier de la Mare Adam, Rte des Huit Bouteilles, 98370 Chaville</p>
+              </article>
+            </div>
 
-          <button className="py-2 mx-56 mb-5 font-bold text-white rounded-full bg-slate-700 px-14">
-            S'inscrire à l'activité
-          </button>
-        </section>
-        {/* Participants */}
-        <section className="my-12">
-          <h2 className="mt-5 mb-5 text-2xl font-bold">Participants </h2>
-          <article className="flex items-center justify-around">
-            <CardParticipant user="toto" />
-            <CardParticipant user="toto" />
-            <CardParticipant user="toto" />
-            <CardParticipant user="toto" />
-            <CardParticipant user="toto" />
-            <CardParticipant user="toto" />
-            <CardParticipant user="toto" />
-            <span className="text-lg font-bold underline cursor-pointer select-none hover:text-yellow-600">
-              Voir tous les participants
-            </span>
-          </article>
-        </section>
-        {/* Comments */}
-        <CommentSection
-          commentTarget={1}
-          targetID={eventID}
-          sectionName="Questions-réponses concernant l’activité"
-        />
-      </div>
+            {/* Bouton s'inscrire ou notification inscrit.e à l'activité */}
+            <div>
+              <button className='py-2 my-5 font-bold text-white rounded-full bg-slate-700 px-14'>S'inscrire à l'activité</button>
+            </div>
+          </section>
+
+          {/* Participants */}
+          <section className='container mx-auto my-12'>
+            <h2 className='mt-5 mb-5 text-2xl font-bold'>Participants </h2>
+            <article className='flex items-center justify-around'>
+              {event.group_participants.map((group, index) => (
+                <CardParticipant user={group.user} participants={group.group_detail} />
+              ))}
+            </article>
+          </section>
+          {/* Comments */}
+          <CommentSection commentTarget={1} targetID={eventId} sectionName='Questions-réponses concernant l’activité' />
+        </div>
+      )}
     </>
   );
 }
@@ -135,34 +122,30 @@ function CardInfo(props) {
   const { icon, line1, line2 } = props;
 
   return (
-    <article className="flex items-center px-3 py-2 border-2 border-black rounded-md">
-      <FontAwesomeIcon icon={icon} className="mr-3 text-lg text-black" />
-      <div className="flex flex-col">
+    <article className='flex items-center py-3 px-2 border border-gray-600 rounded-md'>
+      <FontAwesomeIcon icon={icon} className='mr-3 text-lg text-black' />
+      <div className='flex flex-col'>
         <span>{line1}</span>
-        {line2 !== undefined && <span>{line2}</span>}
+        {line2 && <span>{line2}</span>}
       </div>
     </article>
   );
 }
 
 function CardParticipant(props) {
-  const { user } = props;
-  console.log(user);
+  const { user, participants } = props;
+  console.log(user, participants);
   return (
-    <div className="flex flex-col items-center justify-center align-middle">
-      <img
-        src={BlankProfilPic}
-        alt=""
-        width="75px"
-        className="transition-all hover:scale-105"
-      />
-      <span>Toto, 50ans</span>
+    <div className='flex flex-col items-center justify-center align-middle'>
+      <Link to={`/user/${user._id}`}>
+        <img src={BlankProfilPic} alt='' width='75px' className='hover:scale-105 transition-all' />
+      </Link>
       <span>
-        <FontAwesomeIcon
-          icon={faPeopleGroup}
-          className="mr-3 text-lg text-black"
-        />
-        1 enfant
+        {user.first_name}, {dateManager.getUserAge(user.birthdate)} ans
+      </span>
+      <span>
+        <FontAwesomeIcon icon={faPeopleGroup} className='mr-3 text-lg text-black' />
+        {participants.length + (participants.length > 1 ? 'inscrits' : 'inscrit')}
       </span>
     </div>
   );

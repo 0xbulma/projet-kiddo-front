@@ -1,67 +1,51 @@
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faForward, faBackward } from '@fortawesome/free-solid-svg-icons';
-import { useEffect, useRef, useState } from 'react';
-
-import './_carousel.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faForward, faBackward } from '@fortawesome/free-solid-svg-icons';
+import { useState } from 'react';
 
 export default function Carousel(props) {
   const { images } = props;
+  const imgsLength = images.length;
 
-  const [imgLength] = useState(images.length);
-
-  const [imgMainIndex, setImgMainIndex] = useState(imgLength % 2 === 0 ? imgLength / 2 : 0);
-
-  const [imgIndex, setImgIndex] = useState({
-    first: imgMainIndex - 1 >= 0 ? imgMainIndex - 1 : -1,
-    last: imgMainIndex + 1 < imgLength ? imgMainIndex + 1 : -1,
-  });
-
-  useEffect(() => {
-    setImgIndex({
-      first: imgMainIndex - 1 >= 0 ? imgMainIndex - 1 : imgLength - 1,
-      last: imgMainIndex + 1 < imgLength ? imgMainIndex + 1 : 0,
-    });
-  }, [imgMainIndex, imgLength]);
-
-  const imgAnchor = useRef();
+  const [imgIndex, setimgIndex] = useState(0);
 
   const changeImgIndex = (next) => {
-    let actualImgIndex = imgMainIndex;
+    let finalExtraIndex = imgIndex;
     if (next) {
-      if (actualImgIndex++ >= images.length) {
-        setImgMainIndex(1);
-        console.log(actualImgIndex, '| Case 1');
-      } else {
-        setImgMainIndex(actualImgIndex);
-        console.log(actualImgIndex, '| Case 2');
-      }
+      if (++finalExtraIndex >= imgsLength) setimgIndex(0);
+      else setimgIndex(finalExtraIndex);
     } else {
-      if (actualImgIndex-- < 0) {
-        setImgMainIndex(images.length - 1);
-        console.log(actualImgIndex, '| Case 3');
-      } else {
-        setImgMainIndex(actualImgIndex);
-        console.log(actualImgIndex, '| Case 4');
-      }
+      if (--finalExtraIndex < 0) setimgIndex(imgsLength);
+      else setimgIndex(finalExtraIndex);
     }
   };
 
   return (
     <div>
-      <article className='flex justify-center items-center'>
-        {imgIndex.first > -1 && (
-          <div className='carousel__firstImg' onClick={() => changeImgIndex(false)}>
-            {/* <FontAwesomeIcon icon={faBackward} className='carousel__firstImg__icon' /> */}
-            <img ref={imgAnchor} alt='' src={images[imgIndex.first]} className='carousel__baseImg' />
+      <article>
+        <div className='flex justify-left relative'>
+          <div className='flex flex-shrink-0 flex-nowrap'>
+            {images.map((img, index) => {
+              const indexCalc = index + imgIndex;
+              const finalIndex = indexCalc % imgsLength;
+              return (
+                <div key={index} className='w-full px-2'>
+                  <img src={images[finalIndex]} alt='...' className='shadow rounded max-w-full h-auto align-middle border-none' />
+                </div>
+              );
+            })}
           </div>
-        )}
-        <img ref={imgAnchor} alt='' src={images[imgMainIndex]} className='carousel__mainImg' />
-        {imgIndex.last > -1 && (
-          <div className='carousel__lastImg' onClick={() => changeImgIndex(true)}>
-            {/* <FontAwesomeIcon icon={faForward} className='carousel__LastImg__icon' /> */}
-            <img ref={imgAnchor} alt='' src={images[imgIndex.last]} className='carousel__baseImg' />
-          </div>
-        )}
+
+          <FontAwesomeIcon
+            icon={faBackward}
+            className='absolute left-10 top-2/4 text-xl text-white bg-gray-500 pl-2 pr-3 py-2 rounded-full border border-gray-400 hover:scale-105 cursor-pointer transition-all'
+            onClick={() => changeImgIndex(false)}
+          />
+          <FontAwesomeIcon
+            icon={faForward}
+            className='absolute right-10 top-2/4 text-xl  text-white bg-gray-500 pl-3 pr-2 py-2 rounded-full border border-gray-400 hover:scale-105 cursor-pointer transition-all'
+            onClick={() => changeImgIndex(true)}
+          />
+        </div>
       </article>
     </div>
   );
