@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const GET_ALL = gql`
   query Query {
@@ -57,10 +57,9 @@ export const GET_BY_EMAIL = gql`
 `;
 
 export const CONNECT_USER = gql`
-  query Query($email: EmailAddress, $password: String) {
+  query Query($email: Emailadress, $password: String) {
     connectUser(email: $email, password: $password) {
-      email
-      password
+      _id
     }
   }
 `;

@@ -37,9 +37,9 @@ export default function Home() {
     variables: {
       input: {
         first: 6,
-        dateOrder: "asc",
+        publishedOrder: "desc",
         status: "PUBLISHED",
-        minDate: Date.now(),
+        minDate: currentDate,
       },
     },
   });
@@ -197,7 +197,7 @@ export default function Home() {
           </div>
           <article className="activity-card-container">
             {dataLast &&
-              dataLast.events.map((event, index) => {
+              dataLast.eventsComplexQuery.results.map((event, index) => {
                 // console.log("event", event);
                 return (
                   <Link to={`/event/${event._id}`}>

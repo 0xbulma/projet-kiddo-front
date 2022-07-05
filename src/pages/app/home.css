@@ -39,8 +39,12 @@
     justify-content: center;
     align-items: center;
     padding: 2rem;
-    background-color: rgb(219, 219, 219);
+    background: linear-gradient(to bottom, hsl(228, 96%, 89%), hsl(236, 89%, 79%));
     border-radius: 10px;
+    
+}
+.sous-hero-div:hover{
+    cursor: pointer;
 }
 .title-hero-container{
     display: flex;
