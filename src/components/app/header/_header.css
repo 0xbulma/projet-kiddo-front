@@ -1,5 +1,5 @@
 header.header {
-  @apply bg-white;
+  @apply bg-white relative;
 }
 
 div.header__navbar--flex {

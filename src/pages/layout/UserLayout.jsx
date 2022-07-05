@@ -1,16 +1,14 @@
 import React from "react";
 
-// import Header from "../../components/app/header/Header";
+import Header from "../../components/app/header/Header";
 import Footer from "../../components/app/footer/Footer";
 
 import "./_userLayout.css";
-import Example from "../../components/app/header/Example";
 
 export default function UserLayout({ composant }) {
   return (
     <>
-      {/* <Header /> */}
-      <Example />
+      <Header />
       <div>{composant}</div>
       <Footer />
     </>
