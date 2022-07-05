@@ -90,36 +90,9 @@ export const GET_SIGNALMENTS = gql`
   }
 `;
 export const GET_EVENTS_CATEGORY = gql`
-  query EventsComplexQuery(
-    $first: Int
-    $offset: Int
-    $status: String
-    $minDate: NonNegativeInt
-    $dateOrder: String
-    $minChildAge: Int
-    $maxChildAge: Int
-    $lng: Longitude
-    $lat: Latitude
-    $maxDistMeters: Int
-    $restrictionsArray: [ObjectID]
-    $searchInput: String
-    $categories: ObjectID
-  ) {
-    eventsComplexQuery(
-      first: $first
-      offset: $offset
-      status: $status
-      minDate: $minDate
-      dateOrder: $dateOrder
-      minChildAge: $minChildAge
-      maxChildAge: $maxChildAge
-      lng: $lng
-      lat: $lat
-      maxDistMeters: $maxDistMeters
-      restrictionsArray: $restrictionsArray
-      searchInput: $searchInput
-      categories: $categories
-    ) {
+  query EventsComplexQuery($input: complexQueryInput){
+  eventsComplexQuery(input: $input){
+      count
       results {
         _id
         content {
@@ -135,6 +108,7 @@ export const GET_EVENTS_CATEGORY = gql`
         event_date {
           start
         }
+        gps
         adress {
           city
           zip_code
