@@ -44,7 +44,8 @@ root.render(
         {/* <Route path='/events' element={<UserLayout composant={<Events />} />} /> */}
         <Route path='/event/:id' element={<UserLayout composant={<EventPage />} />} />
         <Route path='/category/:category' element={<UserLayout composant={<CategoryPage />} />} />
-        <Route path='*' element={<UserLayout composant={<NotFound />} />} />
+        {/* <Route path='*' element={<UserLayout composant={<NotFound />} />} /> */}
+        <Route path='*' element={<NotFound />} />
         {isAdmin && (
           <Fragment>
             <Route path='/administration' element={<AdminLayout composant={<AdminDashboard />} />} />

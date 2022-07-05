@@ -16,6 +16,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'nunito';
+  src: local('nunito') url('../assets/fonts/Nunito-VariableFont_wght.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* ----------------------------------------------------------- Additionnal Styles ------------------------------------------------------------ */
 
 div.index {
