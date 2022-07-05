@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const CREATE_COMMENT = gql`
-  mutation CreateComment($input: CommentInput) {
+  mutation createComment($input: CommentInput) {
     createComment(input: $input) {
       parent {
         _id
@@ -40,6 +40,14 @@ export const ADD_REACTION = gql`
         _id
         name
       }
+    }
+  }
+`;
+
+export const ADD_SIGNALMENT = gql`
+  mutation addSignalment($input: CommentInput) {
+    modifyComment(input: $input) {
+      _id
     }
   }
 `;

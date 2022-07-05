@@ -1,11 +1,9 @@
-.backdrop{
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 999;
-    backdrop-filter: blur(5px);
-    background-color: rgba(0, 0, 0, 0.152);
-    content: "";
+.backdrop {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.2);
 }

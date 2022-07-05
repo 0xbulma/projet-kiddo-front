@@ -31,6 +31,9 @@ function Navbar() {
             <Link to='/administration/users'>
               <FontAwesomeIcon icon={faUser} className='px-6 py-5 text-xl transition-all cursor-pointer hover:text-fuchsia-600' />
             </Link>
+            <Link to='/administration/reports'>
+              <FontAwesomeIcon icon={faSection} className='px-6 py-5 text-xl cursor-pointer transition-all hover:text-fuchsia-600' />
+            </Link>
           </article>
         </div>
       </>
@@ -71,12 +74,19 @@ function Navbar() {
               </Link>
             </div>
 
-            <div className='px-6 py-5 text-xl transition-all cursor-pointer hover:bg-fuchsia-400 hover:bg-opacity-50'>
+            <div className='px-6 py-5 text-xl cursor-pointer transition-all hover:bg-fuchsia-400 hover:bg-opacity-50'>
+              <Link to='/administration/reports' onClick={(e) => console.log('Click')}>
+                <FontAwesomeIcon icon={faSection} className='mr-5' />
+                Signalements
+              </Link>
+            </div>
+
+            {/* <div className='px-6 py-5 text-xl cursor-pointer transition-all hover:bg-fuchsia-400 hover:bg-opacity-50'>
               <Link to='/administration/userTest' onClick={(e) => console.log('Click')}>
                 <FontAwesomeIcon icon={faSection} className='mr-5' />
                 Test GraphQL
               </Link>
-            </div>
+            </div> */}
           </article>
         </div>
       </>
