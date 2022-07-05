@@ -7,7 +7,7 @@ import { FaCopyright } from "react-icons/fa";
 import "./category-card.css";
 // import logo from "../../../public/logo.png";
 
-const CategoryCard = ({ name, url }) => {
+const CategoryCard = ({ name, url, color }) => {
   return (
     <div>
       <article className="card-categ-contain">
@@ -22,7 +22,7 @@ const CategoryCard = ({ name, url }) => {
           <FaCopyright className="category-card-icons" />
         </div>
 
-        <div className="category-card-footer">
+        <div className={"category-card-footer " + color}>
           <div>
             <h3>Activités {name}</h3>
           </div>

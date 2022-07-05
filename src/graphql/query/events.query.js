@@ -1,8 +1,13 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const GET_EVENTS_BASE = gql`
   query Query($filter: String, $filterKey: String, $first: Int, $offset: Int) {
-    events(filter: $filter, filterKey: $filterKey, first: $first, offset: $offset) {
+    events(
+      filter: $filter
+      filterKey: $filterKey
+      first: $first
+      offset: $offset
+    ) {
       _id
       content {
         title
@@ -31,31 +36,45 @@ export const GET_EVENTS_BASE = gql`
 `;
 
 export const GET_LAST_EVENTS = gql`
-  query Query($filter: String, $filterKey: String, $first: Int, $offset: Int) {
-    events(filter: $filter, filterKey: $filterKey, first: $first, offset: $offset) {
-      _id
-      content {
-        title
-        subtitle
-        description
+  query EventsComplexQuery(
+    $first: Int
+    $offset: Int
+    $dateOrder: String
+    $status: String
+  ) {
+    eventsComplexQuery(
+      first: $first
+      offset: $offset
+      dateOrder: $dateOrder
+      status: $status
+    ) {
+      results {
+        published_at
+        main_owner {
+          pseudo
+        }
+        _id
+        content {
+          title
+          subtitle
+          description
+        }
+        content_media {
+          photo_main_url
+        }
+        price {
+          child
+          adult
+        }
+        adress {
+          city
+          zip_code
+        }
+        categories {
+          name
+        }
+        status
       }
-      content_media {
-        photo_main_url
-      }
-      price {
-        adult
-      }
-      event_date {
-        start
-      }
-      adress {
-        city
-        zip_code
-      }
-      categories {
-        name
-      }
-      highlighted
     }
   }
 `;
