@@ -1,80 +1,57 @@
 import { gql } from "@apollo/client";
 
-export const GET_EVENTS_BASE = gql`
-  query Query($filter: String, $filterKey: String, $first: Int, $offset: Int) {
-    events(
-      filter: $filter
-      filterKey: $filterKey
-      first: $first
-      offset: $offset
-    ) {
-      _id
-      content {
-        title
-        subtitle
-        description
-      }
-      content_media {
-        photo_main_url
-      }
-      price {
-        adult
-      }
-      event_date {
-        start
-      }
-      adress {
-        city
-        zip_code
-      }
-      categories {
-        name
-      }
-      highlighted
-    }
-  }
-`;
-
-export const GET_LAST_EVENTS = gql`
-  query EventsComplexQuery(
-    $first: Int
-    $offset: Int
-    $dateOrder: String
-    $status: String
-  ) {
-    eventsComplexQuery(
-      first: $first
-      offset: $offset
-      dateOrder: $dateOrder
-      status: $status
-    ) {
+export const GET_UPCOMING_EVENTS = gql`
+  query Query($input: complexQueryInput) {
+    eventsComplexQuery(input: $input) {
       results {
-        published_at
-        main_owner {
-          pseudo
-        }
-        _id
         content {
           title
-          subtitle
-          description
         }
         content_media {
           photo_main_url
         }
         price {
-          child
           adult
+        }
+        event_date {
+          start
         }
         adress {
           city
-          zip_code
         }
         categories {
           name
         }
-        status
       }
+      count
+    }
+  }
+`;
+
+export const GET_LAST_PUBLISHED_EVENTS = gql`
+  query Query($input: complexQueryInput) {
+    eventsComplexQuery(input: $input) {
+      results {
+        content {
+          title
+        }
+        content_media {
+          photo_main_url
+        }
+        price {
+          adult
+        }
+        event_date {
+          start
+        }
+        adress {
+          city
+        }
+        categories {
+          name
+        }
+      }
+      count
     }
   }
 `;
