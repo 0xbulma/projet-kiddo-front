@@ -3,7 +3,6 @@ import './mapLeaflet.css';
 
 export default function MapLeaflet({ className, items, currentLocation }) {
   return (
-
     <div className='sticky square top-4 flex'>
       <MapContainer
         className={`grow ${className}`}
@@ -34,8 +33,12 @@ export default function MapLeaflet({ className, items, currentLocation }) {
               </Popup>
             </Marker>
           );
-        })}
-
+        })};
+           </MapContainer>
+    </div>
+  );
+}
+      
 export function MapLeafletMultipleMarkers(props) {
   let { inputGPS, mainGPS } = props;
   mainGPS = mainGPS.length === 2 ? [mainGPS[1], mainGPS[0]] : [51.505, -0.09];
