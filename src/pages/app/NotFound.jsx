@@ -9,7 +9,7 @@ export default function NotFound() {
           <span className="notfound__content--error-back hidden">
             404
           </span> */}
-          <img src="/404.svg" alt="404" className="notfound__content--img" />
+          <img src="404.svg" alt="404" className="notfound__content--img" />
           <span className="notfound__content--title">
             Désolé la page est introuvable
           </span>
