@@ -2,7 +2,7 @@ import Facebook from '../../components/shared/icons/Facebook';
 import Instagram from '../../components/shared/icons/Instagram';
 import GooglePlus from '../../components/shared/icons/GooglePlus';
 import Twitter from '../../components/shared/icons/Twitter';
-import Auth from '../../components/shared/Auth';
+
 // import Twitter from '../assets/images/svgcomponents/Twitter';
 // import Instagram from '../assets/images/svgcomponents/Instagram';
 // import GooglePlus from '../assets/images/svgcomponents/GooglePlus';
@@ -51,8 +51,6 @@ export const navigationHeader = {
     {
       name: 'Profile',
       icon: (props) => <CgProfile {...props} />,
-      isProfile: true,
-      component: (props) => <Auth {...props} />,
       
     }
   ]

@@ -1,23 +1,39 @@
-import React from 'react'
+import { Fragment, useState } from 'react'
+import Auth from '../../../shared/Auth'
 
 export default function NavIcon({ navIcon }) {
+  let [isOpen, setIsOpen] = useState(false)
+
+  function closeModal() {
+    setIsOpen(false)
+  }
+
+  function openModal() {
+    setIsOpen(true)
+  }
+  
   return (
     <div className='navbar__nav'>
       {
         navIcon.map((item, index) => {
           return (
-            <a key={index} href={item.href} className="nav__icon-link">
-              <p className='sr-only'>{item.name}</p>
+            <Fragment key={index}>
               {
-                item.component ? (
-                  <button onClick={<item.component />} className="nav__icon-button">
-                    <item.icon className="nav-icon" />
-                  </button>
+                item === navIcon[3] ? (
+                  <Fragment>
+                    <button onClick={openModal} className="nav__icon-button">
+                      <item.icon className="nav-icon" />
+                    </button>
+                    <Auth isOpen={isOpen} closeModal={closeModal} />
+                  </Fragment>
                 ) : (
-                  <item.icon className="nav-icon" />
+                  <a key={index} href={item.href} className="nav__icon-link">
+                    <p className='sr-only'>{item.name}</p>
+                    <item.icon className="nav-icon" />
+                  </a>
                 )
               }
-            </a>
+            </Fragment>
           )
         })
       }
