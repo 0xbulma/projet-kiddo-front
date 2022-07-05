@@ -58,7 +58,7 @@ export const navigationHeader = {
 
 export const navigationFooter = {
   about: [
-    { name: 'Découvrir Kiddo', href: '/' },
+    { name: 'Découvrir Kiddo', href: '/kiddo' },
     { name: 'Avis Sur Kiddo', href: '/' },
     { name: 'Ils parlent de nous', href: '/' },
   ],
