@@ -202,7 +202,7 @@ export default function Home() {
                 return (
                   <Link to={`/event/${event._id}`}>
                     <ActivityCard
-                      key={index}
+                      key={event._id}
                       title={event.content.title}
                       category={event.categories.name}
                       description={event.content.description}
