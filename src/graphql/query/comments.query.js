@@ -39,3 +39,14 @@ export const GET_BY_TARGET_ID = gql`
     }
   }
 `;
+
+export const GET_SIGNALMENTS = gql`
+  query Query {
+    comments {
+      signalments {
+        _id
+        name
+      }
+    }
+  }
+`;
