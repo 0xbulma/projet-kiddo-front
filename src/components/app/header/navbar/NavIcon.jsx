@@ -1,5 +1,6 @@
 import { Fragment, useState } from 'react'
-import Auth from '../../../shared/Auth'
+import ModalBackdrop from '../../../shared/modal/ModalBackdrop'
+import Register from '../../register/Register'
 
 export default function NavIcon({ navIcon }) {
   let [isOpen, setIsOpen] = useState(false)
@@ -24,7 +25,11 @@ export default function NavIcon({ navIcon }) {
                     <button onClick={openModal} className="nav__icon-button">
                       <item.icon className="nav-icon" />
                     </button>
-                    <Auth isOpen={isOpen} closeModal={closeModal} />
+                    <ModalBackdrop
+                      composant={<Register />}
+                      open={isOpen}
+                      onClose={closeModal}
+                    />
                   </Fragment>
                 ) : (
                   <a key={index} href={item.href} className="nav__icon-link">
