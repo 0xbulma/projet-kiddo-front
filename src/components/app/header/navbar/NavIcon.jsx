@@ -1,16 +1,26 @@
 import { Fragment, useState } from 'react'
 import ModalBackdrop from '../../../shared/modal/ModalBackdrop'
 import Register from '../../register/Register'
+import Search from './Search'
 
 export default function NavIcon({ navIcon }) {
-  let [isOpen, setIsOpen] = useState(false)
+  let [isOpenRegister, setIsOpenRegister] = useState(false)
+  let [isOpenSearch, setIsOpenSearch] = useState(false)
 
-  function closeModal() {
-    setIsOpen(false)
+  function closeModalRegister() {
+    setIsOpenRegister(false)
   }
 
-  function openModal() {
-    setIsOpen(true)
+  function openModalRegister() {
+    setIsOpenRegister(true)
+  }
+  
+  function closeModalSearch() {
+    setIsOpenSearch(false)
+  }
+
+  function openModalSearch() {
+    setIsOpenSearch(true)
   }
   
   return (
@@ -22,16 +32,29 @@ export default function NavIcon({ navIcon }) {
               {
                 item === navIcon[3] ? (
                   <Fragment>
-                    <button onClick={openModal} className="nav__icon-button">
+                    <button onClick={openModalRegister} className="nav__icon-button">
                       <item.icon className="nav-icon" />
                     </button>
                     <ModalBackdrop
                       composant={<Register />}
-                      open={isOpen}
-                      onClose={closeModal}
+                      open={isOpenRegister}
+                      onClose={closeModalRegister}
                     />
                   </Fragment>
-                ) : (
+                ) : 
+                item === navIcon[0] ? (
+                  <Fragment>
+                    <button onClick={openModalSearch} className="nav__icon-button">
+                      <item.icon className="nav-icon" />
+                    </button>
+                    <ModalBackdrop
+                      composant={<Search />}
+                      open={isOpenSearch}
+                      onClose={closeModalSearch}
+                    />
+                  </Fragment>
+                ) 
+                : (
                   <a key={index} href={item.href} className="nav__icon-link">
                     <p className='sr-only'>{item.name}</p>
                     <item.icon className="nav-icon" />
