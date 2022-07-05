@@ -16,8 +16,8 @@ export default function UserTestMutation() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
-  const [user, setUser] = useState();
-  const [displayUser, toggleDisplayUser] = useToggle(false);
+  const [user] = useState();
+  const [displayUser] = useToggle(false);
 
   const [getUser, { loading, error, data }] = useLazyQuery(CONNECT_USER);
   console.log(loading, error, data);

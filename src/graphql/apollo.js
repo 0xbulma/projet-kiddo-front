@@ -48,8 +48,8 @@ const cache = new InMemoryCache({
 
 export const apollo = new ApolloClient({
   link: new HttpLink({
-    uri: 'http://localhost:3001/graphql',
+    uri: process.env.REACT_APP_GRAPHQL_ENDPOINT,
     credentials: 'include',
   }),
-  cache: new InMemoryCache(),
+  cache,
 });
