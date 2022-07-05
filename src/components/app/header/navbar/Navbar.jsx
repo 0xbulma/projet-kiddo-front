@@ -1,5 +1,4 @@
-import { Fragment } from 'react'
-import { Popover, Transition } from '@headlessui/react'
+import { Popover } from '@headlessui/react'
 import { MenuIcon } from '@heroicons/react/outline'
 
 import NavIcon from './NavIcon'

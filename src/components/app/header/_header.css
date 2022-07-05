@@ -11,7 +11,7 @@ div.header__navbar--flex2 {
 }
 
 .navbar__nav {
-  @apply relative flex flex-row no-underline gap-x-9;
+  @apply relative flex flex-row no-underline gap-x-16;
 }
 
 li.navbar__nar-item {
