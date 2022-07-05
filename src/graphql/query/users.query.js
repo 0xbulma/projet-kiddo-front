@@ -57,10 +57,12 @@ export const GET_BY_EMAIL = gql`
 `;
 
 export const CONNECT_USER = gql`
-  query Query($email: EmailAddress, $password: String) {
+  query Query($email: Emailadress, $password: String) {
     connectUser(email: $email, password: $password) {
+      _id
       email
-      password
+      first_name
+      last_name
     }
   }
 `;
