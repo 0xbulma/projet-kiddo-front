@@ -22,7 +22,7 @@ export default function Home() {
     loading: loadingLast,
     data: dataLast,
   } = useQuery(GET_LAST_EVENTS, {
-    variables: { first: 6, offset: 0 },
+    variables: { first: 6, offset: 0, dateOrder: "asc", status: "PUBLISHED" },
   });
   useEffect(() => {
     if (data) {
@@ -40,20 +40,42 @@ export default function Home() {
   }, [data, error, dataLast, errorLast]);
 
   const categories = [
-    { name: "sportives", url: "/assets/img/sportives.jpg", category: "sport" },
-    { name: "artistiques", url: "/assets/img/art.jpg", category: "art" },
+    {
+      name: "sportives",
+      url: "/assets/img/sportives.jpg",
+      category: "sport",
+      color: "bg-red-300",
+    },
+    {
+      name: "artistiques",
+      url: "/assets/img/art.jpg",
+      category: "art",
+      color: "bg-yellow-300",
+    },
     {
       name: "culturelles",
       url: "/assets/img/culturelle.jpg",
       category: "culture",
+      color: "bg-purple-300",
     },
     {
       name: "d'éveil corporel",
       url: "/assets/img/eveil.jpg",
       category: "eveil",
+      color: "bg-blue-300",
     },
-    { name: "manuelles", url: "/assets/img/manuelles.jpg", category: "manuel" },
-    { name: "autres", url: "/assets/img/autres.jpg", category: "autres" },
+    {
+      name: "manuelles",
+      url: "/assets/img/manuelles.jpg",
+      category: "manuel",
+      color: "bg-green-300",
+    },
+    {
+      name: "autres",
+      url: "/assets/img/autres.jpg",
+      category: "autres",
+      color: "bg-orange-300",
+    },
   ];
 
   return loading || loadingLast ? (
@@ -88,6 +110,7 @@ export default function Home() {
                   <CategoryCard
                     name={category.name}
                     url={category.url}
+                    color={category.color}
                     key={index}
                   />
                 </Link>
@@ -112,7 +135,7 @@ export default function Home() {
                       title={event.content.title}
                       category={event.categories.name}
                       description={event.content.description}
-                      lieu={event.adress}
+                      lieu={event.adress.city}
                       date={event.event_date.start}
                       prix={event.price.adult}
                     />

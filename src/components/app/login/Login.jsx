@@ -10,6 +10,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [next, setNext] = useState(false);
+
   useEffect(() => {
     if (data) {
       // console.log("data-->", data);
