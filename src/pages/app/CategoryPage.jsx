@@ -111,7 +111,7 @@ function CategoryPage(props) {
                   title={data.content.title}
                   // category={data.categories}
                   category={data2.category.name}
-                  lieu={data.adress.city}
+                  lieu={data.adress}
                   date={data.event_date.start}
                   prix={data.price.adult}
                 />

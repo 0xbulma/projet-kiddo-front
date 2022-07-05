@@ -1,61 +1,57 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
-export const GET_EVENTS_BASE = gql`
-  query Query($filter: String, $filterKey: String, $first: Int, $offset: Int) {
-    events(filter: $filter, filterKey: $filterKey, first: $first, offset: $offset) {
-      _id
-      content {
-        title
-        subtitle
-        description
+export const GET_UPCOMING_EVENTS = gql`
+  query Query($input: complexQueryInput) {
+    eventsComplexQuery(input: $input) {
+      results {
+        content {
+          title
+        }
+        content_media {
+          photo_main_url
+        }
+        price {
+          adult
+        }
+        event_date {
+          start
+        }
+        adress {
+          city
+        }
+        categories {
+          name
+        }
       }
-      content_media {
-        photo_main_url
-      }
-      price {
-        adult
-      }
-      event_date {
-        start
-      }
-      adress {
-        city
-        zip_code
-      }
-      categories {
-        name
-      }
-      highlighted
+      count
     }
   }
 `;
 
-export const GET_LAST_EVENTS = gql`
-  query Query($filter: String, $filterKey: String, $first: Int, $offset: Int) {
-    events(filter: $filter, filterKey: $filterKey, first: $first, offset: $offset) {
-      _id
-      content {
-        title
-        subtitle
-        description
+export const GET_LAST_PUBLISHED_EVENTS = gql`
+  query Query($input: complexQueryInput) {
+    eventsComplexQuery(input: $input) {
+      results {
+        content {
+          title
+        }
+        content_media {
+          photo_main_url
+        }
+        price {
+          adult
+        }
+        event_date {
+          start
+        }
+        adress {
+          city
+        }
+        categories {
+          name
+        }
       }
-      content_media {
-        photo_main_url
-      }
-      price {
-        adult
-      }
-      event_date {
-        start
-      }
-      adress {
-        city
-        zip_code
-      }
-      categories {
-        name
-      }
-      highlighted
+      count
     }
   }
 `;

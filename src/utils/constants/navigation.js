@@ -2,6 +2,7 @@ import Facebook from '../../components/shared/icons/Facebook';
 import Instagram from '../../components/shared/icons/Instagram';
 import GooglePlus from '../../components/shared/icons/GooglePlus';
 import Twitter from '../../components/shared/icons/Twitter';
+
 // import Twitter from '../assets/images/svgcomponents/Twitter';
 // import Instagram from '../assets/images/svgcomponents/Instagram';
 // import GooglePlus from '../assets/images/svgcomponents/GooglePlus';
@@ -49,8 +50,7 @@ export const navigationHeader = {
     },
     {
       name: 'Profile',
-      href: '/profile',
-      icon: (props) => <CgProfile {...props} />
+      icon: (props) => <CgProfile {...props} />,
       
     }
   ]
@@ -58,7 +58,7 @@ export const navigationHeader = {
 
 export const navigationFooter = {
   about: [
-    { name: 'Découvrir Kiddo', href: '/' },
+    { name: 'Découvrir Kiddo', href: '/kiddo' },
     { name: 'Avis Sur Kiddo', href: '/' },
     { name: 'Ils parlent de nous', href: '/' },
   ],

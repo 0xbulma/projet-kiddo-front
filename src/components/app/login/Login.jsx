@@ -1,5 +1,5 @@
 import React from "react";
-import { CONNECT_USER } from "../../../graphql/query/connect.query";
+import { CONNECT_USER } from "../../../graphql/query/users.query";
 import { useEffect, useState } from "react";
 import { useLazyQuery } from "@apollo/client";
 import Button from "../../shared/Button";
@@ -12,7 +12,7 @@ const Login = () => {
   const [next, setNext] = useState(false);
   useEffect(() => {
     if (data) {
-      // console.log("data-->", data);
+      console.log("data login-->", data);
       if (email === data.connectUser.email) {
         console.log("connection réussie");
       }

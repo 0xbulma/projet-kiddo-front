@@ -7,10 +7,15 @@ const Modal = ({ open, onClose, composant }) => {
   return (
     <>
       {ReactDOM.createPortal(
-        <div className="modal">
-          <div> {composant}</div>
-          <button onClick={onClose}>Close modal</button>
-        </div>,
+        <section className="modal-container">
+          <div className="modal">
+            <div> {composant}</div>
+            <div className="modal-right"></div>
+            <button className="close-modal" onClick={onClose}>
+              Close modal
+            </button>
+          </div>
+        </section>,
         document.getElementById("modal-root")
       )}
     </>
