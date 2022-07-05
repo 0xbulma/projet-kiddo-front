@@ -142,8 +142,8 @@ export default function Home() {
           <article className='category-card-container'>
             {categories.map((category, index) => {
               return (
-                <Link to={`/category/${category.category}`}>
-                  <CategoryCard name={category.name} url={category.url} color={category.color} key={index} />
+                <Link key={index} to={`/category/${category.category}`}>
+                  <CategoryCard name={category.name} url={category.url} color={category.color} />
                 </Link>
               );
             })}
@@ -157,10 +157,10 @@ export default function Home() {
           </div>
           <article className='activity-card-container'>
             {data &&
-              data.eventsComplexQuery.results.map((event) => {
+              data.eventsComplexQuery.results.map((event, index) => {
                 // console.log("event", event);
                 return (
-                  <Link to={`/event/${event._id}`}>
+                  <Link key={index} to={`/event/${event._id}`}>
                     <ActivityCard
                       key={event._id}
                       title={event.content.title}
@@ -184,9 +184,8 @@ export default function Home() {
           <article className='activity-card-container'>
             {dataLast &&
               dataLast.eventsComplexQuery.results.map((event, index) => {
-                // console.log("event", event);
                 return (
-                  <Link to={`/event/${event._id}`}>
+                  <Link key={index} to={`/event/${event._id}`}>
                     <ActivityCard
                       key={event._id}
                       title={event.content.title}
