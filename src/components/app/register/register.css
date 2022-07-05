@@ -1,15 +1,20 @@
+* {
+  box-sizing: border-box;
+}
 .form-container{
-  height: 30vh;
+ 
 }
 .form-title{
-  padding: 2rem;
+  padding: 1rem;
 }
 
 .form {
-    display: grid;
-    justify-content: center;
+    display: flex;
+    flex-direction: column ;
+    justify-content: space-between;
     align-items: center;
-    gap: 20px;
+    gap: 1rem;
+    margin-bottom: 2rem;
 }
 
 .input-form-register {

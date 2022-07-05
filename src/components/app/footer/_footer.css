@@ -27,7 +27,7 @@ div.footer__navigation--nav__items {
 }
 
 h3.nav__items--h3 {
-  @apply text-lg font-semibold text-white font-['lovely_nathalie'] tracking-wider;
+  @apply font-semibold leading-3 tracking-widest text-white;
 }
 
 ul.nav__items--list {
@@ -67,5 +67,5 @@ section.footer__copyright {
 }
 
 p.footer__copyright__text {
-  @apply space-x-2 text-base text-white xl:text-center;
+  @apply flex flex-row items-center justify-center space-x-2 text-white gap-x-2;
 }

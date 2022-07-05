@@ -1,14 +1,17 @@
+import NavItem from "./NavItem";
+
 export default function Nav({ navigation }) {
+
+  
+  // let ref = useRef(); 
   return (
-    <div className="Navbar__nav">
+    <ul className="navbar__nav">
       {
-        navigation.map((page) => (
-          <a href={page.href} className="nav-link">
-            {page.name}
-          </a>
-        ))
+        navigation.map((page, index) => {
+          return <NavItem page={page} key={index} />
+        })
       }
-    </div>
+    </ul>
   )
 }
 

@@ -1,12 +1,11 @@
 import { Fragment } from "react";
 
-export default function Logo({ home }) {
+export default function Logo({ titleProp }) {
   return (
     <div className="">
       <a href="/" className="">
-        <Fragment key=''>
-          <img src='' alt='' />
-          <p className="">Logo</p>
+        <Fragment key={titleProp.title}>
+          <img src={titleProp.imgSrc} alt={titleProp.imgAlt} />
         </Fragment>
       </a>
     </div>
