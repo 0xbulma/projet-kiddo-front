@@ -1,25 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faLocationCrosshairs,
-  faFilter,
-} from '@fortawesome/free-solid-svg-icons';
+import { faLocationCrosshairs, faFilter } from '@fortawesome/free-solid-svg-icons';
 import { useQuery, useLazyQuery } from '@apollo/client';
 import { GET_EVENTS_CATEGORY } from '../../graphql/query/events.query';
 import { GET_CATEGORY_BY_NAME } from '../../graphql/query/extra.query';
 import MapLeaflet from '../../components/shared/MapLeaflet';
-import {
-  GridCol3,
-  GridCol2,
-  GridItemSpan2,
-} from '../../components/shared/GridCol';
+import { GridCol3, GridCol2, GridItemSpan2 } from '../../components/shared/GridCol';
 import LoadIconBtn from '../../components/shared/loadingfiles/LoadIconBtn';
 import ActivityCard from '../../components/shared/card/ActivityCard';
 import './_categoryPage.css';
 import getGeoLoc from '../../utils/getGeoLoc';
 import PaginationComp from '../../components/shared/PaginationComp';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 function CategoryPage(props) {
   let navigate = useNavigate();
@@ -33,16 +26,15 @@ function CategoryPage(props) {
   });
 
   const {
-   // loading: loading2,
-   // error: error2,
+    // loading: loading2,
+    // error: error2,
     data: data2,
   } = useQuery(GET_CATEGORY_BY_NAME, { variables: { name: category } });
 
-  const [getEvents, { loading, error, data, refetch }] =
-    useLazyQuery(GET_EVENTS_CATEGORY);
+  const [getEvents, { loading, error, data, refetch }] = useLazyQuery(GET_EVENTS_CATEGORY);
 
-    useEffect(() => {
-    if(data2?.category === null){
+  useEffect(() => {
+    if (data2?.category === null) {
       navigate('/404');
     }
 
@@ -61,26 +53,25 @@ function CategoryPage(props) {
       });
     }
     if (data) {
-      console.log('offset', page * ITEMS_PER_PAGE - ITEMS_PER_PAGE)
+      console.log('offset', page * ITEMS_PER_PAGE - ITEMS_PER_PAGE);
       refetch({ offset: page * ITEMS_PER_PAGE - ITEMS_PER_PAGE });
     }
   }, [data2, getEvents, page, data, refetch, navigate]);
 
-
   const onClickHandler = () => {
-    setGeoLoc(geoLoc => ({ ...geoLoc, isLoading: true }));
+    setGeoLoc((geoLoc) => ({ ...geoLoc, isLoading: true }));
 
     getGeoLoc()
-      .then(res => {
-        return setGeoLoc(geoLoc => ({
+      .then((res) => {
+        return setGeoLoc((geoLoc) => ({
           ...geoLoc,
           isLoading: false,
           coords: res,
         }));
       })
-      .catch(err => {
+      .catch((err) => {
         alert(err.message);
-        return setGeoLoc(geoLoc => ({ ...geoLoc, isLoading: false }));
+        return setGeoLoc((geoLoc) => ({ ...geoLoc, isLoading: false }));
       });
   };
 
@@ -92,10 +83,7 @@ function CategoryPage(props) {
     <div className='container mx-auto'>
       <div className='category'>
         <h1 className='category__title'>Title: Activités sportives</h1>
-        <p className='category__subtitle'>
-          Subtitle: Se depenser en s’amuser, rien de mieux pour lier le plaisir
-          et la santé en famille{' '}
-        </p>
+        <p className='category__subtitle'>Subtitle: Se depenser en s’amuser, rien de mieux pour lier le plaisir et la santé en famille </p>
       </div>
 
       {loading && <div>LOADING</div>}
@@ -106,11 +94,7 @@ function CategoryPage(props) {
             <GridItemSpan2>
               <div className='filter_group'>
                 <button className='filter__container' onClick={onClickHandler}>
-                  {geoLoc.isLoading ? (
-                    <LoadIconBtn />
-                  ) : (
-                    <FontAwesomeIcon icon={faLocationCrosshairs} />
-                  )}
+                  {geoLoc.isLoading ? <LoadIconBtn /> : <FontAwesomeIcon icon={faLocationCrosshairs} />}
                   <div className='filter__text'>Activités autour de moi</div>
                 </button>
                 <div className='filter__container'>
@@ -127,7 +111,7 @@ function CategoryPage(props) {
                   title={data.content.title}
                   // category={data.categories}
                   category={data2.category.name}
-                  lieu={data.adress}
+                  lieu={data.adress.city}
                   date={data.event_date.start}
                   prix={data.price.adult}
                 />
@@ -139,7 +123,7 @@ function CategoryPage(props) {
                 totalItem={data.eventsComplexQuery.count}
                 itemsPerPage={12}
                 page={page}
-                onPageClick={page => {
+                onPageClick={(page) => {
                   setPage(page);
                 }}
               />

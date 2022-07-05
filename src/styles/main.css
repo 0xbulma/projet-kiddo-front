@@ -23,7 +23,7 @@ div.index {
 }
 
 .container-user {
-  @apply container mx-auto lg:py-6 
+  @apply container mx-auto lg:py-6;
 }
 
 .container-section {
