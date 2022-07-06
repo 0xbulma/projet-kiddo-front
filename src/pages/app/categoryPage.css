@@ -15,5 +15,5 @@
 }
 
 .filter__container{
-  @apply flex gap-5 items-center justify-start bg-gray-500 rounded-md px-5 py-1 text-white;
+  @apply flex gap-5 items-center justify-start bg-gray-500 rounded-md px-5 py-1 text-white relative;
 }

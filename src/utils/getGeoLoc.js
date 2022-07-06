@@ -1,17 +1,10 @@
 const getGeoLoc = () => {
   
-  let gps = {
-    lat: null,
-    lng: null,
-    timestamp: null,
-  };
-
+  let gps = [];
   return new Promise((resolve, reject) => {
     navigator.geolocation.getCurrentPosition(
       res => {
-        gps.lat = res.coords.latitude;
-        gps.lng = res.coords.longitude;
-        gps.timestamp = res.timestamp;
+        gps = [res.coords.longitude, res.coords.latitude]
         resolve(gps);
       },
       err => {
