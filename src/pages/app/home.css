@@ -1,90 +1,84 @@
-/* CONTAINER USER */
-.container-user {
-    @apply container mx-auto lg:py-6
-}
 /* CARD CONTAINER GRID */
-.activity-card-container{
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 2rem;
+.activity-card-container {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
 }
-.category-card-container{
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 2rem;
+.category-card-container {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
 }
 
 /* HERO */
 .hero {
-    height: 80vh;
-    background-image: url("../../assets/images/hero.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-    margin-bottom: 6rem;
+  height: 80vh;
+  background-image: url('../../assets/images/hero.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  margin-bottom: 6rem;
 }
-.hero-div{
-    display: flex;
-    justify-content:center;
-    gap: 3rem;
-    width: 100%;
-    height: 6rem;
-    position: absolute;
-    margin-bottom: -3rem;
-    bottom: 0;
+.hero-div {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  width: 100%;
+  height: 6rem;
+  position: absolute;
+  margin-bottom: -3rem;
+  bottom: 0;
 }
-.sous-hero-div{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem;
-    background: linear-gradient(to bottom, hsl(228, 96%, 89%), hsl(236, 89%, 79%));
-    border-radius: 10px;
-    
+.sous-hero-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background: linear-gradient(to bottom, hsl(228, 96%, 89%), hsl(236, 89%, 79%));
+  border-radius: 10px;
 }
-.sous-hero-div:hover{
-    cursor: pointer;
+.sous-hero-div:hover {
+  cursor: pointer;
 }
-.title-hero-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    
+.title-hero-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 /* CATEGORY CARDS SECTION */
-.category-container{
-    padding-bottom: 3rem;
+.category-container {
+  padding-bottom: 3rem;
 }
 .fleche {
-    width: 30%;
-    height: 2px;
-    border: 1px solid grey;
+  width: 30%;
+  height: 2px;
+  border: 1px solid grey;
 }
-.home-title-category{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    padding: 2rem; 
+.home-title-category {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 2rem;
 }
 /* ACTIVITY CARDS SECTION */
-.activity-container{
-    background-color: #E2FCFB;
-    padding-bottom: 3rem;
+.activity-container {
+  background-color: #e2fcfb;
+  padding-bottom: 3rem;
 }
 .title-activity-container {
-    padding: 3rem 0 3rem 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+  padding: 3rem 0 3rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 /* LASTED ACTIVITY */
-.lasted-activity-container{
-    padding-bottom: 3rem; 
+.lasted-activity-container {
+  padding-bottom: 3rem;
 }
 .title-activity-container {
-    padding: 3rem 0 3rem 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+  padding: 3rem 0 3rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
