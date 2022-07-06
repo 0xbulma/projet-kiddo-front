@@ -6,18 +6,18 @@ import { faLocationCrosshairs, faFilter } from '@fortawesome/free-solid-svg-icon
 
 
 // import custom components
-import { GET_EVENTS_CATEGORY } from '../../graphql/query/events.query';
-import MapLeaflet, { MapLeafletPlaceHolder } from '../../components/shared/MapLeaflet';
-import { GridCol2, GridItemSpan2 } from '../../components/shared/GridCol';
-import LoadIconBtn from '../../components/shared/loadingfiles/LoadIconBtn';
-import ActivityCard from '../../components/shared/card/ActivityCard';
-import getGeoLoc from '../../utils/getGeoLoc';
-import PaginationComp from '../../components/shared/PaginationComp';
-import Skelet from '../../components/shared/loadingfiles/Skelet';
-import Filterbox from '../../components/shared/filterbox/Filterbox';
+import { GET_EVENTS_CATEGORY } from '../../../graphql/query/events.query';
+import MapLeaflet, { MapLeafletPlaceHolder } from '../../../components/shared/MapLeaflet';
+import { GridCol2, GridItemSpan2 } from '../../../components/shared/GridCol';
+import LoadIconBtn from '../../../components/shared/loadingfiles/LoadIconBtn';
+import ActivityCard from '../../../components/shared/card/ActivityCard';
+import getGeoLoc from '../../../utils/getGeoLoc';
+import PaginationComp from '../../../components/shared/PaginationComp';
+import Skelet from '../../../components/shared/loadingfiles/Skelet';
+import Filterbox from '../../../components/shared/filterbox/Filterbox';
 
 //import CSS
-import './categoryPage.css';
+
 
 function ResultsSection({category, searchInput}) {
   const ITEMS_PER_PAGE = 12;
