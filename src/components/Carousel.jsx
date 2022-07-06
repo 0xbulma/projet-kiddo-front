@@ -22,8 +22,8 @@ export default function Carousel(props) {
   return (
     <div>
       <article>
-        <div className='flex justify-left relative'>
-          <div className='flex flex-shrink-0 flex-nowrap'>
+        <div className='flex justify-left relative overflow-hidden'>
+          <div className='flex flex-shrink-0 flex-nowrap '>
             {images.map((img, index) => {
               const indexCalc = index + imgIndex;
               const finalIndex = indexCalc % imgsLength;

@@ -14,7 +14,7 @@ import { useParams } from 'react-router';
 import { useQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
 import * as dateManager from '../../utils/DateManager';
-import MapLeaflet from '../../components/shared/MapLeaflet';
+import MapLeafletOneMarker from '../../components/shared/MapLeafletOneMarker';
 import { Link } from 'react-router-dom';
 
 export default function EventPage() {
@@ -88,7 +88,7 @@ export default function EventPage() {
                 </div>
                 {/* Rendu de la carte */}
                 <div className='bg-yellow-300'>
-                  <MapLeaflet inputGPS={event.gps} />
+                  <MapLeafletOneMarker inputGPS={event.gps} />
                 </div>
                 {/* Adresse */}
                 <p className='text-center'>Parc Forestier de la Mare Adam, Rte des Huit Bouteilles, 98370 Chaville</p>
@@ -145,7 +145,7 @@ function CardParticipant(props) {
       </span>
       <span>
         <FontAwesomeIcon icon={faPeopleGroup} className='mr-3 text-lg text-black' />
-        {participants.length + (participants.length > 1 ? 'inscrits' : 'inscrit')}
+        {participants.length + (participants.length > 1 ? ' inscrits' : ' inscrit')}
       </span>
     </div>
   );

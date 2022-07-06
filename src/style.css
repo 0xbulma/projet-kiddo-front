@@ -1,0 +1,63 @@
+/* Import obligatoire Tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@200;300;400;500;900&display=swap');
+
+/* Importations globales */
+@import '../src/components/components.css';
+@import '../src/pages/pages.css';
+
+/* Déclarations globales */
+h1 {
+  @apply font-['Nunito'] text-[5.375rem];
+}
+
+h2 {
+  @apply font-['Nunito'] text-[2.813rem];
+}
+
+h3 {
+  @apply font-['Nunito'] text-[1.125rem];
+}
+
+p {
+  @apply font-['Poppins'] text-[1rem];
+}
+
+span {
+  @apply font-['Poppins'] text-[1rem];
+}
+
+/***********************************/
+/* OLD SHARED COMPONENT RESPONSIVE */
+/***********************************/
+
+div.index {
+  @apply flex flex-col justify-between w-full h-full min-h-screen bg-gray-200;
+}
+
+.container-user {
+  @apply container mx-auto lg:py-6;
+}
+
+.container-section {
+  @apply py-5;
+}
+
+/* CONTAINER USER */
+/* .container-user {
+    @apply container mx-auto lg:py-6
+} 
+
+.container-user {
+  @apply container mx-auto my-4 border-2 border-black lg:py-6;
+}*/
+
+.generic-container {
+  @apply container mx-auto;
+}
