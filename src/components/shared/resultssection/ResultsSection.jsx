@@ -16,12 +16,8 @@ import PaginationComp from '../../components/shared/PaginationComp';
 import Skelet from '../../components/shared/loadingfiles/Skelet';
 import Filterbox from '../../components/shared/filterbox/Filterbox';
 
-
-
 //import CSS
 import './categoryPage.css';
-
-
 
 function ResultsSection({category, searchInput}) {
   const ITEMS_PER_PAGE = 12;
