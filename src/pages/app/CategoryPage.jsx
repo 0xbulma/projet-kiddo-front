@@ -21,8 +21,6 @@ import Filterbox from '../../components/shared/filterbox/Filterbox';
 //import CSS
 import './categoryPage.css';
 
-
-
 function CategoryPage(props) {
   const ITEMS_PER_PAGE = 12;
 
@@ -106,23 +104,23 @@ function CategoryPage(props) {
   }, [data2, getEvents, page, data, refetch, navigate, geoLoc.coords, minChildAge, maxChildAge, maxDistMeters]);
 
   const toggleFilterBox = () => {
-    setIsFilterShown(bol => !bol);
+    setIsFilterShown((bol) => !bol);
   };
 
   const onClickHandler = () => {
-    setGeoLoc(geoLoc => ({ ...geoLoc, isLoading: true }));
+    setGeoLoc((geoLoc) => ({ ...geoLoc, isLoading: true }));
     getGeoLoc()
-      .then(res => {
+      .then((res) => {
         setMaxDistMeters(200000);
-        return setGeoLoc(geoLoc => ({
+        return setGeoLoc((geoLoc) => ({
           ...geoLoc,
           isLoading: false,
           coords: res,
         }));
       })
-      .catch(err => {
+      .catch((err) => {
         alert(err.message);
-        return setGeoLoc(geoLoc => ({ ...geoLoc, isLoading: false }));
+        return setGeoLoc((geoLoc) => ({ ...geoLoc, isLoading: false }));
       });
   };
 
@@ -130,9 +128,7 @@ function CategoryPage(props) {
     <div className='container mx-auto'>
       <div className='category'>
         <h1 className='category__title'>Title: Activités sportives</h1>
-        <p className='category__subtitle'>
-          Subtitle: Se depenser en s’amuser, rien de mieux pour lier le plaisir et la santé en famille{' '}
-        </p>
+        <p className='category__subtitle'>Subtitle: Se depenser en s’amuser, rien de mieux pour lier le plaisir et la santé en famille </p>
       </div>
 
       {loading && (
@@ -249,19 +245,14 @@ function CategoryPage(props) {
                 totalItem={data.eventsComplexQuery.count}
                 itemsPerPage={12}
                 page={page}
-                onPageClick={page => {
+                onPageClick={(page) => {
                   setPage(page);
                 }}
               />
             </GridItemSpan2>
           </GridCol2>
 
-          <MapLeaflet
-            className='rounded-xl'
-            currentLocation={geoLoc?.coords}
-            items={data.eventsComplexQuery.results}
-            maxDistMeters={maxDistMeters}
-          />
+          <MapLeaflet className='rounded-xl' currentLocation={geoLoc?.coords} items={data.eventsComplexQuery.results} maxDistMeters={maxDistMeters} />
         </div>
       )}
     </div>
