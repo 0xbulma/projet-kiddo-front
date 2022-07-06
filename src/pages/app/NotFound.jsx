@@ -1,6 +1,7 @@
 import { navigationHeader } from '../../utils/constants/navigation';
 
-import Logo from '../../components/app/header/navbar/Logo';
+import Logo from '../../components/shared/Logo';
+import Error from '../../components/shared/logo__404/Error';
 
 const titleProp = navigationHeader.titleProp;
 
@@ -9,7 +10,7 @@ export default function NotFound() {
     <section className="notfound">
       <div className="notfound__content">
         <div className="notfound__content-flex">
-          <img src="404.svg" alt="404" className="notfound__content--img" />
+          <Error className="notfound__content--img" />
           <span className="notfound__content--title">
             Désolé la page est introuvable
           </span>

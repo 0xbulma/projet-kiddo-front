@@ -15,7 +15,7 @@ span.notfound__content--error {
 }
 
 span.notfound__content--title {
-  @apply font-['nunito'] text-8xl text-center text-black leading-[190px];
+  @apply font-['nunito'] text-7xl text-center text-black leading-[170px];
 }
 
 div.notfound__content--link {
