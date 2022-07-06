@@ -25,6 +25,10 @@ import AdminDashboard from "./pages/administration/Dashboard";
 import AdminUser from "./pages/administration/sections/user/User";
 import AdminUserProfil from "./pages/administration/sections/user/UserProfil";
 import AdminUserTestMutation from "./pages/administration/sections/user/UserTestMutation";
+<<<<<<< HEAD
+=======
+
+>>>>>>> ac8b62e9c8bb890fa40b7b94254782468afb7327
 import Signalement from "./pages/administration/sections/Report";
 import UserInfo from "./pages/app/UserInfo";
 
