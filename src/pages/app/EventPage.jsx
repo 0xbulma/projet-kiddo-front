@@ -1,4 +1,5 @@
 import Carousel from '../../components/Carousel';
+import useAuthContext from '../../hooks/useAuthContext';
 
 import image1 from '../../assets/images/carouselTest/1.jpg';
 import image2 from '../../assets/images/carouselTest/2.jpg';
@@ -23,9 +24,11 @@ export default function EventPage() {
 
   const { loading, error, data } = useQuery(GET_BY_ID, { variables: { eventId: eventId } });
 
+  const { isAuth } = useAuthContext();
+  console.log('isAuth:', isAuth);
+
   useEffect(() => {
     if (data) {
-      console.log('Data : ', data);
       setEvent(data.event);
     } else if (error) {
       console.log('Error : ', error);
@@ -106,11 +109,12 @@ export default function EventPage() {
             <h2 className='mt-5 mb-5 text-2xl font-bold'>Participants </h2>
             <article className='flex items-center justify-around'>
               {event.group_participants.map((group, index) => (
-                <CardParticipant user={group.user} participants={group.group_detail} />
+                <CardParticipant key={index} user={group.user} participants={group.group_detail} />
               ))}
             </article>
           </section>
           {/* Comments */}
+
           <CommentSection commentTarget={1} targetID={eventId} sectionName='Questions-réponses concernant l’activité' />
         </div>
       )}
@@ -134,7 +138,6 @@ function CardInfo(props) {
 
 function CardParticipant(props) {
   const { user, participants } = props;
-  console.log(user, participants);
   return (
     <div className='flex flex-col items-center justify-center align-middle'>
       <Link to={`/user/${user._id}`}>

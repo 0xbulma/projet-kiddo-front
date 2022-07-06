@@ -37,7 +37,7 @@ export const GET_BY_ID = gql`
 `;
 
 export const GET_BY_EMAIL = gql`
-  query Query($email: EmailAddress) {
+  query Query($email: Emailadress) {
     getUserByEmail(email: $email) {
       _id
       created_at
