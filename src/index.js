@@ -25,10 +25,11 @@ import AdminDashboard from "./pages/administration/Dashboard";
 import AdminUser from "./pages/administration/sections/user/User";
 import AdminUserProfil from "./pages/administration/sections/user/UserProfil";
 import AdminUserTestMutation from "./pages/administration/sections/user/UserTestMutation";
-
-import "./global.css";
 import Signalement from "./pages/administration/sections/Report";
 import UserInfo from "./pages/app/UserInfo";
+
+// Import CSS
+import "./style.css";
 
 let isAdmin = true;
 
