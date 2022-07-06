@@ -32,3 +32,17 @@ export default function MapLeaflet({ className, items, currentLocation }) {
     </div>
   );
 }
+
+export function MapLeafletPlaceHolder({ className }) {
+  return (
+    <div className='sticky square top-4 flex'>
+      <MapContainer className={`grow ${className}`} center={[48.8566, 2.3522]} zoom={9} scrollWheelZoom={false} zoomControl={false}>
+        <ZoomControl position='topright' />
+        <TileLayer
+          attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+          url='https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png'
+        />
+      </MapContainer>
+    </div>
+  );
+}
