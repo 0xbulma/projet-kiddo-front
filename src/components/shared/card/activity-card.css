@@ -59,14 +59,27 @@
 }
 .card-category {
   position: absolute;
-  color: white;
-  font-size: 1.5rem;
+
   height: 2rem;
-  line-height: 2rem;
-  padding: 0 15px;
-  left: 0;
-  top: -25px;
+
+  margin-top: -16rem;
+  margin-left: -2.15rem;
+  width: 10rem;
+  transform: rotateZ(-45deg);
+
+  border-right: 29px solid rgba(255, 255, 255, 0);
+  border-left: 29px solid rgba(255, 255, 255, 0);
 }
+
+.card-category p {
+  color: rgb(0, 0, 0);
+  font-size: 1.15rem;
+  height: 2rem;
+  text-align: center;
+  margin-top: 3px;
+  margin-right: 0.5rem;
+}
+
 .card-title {
   padding: 0.4rem 0.5rem 0 0.5rem;
   font-size: 1.5rem;

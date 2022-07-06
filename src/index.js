@@ -9,6 +9,8 @@ import { apollo } from './graphql/apollo';
 import UserLayout from './pages/layout/UserLayout';
 import AdminLayout from './pages/layout/AdminLayout';
 
+import AuthContext from './context/AuthContext';
+
 //App layout components
 
 import Home from './pages/app/Home';
@@ -37,29 +39,31 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
   <ApolloProvider client={apollo}>
-    <Router>
-      <Routes>
-        <Route path='/' element={<UserLayout composant={<Home />} />} />
-        <Route path='/kiddo' element={<UserLayout composant={<Kiddo />} />} />
-        <Route path='/contact' element={<UserLayout composant={<Contact />} />} />
-        {/* <Route path='/events' element={<UserLayout composant={<Events />} />} /> */}
-        <Route path='/event/:eventId' element={<UserLayout composant={<EventPage />} />} />
-        <Route path='/category/:category' element={<UserLayout composant={<CategoryPage />} />} />
-        <Route path='*' element={<UserLayout composant={<NotFound />} />} />
-        {isAdmin && (
-          <Fragment>
-            <Route path='/administration' element={<AdminLayout composant={<AdminDashboard />} />} />
-            <Route path='/administration/users' element={<AdminLayout composant={<AdminUser />} />} />
-            <Route path='/administration/users/:id' element={<AdminLayout composant={<AdminUserProfil />} />} />
-            <Route path='/administration/reports' element={<AdminLayout composant={<Signalement />} />} />
-            <Route path='/administration/userTest' element={<AdminLayout composant={<AdminUserTestMutation />} />} />
-          </Fragment>
-        )}
+    <AuthContext>
+      <Router>
+        <Routes>
+          <Route path='/' element={<UserLayout composant={<Home />} />} />
+          <Route path='/kiddo' element={<UserLayout composant={<Kiddo />} />} />
+          <Route path='/contact' element={<UserLayout composant={<Contact />} />} />
+          {/* <Route path='/events' element={<UserLayout composant={<Events />} />} /> */}
+          <Route path='/event/:eventId' element={<UserLayout composant={<EventPage />} />} />
+          <Route path='/category/:category' element={<UserLayout composant={<CategoryPage />} />} />
+          <Route path='*' element={<UserLayout composant={<NotFound />} />} />
+          {isAdmin && (
+            <Fragment>
+              <Route path='/administration' element={<AdminLayout composant={<AdminDashboard />} />} />
+              <Route path='/administration/users' element={<AdminLayout composant={<AdminUser />} />} />
+              <Route path='/administration/users/:id' element={<AdminLayout composant={<AdminUserProfil />} />} />
+              <Route path='/administration/reports' element={<AdminLayout composant={<Signalement />} />} />
+              <Route path='/administration/userTest' element={<AdminLayout composant={<AdminUserTestMutation />} />} />
+            </Fragment>
+          )}
 
-        {/* <Route path="/users" element={<User />} />
-         */}
-      </Routes>
-    </Router>
+          {/* <Route path="/users" element={<User />} />
+           */}
+        </Routes>
+      </Router>
+    </AuthContext>
   </ApolloProvider>
   // </React.StrictMode>
 );

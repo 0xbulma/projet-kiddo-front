@@ -1,9 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 import { CONNECT_USER } from '../../../graphql/query/users.query';
 import { useEffect, useState } from 'react';
 import { useLazyQuery } from '@apollo/client';
 import Button from '../../shared/Button';
 import LoadingComponent from '../../shared/loadingfiles/LoadingComponent';
+import useAuthContext from '../../../hooks/useAuthContext';
 
 const Login = () => {
   const [connectUser, { error, loading, data }] = useLazyQuery(CONNECT_USER);
@@ -11,17 +13,19 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [next, setNext] = useState(false);
 
+  const { loggedIn } = useAuthContext();
+
   useEffect(() => {
     if (data) {
-      console.log('data login-->', data);
       if (email === data.connectUser.email) {
         console.log('connection réussie');
+        loggedIn(data.connectUser._id, data.connectUser.email);
       }
     }
     if (error) {
-      console.log('error', error);
+      console.log('error', error.networkError.result);
     }
-  }, [data, error, email]);
+  }, [data, error]);
 
   return (
     <>
@@ -50,8 +54,6 @@ const Login = () => {
             </form>
             <Button
               onClick={(e) => {
-                console.log(email);
-                console.log(password);
                 connectUser({ variables: { email: email, password: password } });
                 setNext(true);
               }}>
