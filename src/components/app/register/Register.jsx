@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import Button from "../../shared/Button";
 import ModalBackdrop from "../../shared/modal/ModalBackdrop";
 import Login from "../login/Login";
@@ -7,6 +8,7 @@ import { CREATE_USER } from "../../../graphql/mutation/createUser.mutation";
 import "./register.css";
 
 function Register() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [verifyPassword, setVerifyPassword] = useState("");
@@ -98,7 +100,12 @@ function Register() {
           </div>
         </div>
       ) : (
-        <div>Vous êtes inscris</div>
+        <>
+          <div>Vous êtes inscris</div>
+          {setTimeout(() => {
+            navigate("/user");
+          }, 3000)}
+        </>
       )}
     </>
   );
