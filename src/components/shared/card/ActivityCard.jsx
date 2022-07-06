@@ -12,13 +12,12 @@ import getCategoryColor from "../../../utils/constants/categoryColors";
 
 const ActivityCard = ({ title, category, lieu, date, prix }) => {
   const formatedDate = new Date(date).toLocaleDateString("fr");
-
   const categoryStyle = "card-category " + getCategoryColor(category);
 
   return (
     <>
       <article className="card">
-        <div className="card_thumb">
+        <div className="card-thumb">
           <img src={activityPic} alt="card-thumb__img acitivty" />
         </div>
         <div className="card-icons">
