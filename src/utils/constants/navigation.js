@@ -3,9 +3,7 @@ import Instagram from '../../components/shared/icons/Instagram';
 import GooglePlus from '../../components/shared/icons/GooglePlus';
 import Twitter from '../../components/shared/icons/Twitter';
 
-// import Twitter from '../assets/images/svgcomponents/Twitter';
-// import Instagram from '../assets/images/svgcomponents/Instagram';
-// import GooglePlus from '../assets/images/svgcomponents/GooglePlus';
+import Logosvg from '../../components/shared/logo/Logosvg';
 
 import { FaSearch, FaRegCalendarAlt } from 'react-icons/fa';
 import { CgProfile } from 'react-icons/cg';
@@ -14,20 +12,19 @@ import { MdOutlineNotificationsNone } from 'react-icons/md';
 export const navigationHeader = {
   titleProp: {
     title: 'Kiddo',
-    imgSrc: 'logo.svg',
-    imgAlt: 'Kiddo Logo',
+    img: (props) => <Logosvg {...props} />,
   },
   navigation: [
     { name: 'Découvrir Kiddo', href: '/kiddo'},
     { 
       name: 'Participer aux activités', 
       submenu: [
-        { name: 'Activité culturelles', href: '/category/:category' },
-        { name: 'Activité manuelles', href: '/category/:category' },
-        { name: 'Activités Sportives', href: '/category/:category' },
-        { name: 'Activités Artistiques', href: '/category/:category' },
-        { name: 'Activités d\'éveil corporel', href: '/category/:category' },
-        { name: 'Autre', href: '/category/:category' },
+        { name: 'Activité culturelles', category: 'culture' },
+        { name: 'Activité manuelles', category: 'manuel' },
+        { name: 'Activités Sportives', category: 'sport' },
+        { name: 'Activités Artistiques', category: 'art' },
+        { name: "Activités d'éveil corporel", category: 'eveil' },
+        { name: 'Autres', category: 'autres' },
       ],
     },
     { name: 'Organiser une activité', href: '/create-event'},
