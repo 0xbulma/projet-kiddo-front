@@ -30,9 +30,9 @@ function CategoryPage(props) {
   return (
     <div className='container mx-auto'>
       <div className='category'>
-        <h1 className='category__title'>Title: Activités sportives</h1>
+        <h1 className='category__title'>Activités sportives</h1>
         <p className='category__subtitle'>
-          Subtitle: Se depenser en s’amuser, rien de mieux pour lier le plaisir et la santé en famille{' '}
+          Se depenser en s’amuser, rien de mieux pour lier le plaisir et la santé en famille{' '}
         </p>
       </div>
 

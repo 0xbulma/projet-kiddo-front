@@ -18,7 +18,11 @@ export default function MapLeaflet({ currentLocation, items, className, maxDistM
     if (currentLocation) {
       setCenter([currentLocation[1], currentLocation[0]]);
     }
-  }, [currentLocation]);
+    if (!currentLocation) {
+      setCenter([items[0]?.gps[1], items[0]?.gps[0]]);
+      setZoom(7);
+    }
+  }, [currentLocation, items]);
 
   useEffect(() => {
     if (map) {

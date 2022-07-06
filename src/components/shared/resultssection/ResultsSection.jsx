@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationCrosshairs, faFilter } from '@fortawesome/free-solid-svg-icons';
 
-
 // import custom components
 import { GET_EVENTS_CATEGORY } from '../../../graphql/query/events.query';
 import MapLeaflet, { MapLeafletPlaceHolder } from '../../../components/shared/MapLeaflet';
@@ -17,9 +16,9 @@ import Skelet from '../../../components/shared/loadingfiles/Skelet';
 import Filterbox from '../../../components/shared/filterbox/Filterbox';
 
 //import CSS
+import './resultssection.css'
 
-
-function ResultsSection({category, searchInput}) {
+function ResultsSection({ category, searchInput }) {
   const ITEMS_PER_PAGE = 12;
 
   const [isFilterShown, setIsFilterShown] = useState(false);
@@ -136,7 +135,7 @@ function ResultsSection({category, searchInput}) {
             <Skelet />
             <Skelet />
           </GridCol2>
-          <MapLeafletPlaceHolder className='bg-yellow-300 rounded-xl' />
+          <MapLeafletPlaceHolder className='rounded-xl' />
         </div>
       )}
 
@@ -175,10 +174,11 @@ function ResultsSection({category, searchInput}) {
             <Skelet />
             <Skelet />
           </GridCol2>
-          <MapLeafletPlaceHolder className='bg-yellow-300 rounded-xl' />
+          <MapLeafletPlaceHolder className='rounded-xl' />
         </div>
       )}
       {data?.eventsComplexQuery.results.length > 0 && (
+        <div className='flex flex-col gap-12'>
         <div className='relative flex gap-8'>
           <GridCol2 className='grow'>
             <GridItemSpan2>
@@ -220,17 +220,6 @@ function ResultsSection({category, searchInput}) {
                 </Link>
               );
             })}
-
-            <GridItemSpan2>
-              <PaginationComp
-                totalItem={data.eventsComplexQuery.count}
-                itemsPerPage={12}
-                page={page}
-                onPageClick={page => {
-                  setPage(page);
-                }}
-              />
-            </GridItemSpan2>
           </GridCol2>
 
           <MapLeaflet
@@ -239,6 +228,15 @@ function ResultsSection({category, searchInput}) {
             items={data.eventsComplexQuery.results}
             maxDistMeters={maxDistMeters}
           />
+        </div>
+        <PaginationComp
+                totalItem={data.eventsComplexQuery.count}
+                itemsPerPage={12}
+                page={page}
+                onPageClick={page => {
+                  setPage(page);
+                }}
+              />
         </div>
       )}
     </>
