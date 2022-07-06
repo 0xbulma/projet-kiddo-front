@@ -1,0 +1,13 @@
+.square {
+  width: 30vw;
+  height: 30vw;
+  background-color: yellow;
+  flex-shrink: 0;
+  border-radius: 20px;
+}
+
+/* .square:after {
+  content: "";
+  display: block;
+  padding-bottom: 50%;
+} */

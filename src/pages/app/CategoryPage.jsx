@@ -5,14 +5,16 @@ import { faLocationCrosshairs, faFilter } from '@fortawesome/free-solid-svg-icon
 import { useQuery, useLazyQuery } from '@apollo/client';
 import { GET_EVENTS_CATEGORY } from '../../graphql/query/events.query';
 import { GET_CATEGORY_BY_NAME } from '../../graphql/query/extra.query';
-import MapLeaflet from '../../components/shared/MapLeaflet';
-import { GridCol3, GridCol2, GridItemSpan2 } from '../../components/shared/GridCol';
+import MapLeaflet, { MapLeafletPlaceHolder } from '../../components/shared/MapLeaflet';
+import { GridCol2, GridItemSpan2 } from '../../components/shared/GridCol';
 import LoadIconBtn from '../../components/shared/loadingfiles/LoadIconBtn';
 import ActivityCard from '../../components/shared/card/ActivityCard';
-import './_categoryPage.css';
+import './categoryPage.css';
 import getGeoLoc from '../../utils/getGeoLoc';
 import PaginationComp from '../../components/shared/PaginationComp';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import Skelet from '../../components/shared/loadingfiles/Skelet';
 
 function CategoryPage(props) {
   let navigate = useNavigate();
@@ -41,6 +43,22 @@ function CategoryPage(props) {
     if (data2?.category && !data) {
       getEvents({
         variables: {
+          input: {
+            first: ITEMS_PER_PAGE,
+            offset: page * ITEMS_PER_PAGE - ITEMS_PER_PAGE,
+            categories: data2.category._id,
+            status: 'PUBLISHED',
+            minDate: Date.now(),
+            dateOrder: 'asc',
+            minChildAge: 0,
+            maxChildAge: 12,
+          },
+        },
+      });
+    }
+    if (data) {
+      refetch({
+        input: {
           first: ITEMS_PER_PAGE,
           offset: page * ITEMS_PER_PAGE - ITEMS_PER_PAGE,
           categories: data2.category._id,
@@ -52,26 +70,22 @@ function CategoryPage(props) {
         },
       });
     }
-    if (data) {
-      console.log('offset', page * ITEMS_PER_PAGE - ITEMS_PER_PAGE);
-      refetch({ offset: page * ITEMS_PER_PAGE - ITEMS_PER_PAGE });
-    }
   }, [data2, getEvents, page, data, refetch, navigate]);
 
   const onClickHandler = () => {
-    setGeoLoc((geoLoc) => ({ ...geoLoc, isLoading: true }));
+    setGeoLoc(geoLoc => ({ ...geoLoc, isLoading: true }));
 
     getGeoLoc()
-      .then((res) => {
-        return setGeoLoc((geoLoc) => ({
+      .then(res => {
+        return setGeoLoc(geoLoc => ({
           ...geoLoc,
           isLoading: false,
           coords: res,
         }));
       })
-      .catch((err) => {
+      .catch(err => {
         alert(err.message);
-        return setGeoLoc((geoLoc) => ({ ...geoLoc, isLoading: false }));
+        return setGeoLoc(geoLoc => ({ ...geoLoc, isLoading: false }));
       });
   };
 
@@ -83,16 +97,45 @@ function CategoryPage(props) {
     <div className='container mx-auto'>
       <div className='category'>
         <h1 className='category__title'>Title: Activités sportives</h1>
-        <p className='category__subtitle'>Subtitle: Se depenser en s’amuser, rien de mieux pour lier le plaisir et la santé en famille </p>
+        <p className='category__subtitle'>
+          Subtitle: Se depenser en s’amuser, rien de mieux pour lier le plaisir et la santé en famille{' '}
+        </p>
       </div>
 
-      {loading && <div>LOADING</div>}
+      {loading && (
+        <div className='relative flex gap-8'>
+          <GridCol2 className='grow'>
+          <GridItemSpan2>
+              <div className='filter__group'>
+                <button className='filter__container' onClick={onClickHandler} disabled>
+                 <LoadIconBtn /> 
+                <div className='filter__text'>Activités autour de moi</div>
+                </button>
+                <button className='filter__container' disabled>
+                  <FontAwesomeIcon icon={faFilter} />
+                  <div className='filter__text'>Critères de recherche</div>
+                </button>
+              </div>
+            </GridItemSpan2>
+            <Skelet />
+            <Skelet />
+            <Skelet />
+            <Skelet />
+            <Skelet />
+            <Skelet />
+            <Skelet />
+            <Skelet />
+          </GridCol2>
+          <MapLeafletPlaceHolder className='bg-yellow-300 rounded-xl' />
+        </div>
+      )}
+
       {error && <div>ERROR</div>}
       {data && (
-        <GridCol3 className='relative'>
-          <GridCol2 className='col-span-2'>
+        <div className='relative flex gap-8'>
+          <GridCol2 className='grow'>
             <GridItemSpan2>
-              <div className='filter_group'>
+              <div className='filter__group'>
                 <button className='filter__container' onClick={onClickHandler}>
                   {geoLoc.isLoading ? <LoadIconBtn /> : <FontAwesomeIcon icon={faLocationCrosshairs} />}
                   <div className='filter__text'>Activités autour de moi</div>
@@ -106,15 +149,16 @@ function CategoryPage(props) {
 
             {data.eventsComplexQuery.results.map((data, index) => {
               return (
-                <ActivityCard
-                  key={data._id}
-                  title={data.content.title}
-                  // category={data.categories}
-                  category={data2.category.name}
-                  lieu={data.adress}
-                  date={data.event_date.start}
-                  prix={data.price.adult}
-                />
+                <Link key={data._id} to={`/event/${data._id}`}>
+                  <ActivityCard
+                    title={data.content.title}
+                    // category={data.categories}
+                    category={data2.category.name}
+                    lieu={data.adress.city}
+                    date={data.event_date.start}
+                    prix={data.price.adult}
+                  />
+                </Link>
               );
             })}
 
@@ -123,16 +167,14 @@ function CategoryPage(props) {
                 totalItem={data.eventsComplexQuery.count}
                 itemsPerPage={12}
                 page={page}
-                onPageClick={(page) => {
+                onPageClick={page => {
                   setPage(page);
                 }}
               />
             </GridItemSpan2>
           </GridCol2>
-          <div className='sticky top-0 right-0 bg-yellow-300 h-64 w-92'>
-            <MapLeaflet />
-          </div>
-        </GridCol3>
+          <MapLeaflet className='bg-yellow-300 rounded-xl' items={data.eventsComplexQuery.results} />
+        </div>
       )}
     </div>
   );

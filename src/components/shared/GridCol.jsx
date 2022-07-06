@@ -1,6 +1,6 @@
 export function GridCol3(props) {
   return (
-    <div className={`grid grid-cols-3 gap-2 ${props.className}`}>
+    <div className={`grid grid-cols-3 gap-8 ${props.className}`}>
       {props.children}
     </div>
   );
