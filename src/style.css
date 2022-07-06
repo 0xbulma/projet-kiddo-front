@@ -25,12 +25,28 @@ h3 {
   @apply font-['Nunito'] text-[1.125rem];
 }
 
-p {
+p,
+a {
   @apply font-['Poppins'] text-[1rem];
 }
 
 span {
   @apply font-['Alegreya+Sans'] text-[1rem];
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #a49bcc;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #f26651;
+  border-radius: 5px;
+  border: 1px solid #b84938;
 }
 
 /***********************************/

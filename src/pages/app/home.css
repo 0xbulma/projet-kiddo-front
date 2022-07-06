@@ -12,11 +12,8 @@
 
 /* HERO */
 .hero {
-  height: 80vh;
-  background-image: url('../../assets/images/hero.jpg');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  height: 85vh;
+  background: url('../../assets/images/main_bg.webp') no-repeat center;
   position: relative;
   margin-bottom: 6rem;
 }
@@ -44,6 +41,7 @@
 .title-hero-container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 /* CATEGORY CARDS SECTION */
@@ -63,7 +61,7 @@
 }
 /* ACTIVITY CARDS SECTION */
 .activity-container {
-  background-color: #e2fcfb;
+  /* background-color: #e2fcfb; */
   padding-bottom: 3rem;
 }
 .title-activity-container {
