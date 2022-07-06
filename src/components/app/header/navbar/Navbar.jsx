@@ -7,17 +7,8 @@ import { navigationHeader } from '../../../../utils/constants/navigation';
 import Logo from './Logo';
 import Nav from './Nav';
 
-const submenu = [
-  { name: 'Activité culturelles', category:'culture' },
-  { name: 'Activité manuelles', category:'manuel' },
-  { name: 'Activités Sportives', category:'sport' },
-  { name: 'Activités Artistiques', category:'art' },
-  { name: 'Activités d\'éveil corporel', category:'eveil' },
-  { name: 'Autres', category:'zutres' },
-]
-
 const titleProp = navigationHeader.titleProp;
-// const navigation = navigationHeader.navigation;
+const navigation = navigationHeader.navigation;
 const navIcon = navigationHeader.navIcon;
 
 export default function Navbar() {
@@ -31,7 +22,7 @@ export default function Navbar() {
             <MenuIcon className="w-6 h-6" aria-hidden="true" />
           </Popover.Button>
         </div>
-        <Nav submenu={submenu}/>
+        <Nav navigation={navigation}/>
         <NavIcon navIcon={navIcon} />
       </div>
     </div>
