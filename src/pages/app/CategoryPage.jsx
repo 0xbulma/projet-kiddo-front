@@ -5,7 +5,7 @@ import { faLocationCrosshairs, faFilter } from '@fortawesome/free-solid-svg-icon
 import { useQuery, useLazyQuery } from '@apollo/client';
 import { GET_EVENTS_CATEGORY } from '../../graphql/query/events.query';
 import { GET_CATEGORY_BY_NAME } from '../../graphql/query/extra.query';
-import MapLeaflet from '../../components/shared/MapLeaflet';
+import MapLeaflet, { MapLeafletPlaceHolder } from '../../components/shared/MapLeaflet';
 import { GridCol2, GridItemSpan2 } from '../../components/shared/GridCol';
 import LoadIconBtn from '../../components/shared/loadingfiles/LoadIconBtn';
 import ActivityCard from '../../components/shared/card/ActivityCard';
@@ -13,7 +13,8 @@ import './categoryPage.css';
 import getGeoLoc from '../../utils/getGeoLoc';
 import PaginationComp from '../../components/shared/PaginationComp';
 import { useNavigate } from 'react-router-dom';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
+import Skelet from '../../components/shared/loadingfiles/Skelet';
 
 function CategoryPage(props) {
   let navigate = useNavigate();
@@ -101,11 +102,38 @@ function CategoryPage(props) {
         </p>
       </div>
 
-      {loading && <div>LOADING</div>}
+      {loading && (
+        <div className='relative flex gap-8'>
+          <GridCol2 className='grow'>
+          <GridItemSpan2>
+              <div className='filter__group'>
+                <button className='filter__container' onClick={onClickHandler} disabled>
+                 <LoadIconBtn /> 
+                <div className='filter__text'>Activités autour de moi</div>
+                </button>
+                <button className='filter__container' disabled>
+                  <FontAwesomeIcon icon={faFilter} />
+                  <div className='filter__text'>Critères de recherche</div>
+                </button>
+              </div>
+            </GridItemSpan2>
+            <Skelet />
+            <Skelet />
+            <Skelet />
+            <Skelet />
+            <Skelet />
+            <Skelet />
+            <Skelet />
+            <Skelet />
+          </GridCol2>
+          <MapLeafletPlaceHolder className='bg-yellow-300 rounded-xl' />
+        </div>
+      )}
+
       {error && <div>ERROR</div>}
       {data && (
         <div className='relative flex gap-8'>
-          <GridCol2 className='grow-0'>
+          <GridCol2 className='grow'>
             <GridItemSpan2>
               <div className='filter__group'>
                 <button className='filter__container' onClick={onClickHandler}>
@@ -121,16 +149,16 @@ function CategoryPage(props) {
 
             {data.eventsComplexQuery.results.map((data, index) => {
               return (
-                <Link  key={data._id} to={`/event/${data._id}`}>
-                <ActivityCard
-                  title={data.content.title}
-                  // category={data.categories}
-                  category={data2.category.name}
-                  lieu={data.adress.city}
-                  date={data.event_date.start}
-                  prix={data.price.adult}
-                />
-                </ Link>
+                <Link key={data._id} to={`/event/${data._id}`}>
+                  <ActivityCard
+                    title={data.content.title}
+                    // category={data.categories}
+                    category={data2.category.name}
+                    lieu={data.adress.city}
+                    date={data.event_date.start}
+                    prix={data.price.adult}
+                  />
+                </Link>
               );
             })}
 
@@ -145,10 +173,7 @@ function CategoryPage(props) {
               />
             </GridItemSpan2>
           </GridCol2>
-          <MapLeaflet
-            className='bg-yellow-300 rounded-xl'
-            items={data.eventsComplexQuery.results}
-          />
+          <MapLeaflet className='bg-yellow-300 rounded-xl' items={data.eventsComplexQuery.results} />
         </div>
       )}
     </div>

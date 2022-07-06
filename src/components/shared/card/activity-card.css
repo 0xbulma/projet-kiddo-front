@@ -15,8 +15,8 @@
 }
 
 .card-thumb {
-  height: 15rem;
-  background-color: #000;
+  background-color: lightgray;
+  min-height: 10rem;
 }
 
 .card-thumb__img {

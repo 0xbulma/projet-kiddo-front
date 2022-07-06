@@ -1,21 +1,20 @@
 import React from "react";
 import { Skeleton } from "react-skeleton-generator";
+
 const Skelet = () => {
   return (
-    <>
-      <div className="w-72">
         <Skeleton.SkeletonThemeProvider
           style={{
-            backgroundColor: "lightgrey",
-            padding: "10px",
+            backgroundColor: "white",
             borderRadius: "10px",
+            width: "100%",
           }}
         >
-          <Skeleton height="150px" borderRadius="10px" />
-          <Skeleton count={2} />
+          <Skeleton height="180px" width='100%' borderRadius="10px" />
+          <Skeleton count={2} width='100%' />
         </Skeleton.SkeletonThemeProvider>
-      </div>
-    </>
+
+
   );
 };
 
