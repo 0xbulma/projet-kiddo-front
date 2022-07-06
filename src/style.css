@@ -30,7 +30,7 @@ p {
 }
 
 span {
-  @apply font-['Poppins'] text-[1rem];
+  @apply font-['Alegreya+Sans'] text-[1rem];
 }
 
 /***********************************/
