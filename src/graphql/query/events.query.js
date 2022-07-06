@@ -1,9 +1,10 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
 
 export const GET_UPCOMING_EVENTS = gql`
   query Query($input: complexQueryInput) {
     eventsComplexQuery(input: $input) {
       results {
+        _id
         content {
           title
         }
@@ -32,6 +33,7 @@ export const GET_LAST_PUBLISHED_EVENTS = gql`
   query Query($input: complexQueryInput) {
     eventsComplexQuery(input: $input) {
       results {
+        _id
         content {
           title
         }
@@ -59,6 +61,7 @@ export const GET_LAST_PUBLISHED_EVENTS = gql`
 export const GET_SIGNALMENTS = gql`
   query Query {
     events {
+      _id
       signalments {
         _id
         name
@@ -153,8 +156,8 @@ export const GET_BY_ID = gql`
 `;
 
 export const GET_EVENTS_CATEGORY = gql`
-  query EventsComplexQuery($input: complexQueryInput){
-  eventsComplexQuery(input: $input){
+  query EventsComplexQuery($input: complexQueryInput) {
+    eventsComplexQuery(input: $input) {
       count
       results {
         _id
