@@ -32,7 +32,7 @@ import Signalement from './pages/administration/sections/Report';
 // import UserInfo from "./pages/app/UserInfo";
 
 // Import CSS
-import "./style.css";
+import './style.css';
 
 let isAdmin = true;
 
