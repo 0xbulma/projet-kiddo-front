@@ -3,11 +3,8 @@ import './mapLeaflet.css';
 
 export default function MapLeafletOneMarker(props) {
   let { inputGPS } = props;
-
-  console.log('finalGPS : ', inputGPS);
   const finalGPS = inputGPS.length === 2 ? [inputGPS[1], inputGPS[0]] : [51.505, -0.09];
 
-  console.log('finalGPS : ', inputGPS);
   return (
     <div className='rounded-lg overflow-hidden'>
       <MapContainer style={{ height: '300px' }} center={finalGPS} zoom={13} scrollWheelZoom={false} zoomControl={false}>

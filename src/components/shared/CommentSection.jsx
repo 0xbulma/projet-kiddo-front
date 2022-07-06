@@ -29,7 +29,6 @@ export default function CommentSection({ commentTarget, targetID, sectionName })
   const [getUser, { called, loading, error, data }] = useLazyQuery(GET_BY_EMAIL);
 
   // Chargement des commentaires depuis Mongo
-  targetID = '62bdabddfc13ae63860012a2'; //TEMP
   const { data: comments, refetch } = useQuery(GET_BY_TARGET_ID, { variables: { type: commentTarget, id: targetID } });
 
   // Fonction utilisé pour charger à nouveau les commentaires pour les fonctions enfants
