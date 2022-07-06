@@ -8,7 +8,6 @@ import { useEffect, useState } from 'react';
 import { useLazyQuery } from '@apollo/client';
 
 import { CONNECT_USER, GET_BY_EMAIL } from '../../../../graphql/query/users.query';
-import useToggle from '../../../../hooks/useToggle';
 
 export default function UserTestMutation() {
   const returnArrowPath = '/administration';
@@ -16,8 +15,8 @@ export default function UserTestMutation() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
-  const [user] = useState();
-  const [displayUser] = useToggle(false);
+  // const [user] = useState();
+  // const [displayUser] = useToggle(false);
 
   const [connectUser, { data }] = useLazyQuery(CONNECT_USER);
   //console.log(loading, error, data);
@@ -76,20 +75,20 @@ export default function UserTestMutation() {
   );
 }
 
-function UserPanel({ user }) {
-  return (
-    <div className='w-screen'>
-      <article className='admin-section mt-10 px-10 flex justify-center'>
-        <span className='mx-2 w-24 hover:text-fuchsia-600 cursor-pointer'>Commentaires</span>
-        <span className='mx-2'>|</span>
-        <span className='mx-2 w-24 text-center hover:text-fuchsia-600 cursor-pointer'>Events</span>
-        <span className='mx-2'>|</span>
-        <span className='mx-2 w-24 text-center hover:text-fuchsia-600 cursor-pointer'>Amis</span>
-      </article>
+// function UserPanel({ user }) {
+//   return (
+//     <div className='w-screen'>
+//       <article className='admin-section mt-10 px-10 flex justify-center'>
+//         <span className='mx-2 w-24 hover:text-fuchsia-600 cursor-pointer'>Commentaires</span>
+//         <span className='mx-2'>|</span>
+//         <span className='mx-2 w-24 text-center hover:text-fuchsia-600 cursor-pointer'>Events</span>
+//         <span className='mx-2'>|</span>
+//         <span className='mx-2 w-24 text-center hover:text-fuchsia-600 cursor-pointer'>Amis</span>
+//       </article>
 
-      <article className='admin-section mt-10'>
-        <span className='admin-section__title'>Utilisateur :</span>
-      </article>
-    </div>
-  );
-}
+//       <article className='admin-section mt-10'>
+//         <span className='admin-section__title'>Utilisateur :</span>
+//       </article>
+//     </div>
+//   );
+// }
