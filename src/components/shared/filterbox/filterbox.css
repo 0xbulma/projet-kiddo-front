@@ -1,0 +1,88 @@
+.filterbox__hidden{
+  display: none !important;
+}
+
+.filterbox__container{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background-color: lightgray;
+  border-radius: 10px;
+  padding: 2rem 2rem 3rem 2rem;
+  top:2.5rem;
+  left:-0.1rem;
+  width: 100%;
+  z-index: 500;
+  gap:2rem;
+}
+
+.filterbox__group{
+  width: 100%;
+}
+
+.filterbox__label{
+  color:black;
+  font-size: 0.75rem;
+  padding-bottom: 2rem;
+}
+
+.filterbox__horizontal-slider{
+  
+  width: 100%;
+  height: 5px;
+  background-color: darkgray;
+  border-radius: 100px;
+
+}
+
+.filterbox__slider-track{
+  height: 5px;
+  border-radius: 100px;
+}
+.filterbox__slider-track-0{
+  background-color: darkgray;
+}
+.filterbox__slider-track-1{
+  background-color: blue;
+}
+.filterbox__slider-track-2{
+  background-color: darkgray;
+}
+
+.filterbox__slider-track--dist{
+  height: 5px;
+  border-radius: 100px;
+}
+.filterbox__slider-track--dist-0{
+  background-color: blue;
+}
+.filterbox__slider-track--dist-1{
+  background-color: darkgray;
+}
+
+.filterbox__thumb{
+  position: relative;
+  outline: none;
+ transform: translateY(-5px);
+  cursor: pointer;
+}
+
+.thumb__tag{
+  position: absolute;
+  font-weight: bold;
+  font-size: 0.5rem;
+  text-align: center;
+  left: -10px;
+  top:15px;
+  width: 35px;
+  color: white;
+  background-color: blue;
+  border-radius: 2px;
+}
+.thumb__pin{
+  background-color:blue;
+  border-radius: 100px;
+  width: 14px;
+  height: 14px;
+  z-index: 900;
+}

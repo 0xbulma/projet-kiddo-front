@@ -59,7 +59,8 @@ root.render(
           path="/category/:category"
           element={<UserLayout composant={<CategoryPage />} />}
         />
-        <Route path="*" element={<UserLayout composant={<NotFound />} />} />
+        {/* <Route path="*" element={<UserLayout composant={<NotFound />} />} /> */}
+        <Route path="*" element={<NotFound />} />
         {isAdmin && (
           <Fragment>
             <Route
