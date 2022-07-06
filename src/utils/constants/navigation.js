@@ -1,33 +1,31 @@
-import Facebook from '../../components/shared/icons/Facebook';
-import Instagram from '../../components/shared/icons/Instagram';
-import GooglePlus from '../../components/shared/icons/GooglePlus';
-import Twitter from '../../components/shared/icons/Twitter';
+import IFacebook from '../../components/shared/icons/IFacebook';
+import IInstagram from '../../components/shared/icons/IInstagram';
+import IGooglePlus from '../../components/shared/icons/IGooglePlus';
+import ITwitter from '../../components/shared/icons/ITwitter';
 
-// import Twitter from '../assets/images/svgcomponents/Twitter';
-// import Instagram from '../assets/images/svgcomponents/Instagram';
-// import GooglePlus from '../assets/images/svgcomponents/GooglePlus';
+import Logosvg from '../../components/shared/logo__404/Logosvg';
 
-import { FaSearch, FaRegCalendarAlt } from 'react-icons/fa';
-import { CgProfile } from 'react-icons/cg';
-import { MdOutlineNotificationsNone } from 'react-icons/md';
+import ISearch from '../../components/shared/icons/ISearch';
+import ICalendar from '../../components/shared/icons/ICalendar';
+import INotification from '../../components/shared/icons/INotification';
+import IProfile from '../../components/shared/icons/IProfile';
 
 export const navigationHeader = {
   titleProp: {
     title: 'Kiddo',
-    imgSrc: 'logo.svg',
-    imgAlt: 'Kiddo Logo',
+    img: (props) => <Logosvg {...props} />,
   },
   navigation: [
     { name: 'Découvrir Kiddo', href: '/kiddo'},
     { 
       name: 'Participer aux activités', 
       submenu: [
-        { name: 'Activité culturelles', href: '/category/:category' },
-        { name: 'Activité manuelles', href: '/category/:category' },
-        { name: 'Activités Sportives', href: '/category/:category' },
-        { name: 'Activités Artistiques', href: '/category/:category' },
-        { name: 'Activités d\'éveil corporel', href: '/category/:category' },
-        { name: 'Autre', href: '/category/:category' },
+        { name: 'Activité culturelles', category: 'culture' },
+        { name: 'Activité manuelles', category: 'manuel' },
+        { name: 'Activités Sportives', category: 'sport' },
+        { name: 'Activités Artistiques', category: 'art' },
+        { name: "Activités d'éveil corporel", category: 'eveil' },
+        { name: 'Autres', category: 'autres' },
       ],
     },
     { name: 'Organiser une activité', href: '/create-event'},
@@ -36,21 +34,21 @@ export const navigationHeader = {
     {
       name: 'Search',
       href: '/',
-      icon: (props) => <FaSearch {...props} />
+      icon: (props) => <ISearch {...props} />
     },
     {
       name: 'Calendar',
       href: '/',
-      icon: (props) => <FaRegCalendarAlt {...props} />
+      icon: (props) => <ICalendar {...props} />
     },
     {
       name: 'Notification',
       href: '/',
-      icon: (props) => <MdOutlineNotificationsNone {...props} />
+      icon: (props) => <INotification {...props} />
     },
     {
       name: 'Profile',
-      icon: (props) => <CgProfile {...props} />,
+      icon: (props) => <IProfile {...props} />,
       
     }
   ]
@@ -79,22 +77,22 @@ export const navigationFooter = {
     {
       name: 'Facebook',
       href: 'https://www.facebook.com/',
-      icon: (props) => <Facebook {...props} />
+      icon: (props) => <IFacebook {...props} />
     },
     {
       name: 'Instagram',
       href: 'https://www.instagram.com/',
-      icon: (props) => <Instagram {...props} />
+      icon: (props) => <IInstagram {...props} />
     },
     {
       name: 'Twitter',
       href: 'https://twitter.com/',
-      icon: (props) => <Twitter {...props} />
+      icon: (props) => <ITwitter {...props} />
     },
     {
       name: 'Google+',
       href: 'https://plus.google.com/',
-      icon: (props) => <GooglePlus {...props} />
+      icon: (props) => <IGooglePlus {...props} />
     }
   ]
 }

@@ -1,9 +1,11 @@
 '@fortawesome/free-regular-svg-icons'
 
-import { navigationFooter } from '../../../utils/constants/navigation';
+import { navigationFooter, navigationHeader } from '../../../utils/constants/navigation';
 
 import './_footer.css';
 import { FaRegCopyright } from 'react-icons/fa';
+
+import Logo from '../../shared/Logo';
 
 const about = navigationFooter.about;
 const contact = navigationFooter.contact;
@@ -11,6 +13,8 @@ const faq = navigationFooter.faq;
 const social = navigationFooter.social;
 
 const legal = navigationFooter.legal;
+
+const titleProps = navigationHeader.titleProp;
 
 export default function Footer() {
   return (
@@ -21,7 +25,7 @@ export default function Footer() {
       <div className="footer-nav">
         <section className="footer__content">
           <div className="footer__logo">
-            
+            <Logo titleProp={titleProps} className="w-56 h-56 -mt-16 ml-24" />
           </div>
           <div className="footer__navigation">
             <div className="footer__navigation--nav">
@@ -87,7 +91,7 @@ export default function Footer() {
                 <h3 className="nav__items--h3">
                   Suivez-nous
                 </h3>
-                <ul className="nav__items--list nav__social--list">
+                <ul className="nav__social--list">
                 {
                   social.map((item, index) => (
                     <li key={index} className="nav__social--item">
@@ -100,7 +104,7 @@ export default function Footer() {
                           {item.name}
                         </p>
                         <item.icon 
-                          className="w-8 h-8 " aria-hidden="true" 
+                          className="nav__social--icon" aria-hidden="true" 
                         />
                       </a>
                     </li>
