@@ -10,7 +10,7 @@ import { faMapPin } from '@fortawesome/free-solid-svg-icons';
 
 import getCategoryColor from '../../../utils/constants/categoryColors';
 
-const ActivityCard = ({ title, category, lieu, date, prix }) => {
+const ActivityCard = ({ title, category, lieu, date, prix, imageUrl }) => {
   const formatedDate = new Date(date).toLocaleDateString('fr');
 
   const categoryStyle = 'card-category ' + getCategoryColor(category);
@@ -18,8 +18,8 @@ const ActivityCard = ({ title, category, lieu, date, prix }) => {
   return (
     <>
       <article className='card'>
-        <div className='card_thumb'>
-          <img src={activityPic} alt='card-thumb__img acitivty' />
+        <div className='card-thumb'>
+          <img className='card-thumb__img' src={imageUrl ? imageUrl : activityPic} alt={title} />
         </div>
         <div className='card-icons'>
           <span className='card-icon-price'>

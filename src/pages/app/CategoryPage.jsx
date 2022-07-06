@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 // import custom components
 import { GET_CATEGORY_BY_NAME } from '../../graphql/query/extra.query';
-import ResultsSection from '../../components/shared/resultssection/ResultsSection';
+import ResultsSection from '../../components/shared/resultsbox/ResultsSection';
 
 //import CSS
 import './categoryPage.css';
@@ -28,7 +28,7 @@ function CategoryPage(props) {
   }, [data2, navigate]);
 
   return (
-    <div className='container mx-auto'>
+    <div className='container mx-auto pb-10'>
       <div className='category'>
         <h1 className='category__title'>Activités sportives</h1>
         <p className='category__subtitle'>
@@ -36,7 +36,7 @@ function CategoryPage(props) {
         </p>
       </div>
 
-      {data2 && <ResultsSection category={data2} />}
+      <ResultsSection category={data2 ? data2 : null} />
     </div>
   );
 }
