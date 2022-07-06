@@ -27,7 +27,7 @@ function Register() {
     <>
       {!next ? (
         <div className="form-container">
-          <h2 className="form-title">Bienvenu.e.s sur Kiddo</h2>
+          <h3 className="form-title">Bienvenu.e.s sur Kiddo</h3>
           <p className="p-1"> Créez votre compte</p>
           <form className="form">
             <input
