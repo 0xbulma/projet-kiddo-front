@@ -5,7 +5,7 @@ export default function Logo({ titleProp }) {
     <div className="md:mr-10 md:-ml-14">
       <a href="/" className="">
         <Fragment key={titleProp.title}>
-          <img src={titleProp.imgSrc} alt={titleProp.imgAlt} className="w-36 h-36" />
+          <titleProp.img className="w-36 h-36" />
         </Fragment>
       </a>
     </div>
