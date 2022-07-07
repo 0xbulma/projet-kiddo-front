@@ -11,10 +11,6 @@ export const MODIFY_USER = gql`
       password
       first_name
       last_name
-      profil_picture {
-        hd
-        thumbnail
-      }
     }
   }
 `;

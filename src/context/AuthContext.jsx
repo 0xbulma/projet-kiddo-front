@@ -29,8 +29,8 @@ function AuthContext(props) {
             ...state,
             isAuth: true,
             isAuthChecked: true,
-            email: data.email,
-            _id: data._id,
+            email: data.checkToken.email,
+            _id: data.checkToken._id,
           }));
         },
         onError: err => {

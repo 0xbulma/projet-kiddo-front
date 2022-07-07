@@ -7,6 +7,7 @@
   background-color: #FBFBFB;
   padding: 1rem 0;
   box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
+  z-index: 500;
 }
 
 .navbar2__innercontainer{
@@ -29,6 +30,7 @@
   align-items: center;
   gap:2rem;
   cursor: pointer;
+  user-select: none;
 }
 
 .navbar2__link{
@@ -59,7 +61,8 @@
 .navbar2__searchinput{
   width: 100%;
   outline: none;
-  border-radius: 20px !important;
+  border-radius: 25px !important;
+  padding: 0.5rem 1.5rem !important;
 }
 
 .navbar2__searchinput:focus{
@@ -93,7 +96,7 @@ outline: none;
 .navbar2sub__container{
   position:absolute;
   bottom: -3rem;
-  z-index: 2000;
+  z-index: 200;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -101,7 +104,6 @@ outline: none;
   border-top: 1px solid black;
   background-color: #FBFBFB;
   padding:1rem 0 ;
-  box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
 }
 
 .navbar2sub__innercontainer{
