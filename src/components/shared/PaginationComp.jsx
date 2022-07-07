@@ -35,8 +35,6 @@ export default function PaginationComp({
       hrefAllControls
       onClick={clickEvent => {
         if (clickEvent.nextSelectedPage !== undefined) {
-          console.log('page', page);
-          console.log('nextselect', clickEvent.nextSelectedPage);
           onPageClick(clickEvent.nextSelectedPage + 1);
         }
       }}
