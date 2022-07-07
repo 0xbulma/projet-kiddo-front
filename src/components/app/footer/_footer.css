@@ -27,7 +27,7 @@ div.footer__navigation--nav__items {
 }
 
 h3.nav__items--h3 {
-  @apply font-semibold leading-3 tracking-widest text-white;
+  @apply text-white;
 }
 
 ul.nav__items--list {
@@ -50,20 +50,24 @@ li.nav__social-item {
   @apply w-8 h-8;
 }
 
+/* **************** Legal ******************** */
+
 section.footer__legal {
-  @apply pt-5 mt-12 border-t border-gray-200;
+  @apply py-5 my-12 border-t border-b border-gray-200;
 }
  
 div.footer__legal--nav {
-  @apply flex flex-row justify-around;
+  @apply flex flex-row justify-between;
 }
 
 a.footer__legal--nav-item {
   @apply text-base text-white hover:text-gray-900 hover:scale-125;
 }
 
+/* **************** Copyright **************** */
+
 section.footer__copyright {
-  @apply pt-5 pb-5 mt-5 border-t border-gray-200;
+  @apply pb-5 border-gray-200;
 }
 
 p.footer__copyright__text {

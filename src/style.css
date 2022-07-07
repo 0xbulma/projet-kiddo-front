@@ -13,7 +13,7 @@
 @import '../src/pages/pages.css';
 
 /* Déclarations globales */
-h1 {
+/* h1 {
   @apply font-['Nunito'] text-[5.375rem];
 }
 
@@ -32,7 +32,103 @@ a {
 
 span {
   @apply font-['Alegreya+Sans'] text-[1rem];
+} */
+
+:root {
+  /* les couleurs des categories*/
+  --categorieCulturelle:#FC664E;
+  --categorieSportive:#3AC9BB;
+  --categorieArtistique:#A59DF1;
+  --categorieManuelle:#FFC20B;
+  --categorieEveilcorporelle:#FB9058;
+  --categorieAutre:#41C6F0 ;
+      /* les couleurs des backgrounds des différents éléments*/
+  --backgroundcolor:#FBFBFB;
+  --navbarre:#FBFBFB;
+  --backgroundcolorsection:#EDEBFC;
+  --footer:#6929BA; 
+      /* les couleurs liées aux cards*/
+  --cardactivitybottom:#F5F5F5;
+      /* les couleurs des textes */
+  --bodytextnoir:#0F0F0F;
+  --bodytextblanc:#FBFBFB;
+
+      /* les polices des titres et du body */
+  --fonttitles:'Nunito', sans-serif; /* le sans-serif c'est une police de back-up */
+  --fontbody:'Poppins', sans-serif; /* le sans-serif c'est une police de back-up */
+  --fontsizebody:18px;
 }
+
+body{
+  font-family: var(--fontbody);
+  font-size: var(--fontsizebody);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--fonttitles);
+}
+
+/* definition de la taille de police des différents élements */
+
+h1 {
+  font-size: 4.7em ;
+}
+
+h2 {
+  font-size: 2.5em ;
+}
+
+h3 {
+  font-size: 2em;
+}
+
+.bodymini {
+  font-size: 0.9em;
+}
+.tags {
+  font-size: 0.83em;
+}
+
+.bouton {
+  font-size: 1,2em;
+}
+
+.input {
+  font-size: 1,1em;  
+}
+/* fin */
+
+
+/* les classe categories avec le variant */
+.categorieCulturelle {
+  background-color: var(--categorieCulturelle);
+}
+
+.categorieSportive {
+  background-color: var(--categorieSportive);
+
+}
+
+.categorieArtistique {
+  background-color: var(--categorieArtistique);
+}
+
+.categorieManuelle {
+  background-color: var(--categorieManuelle);
+}
+
+.categorieEveilcorporelle {
+  background-color: var(--categorieEveilcorporelle);
+
+}
+
+.categorieAutre {
+  background-color: var(--categorieAutre);
+}
+
 
 /* Scrollbar */
 ::-webkit-scrollbar {
