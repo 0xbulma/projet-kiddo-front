@@ -230,11 +230,10 @@ function CategoryPage(props) {
                 <Link key={data._id} to={`/event/${data._id}`}>
                   <ActivityCard
                     title={data.content.title}
-                    // category={data.categories}
                     category={data2.category.name}
-                    lieu={data.adress.city}
+                    location={data.adress.city}
                     date={data.event_date.start}
-                    prix={data.price.adult}
+                    price={data.event.price}
                   />
                 </Link>
               );

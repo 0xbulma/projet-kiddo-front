@@ -12,26 +12,99 @@
 @import '../src/components/components.css';
 @import '../src/pages/pages.css';
 
+/* Variables */
+:root {
+  --bg-orange: #fc664e;
+  --bg-green: #3ac9bb;
+  --bg-purple: #a59df1;
+  --bg-yellow: #ffc20b;
+  --bg-salmon: #fb9058;
+  --bg-blue: #41c6f0;
+
+  --bg-color: #fbfbfb;
+  --bg-color-section: #edebfc;
+  --bg-navbar-color: #fbfbfb;
+  --bg-footer-color: #6929ba;
+  --bg-card-color: #f5f5f5;
+
+  --body-text: #0f0f0f;
+  --font-titles: 'Nunito', sans-serif;
+  --font-body: 'Poppins', sans-serif;
+  --font-size-body: 18px;
+}
+
 /* Déclarations globales */
+body {
+  font-family: var(--font-body);
+  font-size: var(--font-size-body);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-titles);
+}
+
 h1 {
-  @apply font-['Nunito'] text-[5.375rem];
+  @apply text-[4.0em] md:text-[4.5em];
 }
 
 h2 {
-  @apply font-['Nunito'] text-[2.813rem];
+  @apply text-[2em] md:text-[2.5em];
 }
 
 h3 {
-  @apply font-['Nunito'] text-[1.125rem];
+  @apply text-[1.5em] md:text-[2em];
 }
 
-p,
-a {
-  @apply font-['Poppins'] text-[1rem];
+/* Generic classes */
+.generic-container {
+  @apply md:container md:mx-auto;
 }
 
-span {
-  @apply font-['Alegreya+Sans'] text-[1rem];
+.section__grid-4 {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mx-8 md:mx-4 mb-10;
+}
+
+.section__grid-3 {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mx-8 md:mx-4 mb-10;
+}
+
+.section__grid-2 {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-4 mx-8 md:mx-4 mb-10;
+}
+
+.orange-bg {
+  background-color: var(--bg-orange);
+}
+
+.green-bg {
+  background-color: var(--bg-green);
+}
+
+.purple-bg {
+  background-color: var(--bg-purple);
+}
+
+.yellow-bg {
+  background-color: var(--bg-yellow);
+}
+
+.salmon-bg {
+  background-color: var(--bg-salmon);
+}
+
+.blue-bg {
+  background-color: var(--bg-blue);
+}
+
+.green-bg-gradient {
+  @apply bg-gradient-to-r from-kiddoGreen to-[#3ac9bb];
+}
+
+.blue-bg-gradient {
+  @apply bg-gradient-to-r from-kiddoBlue to-[#41c6f0];
 }
 
 /* Scrollbar */
@@ -47,33 +120,4 @@ span {
   background-color: #f26651;
   border-radius: 5px;
   border: 1px solid #b84938;
-}
-
-/***********************************/
-/* OLD SHARED COMPONENT RESPONSIVE */
-/***********************************/
-
-div.index {
-  @apply flex flex-col justify-between w-full h-full min-h-screen bg-gray-200;
-}
-
-.container-user {
-  @apply container mx-auto lg:py-6;
-}
-
-.container-section {
-  @apply py-5;
-}
-
-/* CONTAINER USER */
-/* .container-user {
-    @apply container mx-auto lg:py-6
-} 
-
-.container-user {
-  @apply container mx-auto my-4 border-2 border-black lg:py-6;
-}*/
-
-.generic-container {
-  @apply container mx-auto;
 }

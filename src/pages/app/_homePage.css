@@ -1,0 +1,31 @@
+.main-button {
+  @apply z-10 py-8 text-center text-2xl rounded-md shadow-md shadow-gray-600 hover:scale-[1.02] hover:text-gray-100 transition-all cursor-pointer;
+}
+
+.home-section {
+  @apply flex flex-col py-20;
+}
+
+.home-section__title {
+  @apply text-kiddoBlack text-center lg:text-left;
+}
+
+/* Activity Card */
+.activity-card__ruban {
+  position: relative;
+  overflow: hidden;
+}
+.activity-card__ruban::after {
+  content: attr(data-category);
+  background-color: var(--ruban-color);
+  overflow: hidden;
+
+  display: block;
+  position: absolute;
+  top: 40px;
+  left: -50px;
+  transform: rotate(-45deg);
+  width: 200px;
+  text-align: center;
+  padding: 0.2em;
+}

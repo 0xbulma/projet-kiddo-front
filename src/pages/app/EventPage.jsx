@@ -104,19 +104,19 @@ export default function EventPage() {
             </div>
           </section>
 
-          {isAuth ?? (
-            <>
-              <section className='container mx-auto my-12'>
-                <h2 className='mt-5 mb-5 text-2xl font-bold'>Participants </h2>
-                <article className='flex items-center justify-around'>
-                  {event.group_participants.map((group, index) => (
-                    <CardParticipant key={index} user={group.user} participants={group.group_detail} />
-                  ))}
-                </article>
-              </section>
-              <CommentSection commentTarget={1} targetID={eventId} sectionName='Questions-réponses concernant l’activité' />
-            </>
-          )}
+          {/* {isAuth ?? ( */}
+          <>
+            <section className='container mx-auto my-12'>
+              <h2 className='mt-5 mb-5 text-2xl font-bold'>Participants </h2>
+              <article className='flex items-center justify-around'>
+                {event.group_participants.map((group, index) => (
+                  <CardParticipant key={index} user={group.user} participants={group.group_detail} />
+                ))}
+              </article>
+            </section>
+            <CommentSection commentTarget={1} targetID={eventId} sectionName='Questions-réponses concernant l’activité' />
+          </>
+          {/* )} */}
         </div>
       )}
     </>
