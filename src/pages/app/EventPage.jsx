@@ -25,11 +25,7 @@ export default function EventPage() {
   const { loading, error, data } = useQuery(GET_BY_ID, { variables: { eventId: eventId } });
 
   const { isAuth } = useAuthContext();
-
-  useEffect(() => {
-    console.log('isAuth Comp', isAuth);
-  }, [isAuth]);
-
+  
   useEffect(() => {
     if (data) {
       setEvent(data.event);
