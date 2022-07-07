@@ -1,59 +1,55 @@
 import React from 'react';
 import activityPic from '../../../assets/images/GDN2.jpg';
 import './activity-card.css';
-// fontawesome
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCopyright } from '@fortawesome/free-solid-svg-icons';
-import { faEuroSign as euroSolid } from '@fortawesome/free-solid-svg-icons';
-import { faCalendarDay } from '@fortawesome/free-solid-svg-icons';
-import { faMapPin } from '@fortawesome/free-solid-svg-icons';
 
-import getCategoryColor from '../../../utils/constants/categoryColors';
+import * as dateManager from '../../../utils/DateManager';
 
-const ActivityCard = ({ title, category, lieu, date, prix, imageUrl }) => {
-  const formatedDate = new Date(date).toLocaleDateString('fr');
+// Import: assets
+import { FaStar, FaEuroSign, FaMapMarkerAlt, FaCalendarAlt } from 'react-icons/fa';
+import ReactTooltip from 'react-tooltip';
+import icon_arrow from '../../../assets/icons/icon_category_arrow.svg';
 
-  const categoryStyle = 'card-category ' + getCategoryColor(category);
+import { getCategoryColorForCSS } from '../../../utils/constants/categoryColors';
+
+export default function ActivityCard({ title, category, location, date, price, color }) {
+  const categoryColor = getCategoryColorForCSS(category);
 
   return (
     <>
-      <article className='card'>
-        <div className='card-thumb'>
-          <img className='card-thumb__img' src={imageUrl ? imageUrl : activityPic} alt={title} />
+      <article
+        className={`overflow-hidden relative shadow-sm shadow-gray-400 rounded-xl cursor-pointer transition-all hover:ring-2 hover:ring-green-300 hover:shadow-md hover:shadow-green-300`}>
+        <div className='activity-card__ruban' data-category={category} style={{ '--ruban-color': categoryColor }}>
+          <img src={activityPic} alt='' className='relative w-full h-64 rounded-t-xl object-fill' />
+          <ReactTooltip type='light' effect='solid' place='top' />
+          <FaStar
+            className='absolute top-0 left-full -ml-12 mt-3 text-white bg-gray-400 bg-opacity-25 w-8 h-8 p-[6px] rounded-full hover:bg-white hover:text-yellow-300 hover:animate-spin transition-all'
+            data-tip='Mettre en favoris'
+          />
+          <ReactTooltip type='info' effect='solid' place='top' />
+          <FaEuroSign
+            className='absolute top-0 left-full -ml-24 mt-3 pl-1 text-white bg-gray-400 bg-opacity-25 w-8 h-8 p-[6px] rounded-full hover:bg-white hover:text-blue-400 transition-all'
+            data-tip={`Prix adulte ${price.adult}€` + (price.child && `, enfant ${price.child}€`)}
+          />
         </div>
-        <div className='card-icons'>
-          <span className='card-icon-price'>
-            <FontAwesomeIcon className='card-icon' icon={euroSolid} />
-            <span className='card-icon-price-show' style={{ color: 'white' }}>
-              {prix}
-            </span>
-          </span>
-          <span>
-            <FontAwesomeIcon className='card-icon' icon={faCopyright} />
-          </span>
-        </div>
-        <div className='card-bottom'>
-          <div className='card-body'>
-            <div className={categoryStyle}>
-              <p>{category}</p>
-            </div>
-            <h3 className='card-title'>{title}</h3>
+        <div className={`flex flex-col rounded-b-xl py-2 px-3`}>
+          <div className='flex mb-1'>
+            <p className='font-medium mr-auto truncate'>{title}</p>
+            <img src={icon_arrow} alt='' className='ml-auto' />
           </div>
-
-          <div className='card-footer'>
-            <div className='card-place'>
-              <FontAwesomeIcon icon={faMapPin} />
-              {lieu}
+          <div className='flex justify-between font-light text-[16px] mx-1'>
+            <div className='flex items-center'>
+              <FaMapMarkerAlt className='mr-3' />
+              <p className='truncate'>
+                {location.city} ({location.zip_code.substring(0, 2)})
+              </p>
             </div>
-            <div className='card-date'>
-              <FontAwesomeIcon icon={faCalendarDay} />
-              {formatedDate}
+            <div className='flex items-center'>
+              <FaCalendarAlt className='mr-3' />
+              <p>{dateManager.getDate(date)}</p>
             </div>
           </div>
         </div>
       </article>
     </>
   );
-};
-
-export default ActivityCard;
+}

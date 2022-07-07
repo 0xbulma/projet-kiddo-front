@@ -13,12 +13,15 @@ export const GET_UPCOMING_EVENTS = gql`
         }
         price {
           adult
+          child
         }
         event_date {
           start
         }
         adress {
           city
+          zip_code
+          adress_line
         }
         categories {
           name
@@ -42,12 +45,15 @@ export const GET_LAST_PUBLISHED_EVENTS = gql`
         }
         price {
           adult
+          child
         }
         event_date {
           start
         }
         adress {
           city
+          zip_code
+          adress_line
         }
         categories {
           name
@@ -170,6 +176,7 @@ export const GET_EVENTS_CATEGORY = gql`
         }
         price {
           adult
+          child
         }
         event_date {
           start
