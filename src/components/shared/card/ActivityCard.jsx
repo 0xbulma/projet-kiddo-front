@@ -11,7 +11,7 @@ import icon_arrow from '../../../assets/icons/icon_category_arrow.svg';
 
 import { getCategoryColorForCSS } from '../../../utils/constants/categoryColors';
 
-export default function ActivityCard({ title, category, location, date, price, color }) {
+export default function ActivityCard({ title, category, location, date, price }) {
   const categoryColor = getCategoryColorForCSS(category);
 
   return (

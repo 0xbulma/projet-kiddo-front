@@ -38,14 +38,13 @@ function ResultsSection({ categoryId, categoryName, searchInput }) {
 
   // Queries
   const [getEvents, { loading, error, data, refetch }] = useLazyQuery(GET_EVENTS_CATEGORY);
-  const [getAllEvents, { data: dataAll }] =
-    useLazyQuery(GET_EVENTS_CATEGORY);
+  const [getAllEvents, { data: dataAll }] = useLazyQuery(GET_EVENTS_CATEGORY);
 
-  useEffect(()=>{
-    if(dataAll){
-      setAllResults(data => [...dataAll.eventsComplexQuery.results])
+  useEffect(() => {
+    if (dataAll) {
+      setAllResults((data) => [...dataAll.eventsComplexQuery.results]);
     }
-  },[dataAll])
+  }, [dataAll]);
 
   useEffect(() => {
     getAllEvents({
@@ -107,30 +106,30 @@ function ResultsSection({ categoryId, categoryName, searchInput }) {
   }, [categoryId, getEvents, page, data, refetch, geoLoc.coords, minChildAge, maxChildAge, maxDistMeters]);
 
   const toggleFilterBox = () => {
-    setIsFilterShown(bol => !bol);
+    setIsFilterShown((bol) => !bol);
   };
 
   const onClickHandler = () => {
-    setGeoLoc(geoLoc => ({ ...geoLoc, isLoading: true }));
+    setGeoLoc((geoLoc) => ({ ...geoLoc, isLoading: true }));
     getGeoLoc()
-      .then(res => {
+      .then((res) => {
         setMaxDistMeters(200000);
-        return setGeoLoc(geoLoc => ({
+        return setGeoLoc((geoLoc) => ({
           ...geoLoc,
           isLoading: false,
           isGeoLoc: true,
           coords: res,
         }));
       })
-      .catch(err => {
+      .catch((err) => {
         alert(err.message);
-        return setGeoLoc(geoLoc => ({ ...geoLoc, isLoading: false, isGeoLoc: false }));
+        return setGeoLoc((geoLoc) => ({ ...geoLoc, isLoading: false, isGeoLoc: false }));
       });
   };
 
   return (
     <>
-      {(loading || !data )&& (
+      {(loading || !data) && (
         <div className='relative flex gap-8'>
           <GridCol2 className='grow'>
             <GridItemSpan2>
@@ -191,7 +190,7 @@ function ResultsSection({ categoryId, categoryName, searchInput }) {
               </GridItemSpan2>
 
               {data?.eventsComplexQuery.results.length === 0 && <div>PAS DE RESULTATS</div>}
-            
+
               {data.eventsComplexQuery.results.map((data, index) => {
                 return (
                   <Link key={data._id} to={`/event/${data._id}`}>
@@ -199,21 +198,16 @@ function ResultsSection({ categoryId, categoryName, searchInput }) {
                       title={data.content.title}
                       // category={data.categories}
                       category={categoryName}
-                      lieu={data.adress.city}
+                      location={data.adress}
                       date={data.event_date.start}
-                      prix={data.price.adult}
+                      price={data.price}
                     />
                   </Link>
                 );
               })}
             </GridCol2>
 
-            <MapLeaflet
-              className='rounded-xl'
-              currentLocation={geoLoc?.coords}
-              items={allResults}
-              maxDistMeters={maxDistMeters}
-            />
+            <MapLeaflet className='rounded-xl' currentLocation={geoLoc?.coords} items={allResults} maxDistMeters={maxDistMeters} />
           </div>
 
           {data?.eventsComplexQuery.count > 12 && (
@@ -221,7 +215,7 @@ function ResultsSection({ categoryId, categoryName, searchInput }) {
               totalItem={data.eventsComplexQuery.count}
               itemsPerPage={12}
               page={page}
-              onPageClick={page => {
+              onPageClick={(page) => {
                 setPage(page);
               }}
             />
