@@ -13,7 +13,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [next, setNext] = useState(false);
 
-  const { loggedIn } = useAuthContext();
+  const { loggedIn, loggedInOnToken } = useAuthContext();
 
   useEffect(() => {
     if (data) {
@@ -23,12 +23,13 @@ const Login = () => {
       }
     }
     if (error) {
-      console.log('error', error.networkError.result);
+      console.log('error', error.networkError?.result);
     }
   }, [data, error]);
 
   return (
     <>
+  <button onClick={loggedInOnToken}>TEST</button>
       <div>
         {!next ? (
           <div className='form-container'>
