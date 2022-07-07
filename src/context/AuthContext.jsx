@@ -13,7 +13,7 @@ export const AuthContextSchema = createContext({
 });
 
 function AuthContext(props) {
-  const [checkToken, { data, loading, error }] = useLazyQuery(CHECK_TOKEN);
+  const [checkToken] = useLazyQuery(CHECK_TOKEN);
 
   const [state, setState] = useState({
     isAuthChecked: false,
@@ -29,8 +29,8 @@ function AuthContext(props) {
             ...state,
             isAuth: true,
             isAuthChecked: true,
-            email: data.email,
-            _id: data._id,
+            email: data.checkToken.email,
+            _id: data.checkToken._id,
           }));
         },
         onError: err => {

@@ -10,6 +10,8 @@ import { CATEGORIES } from '../../utils/constants/categoryList';
 // Import: Assets & Style
 // import MAIN_BG from '../../assets/images/main_bg.svg';
 import hero_bg_1 from '../../assets/images/hero_bg_1.webp';
+
+// import ICON_CALENDAR from '../../assets/icons/icon_calendar.svg';
 import Skelet from '../../components/shared/loadingfiles/Skelet';
 
 // Variables

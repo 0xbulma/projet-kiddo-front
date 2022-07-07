@@ -1,14 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useQuery, useMutation } from '@apollo/client';
+import { useQuery, useLazyQuery, useMutation } from '@apollo/client';
 
 import { useEffect, useState } from 'react';
 import useToggle from '../../hooks/useToggle';
 import { Link } from 'react-router-dom';
 
 import ReactTooltip from 'react-tooltip';
+// import CustomInput from '../administration/CustomInput';
 
 import * as CommentsMutation from '../../graphql/mutation/comments.mutation';
-import { GET_BY_ID } from '../../graphql/query/users.query';
+import { GET_BY_EMAIL } from '../../graphql/query/users.query';
 import { GET_BY_TARGET_ID } from '../../graphql/query/comments.query';
 
 import useAuthContext from '../../hooks/useAuthContext';
@@ -25,8 +26,27 @@ import CommentSignalment from './Signalment';
 //targetId = userId ou eventId ou articleID
 //sectionName = Texte affiché dans l'entête de la section
 export default function CommentSection({ commentTarget, targetID, sectionName }) {
-  const { _id } = useAuthContext();
-  const [{ loading, error, data: activeUser }] = useQuery(GET_BY_ID, { variables: { _id: _id } });
+  const { email } = useAuthContext();
+  const [getActiveUser, { loading, error, data: activeUser }] = useLazyQuery(GET_BY_EMAIL);
+
+  useEffect(() => {
+    if (!activeUser) {
+      console.log(email);
+      getActiveUser({ variables: { email: 'connect1@gmail.com' } });
+    }
+  }, [email]);
+
+  useEffect(() => {
+    if (activeUser) {
+      console.log(activeUser);
+    }
+    if (loading) {
+      console.log('load', loading);
+    }
+    if (error) {
+      console.log('err', error);
+    }
+  }, [activeUser, loading, error]);
 
   // Chargement des commentaires depuis Mongo
   const { data: comments, refetch } = useQuery(GET_BY_TARGET_ID, { variables: { type: commentTarget, id: targetID } });
@@ -55,6 +75,7 @@ export default function CommentSection({ commentTarget, targetID, sectionName })
             );
           })}
 
+        {/* SECTION TEMPORAIRE: Chargement utilisateur */}
         {loading && <p>Chargement de l'utilisateur...</p>}
         {activeUser !== undefined && (
           <WriteComment user={activeUser.getUserByEmail} commentTarget={commentTarget} targetID={targetID} refetchComments={refetchComments} />
