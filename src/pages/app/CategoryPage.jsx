@@ -17,29 +17,22 @@ function CategoryPage(props) {
   const [dataCatId, setDataCatId] = useState();
   const [dataCatName, setDataCatName] = useState();
 
-  // Queries
-  const [
-    getCategoryData,
-    {
-      // loading: loading2,
-      // error: error2,
-      data: data2,
-    },
-  ] = useLazyQuery(GET_CATEGORY_BY_NAME);
+  // GraphQl Request
+  const [getCategoryData, { data: categoryData }] = useLazyQuery(GET_CATEGORY_BY_NAME);
 
   useEffect(() => {
     getCategoryData({ variables: { name: category } });
-    if (data2?.category === null) {
+    if (categoryData?.category === null) {
       navigate('/404');
     }
-  }, [data2, navigate, category, getCategoryData]);
+  }, [categoryData, navigate, category, getCategoryData]);
 
   useEffect(() => {
-    if (data2) {
-      setDataCatId((d) => data2.category._id);
-      setDataCatName((d) => data2.category.name);
+    if (categoryData) {
+      setDataCatId((d) => categoryData.category._id);
+      setDataCatName((d) => categoryData.category.name);
     }
-  }, [data2, dataCatId]);
+  }, [categoryData, dataCatId]);
 
   return (
     <div className='container mx-auto pb-10'>
