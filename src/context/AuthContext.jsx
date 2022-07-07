@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 
 export const AuthContextSchema = createContext({
   isAuth: null,
@@ -15,17 +15,28 @@ function AuthContext(props) {
     _id: '',
 
     loggedIn: function (id, email) {
-      setState({
+      setState(state => ({
+        ...state,
         isAuth: true,
         email: email,
         _id: id,
-      });
+      }));
     },
-
+  
     loggedOut: function () {
-      setState({ isAuth: false, email: '', _id: '' });
+      //ajout suppression du cookie
+      setState(state => ({
+        ...state,
+        isAuth: false,
+        email: '',
+        _id: '',
+      }));
     },
   });
+
+  useEffect(()=>{
+    console.log('isAuth:', state.isAuth)
+  },[state.isAuth])
 
   return <AuthContextSchema.Provider value={state}>{props.children}</AuthContextSchema.Provider>;
 }

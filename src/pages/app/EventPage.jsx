@@ -25,7 +25,11 @@ export default function EventPage() {
   const { loading, error, data } = useQuery(GET_BY_ID, { variables: { eventId: eventId } });
 
   const { isAuth } = useAuthContext();
-  console.log(isAuth);
+
+  useEffect(()=>{
+    console.log('isAuth Comp', isAuth)
+  },[isAuth])
+
 
   useEffect(() => {
     if (data) {
@@ -39,7 +43,7 @@ export default function EventPage() {
 
   return (
     <>
-      {!loading && event && (
+      {(!loading && event) && (
         <div className=''>
           <article className='flex flex-col items-center grow container mx-auto text-center mt-5 mb-3'>
             <h2 className='text-bold text-4xl'>{event.content.title}</h2>
@@ -104,7 +108,7 @@ export default function EventPage() {
             </div>
           </section>
 
-          {isAuth ?? (
+          {isAuth && (
             <>
               <section className='container mx-auto my-12'>
                 <h2 className='mt-5 mb-5 text-2xl font-bold'>Participants </h2>
