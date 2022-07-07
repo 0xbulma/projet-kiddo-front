@@ -17,7 +17,7 @@ export default function ActivityCard({ title, category, location, date, price })
   return (
     <>
       <article
-        className={`overflow-hidden relative shadow-sm shadow-gray-400 rounded-xl cursor-pointer transition-all hover:ring-2 hover:ring-green-300 hover:shadow-md hover:shadow-green-300`}>
+        className={`overflow-hidden relative shadow-sm shadow-kiddoShadow rounded-xl cursor-pointer transition-all hover:ring-2 hover:ring-green-300 hover:shadow-md hover:shadow-green-300 bg-kiddoGray`}>
         <div className='activity-card__ruban' data-category={category} style={{ '--ruban-color': categoryColor }}>
           <img src={activityPic} alt='' className='relative w-full h-64 rounded-t-xl object-fill' />
           <ReactTooltip type='light' effect='solid' place='top' />

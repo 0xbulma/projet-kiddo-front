@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useLazyQuery, useQuery, useMutation } from '@apollo/client';
+import { useQuery, useLazyQuery, useMutation } from '@apollo/client';
 
 import { useEffect, useState } from 'react';
 import useToggle from '../../hooks/useToggle';
@@ -9,7 +9,7 @@ import ReactTooltip from 'react-tooltip';
 // import CustomInput from '../administration/CustomInput';
 
 import * as CommentsMutation from '../../graphql/mutation/comments.mutation';
-import {  GET_BY_EMAIL } from '../../graphql/query/users.query';
+import { GET_BY_EMAIL } from '../../graphql/query/users.query';
 import { GET_BY_TARGET_ID } from '../../graphql/query/comments.query';
 
 import useAuthContext from '../../hooks/useAuthContext';
@@ -32,7 +32,7 @@ export default function CommentSection({ commentTarget, targetID, sectionName })
   useEffect(() => {
     if (!activeUser) {
       console.log(email);
-      getActiveUser({ variables: { email : "connect1@gmail.com"} });
+      getActiveUser({ variables: { email: 'connect1@gmail.com' } });
     }
   }, [email]);
 
@@ -78,15 +78,9 @@ export default function CommentSection({ commentTarget, targetID, sectionName })
         {/* SECTION TEMPORAIRE: Chargement utilisateur */}
         {loading && <p>Chargement de l'utilisateur...</p>}
         {activeUser !== undefined && (
-          <WriteComment
-            user={activeUser.getUserByEmail}
-            commentTarget={commentTarget}
-            targetID={targetID}
-            refetchComments={refetchComments}
-          />
+          <WriteComment user={activeUser.getUserByEmail} commentTarget={commentTarget} targetID={targetID} refetchComments={refetchComments} />
         )}
         {error !== undefined && <p>Erreur lors du chargement de l'utilisateur</p>}
-        {/* FIN SECTION TEMPORAIRE: Chargement utilisateur */}
       </section>
     </div>
   );
@@ -152,8 +146,7 @@ function Comment({ user, comment, refetchComments, commentTarget, targetID }) {
             {/* SECTION: Répondre - Signaler - Aimer */}
             <p
               className='font-bold mr-2 -mt-1 bg-gray-200 px-2 rounded-full select-none hover:text-gray-200 hover:bg-gray-700 transition-all cursor-pointer'
-              onClick={toggleResponding}
-            >
+              onClick={toggleResponding}>
               Répondre
             </p>
 
@@ -176,11 +169,7 @@ function Comment({ user, comment, refetchComments, commentTarget, targetID }) {
           </div>
 
           {/* MODAL : Signalement */}
-          <ModalBackdrop
-            composant={<CommentSignalment user={user} comment={comment} />}
-            open={modal}
-            onClose={toggleModal}
-          />
+          <ModalBackdrop composant={<CommentSignalment user={user} comment={comment} />} open={modal} onClose={toggleModal} />
         </article>
       </article>
 
@@ -329,20 +318,14 @@ function WriteComment({ user, parent, commentTarget, targetID, refetchComments, 
     <section
       className={
         'flex mx-5 mt-5 ' +
-        ((parentId === undefined || parentId === null) &&
-          ' sticky bottom-0 mt-10 mb-5 pt-5 border-t-2 border-gray-500 -mx-5 px-10 bg-white z-10')
-      }
-    >
+        ((parentId === undefined || parentId === null) && ' sticky bottom-0 mt-10 mb-5 pt-5 border-t-2 border-gray-500 -mx-5 px-10 bg-white z-10')
+      }>
       <article className='flex items-center mt-5'>
         {parentId !== undefined && parentId !== null ? (
           <div className='shrink-0 flex items-center'>
             <span className='child-comment-dot z-0 bg-gray-500 animate-pulse'></span>
             <img
-              src={
-                user.profil_picture !== undefined && user.profil_picture.thumbnail !== undefined
-                  ? user.profil_picture.thumbnail
-                  : BlankProfilPic
-              }
+              src={user.profil_picture !== undefined && user.profil_picture.thumbnail !== undefined ? user.profil_picture.thumbnail : BlankProfilPic}
               alt=''
               width='60px'
               className='rounded-full -mt-4 mr-4'
@@ -350,11 +333,7 @@ function WriteComment({ user, parent, commentTarget, targetID, refetchComments, 
           </div>
         ) : (
           <img
-            src={
-              user.profil_picture !== undefined && user.profil_picture.thumbnail !== undefined
-                ? user.profil_picture.thumbnail
-                : BlankProfilPic
-            }
+            src={user.profil_picture !== undefined && user.profil_picture.thumbnail !== undefined ? user.profil_picture.thumbnail : BlankProfilPic}
             alt=''
             width='75px'
             className='rounded-full -mt-4'
@@ -368,7 +347,7 @@ function WriteComment({ user, parent, commentTarget, targetID, refetchComments, 
           placeholder='Laisser un commentaire'
           className='p-4 bg-transparent rounded-b-lg overflow-hidden border-0 focus:ring-0'
           value={areaValue}
-          onChange={e => setAreaValue(e.currentTarget.value)}
+          onChange={(e) => setAreaValue(e.currentTarget.value)}
         />
       </article>
       <article className='self-center'>

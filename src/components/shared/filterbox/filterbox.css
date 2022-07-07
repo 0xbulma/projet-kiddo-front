@@ -1,86 +1,70 @@
-.filterbox__hidden{
+.filterbox__hidden {
   display: none !important;
 }
 
-.filterbox__container{
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  background-color: lightgray;
-  border-radius: 10px;
-  padding: 2rem 2rem 3rem 2rem;
-  top:2.5rem;
-  left:-0.1rem;
-  width: 100%;
-  z-index: 500;
-  gap:2rem;
-}
-
-.filterbox__group{
+.filterbox__group {
   width: 100%;
 }
 
-.filterbox__label{
-  color:black;
+.filterbox__label {
+  color: black;
   font-size: 0.75rem;
-  padding-bottom: 2rem;
+  padding: 0 10px;
 }
 
-.filterbox__horizontal-slider{
-  
-  width: 100%;
+.filterbox__horizontal-slider {
+  width: 85%;
   height: 5px;
   background-color: darkgray;
   border-radius: 100px;
-
+  margin: 0 auto;
 }
 
-.filterbox__slider-track{
+.filterbox__slider-track {
   height: 5px;
   border-radius: 100px;
 }
-.filterbox__slider-track-0{
+.filterbox__slider-track-0 {
   background-color: darkgray;
 }
-.filterbox__slider-track-1{
-  background-color: blue;
+.filterbox__slider-track-1 {
+  background-color: lightgray;
 }
-.filterbox__slider-track-2{
+.filterbox__slider-track-2 {
   background-color: darkgray;
 }
 
-.filterbox__slider-track--dist{
+.filterbox__slider-track--dist {
   height: 5px;
   border-radius: 100px;
 }
-.filterbox__slider-track--dist-0{
-  background-color: blue;
+.filterbox__slider-track--dist-0 {
+  background-color: lightgray;
 }
-.filterbox__slider-track--dist-1{
+.filterbox__slider-track--dist-1 {
   background-color: darkgray;
 }
 
-.filterbox__thumb{
+.filterbox__thumb {
   position: relative;
   outline: none;
- transform: translateY(-5px);
+  transform: translateY(-5px);
   cursor: pointer;
 }
 
-.thumb__tag{
+.thumb__tag {
   position: absolute;
-  font-weight: bold;
-  font-size: 0.5rem;
+  font-size: 0.7rem;
   text-align: center;
-  left: -10px;
-  top:15px;
-  width: 35px;
-  color: white;
-  background-color: blue;
+  left: -19px;
+  top: 15px;
+  width: 50px;
+  color: rgb(255, 246, 246);
+  background-color: gray;
   border-radius: 2px;
 }
-.thumb__pin{
-  background-color:blue;
+.thumb__pin {
+  background-color: gray;
   border-radius: 100px;
   width: 14px;
   height: 14px;
