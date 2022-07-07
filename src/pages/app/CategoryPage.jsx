@@ -20,7 +20,7 @@ export default function CategoryPage(props) {
 
     // Redirect 404 if no category is found
     if (categoryData?.category === null) navigate('/404');
-  }, [categoryData]);
+  }, [categoryData, category, navigate]);
 
   return (
     <div className='container mx-auto pb-10'>

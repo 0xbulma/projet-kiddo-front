@@ -20,6 +20,7 @@ import NotFound from './pages/app/NotFound.jsx';
 
 import CategoryPage from './pages/app/CategoryPage';
 import EventPage from './pages/app/EventPage';
+import SearchPage from './pages/app/SearchPage';
 
 //Admin layout components
 
@@ -51,6 +52,7 @@ root.render(
           <Route path='/category/:category' element={<UserLayout composant={<CategoryPage />} />} />
           <Route path='*' element={<UserLayout composant={<NotFound />} />} />
           <Route path='/user' element={<UserLayout composant={<UserInfo />} />} />
+          <Route path='/search/:params' element={<UserLayout composant={<SearchPage />} />} />
           {isAdmin && (
             <Fragment>
               <Route path='/administration' element={<AdminLayout composant={<AdminDashboard />} />} />

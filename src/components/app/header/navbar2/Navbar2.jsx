@@ -61,16 +61,16 @@ export default function Navbar2() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [userInput, setUserInput] = useState('');
   const [isModal, setIsModal] = useState();
-  const {isAuth} = useAuthContext();
+  const { isAuth } = useAuthContext();
 
   const navigate = useNavigate();
 
   const showSearchInputHandler = () => {
-    setIsSearchOpen(bol => !bol);
+    setIsSearchOpen((bol) => !bol);
   };
 
   const showSubMenu = () => {
-    setIsSubOpen(bol => !bol);
+    setIsSubOpen((bol) => !bol);
   };
 
   const onInputHandler = (e) => {
@@ -78,28 +78,29 @@ export default function Navbar2() {
   };
 
   // const sendSearchQuery = () => {
-    
+
   // }
 
   const profileClickHandler = () => {
-    if(isAuth){
+    if (isAuth) {
       navigate('/user');
     } else {
       setIsModal(true);
     }
-  }
+  };
 
-  useDebounce(()=> {console.log('dbounced')}, 3000, [userInput])
+  useDebounce(
+    () => {
+      navigate('/search/' + userInput);
+    },
+    1000,
+    [userInput]
+  );
   const onKeyDownHandler = () => {};
 
   return (
     <div className='navbar2__container'>
-        {isModal && (
-      <ModalBackdrop
-      composant={<Register />}
-      open={isModal}
-     onClose={() => setIsModal(false)}
-    />)}
+      {isModal && <ModalBackdrop composant={<Register />} open={isModal} onClose={() => setIsModal(false)} />}
       <nav className='navbar2__innercontainer'>
         <Link to='/'>
           <img className='navbar2_logo' src={logo} alt='logo' />
@@ -147,7 +148,6 @@ export default function Navbar2() {
         </div>
       </nav>
       {isSubOpen && <Navbar2Sub />}
-   
     </div>
   );
 }
