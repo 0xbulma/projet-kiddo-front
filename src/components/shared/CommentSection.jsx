@@ -1,16 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useLazyQuery, useQuery, useMutation } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 
 import { useEffect, useState } from 'react';
 import useToggle from '../../hooks/useToggle';
 import { Link } from 'react-router-dom';
 
 import ReactTooltip from 'react-tooltip';
-import CustomInput from '../administration/CustomInput';
 
 import * as CommentsMutation from '../../graphql/mutation/comments.mutation';
-import { GET_BY_EMAIL } from '../../graphql/query/users.query';
+import { GET_BY_ID } from '../../graphql/query/users.query';
 import { GET_BY_TARGET_ID } from '../../graphql/query/comments.query';
+
+import useAuthContext from '../../hooks/useAuthContext';
 
 import ModalBackdrop from './modal/ModalBackdrop';
 
@@ -24,9 +25,8 @@ import CommentSignalment from './Signalment';
 //targetId = userId ou eventId ou articleID
 //sectionName = Texte affiché dans l'entête de la section
 export default function CommentSection({ commentTarget, targetID, sectionName }) {
-  // TEMPORAIRE : Système de login par email
-  const [email, setEmail] = useState();
-  const [getUser, { called, loading, error, data }] = useLazyQuery(GET_BY_EMAIL);
+  const { _id } = useAuthContext();
+  const [{ loading, error, data: activeUser }] = useQuery(GET_BY_ID, { variables: { _id: _id } });
 
   // Chargement des commentaires depuis Mongo
   const { data: comments, refetch } = useQuery(GET_BY_TARGET_ID, { variables: { type: commentTarget, id: targetID } });
@@ -36,34 +36,16 @@ export default function CommentSection({ commentTarget, targetID, sectionName })
 
   return (
     <div>
-      {/* SECTION TEMPORAIRE: Input chargement utilisateur */}
-      <div className='admin-section flex flex-col'>
-        <span className='admin-section__title'>(Temporaire) Charger un utilisateur : </span>
-        <span className=''>User : tfrid0@aol.com</span>
-        <span className=''>User : flovegrove1@addthis.com</span>
-        <span className=''>Modérateur : selsmore3@yellowbook.com</span>
-        <span className=''>Admin : ependre2@spotify.com</span>
-        <div className='flex justify-center align-middle content-center items-center'>
-          <CustomInput label='Email' customWidth={'w-[20rem]'} setState={setEmail} />
-          <button
-            className='bg-green-500 py-2 px-3 rounded-md mt-8 hover:bg-green-400 transition-all'
-            onClick={() => getUser({ variables: { email: email } })}>
-            Charger
-          </button>
-        </div>
-      </div>
-      {/* FIN SECTION TEMPORAIRE: Input chargement utilisateur */}
-
       <section className='container mx-auto px-10 max-h-[50rem] overflow-y-auto'>
         <h2 className='font-bold text-2xl mt-5'>{sectionName}</h2>
-        {data &&
+        {activeUser &&
           comments &&
           comments.getByTargetId.map((comment, index) => {
             return (
               comment.parent === null && (
                 <Comment
                   key={index}
-                  user={data.getUserByEmail}
+                  user={activeUser.getUserByEmail}
                   comment={comment}
                   commentTarget={commentTarget}
                   targetID={targetID}
@@ -73,14 +55,11 @@ export default function CommentSection({ commentTarget, targetID, sectionName })
             );
           })}
 
-        {/* SECTION TEMPORAIRE: Chargement utilisateur */}
-        {!called && <p>Veuillez charger un utilisateur</p>}
-        {called && loading && <p>Chargement de l'utilisateur...</p>}
-        {data !== undefined && (
-          <WriteComment user={data.getUserByEmail} commentTarget={commentTarget} targetID={targetID} refetchComments={refetchComments} />
+        {loading && <p>Chargement de l'utilisateur...</p>}
+        {activeUser !== undefined && (
+          <WriteComment user={activeUser.getUserByEmail} commentTarget={commentTarget} targetID={targetID} refetchComments={refetchComments} />
         )}
         {error !== undefined && <p>Erreur lors du chargement de l'utilisateur</p>}
-        {/* FIN SECTION TEMPORAIRE: Chargement utilisateur */}
       </section>
     </div>
   );

@@ -8,11 +8,11 @@ export default function MapLeaflet({ currentLocation, items, className, maxDistM
   const [zoom, setZoom] = useState(5);
   const [map, setMap] = useState(null);
 
-  useEffect(()=>{
-    if(maxDistMeters <= 200000){
+  useEffect(() => {
+    if (maxDistMeters <= 200000) {
       setZoom(9);
     }
-  },[maxDistMeters])
+  }, [maxDistMeters]);
 
   useEffect(() => {
     if (currentLocation) {
@@ -32,16 +32,9 @@ export default function MapLeaflet({ currentLocation, items, className, maxDistM
 
   const displayMap = useMemo(
     () => (
-      <MapContainer
-        className={`grow ${className}`}
-        center={center}
-        zoom={zoom}
-        scrollWheelZoom={false}
-        zoomControl={false}
-        ref={setMap}
-      >
+      <MapContainer className={`rounded-lg grow ${className}`} center={center} zoom={zoom} scrollWheelZoom={false} zoomControl={false} ref={setMap}>
         <TileLayer
-          attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+          attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, Team Kiddo'
           url='https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png'
         />
         <ZoomControl position='topright' />
@@ -52,39 +45,32 @@ export default function MapLeaflet({ currentLocation, items, className, maxDistM
             </Popup>
           </Marker>
         )}
-         {items?.length > 0 && items.map((item, index) => {
-          let gpsCoord = [item?.gps[1], item?.gps[0]];
-          return (
-            <Marker key={index} position={gpsCoord}>
-              <Popup>
-                <h3>Title: {item.content.title}</h3>
-              </Popup>
-            </Marker>
-          );
-        })}
+        {items?.length > 0 &&
+          items.map((item, index) => {
+            let gpsCoord = [item?.gps[1], item?.gps[0]];
+            return (
+              <Marker key={index} position={gpsCoord}>
+                <Popup>
+                  <h3>Title: {item.content.title}</h3>
+                </Popup>
+              </Marker>
+            );
+          })}
       </MapContainer>
     ),
     [center, className, currentLocation, items, zoom]
   );
 
-  return <div className='sticky square top-4 flex'>{displayMap}</div>;
+  return <div className='sticky square top-4 lg:mt-[5.7rem] flex w-full shadow-md shadow-kiddoGray'>{displayMap}</div>;
 }
-
-
 
 export function MapLeafletPlaceHolder({ className }) {
   return (
-    <div className='sticky square top-4 flex'>
-      <MapContainer
-        className={`grow ${className}`}
-        center={[48.8566, 2.3522]}
-        zoom={9}
-        scrollWheelZoom={false}
-        zoomControl={false}
-      >
+    <div className='sticky square top-4 flex w-full'>
+      <MapContainer className={`grow`} center={[48.8566, 2.3522]} zoom={9} scrollWheelZoom={false} zoomControl={false}>
         <ZoomControl position='topright' />
         <TileLayer
-          attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+          attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, Team Kiddo'
           url='https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png'
         />
       </MapContainer>
@@ -98,7 +84,7 @@ export function MapLeafletMultipleMarkers(props) {
 
   return (
     <div className='rounded-lg overflow-hidden'>
-      <MapContainer style={{ height: '300px' }} center={mainGPS} zoom={13} scrollWheelZoom={false} zoomControl={false}>
+      <MapContainer center={mainGPS} zoom={13} scrollWheelZoom={false} zoomControl={false}>
         <ZoomControl position='topright' />
         <TileLayer
           attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a> - Team Kiddo'
