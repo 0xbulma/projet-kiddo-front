@@ -77,3 +77,13 @@ export const GET_SIGNALMENTS = gql`
     }
   }
 `;
+
+export const CHECK_TOKEN = gql`
+  query Query {
+    checkToken {
+      _id
+      email
+      isConnected
+    }
+  }
+`;

@@ -18,7 +18,7 @@ import Filterbox from '../../../components/shared/filterbox/Filterbox';
 //import CSS
 import './resultssection.css';
 
-function ResultsSection({ category, searchInput }) {
+function ResultsSection({ categoryId, categoryName, searchInput }) {
   const ITEMS_PER_PAGE = 12;
 
   const [isFilterShown, setIsFilterShown] = useState(false);
@@ -51,7 +51,7 @@ function ResultsSection({ category, searchInput }) {
     getAllEvents({
       variables: {
         input: {
-          categories: category?._id || null,
+          categories: categoryId,
           status: 'PUBLISHED',
           minDate: Date.now(),
           dateOrder: 'asc',
@@ -63,16 +63,17 @@ function ResultsSection({ category, searchInput }) {
         },
       },
     });
-  }, [category, getAllEvents, geoLoc.coords, minChildAge, maxChildAge, maxDistMeters]);
+  }, [categoryId, getAllEvents, geoLoc.coords, minChildAge, maxChildAge, maxDistMeters]);
 
   useEffect(() => {
-    if (category && !data) {
+    console.log(categoryId);
+    if (!data) {
       getEvents({
         variables: {
           input: {
             first: ITEMS_PER_PAGE,
             offset: page * ITEMS_PER_PAGE - ITEMS_PER_PAGE,
-            categories: category?._id || null,
+            categories: categoryId,
             status: 'PUBLISHED',
             minDate: Date.now(),
             dateOrder: 'asc',
@@ -91,7 +92,7 @@ function ResultsSection({ category, searchInput }) {
         input: {
           first: ITEMS_PER_PAGE,
           offset: page * ITEMS_PER_PAGE - ITEMS_PER_PAGE,
-          categories: category?._id || null,
+          categories: categoryId,
           status: 'PUBLISHED',
           minDate: Date.now(),
           dateOrder: 'asc',
@@ -103,7 +104,7 @@ function ResultsSection({ category, searchInput }) {
         },
       });
     }
-  }, [category, getEvents, page, data, refetch, geoLoc.coords, minChildAge, maxChildAge, maxDistMeters]);
+  }, [categoryId, getEvents, page, data, refetch, geoLoc.coords, minChildAge, maxChildAge, maxDistMeters]);
 
   const toggleFilterBox = () => {
     setIsFilterShown(bol => !bol);
@@ -190,16 +191,6 @@ function ResultsSection({ category, searchInput }) {
               </GridItemSpan2>
 
               {data?.eventsComplexQuery.results.length === 0 && <div>PAS DE RESULTATS</div>}
-
-            
-                    <ActivityCard
-                      title={'test'}
-                      // category={data.categories}
-                      category={'sport'}
-                      lieu={'Paris'}
-                      date={Date.now()}
-                      prix={20}
-                    />
             
               {data.eventsComplexQuery.results.map((data, index) => {
                 return (
@@ -207,7 +198,7 @@ function ResultsSection({ category, searchInput }) {
                     <ActivityCard
                       title={data.content.title}
                       // category={data.categories}
-                      category={category.name}
+                      category={categoryName}
                       lieu={data.adress.city}
                       date={data.event_date.start}
                       prix={data.price.adult}

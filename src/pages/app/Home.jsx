@@ -166,7 +166,6 @@ export default function Home() {
           <article className='activity-card-container'>
             {data &&
               data.eventsComplexQuery.results.map((event, index) => {
-                console.log('event', event);
                 return (
                   <Link key={event._id} to={`/event/${event._id}`}>
                     <ActivityCard
