@@ -4,7 +4,7 @@ import './mapLeaflet.css';
 import { useState, useEffect } from 'react';
 
 export default function MapLeaflet({ currentLocation, items, className, maxDistMeters }) {
-  const [center, setCenter] = useState([items[0]?.gps[1], items[0]?.gps[0]]);
+  const [center, setCenter] = useState([48.864716, 2.349014]);
   const [zoom, setZoom] = useState(5);
   const [map, setMap] = useState(null);
 
@@ -18,7 +18,11 @@ export default function MapLeaflet({ currentLocation, items, className, maxDistM
     if (currentLocation) {
       setCenter([currentLocation[1], currentLocation[0]]);
     }
-  }, [currentLocation]);
+    if (!currentLocation && items?.length > 0) {
+      setCenter([items[0]?.gps[1], items[0]?.gps[0]]);
+      setZoom(7);
+    }
+  }, [currentLocation, items]);
 
   useEffect(() => {
     if (map) {
@@ -48,10 +52,10 @@ export default function MapLeaflet({ currentLocation, items, className, maxDistM
             </Popup>
           </Marker>
         )}
-         {items.map((item, index) => {
+         {items?.length > 0 && items.map((item, index) => {
           let gpsCoord = [item?.gps[1], item?.gps[0]];
           return (
-            <Marker position={gpsCoord}>
+            <Marker key={index} position={gpsCoord}>
               <Popup>
                 <h3>Title: {item.content.title}</h3>
               </Popup>

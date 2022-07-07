@@ -9,11 +9,3 @@
 .category__subtitle{
   @apply text-red-400;
 }
-
-.filter__group{
-  @apply flex justify-start gap-2;
-}
-
-.filter__container{
-  @apply flex gap-5 items-center justify-start bg-gray-500 rounded-md px-5 py-1 text-white relative;
-}

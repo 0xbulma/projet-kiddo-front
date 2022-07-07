@@ -6,12 +6,14 @@ const Skelet = () => {
         <Skeleton.SkeletonThemeProvider
           style={{
             backgroundColor: "white",
-            borderRadius: "10px",
+            borderRadius: "20px",
             width: "100%",
+            boxShadow: "4px 4px 8px rgba(0,0,0,0.15)",
+            padding:"0.5rem"
           }}
         >
-          <Skeleton height="180px" width='100%' borderRadius="10px" />
-          <Skeleton count={2} width='100%' />
+          <Skeleton height="180px" width='100%' borderRadius="15px" />
+          <Skeleton count={2} width='100%'  borderRadius="10px"/>
         </Skeleton.SkeletonThemeProvider>
 
 

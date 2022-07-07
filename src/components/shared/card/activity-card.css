@@ -9,25 +9,30 @@
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-  box-shadow: 0px 0px 10px;
+  justify-content: space-between;
+  box-shadow: 4px 4px 8px rgba(0,0,0,0.15);
   overflow-y: hidden;
   position: relative;
+  transition: all .2s;
+}
+
+.card:hover{
+  transform: translate(2px, -2px)
 }
 
 .card-thumb {
-  background-color: lightgray;
+  height: 15vw;
+  flex-grow: 1;
+  background-color: rgb(231, 231, 231);
   min-height: 10rem;
 }
 
 .card-thumb__img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
   display: block;
   opacity: 1;
-  transition: opacity 6ms;
-  border-radius: 20px 20px 0px 0px;
-}
-
-.card-thumb__img:hover {
-  opacity: 0.8;
 }
 
 .card-icons {
