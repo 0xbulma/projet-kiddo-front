@@ -1,5 +1,5 @@
 .main-button {
-  @apply z-10 py-8 text-center text-2xl rounded-md shadow-md shadow-gray-600 hover:scale-[1.02] hover:text-gray-100 transition-all cursor-pointer;
+  @apply z-10 py-8 text-center text-2xl rounded-md shadow-md shadow-[#9ca3af] hover:scale-y-[1.05] transition-all cursor-pointer;
 }
 
 .home-section {
@@ -15,6 +15,7 @@
   position: relative;
   overflow: hidden;
 }
+
 .activity-card__ruban::after {
   content: attr(data-category);
   background-color: var(--ruban-color);

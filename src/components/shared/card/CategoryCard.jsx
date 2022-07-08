@@ -13,7 +13,7 @@ const CategoryCard = ({ type, name, imageUrl }) => {
   const color = 'bg-' + getCategoryColorForTailwind(type);
   return (
     <>
-      <article className='relative shadow-sm shadow-gray-400 rounded-xl cursor-pointer transition-all hover:ring-2 hover:ring-green-300 hover:shadow-md hover:shadow-green-300'>
+      <article className='relative shadow-sm shadow-kiddoShadow rounded-xl cursor-pointer transition-all hover:ring-2 hover:ring-green-300 hover:shadow-md hover:shadow-green-300'>
         <div>
           <img src={imageUrl} alt='' className='relative w-full h-64 rounded-t-xl object-fill' />
           <ReactTooltip type='success' effect='solid' place='top' />

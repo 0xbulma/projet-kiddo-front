@@ -3,27 +3,18 @@ import ReactSlider from 'react-slider';
 
 import './filterbox.css';
 
-export default function Filterbox({
-  className,
-  maxDist,
-  setMaxDist,
-  minChildAge,
-  setMinChildAge,
-  maxChildAge,
-  setMaxChildAge,
-  isGeoLoc,
-}) {
+export default function Filterbox({ className, maxDist, setMaxDist, minChildAge, setMinChildAge, maxChildAge, setMaxChildAge, isGeoLoc }) {
   return (
-    <div className={`filterbox__container ${className}`}>
+    <div className={`${className} rounded-lg shadow-md shadow-kiddoShadow z-10 ` + (isGeoLoc ? 'h-40' : 'h-20')}>
       {isGeoLoc && (
-        <div className='fitlerbox__group'>
-          <label className='filterbox__label'>Distance maximale</label>
+        <div className='fitlerbox__group mb-5 py-3 pt-5'>
+          <label className='filterbox__label underline'>Distance maximale</label>
           <ReactSlider
             value={maxDist / 1000}
             onAfterChange={(value, index) => {
               setMaxDist(value * 1000);
             }}
-            className='filterbox__horizontal-slider'
+            className='filterbox__horizontal-slider mt-2'
             thumbClassName='filterbox__thumb'
             trackClassName='filterbox__slider-track--dist'
             markClassName='filterbox__mark'
@@ -40,7 +31,7 @@ export default function Filterbox({
       )}
 
       <div className='fitlerbox__group'>
-        <label className='filterbox__label'>Age d'enfants</label>
+        <label className='filterbox__label underline'>Age d'enfants</label>
         <ReactSlider
           value={[minChildAge, maxChildAge]}
           onAfterChange={(value, index) => {
@@ -48,7 +39,7 @@ export default function Filterbox({
             setMinChildAge(value[0]);
             setMaxChildAge(value[1]);
           }}
-          className='filterbox__horizontal-slider'
+          className='filterbox__horizontal-slider  mt-2'
           thumbClassName='filterbox__thumb'
           trackClassName='filterbox__slider-track'
           markClassName='filterbox__mark'

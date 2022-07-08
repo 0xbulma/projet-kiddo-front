@@ -1,49 +1,39 @@
-import React, { useEffect, useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect } from 'react';
 import { useLazyQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
-// import custom components
-import { GET_CATEGORY_BY_NAME } from '../../graphql/query/extra.query';
 import ResultsSection from '../../components/shared/resultsbox/ResultsSection';
+import { GET_CATEGORY_BY_NAME } from '../../graphql/query/extra.query';
 
-//import CSS
-import './categoryPage.css';
-
-function CategoryPage(props) {
+export default function CategoryPage(props) {
   let navigate = useNavigate();
   const { category } = useParams();
 
-  const [dataCatId, setDataCatId] = useState();
-  const [dataCatName, setDataCatName] = useState();
-
   // GraphQl Request
-  const [getCategoryData, { data: categoryData }] = useLazyQuery(GET_CATEGORY_BY_NAME);
+  const [getCategoryData, { error: categoryDataError, data: categoryData }] = useLazyQuery(GET_CATEGORY_BY_NAME);
 
   useEffect(() => {
+    // Fetch category data from GQL Request
     getCategoryData({ variables: { name: category } });
-    if (categoryData?.category === null) {
-      navigate('/404');
-    }
-  }, [categoryData, navigate, category, getCategoryData]);
 
-  useEffect(() => {
-    if (categoryData) {
-      setDataCatId((d) => categoryData.category._id);
-      setDataCatName((d) => categoryData.category.name);
-    }
-  }, [categoryData, dataCatId]);
+    // Redirect 404 if no category is found
+    if (categoryData?.category === null) navigate('/404');
+  }, [categoryData, category, navigate]);
 
   return (
     <div className='container mx-auto pb-10'>
-      <div className='category'>
-        <h1 className='category__title'>Activités {category}</h1>
-        <p className='category__subtitle'>Se depenser en s’amuser, rien de mieux pour lier le plaisir et la santé en famille </p>
+      <div className='flex flex-col justify-center items-center py-12'>
+        <h2>Activités {category}</h2>
+        <p>Se depenser en s’amuser, rien de mieux pour lier le plaisir et la santé en famille </p>
       </div>
 
-      <ResultsSection key={dataCatId} categoryId={dataCatId} categoryName={dataCatName} />
+      {categoryData ? (
+        <ResultsSection key={categoryData.category._id} categoryId={categoryData.category._id} categoryName={categoryData.category.name} />
+      ) : (
+        categoryDataError && <p className='text-red-500 col-span-full text-xl'>Erreur lors du chargement des événements...</p>
+      )}
     </div>
   );
 }
-
-export default CategoryPage;

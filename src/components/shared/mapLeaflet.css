@@ -1,10 +1,9 @@
 .square {
   width: 30vw;
   height: 30vw;
-  background-color: yellow;
   flex-shrink: 0;
   border-radius: 20px;
-  box-shadow: 4px 4px 8px rgba(0,0,0,0.15);
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 /* .square:after {
