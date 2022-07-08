@@ -48,7 +48,7 @@ export default function CommentSection({ commentTarget, targetID, sectionName })
   return (
     <div>
       <section className='container mx-auto px-10 max-h-[50rem] overflow-y-auto'>
-        <h2 className='font-bold text-2xl mt-5'>{sectionName}</h2>
+        <h2 className='font-medium text-4xl mt-5'>{sectionName}</h2>
         {activeUser &&
           comments &&
           comments.getByTargetId.map((comment, index) => {
