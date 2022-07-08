@@ -13,9 +13,13 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [next, setNext] = useState(false);
 
-  const { loggedIn, loggedInOnToken } = useAuthContext();
+  const { loggedIn, loggedInOnToken, _id } = useAuthContext();
 
   useEffect(() => {
+    console.log(_id);
+  }, [_id]);
+  useEffect(() => {
+    console.log('DATA', data);
     if (data) {
       if (email === data.connectUser.email) {
         console.log('connection réussie');
@@ -29,25 +33,25 @@ const Login = () => {
 
   return (
     <>
-  <button onClick={loggedInOnToken}>TEST</button>
+      <button onClick={loggedInOnToken}>TEST</button>
       <div>
         {!next ? (
-          <div className='form-container'>
-            <form className='form mb-4'>
+          <div className="form-container">
+            <form className="form mb-4">
               <input
-                className='input-form-register rounded-3xl'
+                className="input-form-register rounded-3xl"
                 value={email}
-                type='email'
-                placeholder='email'
+                type="email"
+                placeholder="email"
                 onChange={(e) => {
                   setEmail(e.target.value);
                 }}
               />
               <input
-                className='input-form-register rounded-3xl'
+                className="input-form-register rounded-3xl"
                 value={password}
-                type='password'
-                placeholder='password'
+                type="password"
+                placeholder="password"
                 onChange={(e) => {
                   setPassword(e.target.value);
                 }}
@@ -55,14 +59,23 @@ const Login = () => {
             </form>
             <Button
               onClick={(e) => {
-                connectUser({ variables: { email: email, password: password } });
+                connectUser({
+                  variables: { email: email, password: password },
+                });
                 setNext(true);
-              }}>
+              }}
+            >
               Connecter
             </Button>
           </div>
         ) : (
-          <>{loading ? <LoadingComponent></LoadingComponent> : <div>Connection Réussie</div>}</>
+          <>
+            {loading ? (
+              <LoadingComponent></LoadingComponent>
+            ) : (
+              <div>Connection Réussie</div>
+            )}
+          </>
         )}
       </div>
     </>
