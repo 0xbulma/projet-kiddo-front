@@ -23,7 +23,7 @@ export default function CategoryPage(props) {
   }, [categoryData, category, navigate]);
 
   return (
-    <div className='container mx-auto pb-10'>
+    <div className='container mx-auto pt-24 min-h-screen'>
       <div className='flex flex-col justify-center items-center py-12'>
         <h2>Activités {category}</h2>
         <p>Se depenser en s’amuser, rien de mieux pour lier le plaisir et la santé en famille </p>

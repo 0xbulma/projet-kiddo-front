@@ -17,8 +17,7 @@ export const AuthContextSchema = createContext({
 
 function AuthContext(props) {
   const [checkToken] = useLazyQuery(CHECK_TOKEN);
-  const userInfos = JSON.parse(localStorage.getItem('userInfos'));
-  console.log(userInfos);
+
   const [state, setState] = useState({
     isAuthChecked: false,
     isAuth: false,
@@ -29,18 +28,20 @@ function AuthContext(props) {
     isOtherGender: false,
 
     loggedInOnToken: function () {
+      console.log('loggedInOnToken 1');
       checkToken({
         variables: {},
         onCompleted: (data) => {
+          console.log('Logged Token : ', data);
           setState((state) => ({
             ...state,
             isAuth: true,
             isAuthChecked: true,
             email: data.checkToken.email,
             _id: data.checkToken._id,
-            gender: data.gender,
-            isFemale: data.gender?.toLowerCase() === 'female',
-            isOtherGender: data.gender?.toLowarCase() !== 'female' && data.gender?.toLowerCase() !== 'male',
+            gender: data.checkToken.gender,
+            isFemale: data.checkToken.gender === 'female',
+            isOtherGender: data.checkToken.gender !== 'female' && data.checkToken.gender?.toLowerCase() !== 'male',
           }));
         },
         onError: (err) => {
@@ -56,6 +57,7 @@ function AuthContext(props) {
     },
 
     loggedIn: function (user) {
+      console.log('Logged Token : ', user);
       setState((state) => ({
         ...state,
         isAuthChecked: true,
@@ -81,6 +83,7 @@ function AuthContext(props) {
   });
 
   useEffect(() => {
+    console.log('useEffect AuthContext : ', state);
     if (!state.isAuthChecked) {
       state.loggedInOnToken();
     }

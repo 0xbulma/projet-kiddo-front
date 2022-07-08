@@ -10,8 +10,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot, faCalendar, faPeopleGroup, faEuroSign, faClock } from '@fortawesome/free-solid-svg-icons';
 import { GET_BY_ID } from '../../graphql/query/events.query';
 
-import LoadingComponent from '../../components/shared/loadingfiles/LoadingComponent';
-
 import BlankProfilPic from '../../assets/admin/blank_profil_pic.png';
 import CommentSection from '../../components/shared/CommentSection';
 import { useParams } from 'react-router';
@@ -107,13 +105,13 @@ export default function EventPage() {
     <>
       {!loading && event ? (
         <div className=''>
-          <article className='flex flex-col items-center grow container mx-auto text-center my-8'>
+          <article className='flex flex-col items-center grow container mx-auto text-center pt-28 pb-8'>
             <h2 className='text-bold text-4xl flex items-center'>
               {event.content.title}
               <ReactTooltip type='success' effect='solid' place='top' />
               <FaStar
                 className={
-                  `ml-3 text-white  bg-opacity-25 w-8 h-8 p-[6px] rounded-full hover:bg-kiddoGreen hover:text-yellow-300 hover:animate-spin transition-all` +
+                  `ml-3 text-white bg-black bg-opacity-25 w-8 h-8 p-[6px] rounded-full hover:bg-kiddoGreen hover:text-yellow-300 hover:animate-spin transition-all` +
                   (isPin ? 'bg-kiddoGreen hover:bg-black hover:text-yellow-300' : 'bg-black hover:bg-kiddoGreen hover:text-yellow-300')
                 }
                 data-tip='Mettre en favoris'
@@ -182,7 +180,7 @@ export default function EventPage() {
               </div>
             </div>
           </section>
-          <section className='flex flex-col items-center w-full my-10 bg-[#F6F5FE]'>
+          <section className='flex flex-col items-center w-full mt-10 pb-16 bg-[#F6F5FE]'>
             <div className='grid w-full grid-cols-2 px-56 my-10 gap-11'>
               <article>
                 <h2 className='text-2xl font-bold'>Description de l'activité</h2>
@@ -263,12 +261,11 @@ export default function EventPage() {
           )}
         </div>
       ) : loading ? (
-        <div className='flex flex-col items-center min-h-screen '>
-          <h2 className='text-center mt-10'>Chargement en cours</h2>
-          <LoadingComponent />
+        <div className='flex flex-col items-center min-h-screen pt-28 '>
+          <h2 className='text-center mt-10'>Chargement en cours...</h2>
         </div>
       ) : (
-        error && <h2 className='min-h-screen text-center text-red-500'>Erreur lors du chargment de l'événement !</h2>
+        error && <h2 className='min-h-screen text-center text-red-500 pt-28 '>Erreur lors du chargment de l'événement !</h2>
       )}
     </>
   );

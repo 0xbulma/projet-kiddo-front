@@ -1,12 +1,11 @@
-import kiddoLogo from '../../assets/images/logo.svg';
-import Circle from '../../components/shared/GeometricalForm';
-
 export default function Kiddo() {
   return (
     <>
-      <section className='generic-container'>
+      <section className='min-h-screen pt-28'>
+        <h2>Page Kiddo trop jolie</h2>
+      </section>
+      {/* <section className='generic-container'>
         <img src={kiddoLogo} alt='Logo Kiddo' className='mt-20 mb-5 w-72' />
-        {/* 1ème article */}
         <article className='section__grid-3'>
           <div className='col-span-2'>
             <h2 className='font-bold mb-2'>
@@ -29,7 +28,7 @@ export default function Kiddo() {
         </article>
 
         <Circle color='bg-red-300' size='36' />
-        {/* <article className='mt-12'>
+        <article className='mt-12'>
           <h2 className=''>Des activités pour toutes les familles</h2>
           <h3 className=''>Kiddo la plateforme créer pour les parents par les parents</h3>
           <div className={imgTextStyle}>
@@ -42,15 +41,8 @@ export default function Kiddo() {
               ea quos est id blanditiis corrupti illum? Odio quasi quos obcaecati. Adipisci, repudiandae!
             </p>
           </div>
-        </article> */}
-        {/* 2ème article */}
-
-        {/* 3ème article */}
-
-        {/* 4ème article */}
-
-        {/* 5ème article */}
-      </section>
+        </article>
+      </section> */}
     </>
   );
 }
