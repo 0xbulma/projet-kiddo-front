@@ -14,10 +14,6 @@ export const CREATE_COMMENT = gql`
         _id
         first_name
         last_name
-        profil_picture {
-          hd
-          thumbnail
-        }
       }
       created_at
     }

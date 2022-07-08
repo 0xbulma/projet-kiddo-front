@@ -25,8 +25,7 @@ export default function EventPage() {
   const { loading, error, data } = useQuery(GET_BY_ID, { variables: { eventId: eventId } });
 
   const { isAuth } = useAuthContext();
-  console.log(isAuth);
-
+  
   useEffect(() => {
     if (data) {
       setEvent(data.event);
@@ -104,7 +103,7 @@ export default function EventPage() {
             </div>
           </section>
 
-          {isAuth ?? (
+          {isAuth && (
             <>
               <section className='container mx-auto my-12'>
                 <h2 className='mt-5 mb-5 text-2xl font-bold'>Participants </h2>

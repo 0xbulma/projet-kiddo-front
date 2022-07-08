@@ -13,13 +13,14 @@ import AuthContext from './context/AuthContext';
 
 //App layout components
 
-import Home from './pages/app/Home';
+import HomePage from './pages/app/HomePage';
 import Kiddo from './pages/app/Kiddo';
 import Contact from './pages/app/Contact.jsx';
 import NotFound from './pages/app/NotFound.jsx';
 
 import CategoryPage from './pages/app/CategoryPage';
 import EventPage from './pages/app/EventPage';
+import SearchPage from './pages/app/SearchPage';
 
 //Admin layout components
 
@@ -29,7 +30,7 @@ import AdminUserProfil from './pages/administration/sections/user/UserProfil';
 import AdminUserTestMutation from './pages/administration/sections/user/UserTestMutation';
 import UserInfo from './pages/app/UserInfo';
 import Signalement from './pages/administration/sections/Report';
-// import UserInfo from "./pages/app/UserInfo";
+import UserInfo from './pages/app/UserInfo';
 
 // Import CSS
 import './style.css';
@@ -44,15 +45,11 @@ root.render(
     <AuthContext>
       <Router>
         <Routes>
-          <Route path="/" element={<UserLayout composant={<Home />} />} />
+          <Route path="/" element={<UserLayout composant={<HomePage />} />} />
           <Route path="/kiddo" element={<UserLayout composant={<Kiddo />} />} />
           <Route
             path="/contact"
             element={<UserLayout composant={<Contact />} />}
-          />
-          <Route
-            path="/user"
-            element={<UserLayout composant={<UserInfo />} />}
           />
           <Route
             path="/event/:eventId"
@@ -63,6 +60,14 @@ root.render(
             element={<UserLayout composant={<CategoryPage />} />}
           />
           <Route path="*" element={<UserLayout composant={<NotFound />} />} />
+          <Route
+            path="/user"
+            element={<UserLayout composant={<UserInfo />} />}
+          />
+          <Route
+            path="/search/:params"
+            element={<UserLayout composant={<SearchPage />} />}
+          />
           {isAdmin && (
             <Fragment>
               <Route
