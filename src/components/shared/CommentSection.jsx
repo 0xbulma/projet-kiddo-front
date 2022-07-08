@@ -36,7 +36,9 @@ export default function CommentSection({ commentTarget, targetID, sectionName })
   }, [email]);
 
   // Chargement des commentaires depuis Mongo
-  const { data: comments, refetch } = useQuery(GET_BY_TARGET_ID, { variables: { type: commentTarget, id: targetID } });
+  const { data: comments, refetch } = useQuery(GET_BY_TARGET_ID, {
+    variables: { type: commentTarget, id: targetID },
+  });
 
   // Fonction utilisé pour charger à nouveau les commentaires pour les fonctions enfants
   const refetchComments = () => refetch();

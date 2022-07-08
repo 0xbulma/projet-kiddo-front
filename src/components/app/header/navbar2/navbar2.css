@@ -1,5 +1,5 @@
 .navbar2__container {
-  position: relative;
+  position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,7 +15,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1024px;
   gap: 2rem;
 }
 
@@ -24,11 +23,11 @@
 }
 
 .navbar2__linklist {
-  flex-grow: 1;
+  flex-grow: 5;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 4rem;
   cursor: pointer;
   user-select: none;
 }
@@ -37,6 +36,8 @@
   font-family: inherit;
   font-size: 1rem;
   transition: all 0.2s;
+  width: 100%;
+  height: 100%;
 }
 
 .navbar2__link:hover,
@@ -45,24 +46,47 @@
 }
 
 .navbar2__icongroup {
-  flex-grow: 1;
+  flex-grow: 0;
+  flex-shrink: 1;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   gap: 2rem;
 }
 
+.navbar2__icongroup--grow {
+  flex-grow: 1;
+}
+
+@keyframes slidein {
+  from {
+    width: 10%;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
 .navbar2__searchinput-container {
   position: relative;
   display: flex;
-  width: 90%;
+  width: 100%;
+  animation: slidein 0.4s;
 }
 
 .navbar2__searchinput {
   width: 100%;
   outline: none;
   border-radius: 25px !important;
-  padding: 0.5rem 1.5rem !important;
+  padding: 0.5rem 3rem !important;
+  border-width: 2px !important;
+  border-color: rgb(228, 227, 227) !important;
+  background-color: rgba(250, 250, 250, 0.6) !important;
+}
+
+.active {
+  color: #fc664e;
 }
 
 .navbar2__searchinput:focus {
@@ -75,15 +99,25 @@
 
 .navbar2__icon--searchinput {
   position: absolute;
-  right: 1rem;
-  top: 0.4rem;
-  width: 20px;
+  left: 1rem;
+  top: 6.8px;
+  width: 16px;
   cursor: pointer;
+}
+.navbar2__icon--searchinputleft {
+  position: absolute;
+  right: 1rem;
+  top: 12px;
+  width: 16px;
+  cursor: pointer;
+  color: rgb(228, 227, 227);
 }
 
 .navbar2__icon {
+  flex-shrink: 0;
   cursor: pointer;
   width: 20px;
+  height: 20px;
 }
 
 .navbar2__icon:hover,
@@ -93,15 +127,19 @@
 
 .navbar2sub__container {
   position: absolute;
-  bottom: -3rem;
   z-index: 200;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  border-top: 1px solid black;
-  background-color: #fbfbfb;
+  background-color: rgba(250, 250, 250, 0.9);
+  backdrop-filter: blur(8px);
   padding: 1rem 0;
+  transition: all 0.3s;
+}
+
+.navbar2sub__container--shown {
+  transform: translateY(117%);
 }
 
 .navbar2sub__innercontainer {
@@ -111,6 +149,7 @@
 
 .navbar2sub__linklist {
   width: 100%;
+  height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;

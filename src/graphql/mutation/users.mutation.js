@@ -60,3 +60,27 @@ export const PIN_EVENT = gql`
     }
   }
 `;
+
+export const MODIFY_USER_INFO = gql`
+  mutation ModifyUser($id: ObjectID!, $input: UserInput!) {
+    modifyUser(_id: $id, input: $input) {
+      email
+      pseudo
+      first_name
+      last_name
+      birthdate
+      phone
+      adress {
+        city
+        zip_code
+        adress_line
+      }
+      description
+      children {
+        name
+        gender
+        age
+      }
+    }
+  }
+`;

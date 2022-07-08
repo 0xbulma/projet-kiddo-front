@@ -37,6 +37,7 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
   });
 
   // GraphQl Request
+  // eslint-disable-next-line no-unused-vars
   const [getEvents, { loading, data, refetch }] = useLazyQuery(GET_EVENTS_CATEGORY);
   const [getAllEvents, { data: dataAll }] = useLazyQuery(GET_EVENTS_CATEGORY);
 
@@ -54,6 +55,7 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
           status: 'PUBLISHED',
           minDate: Date.now(),
           dateOrder: 'asc',
+          searchInput : searchInput,
           minChildAge: minChildAge,
           maxChildAge: maxChildAge,
           lng: geoLoc.coords ? geoLoc?.coords[0] : null,
@@ -62,16 +64,18 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
         },
       },
     });
-  }, [categoryId, getAllEvents, geoLoc.coords, minChildAge, maxChildAge, maxDistMeters]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [categoryId, geoLoc.coords, minChildAge, maxChildAge, maxDistMeters, searchInput]);
 
   useEffect(() => {
-    if (!data) {
+    // if (!data) {
       getEvents({
         variables: {
           input: {
             first: ITEMS_PER_PAGE,
             offset: page * ITEMS_PER_PAGE - ITEMS_PER_PAGE,
             categories: categoryId,
+            searchInput : searchInput,
             status: 'PUBLISHED',
             minDate: Date.now(),
             dateOrder: 'asc',
@@ -83,26 +87,28 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
           },
         },
       });
-    }
+    // }
 
-    if (data) {
-      refetch({
-        input: {
-          first: ITEMS_PER_PAGE,
-          offset: page * ITEMS_PER_PAGE - ITEMS_PER_PAGE,
-          categories: categoryId,
-          status: 'PUBLISHED',
-          minDate: Date.now(),
-          dateOrder: 'asc',
-          minChildAge: minChildAge,
-          maxChildAge: maxChildAge,
-          lng: geoLoc.coords ? geoLoc?.coords[0] : null,
-          lat: geoLoc.coords ? geoLoc?.coords[1] : null,
-          maxDistMeters: maxDistMeters,
-        },
-      });
-    }
-  }, [categoryId, getEvents, page, data, refetch, geoLoc.coords, minChildAge, maxChildAge, maxDistMeters]);
+    // if (data) {
+    //   refetch({
+    //     input: {
+    //       first: ITEMS_PER_PAGE,
+    //       offset: page * ITEMS_PER_PAGE - ITEMS_PER_PAGE,
+    //       categories: categoryId,
+    //       searchInput : searchInput,
+    //       status: 'PUBLISHED',
+    //       minDate: Date.now(),
+    //       dateOrder: 'asc',
+    //       minChildAge: minChildAge,
+    //       maxChildAge: maxChildAge,
+    //       lng: geoLoc.coords ? geoLoc?.coords[0] : null,
+    //       lat: geoLoc.coords ? geoLoc?.coords[1] : null,
+    //       maxDistMeters: maxDistMeters,
+    //     },
+    //   });
+    // }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [categoryId, page, geoLoc.coords, minChildAge, maxChildAge, maxDistMeters, searchInput]);
 
   const onClickHandler = () => {
     setGeoLoc((geoLoc) => ({ ...geoLoc, isLoading: true }));
@@ -176,12 +182,12 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
           ) : data?.eventsComplexQuery.results.length === 0 ? (
             <div>PAS DE RESULTATS</div>
           ) : (
-            data.eventsComplexQuery.results.map((data, index) => {
+            data?.eventsComplexQuery.results.map((data, index) => {
               return (
                 <Link key={data._id} to={`/event/${data._id}`}>
                   <ActivityCard
                     title={data.content.title}
-                    category={categoryName}
+                    category={data.categories.name}
                     location={data.adress}
                     date={data.event_date.start}
                     price={data.price}

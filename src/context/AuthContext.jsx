@@ -17,7 +17,8 @@ export const AuthContextSchema = createContext({
 
 function AuthContext(props) {
   const [checkToken] = useLazyQuery(CHECK_TOKEN);
-
+  const userInfos = JSON.parse(localStorage.getItem('userInfos'));
+  console.log(userInfos);
   const [state, setState] = useState({
     isAuthChecked: false,
     isAuth: false,
