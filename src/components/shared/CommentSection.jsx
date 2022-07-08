@@ -43,6 +43,8 @@ export default function CommentSection({ commentTarget, targetID, sectionName })
   // Fonction utilisé pour charger à nouveau les commentaires pour les fonctions enfants
   const refetchComments = () => refetch();
 
+  console.log('Comments : ', comments);
+
   return (
     <div>
       <section className='container mx-auto px-10 max-h-[50rem] overflow-y-auto'>
@@ -97,9 +99,7 @@ function Comment({ user, comment, refetchComments, commentTarget, targetID }) {
           <Link to={'../user/' + comment.sender._id}>
             <img
               src={
-                comment.sender.profil_picture !== undefined && comment.sender.profil_picture.thumbnail !== null
-                  ? comment.sender.profil_picture.thumbnail
-                  : BlankProfilPic
+                comment.sender.profil_picture !== undefined && comment.sender.profil_picture !== null ? comment.sender.profil_picture : BlankProfilPic
               }
               alt=''
               width='60px'
@@ -112,7 +112,12 @@ function Comment({ user, comment, refetchComments, commentTarget, targetID }) {
           {/* SECTION: Nom + Prénom et affichage date */}
           <div className='pt-2 ml-3 flex justify-between'>
             <p className='font-bold'>
-              {comment.sender.first_name} {comment.sender.last_name}
+              {comment.sender.first_name === undefined && comment.sender.last_name === undefined && comment.sender.email}
+              {comment.sender.first_name !== undefined && comment.sender.last_name === undefined && comment.sender.first_name}
+              {comment.sender.first_name === undefined && comment.sender.last_name !== undefined && comment.sender.last_name}
+              {comment.sender.first_name !== undefined &&
+                comment.sender.last_name !== undefined &&
+                comment.sender.first_name + ' ' + comment.sender.last_name}
             </p>
             <p className='mr-3 font-thin'>{new Date(comment.created_at).toLocaleString().replace(' ', ' à ')}</p>
           </div>
@@ -189,8 +194,8 @@ function Comment({ user, comment, refetchComments, commentTarget, targetID }) {
                 <Link to={'../user/' + comment.sender._id}>
                   <img
                     src={
-                      comment.sender.profil_picture !== undefined && comment.sender.profil_picture.thumbnail !== null
-                        ? comment.sender.profil_picture.thumbnail
+                      comment.sender.profil_picture !== undefined && comment.sender.profil_picture !== null
+                        ? comment.sender.profil_picture
                         : BlankProfilPic
                     }
                     alt=''
@@ -204,7 +209,12 @@ function Comment({ user, comment, refetchComments, commentTarget, targetID }) {
                 {/* SECTION: Nom + Prénom et affichage date */}
                 <div className='pt-2 ml-3 flex justify-between'>
                   <p className='font-bold'>
-                    {comment.sender.first_name} {comment.sender.last_name}
+                    {comment.sender.first_name === undefined && comment.sender.last_name === undefined && comment.sender.email}
+                    {comment.sender.first_name !== undefined && comment.sender.last_name === undefined && comment.sender.first_name}
+                    {comment.sender.first_name === undefined && comment.sender.last_name !== undefined && comment.sender.last_name}
+                    {comment.sender.first_name !== undefined &&
+                      comment.sender.last_name !== undefined &&
+                      comment.sender.first_name + ' ' + comment.sender.last_name}
                   </p>
                   <p className='mr-3 font-thin'>{new Date(comment.created_at).toLocaleDateString('fr')}</p>
                 </div>
@@ -312,7 +322,7 @@ function WriteComment({ user, parent, commentTarget, targetID, refetchComments, 
           <div className='shrink-0 flex items-center'>
             <span className='child-comment-dot z-0 bg-gray-500 animate-pulse'></span>
             <img
-              src={user.profil_picture !== undefined && user.profil_picture.thumbnail !== undefined ? user.profil_picture.thumbnail : BlankProfilPic}
+              src={user.profil_picture !== undefined && user.profil_picture !== undefined ? user.profil_picture : BlankProfilPic}
               alt=''
               width='60px'
               className='rounded-full -mt-4 mr-4'
@@ -320,7 +330,7 @@ function WriteComment({ user, parent, commentTarget, targetID, refetchComments, 
           </div>
         ) : (
           <img
-            src={user.profil_picture !== undefined && user.profil_picture.thumbnail !== undefined ? user.profil_picture.thumbnail : BlankProfilPic}
+            src={user.profil_picture !== undefined && user.profil_picture !== undefined ? user.profil_picture : BlankProfilPic}
             alt=''
             width='75px'
             className='rounded-full -mt-4'

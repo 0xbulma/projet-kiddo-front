@@ -28,10 +28,7 @@ export const GET_BY_ID = gql`
       first_name
       last_name
       birthdate
-      profil_picture {
-        hd
-        thumbnail
-      }
+      profil_picture
     }
   }
 `;
