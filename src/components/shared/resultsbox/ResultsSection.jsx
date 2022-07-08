@@ -54,6 +54,7 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
           status: 'PUBLISHED',
           minDate: Date.now(),
           dateOrder: 'asc',
+          searchInput : searchInput,
           minChildAge: minChildAge,
           maxChildAge: maxChildAge,
           lng: geoLoc.coords ? geoLoc?.coords[0] : null,
@@ -62,7 +63,7 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
         },
       },
     });
-  }, [categoryId, getAllEvents, geoLoc.coords, minChildAge, maxChildAge, maxDistMeters]);
+  }, [categoryId, getAllEvents, geoLoc.coords, minChildAge, maxChildAge, maxDistMeters, searchInput]);
 
   useEffect(() => {
     if (!data) {
@@ -72,6 +73,7 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
             first: ITEMS_PER_PAGE,
             offset: page * ITEMS_PER_PAGE - ITEMS_PER_PAGE,
             categories: categoryId,
+            searchInput : searchInput,
             status: 'PUBLISHED',
             minDate: Date.now(),
             dateOrder: 'asc',
@@ -91,6 +93,7 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
           first: ITEMS_PER_PAGE,
           offset: page * ITEMS_PER_PAGE - ITEMS_PER_PAGE,
           categories: categoryId,
+          searchInput : searchInput,
           status: 'PUBLISHED',
           minDate: Date.now(),
           dateOrder: 'asc',
@@ -102,7 +105,7 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
         },
       });
     }
-  }, [categoryId, getEvents, page, data, refetch, geoLoc.coords, minChildAge, maxChildAge, maxDistMeters]);
+  }, [categoryId, getEvents, page, data, refetch, geoLoc.coords, minChildAge, maxChildAge, maxDistMeters, searchInput]);
 
   const onClickHandler = () => {
     setGeoLoc((geoLoc) => ({ ...geoLoc, isLoading: true }));
@@ -181,7 +184,7 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
                 <Link key={data._id} to={`/event/${data._id}`}>
                   <ActivityCard
                     title={data.content.title}
-                    category={categoryName}
+                    category={data.categories.name}
                     location={data.adress}
                     date={data.event_date.start}
                     price={data.price}

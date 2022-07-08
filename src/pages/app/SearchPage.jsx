@@ -8,7 +8,7 @@ export default function SearchPage(props) {
 
   const { params } = useParams();
 
-  const toto = null;
+  const toto = true;
   const totoError = null;
 
   console.log('Search params :', params);
