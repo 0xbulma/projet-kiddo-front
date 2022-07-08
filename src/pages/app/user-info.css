@@ -66,8 +66,12 @@ margin-top: 2rem ;
   }
 
   .etiquette {
-    clip-path: polygon(0 0, 90% 0, 100% 50%, 90% 100%, 0 100%);
+    clip-path: polygon(0 0, 90% 0, 88% 50%, 90% 100%, 0 100%);
     background-color: lightgray
+  }
+  .etiquette:hover{
+    cursor: pointer;
+    transform: scale(1.05);
   }
 
   .child-card {
