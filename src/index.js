@@ -27,7 +27,7 @@ import AdminDashboard from './pages/administration/Dashboard';
 import AdminUser from './pages/administration/sections/user/User';
 import AdminUserProfil from './pages/administration/sections/user/UserProfil';
 import AdminUserTestMutation from './pages/administration/sections/user/UserTestMutation';
-
+import UserInfo from './pages/app/UserInfo';
 import Signalement from './pages/administration/sections/Report';
 // import UserInfo from "./pages/app/UserInfo";
 
@@ -44,19 +44,47 @@ root.render(
     <AuthContext>
       <Router>
         <Routes>
-          <Route path='/' element={<UserLayout composant={<Home />} />} />
-          <Route path='/kiddo' element={<UserLayout composant={<Kiddo />} />} />
-          <Route path='/contact' element={<UserLayout composant={<Contact />} />} />
-          <Route path='/event/:eventId' element={<UserLayout composant={<EventPage />} />} />
-          <Route path='/category/:category' element={<UserLayout composant={<CategoryPage />} />} />
-          <Route path='*' element={<UserLayout composant={<NotFound />} />} />
+          <Route path="/" element={<UserLayout composant={<Home />} />} />
+          <Route path="/kiddo" element={<UserLayout composant={<Kiddo />} />} />
+          <Route
+            path="/contact"
+            element={<UserLayout composant={<Contact />} />}
+          />
+          <Route
+            path="/user"
+            element={<UserLayout composant={<UserInfo />} />}
+          />
+          <Route
+            path="/event/:eventId"
+            element={<UserLayout composant={<EventPage />} />}
+          />
+          <Route
+            path="/category/:category"
+            element={<UserLayout composant={<CategoryPage />} />}
+          />
+          <Route path="*" element={<UserLayout composant={<NotFound />} />} />
           {isAdmin && (
             <Fragment>
-              <Route path='/administration' element={<AdminLayout composant={<AdminDashboard />} />} />
-              <Route path='/administration/users' element={<AdminLayout composant={<AdminUser />} />} />
-              <Route path='/administration/users/:id' element={<AdminLayout composant={<AdminUserProfil />} />} />
-              <Route path='/administration/reports' element={<AdminLayout composant={<Signalement />} />} />
-              <Route path='/administration/userTest' element={<AdminLayout composant={<AdminUserTestMutation />} />} />
+              <Route
+                path="/administration"
+                element={<AdminLayout composant={<AdminDashboard />} />}
+              />
+              <Route
+                path="/administration/users"
+                element={<AdminLayout composant={<AdminUser />} />}
+              />
+              <Route
+                path="/administration/users/:id"
+                element={<AdminLayout composant={<AdminUserProfil />} />}
+              />
+              <Route
+                path="/administration/reports"
+                element={<AdminLayout composant={<Signalement />} />}
+              />
+              <Route
+                path="/administration/userTest"
+                element={<AdminLayout composant={<AdminUserTestMutation />} />}
+              />
             </Fragment>
           )}
         </Routes>
