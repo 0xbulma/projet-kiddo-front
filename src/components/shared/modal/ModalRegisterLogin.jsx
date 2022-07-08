@@ -104,7 +104,7 @@ function Register({ loginSubtitle, registerSubtitle, isLoginPage, closeModal }) 
       }
     }
     if (errorUserData) {
-      setErrors([errorUserData]);
+      setErrors([errorUserData.message]);
     }
     // Connection de l'utilisateur
     if (connectUserData) {
@@ -117,11 +117,8 @@ function Register({ loginSubtitle, registerSubtitle, isLoginPage, closeModal }) 
       } else {
         setErrors(['Erreur de votre connexion, veuillez contacter un administrateur ! (Erreur: 002)']);
       }
-    }
-    if (connectUserError) {
-      console.log(connectUserError.message);
+    } else if (connectUserError) {
       setErrors([connectUserError.message]);
-      console.log(errors);
     }
   }, [createUserData, errorUserData, connectUserData, connectUserError]);
 
