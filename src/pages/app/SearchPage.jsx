@@ -1,12 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router';
 import ResultsSection from '../../components/shared/resultsbox/ResultsSection';
 
 export default function SearchPage(props) {
   const { params } = useParams();
 
-  const toto = null;
+  const toto = true;
   const totoError = null;
 
   console.log('Search params :', params);
