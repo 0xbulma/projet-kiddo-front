@@ -67,6 +67,7 @@ export default function Navbar2() {
 
   const showSearchInputHandler = () => {
     setIsSearchOpen(bol => !bol);
+    setUserInput('');
   };
 
   const showSubMenu = () => {
@@ -108,7 +109,7 @@ export default function Navbar2() {
         {!isSearchOpen && (
           <ul className='navbar2__linklist'>
             <li>
-              <Link className='navbar2__link' to='kiddo'>
+              <Link className='navbar2__link' to='/kiddo'>
                 Découvrir Kiddo
               </Link>
             </li>
@@ -132,6 +133,7 @@ export default function Navbar2() {
                 className='navbar2__searchinput focus:ring-0'
                 type='text'
                 autoFocus
+                placeholder='Trouver une activité...'
                 value={userInput}
                 onChange={onInputHandler}
                 onKeyDown={onKeyDownHandler}

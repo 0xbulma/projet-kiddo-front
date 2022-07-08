@@ -46,16 +46,28 @@
 
 .navbar2__icongroup{
   flex-grow:1;
+  flex-shrink: 0;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   gap:2rem;
 }
 
+@keyframes slidein {
+  from {
+    width: 10%;
+  }
+
+  to {
+    width: 80%;
+  }
+}
+
 .navbar2__searchinput-container{
   position: relative;
   display: flex;
   width: 90%;
+  animation: slidein .4s;
 }
 
 .navbar2__searchinput{
@@ -77,14 +89,16 @@ outline: none;
 .navbar2__icon--searchinput{
   position: absolute;
   right: 1rem;
-  top: 0.4rem;
+  top: 6.6px;
   width: 20px;
   cursor: pointer;
 }
 
 .navbar2__icon{
+  flex-shrink: 0;
   cursor: pointer;
   width: 20px;
+  height: 20px;
 }
 
 .navbar2__icon:hover,
@@ -129,3 +143,4 @@ outline: none;
 .navbar2sub__link:active{
   color: #FC664E
 }
+
