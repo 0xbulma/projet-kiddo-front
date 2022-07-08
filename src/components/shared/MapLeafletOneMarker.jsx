@@ -6,7 +6,7 @@ export default function MapLeafletOneMarker(props) {
   const finalGPS = inputGPS.length === 2 ? [inputGPS[1], inputGPS[0]] : [51.505, -0.09];
 
   return (
-    <div className='rounded-lg overflow-hidden'>
+    <div className='z-0 rounded-lg overflow-hidden'>
       <MapContainer style={{ height: '300px' }} center={finalGPS} zoom={13} scrollWheelZoom={false} zoomControl={false}>
         <ZoomControl position='topright' />
         <TileLayer
