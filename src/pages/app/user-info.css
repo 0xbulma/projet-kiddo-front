@@ -83,5 +83,5 @@ margin-top: 2rem ;
     right: 0.5rem;
   }
   .remove-child-button:hover{
-    background-color: #ccca;
+    color: grey;
   }

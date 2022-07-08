@@ -5,16 +5,37 @@ import './user-info.css';
 import childProfil from '../../assets/images/blank_child_profil.svg';
 import boyProfil from '../../assets/images/profil_male_child.svg';
 import girlProfil from '../../assets/images/profil_female_child.svg';
-import { FaExpandArrowsAlt } from 'react-icons/fa';
+import { FaTimesCircle } from 'react-icons/fa';
 import { CATEGORIES } from '../../utils/constants/categoryList';
 import Etiquette from '../../components/shared/Etiquette';
-
+import { useMutation } from '@apollo/client';
+import { MODIFY_USER_INFO } from '../../graphql/mutation/users.mutation';
+import useAuthContext from './../../hooks/useAuthContext';
 const UserInfo = () => {
+  const context = useAuthContext();
+
   // fonction qui récupère les values du form
   const handleChange = (e) => {
-    setUser((user) => {
-      return { ...user, [e.target.name]: e.target.value };
-    });
+    if (
+      e.target.name === 'adress_line' ||
+      e.target.name === 'zip_code' ||
+      e.target.name === 'city' ||
+      e.target.name === 'adress_line_2'
+    ) {
+      setUser((user) => {
+        return {
+          ...user,
+          adress: {
+            ...user.adress,
+            [e.target.name]: e.target.value,
+          },
+        };
+      });
+    } else {
+      setUser((user) => {
+        return { ...user, [e.target.name]: e.target.value };
+      });
+    }
   };
   // fonction qui met à jour l'objet children et ses valeurs
   const handleChangeChildren = (value, index, key) => {
@@ -54,6 +75,7 @@ const UserInfo = () => {
       city: '',
       zip_code: '',
       adress_line: '',
+      adress_line_2: '',
     },
 
     description: '',
@@ -74,6 +96,14 @@ const UserInfo = () => {
       return childProfil;
     }
   };
+
+  const [modifyUserInfo, { data, error }] = useMutation(MODIFY_USER_INFO);
+  if (error) {
+    console.log(error);
+  }
+  if (data) {
+    console.log(data);
+  }
 
   return (
     <>
@@ -126,14 +156,14 @@ const UserInfo = () => {
               <div className="flex flex-col">
                 <input
                   className="rounded-xl mb-2 border-gray-200"
-                  name="firstname"
+                  name="first_name"
                   type="text"
                   placeholder="Prénom"
                   onChange={handleChange}
                 />
                 <input
                   className="rounded-xl mb-2 border-gray-200"
-                  name="lastname"
+                  name="last_name"
                   type="text"
                   placeholder="Nom"
                   onChange={handleChange}
@@ -170,7 +200,7 @@ const UserInfo = () => {
                   onChange={handleChange}
                 />
                 <input
-                  name="adress"
+                  name="adress_line"
                   className="rounded-xl mb-2 border-gray-200"
                   type="text"
                   placeholder="adresse complète"
@@ -178,7 +208,7 @@ const UserInfo = () => {
                 />
                 <div>
                   <input
-                    name="zipcode"
+                    name="zip_code"
                     className="rounded-xl mb-2 border-gray-200"
                     type="text"
                     placeholder="Code postal"
@@ -191,13 +221,13 @@ const UserInfo = () => {
                     placeholder="Ville"
                     onChange={handleChange}
                   />
-                  <input
+                  {/* <input
                     name="country"
                     className="rounded-xl mb-2 border-gray-200"
                     type="text"
                     placeholder="pays"
                     onChange={handleChange}
-                  />
+                  /> */}
                 </div>
               </div>
             </article>
@@ -227,7 +257,7 @@ const UserInfo = () => {
                       handleRemoveChild(i);
                     }}
                   >
-                    <FaExpandArrowsAlt />
+                    <FaTimesCircle />
                   </button>
                 )}
 
@@ -236,17 +266,13 @@ const UserInfo = () => {
                 </div>
                 <div className="pl-3">
                   <input
-                    value={user.children[i].firstname}
-                    name={`children[${i}].firstname`}
+                    value={user.children[i].name}
+                    name={`children[${i}].name`}
                     className="rounded-xl mb-2 border-gray-200 w-full"
                     type="text"
                     placeholder="Prénom"
                     onChange={(e) =>
-                      handleChangeChildren(
-                        e.currentTarget.value,
-                        i,
-                        'firstname'
-                      )
+                      handleChangeChildren(e.currentTarget.value, i, 'name')
                     }
                   />
                   <select
@@ -288,7 +314,7 @@ const UserInfo = () => {
               <input type="checkbox" /> J'autorise un autre membre à amener mes
               enfants aux activités
             </p>
-            <p className="pt-8 flex flex-col">
+            <p className="pt-8 flex justify-around">
               Saisissez le nom et l'adresse du membre Kiddo :
               <input
                 type="text"
@@ -307,7 +333,6 @@ const UserInfo = () => {
           <h2>catégories d'activités recherchées</h2>
           <article className="grid grid-cols-3 gap-5 p-8">
             {CATEGORIES.map((etiquette, index) => {
-              console.log('etiq', etiquette.backgroundColor);
               return (
                 <Etiquette
                   key={index}
@@ -319,7 +344,44 @@ const UserInfo = () => {
             })}
           </article>
           <div className="flex justify-center p-10">
-            <Button>Valider</Button>
+            <Button
+              onClick={() => {
+                console.log({
+                  id: context._id,
+                  input: {
+                    gender: user.gender,
+                    first_name: user.first_name,
+                    last_name: user.last_name,
+                    pseudo: user.pseudo,
+                    phone: user.phone,
+                    email: user.email,
+                    birthdate: user.birthdate,
+                    adress: user.adress,
+                    description: user.description,
+                    children: user.children,
+                  },
+                });
+                modifyUserInfo({
+                  variables: {
+                    id: context._id,
+                    input: {
+                      gender: user.gender,
+                      first_name: user.first_name,
+                      last_name: user.last_name,
+                      pseudo: user.pseudo,
+                      phone: user.phone,
+                      email: user.email,
+                      birthdate: user.birthdate,
+                      adress: user.adress,
+                      description: user.description,
+                      children: user.children,
+                    },
+                  },
+                });
+              }}
+            >
+              Valider
+            </Button>
           </div>
         </section>
       </section>

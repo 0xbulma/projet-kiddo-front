@@ -1,5 +1,4 @@
 import React from 'react';
-import { useState } from 'react';
 import useToggle from '../../hooks/useToggle';
 const Etiquette = ({ name, backgroundColor }) => {
   const [isActive, toggleActive] = useToggle(false);

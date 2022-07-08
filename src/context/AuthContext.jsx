@@ -3,7 +3,7 @@ import { CHECK_TOKEN } from '../graphql/query/users.query';
 import { useLazyQuery } from '@apollo/client';
 
 export const AuthContextSchema = createContext({
-  isAuthChecked : null,
+  isAuthChecked: null,
   isAuth: null,
   email: null,
   _id: null,
@@ -14,7 +14,8 @@ export const AuthContextSchema = createContext({
 
 function AuthContext(props) {
   const [checkToken] = useLazyQuery(CHECK_TOKEN);
-
+  const userInfos = JSON.parse(localStorage.getItem('userInfos'));
+  console.log(userInfos);
   const [state, setState] = useState({
     isAuthChecked: false,
     isAuth: false,
@@ -24,8 +25,8 @@ function AuthContext(props) {
     loggedInOnToken: function () {
       checkToken({
         variables: {},
-        onCompleted: data => {
-          setState(state => ({
+        onCompleted: (data) => {
+          setState((state) => ({
             ...state,
             isAuth: true,
             isAuthChecked: true,
@@ -33,8 +34,8 @@ function AuthContext(props) {
             _id: data.checkToken._id,
           }));
         },
-        onError: err => {
-          setState(state => ({
+        onError: (err) => {
+          setState((state) => ({
             ...state,
             isAuthChecked: true,
             isAuth: false,
@@ -46,18 +47,22 @@ function AuthContext(props) {
     },
 
     loggedIn: function (id, email) {
-      setState(state => ({
-        ...state,
-        isAuthChecked: true,
-        isAuth: true,
-        email: email,
-        _id: id,
-      }));
+      setState((state) => {
+        let newInfos = {
+          ...state,
+          isAuthChecked: true,
+          isAuth: true,
+          email: email,
+          _id: id,
+        };
+        localStorage.setItem('userInfos', JSON.stringify(newInfos));
+        return newInfos;
+      });
     },
 
     loggedOut: function () {
       //ajout suppression du cookie
-      setState(state => ({
+      setState((state) => ({
         ...state,
         isAuthChecked: true,
         isAuth: false,
@@ -68,12 +73,16 @@ function AuthContext(props) {
   });
 
   useEffect(() => {
-    if(!state.isAuthChecked) {
+    if (!state.isAuthChecked) {
       state.loggedInOnToken();
     }
   }, [state]);
 
-  return <AuthContextSchema.Provider value={state}>{props.children}</AuthContextSchema.Provider>;
+  return (
+    <AuthContextSchema.Provider value={state}>
+      {props.children}
+    </AuthContextSchema.Provider>
+  );
 }
 
 export default AuthContext;
