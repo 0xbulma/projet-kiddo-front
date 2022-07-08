@@ -11,6 +11,7 @@ export const GET_BY_TARGET_ID = gql`
         _id
         sender {
           _id
+          email
           first_name
           last_name
           profil_picture
@@ -22,6 +23,7 @@ export const GET_BY_TARGET_ID = gql`
       }
       sender {
         _id
+        email
         first_name
         last_name
         profil_picture
