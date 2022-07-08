@@ -30,7 +30,6 @@ import AdminUserProfil from './pages/administration/sections/user/UserProfil';
 import AdminUserTestMutation from './pages/administration/sections/user/UserTestMutation';
 import UserInfo from './pages/app/UserInfo';
 import Signalement from './pages/administration/sections/Report';
-import UserInfo from './pages/app/UserInfo';
 
 // Import CSS
 import './style.css';
