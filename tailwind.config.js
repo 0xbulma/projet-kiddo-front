@@ -7,7 +7,6 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        grape: colors.purple,
         kiddoOrange: '#fc664e',
         kiddoGreen: '#3ac9bb',
         kiddoPurple: '#a59df1',

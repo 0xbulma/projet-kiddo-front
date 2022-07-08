@@ -1,5 +1,5 @@
 import React from 'react';
-import { getCategoryColorForTailwind } from '../../../utils/constants/categoryColors';
+import { getCategoryColorForCSS } from '../../../utils/constants/categoryColors';
 // Import: assets
 import { FaStar } from 'react-icons/fa';
 import ReactTooltip from 'react-tooltip';
@@ -10,10 +10,13 @@ const handleFavClick = () => {
 };
 
 const CategoryCard = ({ type, name, imageUrl }) => {
-  const color = 'bg-' + getCategoryColorForTailwind(type);
+  const categoryColor = getCategoryColorForCSS(type);
+
   return (
     <>
-      <article className='relative shadow-sm shadow-kiddoShadow rounded-xl cursor-pointer transition-all hover:ring-2 hover:ring-green-300 hover:shadow-md hover:shadow-green-300'>
+      <article
+        className='category-card relative shadow-sm shadow-kiddoShadow rounded-xl cursor-pointer transition-all hover:ring-4'
+        style={{ '--ruban-color': categoryColor }}>
         <div>
           <img src={imageUrl} alt='' className='relative w-full h-64 rounded-t-xl object-fill' />
           <ReactTooltip type='success' effect='solid' place='top' />
@@ -23,7 +26,7 @@ const CategoryCard = ({ type, name, imageUrl }) => {
             data-tip='Mettre en favoris'
           />
         </div>
-        <div className={`flex font-medium rounded-b-xl py-4 px-3 hover:underline ${color}`}>
+        <div className='category-card-ruban flex font-medium rounded-b-xl py-4 px-3 hover:underline' style={{ '--ruban-color': categoryColor }}>
           <p className='ml-auto'>Activités {name}</p>
           <img src={icon_arrow} alt='' className='ml-auto' />
         </div>

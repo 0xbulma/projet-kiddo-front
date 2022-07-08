@@ -7,7 +7,8 @@ import INotification from '../../../../components/shared/icons/INotification';
 import ICalendar from '../../../../components/shared/icons/ICalendar';
 import useAuthContext from '../../../../hooks/useAuthContext';
 import ModalBackdrop from '../../../shared/modal/ModalBackdrop';
-import Register from '../../register/Register';
+import ModalRegisterLogin from '../../../shared/modal/ModalRegisterLogin';
+
 import useEventListener from '../../../../hooks/useEventListener';
 import Navbar2Sub from './Navbar2Sub';
 import { FaChevronDown, FaTimesCircle } from 'react-icons/fa';
@@ -26,7 +27,7 @@ export default function Navbar2() {
   const [showNav, setShowNav] = useState(true);
   const [scrollY, setScrollY] = useState();
   const [goingUp, setGoingUp] = useState(false);
-  const [profileIsShown, setProfileIsShown] = useState(false)
+  const [profileIsShown, setProfileIsShown] = useState(false);
 
   const prevScrollY = useRef(0);
 
@@ -52,12 +53,12 @@ export default function Navbar2() {
     if (isSubOpen) {
       setIsSubOpen(false);
     }
-    setIsSearchOpen(bol => !bol);
+    setIsSearchOpen((bol) => !bol);
     setUserInput('');
   };
 
   const showSubMenu = () => {
-    setIsSubOpen(bol => !bol);
+    setIsSubOpen((bol) => !bol);
   };
   const closeSubMenu = () => {
     setIsSubOpen(false);
@@ -67,7 +68,7 @@ export default function Navbar2() {
     setUserInput('');
   };
 
-  const onInputHandler = e => {
+  const onInputHandler = (e) => {
     setUserInput(e.currentTarget.value);
   };
 
@@ -94,38 +95,43 @@ export default function Navbar2() {
       setGoingUp(true);
     }
     prevScrollY.current = currentScrollY;
-   setScrollY(currentScrollY);
+    setScrollY(currentScrollY);
   };
 
-  useEffect(()=>{
-    if(!showNav){
+  useEffect(() => {
+    if (!showNav) {
       setShowNav(true);
     }
-    if(!goingUp && window.scrollY > 10){
+    if (!goingUp && window.scrollY > 10) {
       setShowNav(false);
       setIsSubOpen(false);
       setProfileIsShown(false);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[goingUp, scrollY])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [goingUp, scrollY]);
 
-  useDebounce(() => {
-    if(!showNav){
-      setShowNav(true);
-    }
-  }, 800, [scrollY]);
-
+  useDebounce(
+    () => {
+      if (!showNav) {
+        setShowNav(true);
+      }
+    },
+    800,
+    [scrollY]
+  );
 
   const toggleProfile = () => {
-    setProfileIsShown(bol => !bol);
-  }
+    setProfileIsShown((bol) => !bol);
+  };
 
   useEventListener('scroll', scrollHandler);
   useEventListener('keydown', handler);
 
   return (
     <>
-      {isModal && <ModalBackdrop composant={<Register />} open={isModal} onClose={() => setIsModal(false)} />}
+      {isModal && (
+        <ModalBackdrop composant={<ModalRegisterLogin closeModal={() => setIsModal(false)} />} open={isModal} onClose={() => setIsModal(false)} />
+      )}
 
       <div className={`navbar2__container ${scrollY > 2 && 'navbar2__container--scrolled'} ${!showNav && 'navbar2__container--hidden'}`}>
         <nav className='navbar2__innercontainer generic-container'>
@@ -179,7 +185,8 @@ export default function Navbar2() {
                 <Menu.Button onClick={toggleProfile} className='flex items-center outline-none'>
                   <IProfile className='navbar2__icon' />
                 </Menu.Button>
-                <ProfileMenu isShown={profileIsShown}
+                <ProfileMenu
+                  isShown={profileIsShown}
                   goToProfile={() => {
                     closeSubMenu();
                     closeSearchInput();
@@ -192,13 +199,12 @@ export default function Navbar2() {
                     loggedOut();
                   }}
                 />
-                
               </Menu>
             )}
             {!isAuth && <IProfile className='navbar2__icon' onClick={() => setIsModal(true)} />}
           </div>
         </nav>
-        {isSubOpen && <Navbar2Sub toggle={isSubOpen}/>}
+        {isSubOpen && <Navbar2Sub toggle={isSubOpen} />}
       </div>
     </>
   );
