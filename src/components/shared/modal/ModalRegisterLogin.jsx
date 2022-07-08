@@ -12,7 +12,16 @@ import useAuthContext from '../../../hooks/useAuthContext';
 
 function Register({ loginSubtitle, registerSubtitle, isLoginPage, closeModal }) {
   const navigate = useNavigate();
-  const { loggedIn } = useAuthContext();
+  const { isAuth, loggedIn } = useAuthContext();
+
+  // Vérification si l'utilisateur est déjà connecté (prévention bug)
+  useEffect(() => {
+    if (isAuth) {
+      navigate('/user');
+      closeModal();
+    }
+  }, []);
+
   const [displayLogin, toggleLogin] = useToggle(isLoginPage);
 
   const [connectUser, { loading: connectUserLoading, error: connectUserError, data: connectUserData }] = useLazyQuery(CONNECT_USER);
@@ -49,7 +58,7 @@ function Register({ loginSubtitle, registerSubtitle, isLoginPage, closeModal }) 
           },
         });
       } else {
-        setErrors(['Les mots de passet ne correspondent pas !']);
+        setErrors(['Les mots de passe ne correspondent pas !']);
       }
     } else {
       setErrors(tempErrors);
@@ -86,9 +95,9 @@ function Register({ loginSubtitle, registerSubtitle, isLoginPage, closeModal }) 
     }
     // Connection de l'utilisateur
     if (connectUserData) {
-      console.log('ConnectUserData ', connectUserData);
       if (connectUserData.connectUser.email === dataInput.email) {
         setTimeout(() => {
+          loggedIn(connectUserData.connectUser);
           closeModal();
         }, 2000);
       } else {

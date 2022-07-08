@@ -153,9 +153,7 @@ export default function EventPage() {
                   </button>
                 ) : (
                   <div className='relative flex items-center justify-center'>
-                    <p className='absolute -top-5 text-center italic text-md'>
-                      {authContext.isOtherGender ? 'Inscrit.e' : authContext.isFemale ? 'Inscrite' : 'Inscrit'} à l'activité
-                    </p>
+                    <p className='absolute -top-5 text-center italic text-md'>Inscrit.e à l'activité</p>
                     <button
                       onClick={handleSubsClick}
                       className='bg-kiddoPurple px-8 py-2 w-96 rounded-2xl mt-2 font-medium mb-5 hover:underline shadow-md shadow-kiddoShadow hover:scale-[1.01] transition-all'>
@@ -218,9 +216,7 @@ export default function EventPage() {
                   </button>
                 ) : (
                   <div className='relative flex items-center justify-center'>
-                    <p className='absolute -top-5 text-center italic text-md'>
-                      {authContext.isOtherGender ? 'Inscrit.e' : authContext.isFemale ? 'Inscrite' : 'Inscrit'} à l'activité
-                    </p>
+                    <p className='absolute -top-5 text-center italic text-md'>Inscrit.e à l'activité</p>
                     <button
                       onClick={handleSubsClick}
                       className='bg-kiddoPurple px-8 py-2 w-96 rounded-2xl mt-2 font-medium mb-5 hover:underline shadow-md shadow-kiddoShadow hover:scale-[1.01] transition-all'>

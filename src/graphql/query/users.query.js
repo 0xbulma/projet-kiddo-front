@@ -78,7 +78,15 @@ export const CHECK_TOKEN = gql`
     checkToken {
       _id
       email
-      gender
+    }
+  }
+`;
+
+export const DISCONNECT_USER = gql`
+  query Query($id: ObjectID!) {
+    disconnectUser(_id: $id) {
+      _id
+      email
     }
   }
 `;

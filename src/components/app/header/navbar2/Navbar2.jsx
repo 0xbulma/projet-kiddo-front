@@ -23,7 +23,7 @@ export default function Navbar2() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [userInput, setUserInput] = useState('');
   const [isModal, setIsModal] = useState();
-  const { isAuth, loggedOut } = useAuthContext();
+  const { isAuth, _id, loggedOut } = useAuthContext();
   const [showNav, setShowNav] = useState(true);
   const [scrollY, setScrollY] = useState();
   const [goingUp, setGoingUp] = useState(false);
@@ -196,7 +196,7 @@ export default function Navbar2() {
                     closeSubMenu();
                     closeSearchInput();
                     navigate('/');
-                    loggedOut();
+                    loggedOut(_id);
                   }}
                 />
               </Menu>
