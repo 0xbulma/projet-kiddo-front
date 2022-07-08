@@ -20,3 +20,43 @@ export const FRIEND_REQUEST = gql`
     sendFriendRequest(senderEmail: $senderEmail, targetEmail: $targetEmail)
   }
 `;
+
+export const BOOK_EVENT = gql`
+  mutation Mutation($id: ObjectID!, $eventId: ObjectID!) {
+    bookEvent(_id: $id, eventId: $eventId) {
+      booked_events {
+        event {
+          _id
+          main_owner {
+            email
+            first_name
+          }
+          content {
+            title
+          }
+        }
+        booked_at
+      }
+    }
+  }
+`;
+
+export const PIN_EVENT = gql`
+  mutation Mutation($id: ObjectID!, $eventId: ObjectID!) {
+    pinEvent(_id: $id, eventId: $eventId) {
+      pinned_events {
+        event {
+          _id
+          main_owner {
+            email
+            first_name
+          }
+          content {
+            title
+          }
+        }
+        pinned_at
+      }
+    }
+  }
+`;

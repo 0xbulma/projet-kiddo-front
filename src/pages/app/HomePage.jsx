@@ -11,7 +11,7 @@ import { CATEGORIES } from '../../utils/constants/categoryList';
 // import MAIN_BG from '../../assets/images/main_bg.svg';
 import hero_bg_1 from '../../assets/images/hero_bg_1.webp';
 
-// import ICON_CALENDAR from '../../assets/icons/icon_calendar.svg';
+import ICON_CALENDAR from '../../assets/icons/icon_calendar.svg';
 import Skelet from '../../components/shared/loadingfiles/Skelet';
 
 // Variables
@@ -90,10 +90,10 @@ export default function HomePage() {
         <article className='generic-container home-section'>
           <div className='flex flex-col md:flex-row justify-between items-center mb-5'>
             <h2 className='home-section__title'>Activités prévues cette semaine</h2>
-            {/* <div className='flex items-center'>
+            <div className='flex items-center'>
               <img src={ICON_CALENDAR} alt='' />
               <p className='md:ml-4 md:mr-10 text-xl md:text-2xl underline'>Calendrier des activités</p>
-            </div> */}
+            </div>
           </div>
           <div className='section__grid-3'>
             {lastPublishedLoading ? (

@@ -31,22 +31,9 @@ export default function CommentSection({ commentTarget, targetID, sectionName })
 
   useEffect(() => {
     if (!activeUser) {
-      console.log(email);
-      getActiveUser({ variables: { email: 'connect1@gmail.com' } });
+      getActiveUser({ variables: { email } });
     }
   }, [email]);
-
-  useEffect(() => {
-    if (activeUser) {
-      console.log(activeUser);
-    }
-    if (loading) {
-      console.log('load', loading);
-    }
-    if (error) {
-      console.log('err', error);
-    }
-  }, [activeUser, loading, error]);
 
   // Chargement des commentaires depuis Mongo
   const { data: comments, refetch } = useQuery(GET_BY_TARGET_ID, { variables: { type: commentTarget, id: targetID } });
@@ -277,8 +264,6 @@ function WriteComment({ user, parent, commentTarget, targetID, refetchComments, 
 
   //Forcer le undefined pour un enregistrement.
   const parentId = parent !== undefined && parent !== null ? parent : undefined;
-
-  console.log('CommentTarget ', commentTarget, '| TargetID :', targetID);
 
   const getTargetKey = () => {
     switch (commentTarget) {

@@ -1,6 +1,5 @@
 import React from 'react';
 import activityPic from '../../../assets/images/GDN2.jpg';
-import './activity-card.css';
 
 import * as dateManager from '../../../utils/DateManager';
 
@@ -17,7 +16,8 @@ export default function ActivityCard({ title, category, location, date, price })
   return (
     <>
       <article
-        className={`overflow-hidden relative shadow-sm shadow-kiddoShadow rounded-xl cursor-pointer transition-all hover:ring-2 hover:ring-green-300 hover:shadow-md hover:shadow-green-300 bg-kiddoGray`}>
+        className={`activity-card overflow-hidden relative shadow-sm shadow-kiddoShadow rounded-xl cursor-pointer transition-all hover:ring-4 bg-kiddoGray`}
+        style={{ '--ruban-color': categoryColor }}>
         <div className='activity-card__ruban' data-category={category} style={{ '--ruban-color': categoryColor }}>
           <img src={activityPic} alt='' className='relative w-full h-64 rounded-t-xl object-fill' />
           <ReactTooltip type='light' effect='solid' place='top' />

@@ -1,25 +1,15 @@
-
-.modal{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: linear-gradient(to bottom, hsl(228, 96%, 89%), hsl(236, 89%, 79%));
-
-    padding: 4rem;
-    z-index: 1000;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 500px;
-    width: 500px;
-    box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.63);
+.modal-form {
+  @apply flex flex-col items-center text-center;
 }
 
-.close-modal{
-    position: absolute;
-    top: 10px;
-    right: 10px;
+.modal-form__input {
+  @apply w-80 border border-gray-400 mb-3;
+}
+
+.modal-form input {
+  @apply rounded-3xl;
+}
+
+.modal-form button {
+  @apply px-8 py-2 w-96 rounded-2xl mt-5;
 }

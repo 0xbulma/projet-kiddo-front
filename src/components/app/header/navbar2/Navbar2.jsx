@@ -8,7 +8,7 @@ import INotification from '../../../../components/shared/icons/INotification';
 import ICalendar from '../../../../components/shared/icons/ICalendar';
 import useAuthContext from '../../../../hooks/useAuthContext';
 import ModalBackdrop from '../../../shared/modal/ModalBackdrop';
-import Register from '../../register/Register';
+import ModalRegisterLogin from '../../../shared/modal/ModalRegisterLogin';
 
 import useDebounce from '../../../../hooks/useDebounce';
 
@@ -100,7 +100,9 @@ export default function Navbar2() {
 
   return (
     <div className='navbar2__container'>
-      {isModal && <ModalBackdrop composant={<Register />} open={isModal} onClose={() => setIsModal(false)} />}
+      {isModal && (
+        <ModalBackdrop composant={<ModalRegisterLogin closeModal={() => setIsModal(false)} />} open={isModal} onClose={() => setIsModal(false)} />
+      )}
       <nav className='navbar2__innercontainer'>
         <Link to='/'>
           <img className='navbar2_logo' src={logo} alt='logo' />

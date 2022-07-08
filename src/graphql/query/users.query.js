@@ -37,8 +37,8 @@ export const GET_BY_ID = gql`
 `;
 
 export const GET_BY_EMAIL = gql`
-query GetUserById($email: Emailadress) {
-  getUserByEmail(email: $email) {
+  query GetUserById($email: Emailadress) {
+    getUserByEmail(email: $email) {
       _id
       created_at
       updated_at
@@ -78,7 +78,7 @@ export const CHECK_TOKEN = gql`
     checkToken {
       _id
       email
-      isConnected
+      gender
     }
   }
 `;
