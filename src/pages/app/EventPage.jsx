@@ -35,7 +35,9 @@ export default function EventPage() {
   const { loading, error, data } = useQuery(GET_BY_ID, { variables: { eventId: eventId } });
 
   // Auto scroll to top page for avoid mi screen bug with navigate/link
-  useEffect(() => !data && window.scroll(0, 0), [loading]);
+  useEffect(() => {
+    if (!data) window.scroll(0, 0);
+  }, [data, loading]);
 
   useEffect(() => {
     if (data) {
