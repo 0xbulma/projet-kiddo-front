@@ -2,6 +2,13 @@ import { useMemo } from 'react';
 import { MapContainer, TileLayer, Popup, Marker, ZoomControl } from 'react-leaflet';
 import './mapLeaflet.css';
 import { useState, useEffect } from 'react';
+import L from 'leaflet';
+
+const customIcon = L.icon({
+  iconUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Google_Maps_icon_%282020%29.svg/536px-Google_Maps_icon_%282020%29.svg.png',
+  iconSize: [22, 30],
+  popupAnchor: [0, -15],
+});
 
 export default function MapLeaflet({ currentLocation, items, className, maxDistMeters }) {
   const [center, setCenter] = useState([48.864716, 2.349014]);
@@ -30,6 +37,11 @@ export default function MapLeaflet({ currentLocation, items, className, maxDistM
     }
   }, [map, center, zoom]);
 
+  // Ne pas faire de target='_blank' sur le <a> faille de sécurité !!!
+  const openInNewTab = (url) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
   const displayMap = useMemo(
     () => (
       <MapContainer className={`rounded-lg grow ${className}`} center={center} zoom={zoom} scrollWheelZoom={false} zoomControl={false} ref={setMap}>
@@ -39,9 +51,9 @@ export default function MapLeaflet({ currentLocation, items, className, maxDistM
         />
         <ZoomControl position='topright' />
         {currentLocation && (
-          <Marker position={center}>
+          <Marker position={center} icon={customIcon}>
             <Popup>
-              <h3>Vous êtes ici</h3>
+              <span>Vous êtes ici</span>
             </Popup>
           </Marker>
         )}
@@ -49,9 +61,16 @@ export default function MapLeaflet({ currentLocation, items, className, maxDistM
           items.map((item, index) => {
             let gpsCoord = [item?.gps[1], item?.gps[0]];
             return (
-              <Marker key={index} position={gpsCoord}>
+              <Marker key={index} position={gpsCoord} icon={customIcon}>
                 <Popup>
-                  <h3>Title: {item.content.title}</h3>
+                  <span className='text-lg'>
+                    {item.content.title} <br />
+                    <span
+                      className='text-kiddoPurple hover:underline cursor-pointer'
+                      onClick={() => openInNewTab(`https://www.google.com/maps/dir//${gpsCoord}/`)}>
+                      Consulter l'itinéraire
+                    </span>
+                  </span>
                 </Popup>
               </Marker>
             );
@@ -73,30 +92,6 @@ export function MapLeafletPlaceHolder({ className }) {
           attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, Team Kiddo'
           url='https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png'
         />
-      </MapContainer>
-    </div>
-  );
-}
-
-export function MapLeafletMultipleMarkers(props) {
-  let { inputGPS, mainGPS } = props;
-  mainGPS = mainGPS.length === 2 ? [mainGPS[1], mainGPS[0]] : [51.505, -0.09];
-
-  return (
-    <div className='rounded-lg overflow-hidden'>
-      <MapContainer center={mainGPS} zoom={13} scrollWheelZoom={false} zoomControl={false}>
-        <ZoomControl position='topright' />
-        <TileLayer
-          attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a> - Team Kiddo'
-          url='https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png'
-        />
-        {inputGPS.map((map, index) => (
-          <Marker position={map}>
-            <Popup>
-              A pretty CSS3 popup. <br /> Easily customizable.
-            </Popup>
-          </Marker>
-        ))}
       </MapContainer>
     </div>
   );

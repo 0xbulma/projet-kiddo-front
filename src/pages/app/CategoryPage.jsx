@@ -12,7 +12,10 @@ export default function CategoryPage(props) {
   const { category } = useParams();
 
   // GraphQl Request
-  const [getCategoryData, { error: categoryDataError, data: categoryData }] = useLazyQuery(GET_CATEGORY_BY_NAME);
+  const [getCategoryData, { loading: categoryDataLoading, error: categoryDataError, data: categoryData }] = useLazyQuery(GET_CATEGORY_BY_NAME);
+
+  // Auto scroll to top page for avoid mi screen bug with navigate/link
+  useEffect(() => !categoryData && window.scroll(0, 0), [categoryDataLoading]);
 
   useEffect(() => {
     // Fetch category data from GQL Request
