@@ -17,6 +17,7 @@ module.exports = {
         kiddoSection: '#edebfc',
         kiddoGray: '#e4e3e3',
         kiddoShadow: '#9ca3af',
+        kiddoLightGray: '#8A8787',
       },
       fontFamily: {
         lovely: ['lovely_nathalie', 'sans-serif'],

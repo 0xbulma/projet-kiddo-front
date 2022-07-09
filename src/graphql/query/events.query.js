@@ -101,6 +101,7 @@ export const GET_BY_ID = gql`
           _id
           first_name
           birthdate
+          profil_picture
         }
         booked_at
         group_detail {
@@ -137,6 +138,7 @@ export const GET_BY_ID = gql`
         first_name
         last_name
         birthdate
+        profil_picture
         children {
           id
           name
@@ -150,6 +152,7 @@ export const GET_BY_ID = gql`
         first_name
         last_name
         birthdate
+        profil_picture
         children {
           id
           name

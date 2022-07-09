@@ -12,27 +12,30 @@ import { GET_BY_ID } from '../../graphql/query/events.query';
 
 import BlankProfilPic from '../../assets/admin/blank_profil_pic.png';
 import CommentSection from '../../components/shared/CommentSection';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { useQuery, useMutation } from '@apollo/client';
 import { useEffect, useState } from 'react';
 import * as dateManager from '../../utils/DateManager';
 import MapLeafletOneMarker from '../../components/shared/MapLeafletOneMarker';
-import { Link } from 'react-router-dom';
 import useToggle from '../../hooks/useToggle';
 import ModalBackdrop from '../../components/shared/modal/ModalBackdrop';
 import ModalRegisterLogin from '../../components/shared/modal/ModalRegisterLogin';
 import { BOOK_EVENT, PIN_EVENT } from '../../graphql/mutation/users.mutation';
 
 import ReactTooltip from 'react-tooltip';
-import { FaStar } from 'react-icons/fa';
+import { FaStar, FaInfo } from 'react-icons/fa';
 
 export default function EventPage() {
+  const navigate = useNavigate();
   const { eventId } = useParams();
   const authContext = useAuthContext();
 
   const [event, setEvent] = useState();
 
   const { loading, error, data } = useQuery(GET_BY_ID, { variables: { eventId: eventId } });
+
+  // Auto scroll to top page for avoid mi screen bug with navigate/link
+  useEffect(() => !data && window.scroll(0, 0), [loading]);
 
   useEffect(() => {
     if (data) {
@@ -105,7 +108,7 @@ export default function EventPage() {
     <>
       {!loading && event ? (
         <div className=''>
-          <article className='flex flex-col items-center grow container mx-auto text-center pt-28 pb-8'>
+          <article className='flex flex-col items-center grow container mx-auto text-center pt-32 pb-8'>
             <h2 className='text-bold text-4xl flex items-center'>
               {event.content.title}
               <ReactTooltip type='success' effect='solid' place='top' />
@@ -178,30 +181,34 @@ export default function EventPage() {
               </div>
             </div>
           </section>
-          <section className='flex flex-col items-center w-full mt-10 pb-16 bg-[#F6F5FE]'>
-            <div className='grid w-full grid-cols-2 px-56 my-10 gap-11'>
+          <section className='flex flex-col items-center w-full mt-10 py-10 bg-[#F6F5FE]'>
+            <div className='grid w-full px-5 lg:px-20 xl:px-56 my-10 section__grid-2'>
               <article>
-                <h2 className='text-2xl font-bold'>Description de l'activité</h2>
-                <p className='mt-8 mr-10'>{event.content.description}</p>
+                <h2 className='text-2xl md:text-4xl font-medium'>Description de l'activité</h2>
+                <p className='md:mt-16 md:mr-10 text-md font-light mt-5'>{event.content.description}</p>
               </article>
               <article className='flex flex-col justify-around'>
                 {/* Activité organisé par */}
                 <div className='flex justify-center items-center'>
                   <span className='mr-3'>Activité organisé par </span>
-                  <div className='flex flex-col items-center'>
-                    <Link to={`/user/${event.main_owner._id}`}>
-                      <img src={BlankProfilPic} alt='' width='75px' className='hover:scale-105 transition-all' />
-                    </Link>
+                  <div className='flex flex-col items-center mb-3'>
+                    <img
+                      src={event.main_owner.profil_picture !== null ? event.main_owner.profil_picture : BlankProfilPic}
+                      alt=''
+                      width='112px'
+                      className='hover:scale-105 transition-all rounded-full bg-kiddoGray shadow-sm shadow-kiddoShadow p-1'
+                      onClick={() => navigate(`/user/${event.main_owner._id}`)}
+                    />
                     <span>{event.main_owner.first_name + ', ' + dateManager.getUserAge(event.main_owner.birthdate) + ' ans'}</span>
                     <span>{event.main_owner.children.length + (event.main_owner.children.length > 1 ? ' enfants' : ' enfant')}</span>
                   </div>
                 </div>
                 {/* Rendu de la carte */}
-                <div className='bg-yellow-300'>
-                  <MapLeafletOneMarker inputGPS={event.gps} />
+                <div className='w-auto h-full mx-2 my-10'>
+                  <MapLeafletOneMarker name={event.name} inputGPS={event.gps} />
                 </div>
                 {/* Adresse */}
-                <p className='text-center'>Parc Forestier de la Mare Adam, Rte des Huit Bouteilles, 98370 Chaville</p>
+                <p className='text-center mt-2'>Parc Forestier de la Mare Adam, Rte des Huit Bouteilles, 98370 Chaville</p>
               </article>
             </div>
 
@@ -245,8 +252,14 @@ export default function EventPage() {
           {authContext.isAuth && (
             <>
               <section className='container mx-auto my-12'>
-                <h2 className='mt-5 mb-5 text-2xl font-bold'>Participants </h2>
-                <article className='flex items-center justify-around'>
+                <article className='flex justify-between'>
+                  <h2 className='mt-5 mb-5 font-medium text-4xl'>Participants </h2>
+                  <div className='flex items-center'>
+                    <FaInfo className='w-6 h-6 p-1 border-2 border-kiddoPurple rounded-full text-kiddoPurple mr-2' />
+                    <span className='text-sm'>Plus que {event.group_size - event.group_participants.length} places</span>
+                  </div>
+                </article>
+                <article className='flex items-center justify-around py-10'>
                   {event.group_participants.map((group, index) => (
                     <CardParticipant key={index} user={group.user} participants={group.group_detail} />
                   ))}
@@ -282,12 +295,19 @@ function CardInfo(props) {
 }
 
 function CardParticipant(props) {
+  const navigate = useNavigate();
   const { user, participants } = props;
+
+  console.log('Participant : ', user);
   return (
     <div className='flex flex-col items-center justify-center align-middle'>
-      <Link to={`/user/${user._id}`}>
-        <img src={BlankProfilPic} alt='' width='75px' className='hover:scale-105 transition-all' />
-      </Link>
+      <img
+        src={user.profil_picture !== null ? user.profil_picture : BlankProfilPic}
+        alt=''
+        width='100px'
+        className='hover:scale-105 transition-all rounded-full bg-kiddoGray shadow-sm shadow-kiddoShadow p-1 mb-2'
+        onClick={() => navigate(`/user/${user._id}`)}
+      />
       <span>
         {user.first_name}, {dateManager.getUserAge(user.birthdate)} ans
       </span>

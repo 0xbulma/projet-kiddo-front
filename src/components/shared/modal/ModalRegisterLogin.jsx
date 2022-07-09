@@ -18,6 +18,7 @@ function Register({ loginSubtitle, registerSubtitle, isLoginPage, closeModal }) 
   useEffect(() => {
     if (isAuth) {
       navigate('/user');
+      window.scrollTo(0, 0);
       closeModal();
     }
   }, []);
@@ -36,6 +37,16 @@ function Register({ loginSubtitle, registerSubtitle, isLoginPage, closeModal }) 
   });
 
   const [errors, setErrors] = useState([]);
+
+  // Suppression des erreurs enregistrées lors du changement de panel
+  useEffect(() => {
+    setErrors([]);
+    setDataInput({
+      ...dataInput,
+      verifyPassword: null,
+      cgu: false,
+    });
+  }, [displayLogin]);
 
   const tryRegisterUser = () => {
     const tempErrors = [];
@@ -85,26 +96,29 @@ function Register({ loginSubtitle, registerSubtitle, isLoginPage, closeModal }) 
         setTimeout(() => {
           loggedIn(createUserData.createUser);
           navigate('/user');
+          window.scrollTo(0, 0);
           closeModal();
         }, 2000);
       } else {
         setErrors(['Erreur de la création de votre compte, veuillez contacter un administrateur ! (Erreur: 001)']);
       }
-    } else if (errorUserData) {
-      setErrors([errorUserData]);
+    }
+    if (errorUserData) {
+      setErrors([errorUserData.message]);
     }
     // Connection de l'utilisateur
     if (connectUserData) {
       if (connectUserData.connectUser.email === dataInput.email) {
         setTimeout(() => {
           loggedIn(connectUserData.connectUser);
+          window.scrollTo(0, 0);
           closeModal();
         }, 2000);
       } else {
         setErrors(['Erreur de votre connexion, veuillez contacter un administrateur ! (Erreur: 002)']);
       }
     } else if (connectUserError) {
-      setErrors([connectUserError]);
+      setErrors([connectUserError.message]);
     }
   }, [createUserData, errorUserData, connectUserData, connectUserError]);
 
@@ -144,7 +158,7 @@ function Register({ loginSubtitle, registerSubtitle, isLoginPage, closeModal }) 
               }}
             />
 
-            <p className='italic text-sm -mt-2 self-end mr-32'>*Obligatoire</p>
+            <p className='italic text-sm -mt-2 self-end text-center mr-10'>*Obligatoire</p>
             <div className='flex items-center mt-5'>
               <input
                 type='checkbox'
@@ -159,6 +173,7 @@ function Register({ loginSubtitle, registerSubtitle, isLoginPage, closeModal }) 
                   className='underline text-kiddoOrange cursor-pointer'
                   onClick={() => {
                     closeModal();
+                    window.scrollTo(0, 0);
                     navigate('/cgu');
                   }}>
                   conditions générales d'utilisation
@@ -223,6 +238,15 @@ function Register({ loginSubtitle, registerSubtitle, isLoginPage, closeModal }) 
             <p className='italic text-sm -mt-2 self-end mr-[3rem] hover:underline cursor-pointer select-none' onClick={() => handleForgerPassword()}>
               Mot de passe oublié ?
             </p>
+
+            {/* Gestion des messages d'erreurs */}
+            <div className='mt-5 flex flex-col'>
+              {errors.map((error, index) => (
+                <span key={index} className='text-red-600 font-medium text-sm'>
+                  *{error}
+                </span>
+              ))}
+            </div>
 
             <button
               onClick={tryConnectUser}
