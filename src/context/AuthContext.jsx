@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 import { CHECK_TOKEN, DISCONNECT_USER } from '../graphql/query/users.query';
-import { useLazyQuery, useQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 
 export const AuthContextSchema = createContext({
   isAuthChecked: null,

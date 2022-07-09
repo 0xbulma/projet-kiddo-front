@@ -30,8 +30,10 @@ export default function CommentSection({ commentTarget, targetID, sectionName })
   useEffect(() => {
     if (!activeUser) {
       getActiveUser({ variables: { email } });
+    } else {
+      console.log('ActiveUser : ', activeUser);
     }
-  }, [email]);
+  }, [email, activeUser]);
 
   // Chargement des commentaires depuis Mongo
   const { data: comments, refetch } = useQuery(GET_BY_TARGET_ID, {
@@ -106,14 +108,13 @@ function Comment({ user, comment, refetchComments, commentTarget, targetID }) {
           />
         </div>
         {/* FIN SECTION: Image de profil */}
-        <article className='bg-kiddoSection grow rounded-lg flex flex-col p-2 shadow-sm shadow-kiddoShadow'>
+        <article className='bg-kiddoSection grow rounded-lg flex flex-col p-2 shadow-sm shadow-kiddoShadow cursor-default'>
           {/* SECTION: Nom + Prénom et affichage date */}
           <div className='pt-2 ml-3 flex justify-between'>
             <p className='font-medium'>
-              {comment.sender.first_name === null && comment.sender.last_name === null && comment.sender.email}
-              {comment.sender.first_name !== null && comment.sender.last_name === null && comment.sender.first_name}
-              {comment.sender.first_name === null && comment.sender.last_name !== null && comment.sender.last_name}
-              {comment.sender.first_name !== null && comment.sender.last_name !== null && comment.sender.first_name + ' ' + comment.sender.last_name}
+              {comment.sender.first_name !== null
+                ? comment.sender.first_name + (comment.sender.last_name !== null && ' ' + comment.sender.last_name)
+                : comment.sender.email}
             </p>
             <p className='mr-3 font-thin text-sm'>{new Date(comment.created_at).toLocaleString().replace(' ', ' à ')}</p>
           </div>
@@ -198,16 +199,13 @@ function Comment({ user, comment, refetchComments, commentTarget, targetID }) {
                 />
               </div>
               {/* FIN SECTION: Image de profil */}
-              <article className='bg-kiddoSection grow rounded-lg flex flex-col p-2 shadow-sm shadow-kiddoShadow'>
+              <article className='bg-kiddoSection grow rounded-lg flex flex-col p-2 shadow-sm shadow-kiddoShadow cursor-default'>
                 {/* SECTION: Nom + Prénom et affichage date */}
                 <div className='pt-2 ml-3 flex justify-between'>
                   <p className='font-medium'>
-                    {comment.sender.first_name === null && comment.sender.last_name === null && comment.sender.email}
-                    {comment.sender.first_name !== null && comment.sender.last_name === null && comment.sender.first_name}
-                    {comment.sender.first_name === null && comment.sender.last_name !== null && comment.sender.last_name}
-                    {comment.sender.first_name !== null &&
-                      comment.sender.last_name !== null &&
-                      comment.sender.first_name + ' ' + comment.sender.last_name}
+                    {comment.sender.first_name !== null
+                      ? comment.sender.first_name + (comment.sender.last_name !== null && ' ' + comment.sender.last_name)
+                      : comment.sender.email}
                   </p>
                   <p className='mr-3 font-thin text-sm'>{new Date(comment.created_at).toLocaleString().replace(' ', ' à ')}</p>
                 </div>
