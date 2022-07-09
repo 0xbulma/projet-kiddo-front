@@ -59,27 +59,27 @@ const UserInfo = () => {
   const nbChildren = 1;
 
   const [user, setUser] = useState({
-    gender: '',
-    first_name: '',
-    last_name: '',
-    pseudo: '',
-    phone: '',
-    email: '',
-    birthdate: '',
+    gender: null,
+    first_name: null,
+    last_name: null,
+    pseudo: null,
+    phone: null,
+    email: null,
+    birthdate: null,
     adress: {
-      city: '',
-      zip_code: '',
-      adress_line: '',
-      adress_line_2: '',
+      city: null,
+      zip_code: null,
+      adress_line: null,
+      adress_line_2: null,
     },
 
-    description: '',
-    children: Array(nbChildren).fill({}),
+    description: null,
+    children: nbChildren.length > 0 ? Array(nbChildren).fill({}) : [],
   });
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
+  // useEffect(() => {
+  //   console.log('UserInfo UseEffect :', user);
+  // }, [user]);
 
   // détermine la photo de profil enfant
   const getChildPic = (i) => {
@@ -94,10 +94,10 @@ const UserInfo = () => {
 
   const [modifyUserInfo, { data, error }] = useMutation(MODIFY_USER_INFO);
   if (error) {
-    console.log(error);
+    console.log('UserInfo Error :', error);
   }
   if (data) {
-    console.log(data);
+    console.log('UserInfo Data :', data);
   }
 
   return (
@@ -260,7 +260,7 @@ const UserInfo = () => {
           <div className='flex justify-center p-10'>
             <Button
               onClick={() => {
-                console.log({
+                console.log('UserInfo SaveBtnOnClick :', {
                   id: context._id,
                   input: {
                     gender: user.gender,

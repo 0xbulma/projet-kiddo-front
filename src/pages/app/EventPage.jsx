@@ -32,12 +32,13 @@ export default function EventPage() {
 
   const [event, setEvent] = useState();
 
-  const { loading, error, data } = useQuery(GET_BY_ID, { variables: { eventId: eventId } });
+  // fetchPolicy 'network-only' for getting user only on network for having modification
+  const { loading, error, data } = useQuery(GET_BY_ID, { variables: { eventId: eventId }, fetchPolicy: 'network-only' });
 
   // Auto scroll to top page for avoid mi screen bug with navigate/link
   useEffect(() => {
     if (!data) window.scroll(0, 0);
-  }, [data, loading]);
+  }, [data]);
 
   useEffect(() => {
     if (data) {
