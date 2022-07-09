@@ -3,10 +3,8 @@ import { useQuery, useLazyQuery, useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router';
 import { useEffect, useState } from 'react';
 import useToggle from '../../hooks/useToggle';
-import { Link } from 'react-router-dom';
 
 import ReactTooltip from 'react-tooltip';
-// import CustomInput from '../administration/CustomInput';
 
 import * as CommentsMutation from '../../graphql/mutation/comments.mutation';
 import { GET_BY_EMAIL } from '../../graphql/query/users.query';
