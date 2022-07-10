@@ -67,7 +67,7 @@ a.footer__legal--nav-item {
 /* **************** Copyright **************** */
 
 section.footer__copyright {
-  @apply pb-5 border-gray-200;
+  @apply pb-3 border-gray-200;
 }
 
 p.footer__copyright__text {

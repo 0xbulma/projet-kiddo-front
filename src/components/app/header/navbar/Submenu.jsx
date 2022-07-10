@@ -3,6 +3,7 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Submenu({ item }) {
+  const submenu = item.submenu;
   return (
     <Transition
       as={Fragment}
@@ -12,15 +13,16 @@ export default function Submenu({ item }) {
       leave='transition ease-in duration-150'
       leaveFrom='opacity-100 translate-y-0'
       leaveTo='opacity-0 -translate-y-1'>
-      <Popover.Panel className='absolute inset-x-0 z-10 hidden transform bg-white shadow-lg md:block top-full'>
+      <Popover.Panel className='navbar__subnav'>
         <div className='bg-white'>
-          <div className='px-4 py-5 mx-auto space-y-6 max-w-7xl sm:flex sm:space-y-0 sm:space-x-10 sm:px-6 lg:px-8'>
-            {item.submenu.map((category) => (
+          <div className='subnav__content'>
+            {submenu.map((category) => (
               <div key={category.name} className='flow-root'>
                 <Link
                   to={`/category/${category.category}`}
-                  className='flex items-center p-3 -m-3 text-base font-medium text-gray-900 rounded-md hover:bg-gray-100'>
-                  <p className='ml-3 text-sm'>{category.name}</p>
+                  className='subnav__content--link'
+                >
+                  <p className='ml-3'>{category.name}</p>
                 </Link>
               </div>
             ))}

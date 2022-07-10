@@ -33,6 +33,7 @@ import Signalement from './pages/administration/sections/Report';
 
 // Import CSS
 import './style.css';
+import CreateEvents from './pages/app/CreateEvents';
 
 let isAdmin = true;
 
@@ -49,6 +50,7 @@ root.render(
           <Route path='/contact' element={<UserLayout composant={<Contact />} />} />
           <Route path='/event/:eventId' element={<UserLayout composant={<EventPage />} />} />
           <Route path='/category/:category' element={<UserLayout composant={<CategoryPage />} />} />
+          <Route path='/create-event' element={<UserLayout composant={<CreateEvents />} />} />
           <Route path='*' element={<UserLayout composant={<NotFound />} />} />
           {isAdmin && (
             <Fragment>
