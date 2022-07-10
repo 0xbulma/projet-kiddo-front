@@ -1,11 +1,14 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
-import './back-drop.css';
 
 const BackDrop = ({ open, onClose }) => {
   if (!open) return null;
   return (
-    <>{ReactDOM.createPortal(<div className='backdrop backdrop-blur-xl fixed' onClick={onClose}></div>, document.getElementById('backdrop-root'))}</>
+    <>
+      {ReactDOM.createPortal(
+        <div className='fixed z-40 top-0 left-0 right-0 bottom-0 backdrop-blur-md backdrop-brightness-75' onClick={onClose}></div>,
+        document.getElementById('backdrop-root')
+      )}
+    </>
   );
 };
 

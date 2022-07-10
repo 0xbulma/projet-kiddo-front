@@ -64,3 +64,24 @@ margin-top: 2rem ;
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
   }
+
+  .etiquette {
+    clip-path: polygon(0 0, 90% 0, 88% 50%, 90% 100%, 0 100%);
+    background-color: lightgray
+  }
+  .etiquette:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+  }
+
+  .child-card {
+    position: relative;
+  }
+  .remove-child-button {
+    position: absolute;
+    top : 0.5rem;
+    right: 0.5rem;
+  }
+  .remove-child-button:hover{
+    color: grey;
+  }

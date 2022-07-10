@@ -28,8 +28,12 @@ export default function Carousel(props) {
               const indexCalc = index + imgIndex;
               const finalIndex = indexCalc % imgsLength;
               return (
-                <div key={index} className='w-full px-2'>
-                  <img src={images[finalIndex]} alt='...' className='shadow rounded max-w-full h-auto align-middle border-none' />
+                <div key={index} className='w-full px-0 md:px-2'>
+                  <img
+                    src={images[finalIndex]}
+                    alt='...'
+                    className='shadow rounded w-screen lg:w-full lg:max-w-screen h-auto align-middle border-none'
+                  />
                 </div>
               );
             })}
@@ -37,12 +41,12 @@ export default function Carousel(props) {
 
           <FontAwesomeIcon
             icon={faBackward}
-            className='absolute left-10 top-2/4 text-xl text-white bg-gray-500 pl-2 pr-3 py-2 rounded-full border border-gray-400 hover:scale-105 cursor-pointer transition-all'
+            className='absolute left-5 top-2/4 text-xl text-kiddoGray bg-kiddoPurple pl-2 pr-3 py-2 rounded-full shadow-sm shadow-kiddoShadow hover:text-white hover:scale-105 cursor-pointer transition-all'
             onClick={() => changeImgIndex(false)}
           />
           <FontAwesomeIcon
             icon={faForward}
-            className='absolute right-10 top-2/4 text-xl  text-white bg-gray-500 pl-3 pr-2 py-2 rounded-full border border-gray-400 hover:scale-105 cursor-pointer transition-all'
+            className='absolute right-5 top-2/4 text-xl  text-kiddoGray bg-kiddoSalmon pl-3 pr-2 py-2 rounded-full shadow-sm shadow-kiddoShadow hover:text-white hover:scale-105 cursor-pointer transition-all'
             onClick={() => changeImgIndex(true)}
           />
         </div>
