@@ -1,21 +1,32 @@
 import { useState, useEffect } from 'react';
-import Button from '../../components/shared/Button';
+// import { useNavigate } from 'react-router';
+// graphQL
+import { useMutation, useQuery } from '@apollo/client';
+import { MODIFY_USER_INFO } from '../../graphql/mutation/users.mutation';
+import { GET_BY_ID } from '../../graphql/query/users.query';
+// children pics
 import childProfil from '../../assets/images/blank_child_profil.svg';
 import boyProfil from '../../assets/images/profil_male_child.svg';
 import girlProfil from '../../assets/images/profil_female_child.svg';
+// icons
 import { FaTimesCircle } from 'react-icons/fa';
+//
 import { CATEGORIES } from '../../utils/constants/categoryList';
-import Etiquette from '../../components/shared/Etiquette';
-import { useMutation } from '@apollo/client';
-import { MODIFY_USER_INFO } from '../../graphql/mutation/users.mutation';
 import useAuthContext from './../../hooks/useAuthContext';
 import './user-info.css';
+// components
+import Etiquette from '../../components/shared/Etiquette';
+import Button from '../../components/shared/Button';
+
+// phone input
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
 
 const UserInfo = () => {
+  // const navigate = useNavigate();
   const nbChildren = 1;
   const context = useAuthContext();
+  // console.log('context', context);
   const [user, setUser] = useState({
     gender: null,
     first_name: null,
@@ -36,7 +47,7 @@ const UserInfo = () => {
   });
   // fonction qui récupère les values du form
   const handleChange = (e) => {
-    console.log('event', e.target);
+    // console.log('event', e.target);
     if (
       e.target.name === 'adress_line' ||
       e.target.name === 'zip_code' ||
@@ -75,17 +86,29 @@ const UserInfo = () => {
     setUser((user) => ({ ...user, children: [...user.children, {}] }));
   };
   const handleRemoveChild = (i) => {
-    // console.log('remove log ------>', i);
     let updateNbChildren = [...user.children];
     updateNbChildren.splice(i, 1);
     setUser((user) => {
       return { ...user, children: updateNbChildren };
     });
   };
+  const { data: userData, error: userError } = useQuery(GET_BY_ID, {
+    variables: {
+      id: context._id,
+    },
+  });
 
   useEffect(() => {
-    console.log('UserInfo UseEffect :', user);
-  }, [user]);
+    if (userData) {
+      console.log('userData', userData);
+    }
+    if (userError) {
+      console.log('errorDATA', userError);
+    }
+
+    // if (!context.isAuth) navigate('../');
+    // console.log('UserInfo UseEffect :', user);
+  }, [user, userData, userError]);
 
   // détermine la photo de profil enfant
   const getChildPic = (i) => {
@@ -153,7 +176,7 @@ const UserInfo = () => {
               {/* input form */}
               <div className="flex flex-col">
                 <input
-                  // value={user.first_name}
+                  value={userData && userData.getUserById.first_name}
                   className="rounded-xl mb-2 border-gray-200"
                   name="first_name"
                   type="text"
