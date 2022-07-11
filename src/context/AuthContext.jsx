@@ -85,7 +85,11 @@ function AuthContext(props) {
 
   // const getLocalUser = () => JSON.parse(localStorage.getItem('kiddo-user'));
 
-  return <AuthContextSchema.Provider value={state}>{props.children}</AuthContextSchema.Provider>;
+  return (
+    <AuthContextSchema.Provider value={state}>
+      {props.children}
+    </AuthContextSchema.Provider>
+  );
 }
 
 export default AuthContext;
