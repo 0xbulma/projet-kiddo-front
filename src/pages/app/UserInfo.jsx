@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Button from '../../components/shared/Button';
-import './user-info.css';
 import childProfil from '../../assets/images/blank_child_profil.svg';
 import boyProfil from '../../assets/images/profil_male_child.svg';
 import girlProfil from '../../assets/images/profil_female_child.svg';
@@ -10,6 +9,9 @@ import Etiquette from '../../components/shared/Etiquette';
 import { useMutation } from '@apollo/client';
 import { MODIFY_USER_INFO } from '../../graphql/mutation/users.mutation';
 import useAuthContext from './../../hooks/useAuthContext';
+
+import './user-info.css';
+
 const UserInfo = () => {
   const context = useAuthContext();
 
