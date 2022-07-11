@@ -12,6 +12,7 @@ import getGeoLoc from '../../../utils/getGeoLoc';
 import PaginationComp from '../../../components/shared/PaginationComp';
 import Skelet from '../../../components/shared/loadingfiles/Skelet';
 import Filterbox from '../../../components/shared/filterbox/Filterbox';
+import getCity from '../../../utils/getCity';
 
 import { FaCrosshairs, FaFilter } from 'react-icons/fa';
 
@@ -34,6 +35,7 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
     isLoading: false,
     coords: null,
     isGeoLoc: false,
+    city: null,
   });
 
   // GraphQl Request
@@ -42,6 +44,7 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
   const [getAllEvents, { data: dataAll }] = useLazyQuery(GET_EVENTS_CATEGORY);
 
   useEffect(() => {
+    console.log(dataAll);
     if (dataAll) {
       setAllResults(() => [...dataAll.eventsComplexQuery.results]);
     }
@@ -55,7 +58,7 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
           status: 'PUBLISHED',
           minDate: Date.now(),
           dateOrder: 'asc',
-          searchInput : searchInput,
+          searchInput: searchInput,
           minChildAge: minChildAge,
           maxChildAge: maxChildAge,
           lng: geoLoc.coords ? geoLoc?.coords[0] : null,
@@ -64,29 +67,29 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
         },
       },
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryId, geoLoc.coords, minChildAge, maxChildAge, maxDistMeters, searchInput]);
 
   useEffect(() => {
     // if (!data) {
-      getEvents({
-        variables: {
-          input: {
-            first: ITEMS_PER_PAGE,
-            offset: page * ITEMS_PER_PAGE - ITEMS_PER_PAGE,
-            categories: categoryId,
-            searchInput : searchInput,
-            status: 'PUBLISHED',
-            minDate: Date.now(),
-            dateOrder: 'asc',
-            minChildAge: minChildAge,
-            maxChildAge: maxChildAge,
-            lng: geoLoc.coords ? geoLoc?.coords[0] : null,
-            lat: geoLoc.coords ? geoLoc?.coords[1] : null,
-            maxDistMeters: maxDistMeters,
-          },
+    getEvents({
+      variables: {
+        input: {
+          first: ITEMS_PER_PAGE,
+          offset: page * ITEMS_PER_PAGE - ITEMS_PER_PAGE,
+          categories: categoryId,
+          searchInput: searchInput,
+          status: 'PUBLISHED',
+          minDate: Date.now(),
+          dateOrder: 'asc',
+          minChildAge: minChildAge,
+          maxChildAge: maxChildAge,
+          lng: geoLoc.coords ? geoLoc?.coords[0] : null,
+          lat: geoLoc.coords ? geoLoc?.coords[1] : null,
+          maxDistMeters: maxDistMeters,
         },
-      });
+      },
+    });
     // }
 
     // if (data) {
@@ -107,37 +110,44 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
     //     },
     //   });
     // }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryId, page, geoLoc.coords, minChildAge, maxChildAge, maxDistMeters, searchInput]);
 
   const onClickHandler = () => {
-    setGeoLoc((geoLoc) => ({ ...geoLoc, isLoading: true }));
+    setGeoLoc(geoLoc => ({ ...geoLoc, isLoading: true }));
+    let gps;
+
     getGeoLoc()
-      .then((res) => {
+      .then(res => {
+        gps = res;
+        return getCity(res[1], res[0]);
+      })
+      .then(res => {
         setMaxDistMeters(200000);
-        return setGeoLoc((geoLoc) => ({
+        return setGeoLoc(geoLoc => ({
           ...geoLoc,
           isLoading: false,
           isGeoLoc: true,
-          coords: res,
+          coords: gps,
+          city: res
         }));
       })
-      .catch((err) => {
+      .catch(err => {
         alert(err.message);
-        return setGeoLoc((geoLoc) => ({ ...geoLoc, isLoading: false, isGeoLoc: false }));
+        return setGeoLoc(geoLoc => ({ ...geoLoc, isLoading: false, isGeoLoc: false, city:null }));
       });
   };
 
   return (
     <>
       <section className='section__grid-3'>
-        <article className='section__grid-2 col-span-2'>
+        <article className='section__grid-2 col-span-2 mb-0'>
           <div className='pb-8'>
             <div className='flex bg-kiddoGray rounded-md shadow-sm shadow-kiddoShadow items-center justify-center py-2 mx-8 h-11 hover:ring-2 ring-0 transition-all'>
               {loading || !data ? <LoadIconBtn className='mr-2' /> : <FaCrosshairs className='text-sm mx-5' />}
               {data && (
                 <button onClick={onClickHandler} className='mx-3 w-full hover:underline py-2'>
-                  Activités autour de moi
+                  {(geoLoc.city && !loading) ? geoLoc.city : 'Activités autour de moi'}
                 </button>
               )}
             </div>
@@ -153,7 +163,9 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
               )}
               {data && showFilter && (
                 <Filterbox
-                  className={'absolute top-12 w-96 mb-5 mx-2 bg-kiddoGray rounded-lg' + (showFilter ? '' : 'filterbox__hidden')}
+                  className={
+                    'absolute top-12 w-96 p-3 pb-12 mb-5 mx-2 bg-kiddoGray rounded-lg' + (showFilter ? '' : 'filterbox__hidden')
+                  }
                   maxDist={maxDistMeters}
                   setMaxDist={setMaxDistMeters}
                   minChildAge={minChildAge}
@@ -199,17 +211,21 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
         </article>
 
         <article className='text-center col-span-2 lg:col-span-1'>
-          {data ? <MapLeaflet currentLocation={geoLoc?.coords} items={allResults} maxDistMeters={maxDistMeters} /> : <MapLeafletPlaceHolder />}
+          {data ? (
+            <MapLeaflet currentLocation={geoLoc?.coords} items={allResults} maxDistMeters={maxDistMeters} />
+          ) : (
+            <MapLeafletPlaceHolder />
+          )}
         </article>
       </section>
 
-      <section>
+      <section className=''>
         {data?.eventsComplexQuery.count > 12 && (
           <PaginationComp
             totalItem={data.eventsComplexQuery.count}
             itemsPerPage={12}
             page={page}
-            onPageClick={(page) => {
+            onPageClick={page => {
               setPage(page);
               window.scrollTo(0, 0);
             }}
