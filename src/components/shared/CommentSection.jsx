@@ -28,12 +28,8 @@ export default function CommentSection({ commentTarget, targetID, sectionName })
   const [getActiveUser, { loading, error, data: activeUser }] = useLazyQuery(GET_BY_EMAIL);
 
   useEffect(() => {
-    if (!activeUser) {
-      getActiveUser({ variables: { email } });
-    } else {
-      console.log('ActiveUser : ', activeUser);
-    }
-  }, [email, activeUser]);
+    if (!activeUser) getActiveUser({ variables: { email } });
+  }, [activeUser]);
 
   // Chargement des commentaires depuis Mongo
   const { data: comments, refetch } = useQuery(GET_BY_TARGET_ID, {
@@ -43,30 +39,30 @@ export default function CommentSection({ commentTarget, targetID, sectionName })
   // Fonction utilisé pour charger à nouveau les commentaires pour les fonctions enfants
   const refetchComments = () => refetch();
 
-  console.log('Comments : ', comments);
-
   return (
     <div>
-      <section className='container mx-auto px-10 max-h-[50rem] overflow-y-auto'>
+      {/* max-h-[50rem] -y-auto */}
+      <section className='container mx-auto px-10'>
         <h2 className='font-medium text-4xl mt-5'>{sectionName}</h2>
-        {activeUser &&
-          comments &&
-          comments.getByTargetId.map((comment, index) => {
-            return (
-              comment.parent === null && (
-                <Comment
-                  key={index}
-                  user={activeUser.getUserByEmail}
-                  comment={comment}
-                  commentTarget={commentTarget}
-                  targetID={targetID}
-                  refetchComments={refetchComments}
-                />
-              )
-            );
-          })}
+        <article>
+          {activeUser &&
+            comments &&
+            comments.getByTargetId.map((comment, index) => {
+              return (
+                comment.parent === null && (
+                  <Comment
+                    key={index}
+                    user={activeUser.getUserByEmail}
+                    comment={comment}
+                    commentTarget={commentTarget}
+                    targetID={targetID}
+                    refetchComments={refetchComments}
+                  />
+                )
+              );
+            })}
+        </article>
 
-        {/* SECTION TEMPORAIRE: Chargement utilisateur */}
         {loading && <p>Chargement de l'utilisateur...</p>}
         {activeUser !== undefined && (
           <WriteComment user={activeUser.getUserByEmail} commentTarget={commentTarget} targetID={targetID} refetchComments={refetchComments} />
@@ -82,15 +78,23 @@ function Comment({ user, comment, refetchComments, commentTarget, targetID }) {
   const [hiddingResponse, toggleHiddingResponse] = useToggle(false);
   const [isResponding, toggleResponding] = useToggle(false);
 
-  const [removeComment, { called, data }] = useMutation(CommentsMutation.REMOVE_COMMENT);
+  const [removeComment, { called, data: removeData }] = useMutation(CommentsMutation.REMOVE_COMMENT);
+
+  //Temp Like _id
+  const reactionId = '62bef2b93fdb4c2bc213dac0';
+  const [reactComment, { data: reactionData }] = useMutation(CommentsMutation.ADD_REACTION);
 
   const [modal, toggleModal] = useToggle(false);
 
   useEffect(() => {
-    if (called && data) {
+    if (called && removeData) {
       refetchComments();
     }
-  }, [data]);
+
+    if (reactionData) {
+      refetchComments();
+    }
+  }, [removeData, reactionData]);
 
   return (
     <section className='flex flex-col mt-5'>
@@ -119,7 +123,7 @@ function Comment({ user, comment, refetchComments, commentTarget, targetID }) {
             <p className='mr-3 font-thin text-sm'>{new Date(comment.created_at).toLocaleString().replace(' ', ' à ')}</p>
           </div>
           {/* FIN SECTION: Nom + Prénom et affichage date */}
-          <p className='p-3 break-all overflow-hidden max-h-52'>{comment.content.message}</p>
+          <p className='p-3 break-all -hidden max-h-52'>{comment.content.message}</p>
           <div className='relative pt-2 ml-3 flex justify-end mr-3 pb-2'>
             <p
               className='absolute left-0 font-medium text-kiddoLightGray select-none transition-all cursor-pointer hover:text-kiddoOrange hover:underline'
@@ -132,7 +136,7 @@ function Comment({ user, comment, refetchComments, commentTarget, targetID }) {
                 <ReactTooltip effect='solid' place='top' />
                 <FontAwesomeIcon
                   icon={faTrashCan}
-                  className='mx-2 text-red-600 hover:scale-125 transition-all cursor-pointer  select-none'
+                  className='comment__icon mx-2 text-red-600 hover:scale-125 transition-all cursor-pointer  select-none'
                   data-tip='Supprimer ce commentaire'
                   onClick={() => removeComment({ variables: { _id: comment._id } })}
                 />
@@ -143,7 +147,7 @@ function Comment({ user, comment, refetchComments, commentTarget, targetID }) {
             <ReactTooltip effect='solid' place='top' />
             <FontAwesomeIcon
               icon={faFlag}
-              className='mx-2 hover:text-kiddoYellow hover:scale-105 transition-all cursor-pointer  select-none'
+              className='comment__icon mx-2 hover:text-kiddoYellow hover:scale-105 transition-all cursor-pointer  select-none'
               data-tip='Signaler ce commentaire'
               onClick={toggleModal}
             />
@@ -151,8 +155,22 @@ function Comment({ user, comment, refetchComments, commentTarget, targetID }) {
             <ReactTooltip effect='solid' place='top' />
             <FontAwesomeIcon
               icon={faHeart}
-              className='ml-2  hover:text-red-600 hover:scale-105 transition-all cursor-pointer  select-none'
-              data-tip='Aimer ce commentaire'
+              className={
+                `comment__icon ml-2 hover:text-red-600 hover:scale-105 transition-all cursor-pointer select-none ` +
+                (commentIsLiked(user._id, comment.reactions) && 'text-red-600')
+              }
+              data-tip={commentIsLiked(user._id, comment.reactions) ? 'Ne plus aimer ce commentaire' : 'Aimer ce commentaire'}
+              onClick={() =>
+                reactComment({
+                  variables: {
+                    _id: comment._id,
+                    input: {
+                      type: reactionId,
+                      sender: user._id,
+                    },
+                  },
+                })
+              }
             />
             {/* FIN SECTION: Répondre - Signaler - Aimer */}
           </div>
@@ -210,7 +228,7 @@ function Comment({ user, comment, refetchComments, commentTarget, targetID }) {
                   <p className='mr-3 font-thin text-sm'>{new Date(comment.created_at).toLocaleString().replace(' ', ' à ')}</p>
                 </div>
                 {/* FIN SECTION: Nom + Prénom et affichage date */}
-                <p className='p-3 break-all overflow-hidden max-h-52'>{comment.content.message}</p>
+                <p className='p-3 break-all -hidden max-h-52'>{comment.content.message}</p>
                 <div className='pt-2 ml-3 flex justify-end mr-3 pb-2'>
                   {/* SECTION: Suppression message */}
                   {canManageComment(user, comment) && (
@@ -218,7 +236,7 @@ function Comment({ user, comment, refetchComments, commentTarget, targetID }) {
                       <ReactTooltip effect='solid' place='top' />
                       <FontAwesomeIcon
                         icon={faTrashCan}
-                        className='mr-2 text-red-600 hover:scale-125 transition-all cursor-pointer select-none'
+                        className='comment__icon mr-2 text-red-600 hover:scale-125 transition-all cursor-pointer select-none'
                         data-tip='Supprimer ce commentaire'
                         onClick={() => removeComment({ variables: { _id: comment._id } })}
                       />
@@ -229,7 +247,7 @@ function Comment({ user, comment, refetchComments, commentTarget, targetID }) {
                   <ReactTooltip effect='solid' place='top' />
                   <FontAwesomeIcon
                     icon={faFlag}
-                    className='mx-2 hover:text-kiddoYellow hover:scale-105 transition-all cursor-pointer  select-none'
+                    className='comment__icon mx-2 hover:text-kiddoYellow hover:scale-105 transition-all cursor-pointer'
                     data-tip='Signaler ce commentaire'
                     onClick={toggleModal}
                   />
@@ -237,8 +255,22 @@ function Comment({ user, comment, refetchComments, commentTarget, targetID }) {
                   <ReactTooltip effect='solid' place='top' />
                   <FontAwesomeIcon
                     icon={faHeart}
-                    className='ml-2  hover:text-red-600 hover:scale-105 transition-all cursor-pointer  select-none'
-                    data-tip='Aimer ce commentaire'
+                    className={
+                      `comment__icon ml-2 hover:text-red-600 hover:scale-105 transition-all cursor-pointer` +
+                      (commentIsLiked(user._id, comment.reactions) && 'text-red-600')
+                    }
+                    data-tip={commentIsLiked(user._id, comment.reactions) ? 'Ne plus aimer ce commentaire' : 'Aimer ce commentaire'}
+                    onClick={() => {
+                      reactComment({
+                        variables: {
+                          _id: comment._id,
+                          input: {
+                            type: reactionId,
+                            sender: user._id,
+                          },
+                        },
+                      });
+                    }}
                   />
                   {/* FIN SECTION: Répondre - Signaler - Aimer */}
                 </div>
@@ -255,13 +287,14 @@ function Comment({ user, comment, refetchComments, commentTarget, targetID }) {
           targetID={targetID}
           refetchComments={refetchComments}
           toggleResponding={toggleResponding}
+          autoFocus
         />
       )}
     </section>
   );
 }
 
-function WriteComment({ user, parent, commentTarget, targetID, refetchComments, toggleResponding }) {
+function WriteComment({ user, parent, commentTarget, targetID, refetchComments, toggleResponding, autoFocus }) {
   const [areaValue, setAreaValue] = useState();
   const [icon] = useState(faPaperPlane);
 
@@ -306,7 +339,7 @@ function WriteComment({ user, parent, commentTarget, targetID, refetchComments, 
     <section
       className={
         'flex mx-5 mt-5 ' +
-        ((parentId === undefined || parentId === null) && ' sticky bottom-0 mt-10 mb-5 pt-5 border-t-2 border-kiddoSection -mx-5 px-10 bg-white z-10')
+        ((parentId === undefined || parentId === null) && ' sticky bottom-0 mt-10 mb-5 p-5 border-t-2 border-kiddoSection -mx-5 px-10 bg-white z-10')
       }>
       <article className='flex items-center mt-5'>
         {parentId !== undefined && parentId !== null ? (
@@ -333,15 +366,16 @@ function WriteComment({ user, parent, commentTarget, targetID, refetchComments, 
           name='message'
           id='message'
           placeholder='Laisser un commentaire'
-          className='p-4 bg-transparent rounded-b-lg overflow-hidden border-0 focus:ring-0'
+          className='p-4 bg-transparent rounded-b-lg -hidden border-0 focus:ring-0'
           value={areaValue}
           onChange={(e) => setAreaValue(e.currentTarget.value)}
+          autoFocus={autoFocus}
         />
       </article>
       <article className='self-center'>
         <FontAwesomeIcon
           icon={icon}
-          className='ml-4 p-2 rounded-full text-xl kiddoSection shadow-md shadow-kiddoShadow border-2 hover:scale-105 transition-all cursor-pointer select-none'
+          className='comment__icon ml-4 p-2 rounded-full text-xl kiddoSection shadow-md shadow-kiddoShadow border-2 hover:scale-105 transition-all cursor-pointer select-none'
           onClick={() => createComment({ variables: requestVariables })}
         />
       </article>
@@ -356,4 +390,9 @@ function canManageComment(activeUser, comment) {
   }
 
   return false;
+}
+
+// Utils
+function commentIsLiked(userId, reactions) {
+  return reactions.filter((r) => r.sender?._id === userId).length > 0;
 }

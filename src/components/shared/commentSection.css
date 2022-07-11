@@ -19,3 +19,7 @@
   height: 170px;
   background-color: var(--bg-yellow);
 }
+
+.comment__icon:focus {
+  outline: none !important;
+}

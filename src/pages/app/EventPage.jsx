@@ -42,7 +42,9 @@ export default function EventPage() {
 
   useEffect(() => {
     if (data) {
-      setEvent(data.event);
+      if (data.event.main_owner === null) {
+        setEvent(null);
+      } else setEvent(data.event);
     } else if (error) {
       console.log('Error : ', error);
     }
@@ -189,26 +191,30 @@ export default function EventPage() {
               <article>
                 <h2 className='text-2xl md:text-4xl font-medium'>Description de l'activité</h2>
                 <p className='md:mt-16 md:mr-10 text-md font-light mt-5'>{event.content.description}</p>
-              </article>
-              <article className='flex flex-col justify-around'>
                 {/* Activité organisé par */}
-                <div className='flex justify-center items-center'>
-                  <span className='mr-3'>Activité organisé par </span>
-                  <div className='flex flex-col items-center mb-3'>
+                <div className='flex items-center mt-10'>
+                  <span className='mr-3 text-md font-light'>Activité organisé par </span>
+                  <div className='flex flex-col items-center'>
                     <img
                       src={event.main_owner.profil_picture !== null ? event.main_owner.profil_picture : BlankProfilPic}
                       alt=''
                       width='112px'
-                      className='hover:scale-105 transition-all rounded-full bg-kiddoGray shadow-sm shadow-kiddoShadow p-1'
+                      className='hover:scale-105 transition-all rounded-full bg-kiddoGray shadow-sm shadow-kiddoShadow p-1 mb-3'
                       onClick={() => navigate(`/user/${event.main_owner._id}`)}
                     />
-                    <span>{event.main_owner.first_name + ', ' + dateManager.getUserAge(event.main_owner.birthdate) + ' ans'}</span>
-                    <span>{event.main_owner.children.length + (event.main_owner.children.length > 1 ? ' enfants' : ' enfant')}</span>
+                    <span className='text-sm'>
+                      {event.main_owner.first_name + ', ' + dateManager.getUserAge(event.main_owner.birthdate) + ' ans'}
+                    </span>
+                    <span className='text-sm'>
+                      {event.main_owner.children.length + (event.main_owner.children.length > 1 ? ' enfants' : ' enfant')}
+                    </span>
                   </div>
                 </div>
+              </article>
+              <article className='flex flex-col justify-start items-ceter'>
                 {/* Rendu de la carte */}
-                <div className='w-auto h-full mx-2 my-10'>
-                  <MapLeafletOneMarker name={event.name} inputGPS={event.gps} />
+                <div className='z-0 h-1/2 md:h-72 lg:h-96 w-1/2 md:w-72 lg:w-auto my-10 aspect-square bg-red-500'>
+                  <MapLeafletOneMarker name={event.name} inputGPS={event.gps} className='bg-red-500' />
                 </div>
                 {/* Adresse */}
                 <p className='text-center mt-2'>Parc Forestier de la Mare Adam, Rte des Huit Bouteilles, 98370 Chaville</p>
@@ -277,7 +283,7 @@ export default function EventPage() {
           <h2 className='text-center mt-10'>Chargement en cours...</h2>
         </div>
       ) : (
-        error && <h2 className='min-h-screen text-center text-red-500 pt-28 '>Erreur lors du chargment de l'événement !</h2>
+        (error || !event) && <h2 className='min-h-screen text-center text-red-500 pt-28 '>Erreur lors du chargment de l'événement !</h2>
       )}
     </>
   );
@@ -301,7 +307,6 @@ function CardParticipant(props) {
   const navigate = useNavigate();
   const { user, participants } = props;
 
-  console.log('Participant : ', user);
   return (
     <div className='flex flex-col items-center justify-center align-middle'>
       <img

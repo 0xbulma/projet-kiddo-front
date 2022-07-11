@@ -18,8 +18,8 @@ export default function MapLeafletOneMarker(props) {
   };
 
   return (
-    <div className='z-0 rounded-lg h-full w-full overflow-hidden shadow-sm shadow-kiddoShadow aspect-square'>
-      <MapContainer className='aspect-square w-full h-full' center={finalGPS} zoom={13} scrollWheelZoom={false} zoomControl={false}>
+    <div className='z-0 rounded-lg h-full w-full overflow-hidden shadow-sm shadow-kiddoShadow'>
+      <MapContainer className='z-0 h-full w-full' center={finalGPS} zoom={13} scrollWheelZoom={false} zoomControl={false}>
         <ZoomControl position='topright' />
         <TileLayer
           attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a> - Team Kiddo'
