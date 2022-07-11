@@ -55,7 +55,7 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
           status: 'PUBLISHED',
           minDate: Date.now(),
           dateOrder: 'asc',
-          searchInput : searchInput,
+          searchInput: searchInput,
           minChildAge: minChildAge,
           maxChildAge: maxChildAge,
           lng: geoLoc.coords ? geoLoc?.coords[0] : null,
@@ -64,29 +64,29 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
         },
       },
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryId, geoLoc.coords, minChildAge, maxChildAge, maxDistMeters, searchInput]);
 
   useEffect(() => {
     // if (!data) {
-      getEvents({
-        variables: {
-          input: {
-            first: ITEMS_PER_PAGE,
-            offset: page * ITEMS_PER_PAGE - ITEMS_PER_PAGE,
-            categories: categoryId,
-            searchInput : searchInput,
-            status: 'PUBLISHED',
-            minDate: Date.now(),
-            dateOrder: 'asc',
-            minChildAge: minChildAge,
-            maxChildAge: maxChildAge,
-            lng: geoLoc.coords ? geoLoc?.coords[0] : null,
-            lat: geoLoc.coords ? geoLoc?.coords[1] : null,
-            maxDistMeters: maxDistMeters,
-          },
+    getEvents({
+      variables: {
+        input: {
+          first: ITEMS_PER_PAGE,
+          offset: page * ITEMS_PER_PAGE - ITEMS_PER_PAGE,
+          categories: categoryId,
+          searchInput: searchInput,
+          status: 'PUBLISHED',
+          minDate: Date.now(),
+          dateOrder: 'asc',
+          minChildAge: minChildAge,
+          maxChildAge: maxChildAge,
+          lng: geoLoc.coords ? geoLoc?.coords[0] : null,
+          lat: geoLoc.coords ? geoLoc?.coords[1] : null,
+          maxDistMeters: maxDistMeters,
         },
-      });
+      },
+    });
     // }
 
     // if (data) {
@@ -107,7 +107,7 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
     //     },
     //   });
     // }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryId, page, geoLoc.coords, minChildAge, maxChildAge, maxDistMeters, searchInput]);
 
   const onClickHandler = () => {
@@ -198,7 +198,7 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
           )}
         </article>
 
-        <article className='text-center col-span-2 lg:col-span-1'>
+        <article className='text-center col-span-2 lg:col-span-1 mb-10'>
           {data ? <MapLeaflet currentLocation={geoLoc?.coords} items={allResults} maxDistMeters={maxDistMeters} /> : <MapLeafletPlaceHolder />}
         </article>
       </section>

@@ -107,7 +107,7 @@ function Register({ loginSubtitle, registerSubtitle, isLoginPage, closeModal }) 
       setErrors([errorUserData.message]);
     }
     // Connection de l'utilisateur
-    if (connectUserData) {
+    else if (connectUserData) {
       if (connectUserData.connectUser.email === dataInput.email) {
         setTimeout(() => {
           loggedIn(connectUserData.connectUser);

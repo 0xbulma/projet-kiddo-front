@@ -29,12 +29,17 @@ export const REMOVE_COMMENT = gql`
 `;
 
 export const ADD_REACTION = gql`
-  mutation addReaction($input: CommentInput) {
-    modifyComment(input: $input) {
+  mutation AddReaction($_id: ObjectID!, $input: CommentReactionInput!) {
+    addReaction(id: $_id, input: $input) {
       _id
       reactions {
-        _id
-        name
+        type {
+          name
+        }
+        sender {
+          _id
+          email
+        }
       }
     }
   }
