@@ -1,7 +1,7 @@
 import { Menu, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 
-export default function ProfileMenu() {
+export default function ProfileMenu({ goToProfile, logOut }) {
   return (
     <Transition
       as={Fragment}
@@ -17,8 +17,9 @@ export default function ProfileMenu() {
           <Menu.Item>
             {({ active }) => (
               <button
+                onClick={goToProfile}
                 className={`${
-                  active ? 'bg-violet-500 text-white' : 'text-gray-900'
+                  active ? 'bg-kiddoSalmon text-white' : 'text-gray-900'
                 } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
               >
                 Mon Profil
@@ -28,8 +29,9 @@ export default function ProfileMenu() {
           <Menu.Item>
             {({ active }) => (
               <button
+                onClick={logOut}
                 className={`${
-                  active ? 'bg-violet-500 text-white' : 'text-gray-900'
+                  active ? 'bg-kiddoSalmon text-white' : 'text-gray-900'
                 } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
               >
                 Déconnexion

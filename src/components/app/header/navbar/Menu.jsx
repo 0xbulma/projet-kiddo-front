@@ -92,7 +92,7 @@ export default function Menu() {
                       <>
                         <a
                           href="/"
-                          className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+                          className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-kiddoSalmon hover:kiddoOrange"
                         >
                           S'inscrire
                         </a>
@@ -100,12 +100,12 @@ export default function Menu() {
                     ) : (
                       <div className='flex flex-col gap-y-2'>
                         <button
-                          className='group active:bg-violet-500 hover:bg-violet-500 active:text-white text-gray-900 flex w-full items-center border border-black rounded-md px-2 py-2 text-sm'
+                          className='group active:kiddoSalmon hover:kiddoSalmon active:text-white text-gray-900 flex w-full items-center border border-black rounded-md px-2 py-2 text-sm'
                         >
                           Mon Profil
                         </button>
                         <button
-                          className='group active:bg-violet-500 hover:bg-violet-500 active:text-white text-gray-900 flex w-full items-center border border-black rounded-md px-2 py-2 text-sm -mb-2'
+                          className='group active:kiddoSalmon hover:kiddoSalmon active:text-white text-gray-900 flex w-full items-center border border-black rounded-md px-2 py-2 text-sm -mb-2'
                         >
                           Déconnexion
                         </button>

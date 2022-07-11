@@ -2,40 +2,97 @@ header.header {
   @apply bg-white relative;
 }
 
-div.header__navbar {
-  @apply flex flex-row items-center justify-around h-20 mx-auto;
+.navbar2__container {
+  transform: translateY(0);
+  @apply fixed flex justify-center items-center w-full bg-[#fbfbfb] py-4 px-0 shadow-[0_2px_10px_rgba(0,0,0,0.1)] z-[35] transition-[all_0.3s] translate-y-0;
 }
 
-div.header__navbar--flex2 {
-  @apply flex items-center justify-between px-4 py-5 mx-auto max-w-7xl sm:px-6 sm:py-4 lg:px-8 md:justify-start md:space-x-10;
+.navbar2__container--hidden {
+  transform: translateY(-100%);
 }
 
-.navbar__nav {
-  @apply relative flex flex-row no-underline gap-x-16;
+.navbar2__container--scrolled {
+  @apply bg-[rgb(250,250,250,0.8)] backdrop-blur-[5px];
 }
 
-li.navbar__nar-item {
-  @apply relative text-lg;
+.navbar2__innercontainer {
+  @apply flex grow justify-between items-center gap-8;
 }
 
-li.navbar__nar-item button {
-  font-size: inherit;
-  @apply w-full bg-transparent border-none cursor-pointer text-inherit;
+.navbar2_logo {
+  @apply w-40;
 }
 
-a.nav-link {
-  font-size: inherit;
-  @apply block no-underline;
+.navbar2__linklist {
+  @apply flex grow-[5] items-center justify-center gap-16 cursor-pointer select-none;
 }
 
-a.nav__icon-link {
-  @apply text-gray-600 hover:text-black hover:font-semibold active:text-black;
+.navbar2__link {
+  @apply w-full h-full transition-[all_0.2s] text-base font-[inherit] active:text-kiddoOrange hover:text-kiddoOrange;
 }
 
-.nav-icon {
-  @apply w-7 h-7;
+.navbar2__icongroup {
+  @apply grow-0 shrink flex justify-end items-center gap-8;
 }
-/* 
-ul.dropdown {
-  @apply hidden;
-} */
+
+.navbar2__icongroup--grow {
+  flex-grow: 1;
+}
+
+@keyframes slidein {
+  from {
+    width: 10%;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+.navbar2__searchinput-container {
+  @apply relative flex w-full animate-[slidein_0.4s];
+}
+
+.navbar2__searchinput {
+  @apply w-full outline-none rounded-3xl border-[rgb(228,227,227)] bg-[rgba(250,250,250,0.6)];
+}
+
+.active {
+  @apply text-kiddoOrange;
+}
+
+.navbar2__searchinput:focus {
+  @apply text-kiddoOrange border-2 shadow outline-none;
+  --tw-ring-color: none;
+}
+
+.navbar2__icon--searchinput {
+  @apply absolute left-4 top-[6.8px] w-4 cursor-pointer;
+}
+.navbar2__icon--searchinputleft {
+  @apply absolute right-4 top-3 w-4 cursor-pointer text-kiddoGray;
+}
+
+.navbar2__icon {
+  @apply cursor-pointer w-5 h-5 shrink-0 active:fill-kiddoOrange hover:fill-kiddoOrange;
+}
+
+.navbar2sub__container {
+  @apply absolute z-[200] flex justify-center items-center w-full bg-[rgba(250,250,250,0.902)] py-4 px-0 shadow-[0_2px_10px_rgba(0,0,0,0.1)] backdrop-blur transition-[all_0.3s];
+}
+
+.navbar2sub__container--shown {
+  transform: translateY(117%);
+}
+
+.navbar2sub__innercontainer{
+  @apply grow max-w-screen-lg;
+}
+
+.navbar2sub__linklist {
+  @apply w-full h-full flex justify-between items-center gap-8;
+}
+
+.navbar2sub__link {
+  @apply text-sm transition-[all_0.15s] grow active:text-kiddoOrange hover:text-kiddoOrange;
+}
