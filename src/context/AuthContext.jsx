@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from 'react';
-import { CHECK_TOKEN, DISCONNECT_USER, GET_BY_ID } from '../graphql/query/users.query';
+import { CHECK_TOKEN, DISCONNECT_USER } from '../graphql/query/users.query';
 import { useLazyQuery } from '@apollo/client';
 
 export const AuthContextSchema = createContext({
@@ -16,10 +16,10 @@ function AuthContext(props) {
   const [checkToken] = useLazyQuery(CHECK_TOKEN);
 
   // Requête GraphQl obligatoire pour la suppression du token en HTTP Only
-  const [disconnectUser, { data: disconnectUserData }] = useLazyQuery(DISCONNECT_USER);
+  const [disconnectUser] = useLazyQuery(DISCONNECT_USER);
 
   // Méthoge de récupération des données utilisateurs.
-  const [getUser] = useLazyQuery(GET_BY_ID);
+  // const [getUser] = useLazyQuery(GET_BY_ID);
 
   const [state, setState] = useState({
     isAuthChecked: false,
@@ -83,7 +83,7 @@ function AuthContext(props) {
     }
   }, [state]);
 
-  const getLocalUser = () => JSON.parse(localStorage.getItem('kiddo-user'));
+  // const getLocalUser = () => JSON.parse(localStorage.getItem('kiddo-user'));
 
   return <AuthContextSchema.Provider value={state}>{props.children}</AuthContextSchema.Provider>;
 }

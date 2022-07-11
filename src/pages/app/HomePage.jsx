@@ -110,6 +110,7 @@ export default function HomePage() {
               </>
             ) : (
               upcomingEvents &&
+              // eslint-disable-next-line array-callback-return
               upcomingEvents?.eventsComplexQuery.results.map((event, index) => {
                 if (event?.main_owner !== null) {
                   return (
@@ -156,6 +157,7 @@ export default function HomePage() {
               </>
             ) : (
               lastPublishedEvents &&
+              // eslint-disable-next-line array-callback-return
               lastPublishedEvents?.eventsComplexQuery.results.map((event, index) => {
                 if (event?.main_owner !== null) {
                   return (
