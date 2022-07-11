@@ -12,6 +12,7 @@ export default function CategoryPage(props) {
   const { category } = useParams();
 
   // GraphQl Request
+  // eslint-disable-next-line no-unused-vars
   const [getCategoryData, { error: categoryDataError, data: categoryData }] = useLazyQuery(GET_CATEGORY_BY_NAME);
 
   // Auto scroll to top page for avoid mi screen bug with navigate/link
