@@ -20,6 +20,14 @@ export const GET_BY_TARGET_ID = gql`
           message
         }
         created_at
+        reactions {
+          type {
+            name
+          }
+          sender {
+            _id
+          }
+        }
       }
       sender {
         _id
@@ -32,6 +40,14 @@ export const GET_BY_TARGET_ID = gql`
         message
       }
       created_at
+      reactions {
+        type {
+          name
+        }
+        sender {
+          _id
+        }
+      }
     }
   }
 `;

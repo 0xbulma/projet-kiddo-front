@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState } from 'react';
 import Button from '../../components/shared/Button';
 import childProfil from '../../assets/images/blank_child_profil.svg';
@@ -11,9 +12,17 @@ import { MODIFY_USER_INFO } from '../../graphql/mutation/users.mutation';
 import useAuthContext from './../../hooks/useAuthContext';
 
 import './user-info.css';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router';
 
 const UserInfo = () => {
+  const navigate = useNavigate();
   const context = useAuthContext();
+  // const contextUser = context.user;
+
+  useEffect(() => {
+    if (!context.isAuth) navigate('../');
+  }, []);
 
   // fonction qui récupère les values du form
   const handleChange = (e) => {

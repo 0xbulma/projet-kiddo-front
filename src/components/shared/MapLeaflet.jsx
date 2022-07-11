@@ -85,7 +85,7 @@ export default function MapLeaflet({ currentLocation, items, className, maxDistM
 
 export function MapLeafletPlaceHolder({ className }) {
   return (
-    <div className='sticky square top-4 flex w-full'>
+    <div className='sticky square top-4 flex w-full lg:mt-[5.7rem]'>
       <MapContainer className={`grow`} center={[48.8566, 2.3522]} zoom={9} scrollWheelZoom={false} zoomControl={false}>
         <ZoomControl position='topright' />
         <TileLayer

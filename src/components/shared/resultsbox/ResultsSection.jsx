@@ -210,12 +210,8 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
           )}
         </article>
 
-        <article className='text-center col-span-2 lg:col-span-1'>
-          {data ? (
-            <MapLeaflet currentLocation={geoLoc?.coords} items={allResults} maxDistMeters={maxDistMeters} />
-          ) : (
-            <MapLeafletPlaceHolder />
-          )}
+        <article className='text-center col-span-2 lg:col-span-1 mb-10'>
+          {data ? <MapLeaflet currentLocation={geoLoc?.coords} items={allResults} maxDistMeters={maxDistMeters} /> : <MapLeafletPlaceHolder />}
         </article>
       </section>
 
