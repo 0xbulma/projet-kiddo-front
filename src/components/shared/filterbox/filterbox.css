@@ -25,13 +25,13 @@
   border-radius: 100px;
 }
 .filterbox__slider-track-0 {
-  background-color: darkgray;
+  background-color: lightgrey;
 }
 .filterbox__slider-track-1 {
-  background-color: lightgray;
+  background-color: #fc664e;
 }
 .filterbox__slider-track-2 {
-  background-color: darkgray;
+  background-color: lightgrey;
 }
 
 .filterbox__slider-track--dist {
@@ -39,10 +39,10 @@
   border-radius: 100px;
 }
 .filterbox__slider-track--dist-0 {
-  background-color: lightgray;
+  background-color: #fc664e;
 }
 .filterbox__slider-track--dist-1 {
-  background-color: darkgray;
+  background-color: lightgray;
 }
 
 .filterbox__thumb {
@@ -60,11 +60,11 @@
   top: 15px;
   width: 50px;
   color: rgb(255, 246, 246);
-  background-color: gray;
+  background-color: #fc664e;
   border-radius: 2px;
 }
 .thumb__pin {
-  background-color: gray;
+  background-color: #fc664e;
   border-radius: 100px;
   width: 14px;
   height: 14px;

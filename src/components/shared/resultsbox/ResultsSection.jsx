@@ -48,6 +48,10 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
   }, [dataAll]);
 
   useEffect(() => {
+    setPage(1);
+  }, [minChildAge, maxChildAge, maxDistMeters]);
+
+  useEffect(() => {
     getAllEvents({
       variables: {
         input: {
@@ -55,7 +59,7 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
           status: 'PUBLISHED',
           minDate: Date.now(),
           dateOrder: 'asc',
-          searchInput : searchInput,
+          searchInput: searchInput,
           minChildAge: minChildAge,
           maxChildAge: maxChildAge,
           lng: geoLoc.coords ? geoLoc?.coords[0] : null,
@@ -64,29 +68,29 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
         },
       },
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryId, geoLoc.coords, minChildAge, maxChildAge, maxDistMeters, searchInput]);
 
   useEffect(() => {
     // if (!data) {
-      getEvents({
-        variables: {
-          input: {
-            first: ITEMS_PER_PAGE,
-            offset: page * ITEMS_PER_PAGE - ITEMS_PER_PAGE,
-            categories: categoryId,
-            searchInput : searchInput,
-            status: 'PUBLISHED',
-            minDate: Date.now(),
-            dateOrder: 'asc',
-            minChildAge: minChildAge,
-            maxChildAge: maxChildAge,
-            lng: geoLoc.coords ? geoLoc?.coords[0] : null,
-            lat: geoLoc.coords ? geoLoc?.coords[1] : null,
-            maxDistMeters: maxDistMeters,
-          },
+    getEvents({
+      variables: {
+        input: {
+          first: ITEMS_PER_PAGE,
+          offset: page * ITEMS_PER_PAGE - ITEMS_PER_PAGE,
+          categories: categoryId,
+          searchInput: searchInput,
+          status: 'PUBLISHED',
+          minDate: Date.now(),
+          dateOrder: 'asc',
+          minChildAge: minChildAge,
+          maxChildAge: maxChildAge,
+          lng: geoLoc.coords ? geoLoc?.coords[0] : null,
+          lat: geoLoc.coords ? geoLoc?.coords[1] : null,
+          maxDistMeters: maxDistMeters,
         },
-      });
+      },
+    });
     // }
 
     // if (data) {
@@ -107,7 +111,7 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
     //     },
     //   });
     // }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryId, page, geoLoc.coords, minChildAge, maxChildAge, maxDistMeters, searchInput]);
 
   const onClickHandler = () => {
@@ -133,27 +137,33 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
       <section className='section__grid-3'>
         <article className='section__grid-2 col-span-2'>
           <div className='pb-8'>
-            <div className='flex bg-kiddoGray rounded-md shadow-sm shadow-kiddoShadow items-center justify-center py-2 mx-8 h-11 hover:ring-2 ring-0 transition-all'>
+            <div className='flex bg-kiddoGray rounded-md shadow-sm shadow-kiddoShadow items-center py-2 px-5 mx-8 h-11 hover:ring-2 ring-0 transition-all gap-3'>
+              {geoLoc.isLoading ? <LoadIconBtn className='mr-2' /> : <FaCrosshairs className='' />}
+
+              <button onClick={onClickHandler} className='w-full hover:underline py-2 text-left' disabled={loading}>
+                {geoLoc.city ? geoLoc.city : 'Activités autour de moi'}
+
+                {/* <div className='flex bg-kiddoGray rounded-md shadow-sm shadow-kiddoShadow items-center justify-center py-2 mx-8 h-11 hover:ring-2 ring-0 transition-all'>
               {loading || !data ? <LoadIconBtn className='mr-2' /> : <FaCrosshairs className='text-sm mx-5' />}
               {data && (
                 <button onClick={onClickHandler} className='mx-3 w-full hover:underline py-2'>
-                  Activités autour de moi
-                </button>
-              )}
+                  Activités autour de moi */}
+              </button>
             </div>
           </div>
 
           <div className='relative pb-8'>
-            <div className='flex bg-kiddoGray rounded-md shadow-sm shadow-kiddoShadow items-center justify-center py-2 mx-8 h-11 hover:ring-2 ring-0 transition-all'>
-              {loading || !data ? <LoadIconBtn className='mr-2' /> : <FaFilter className='text-sm mx-3' />}
-              {data && (
-                <button onClick={data && toggleFilterVisibility} className='z-20 w-full hover:underline py-2'>
-                  Critères de recherche
-                </button>
-              )}
-              {data && showFilter && (
+            <div className='flex bg-kiddoGray rounded-md shadow-sm shadow-kiddoShadow items-center justify-center py-2 px-5 mx-8 h-11 hover:ring-2 ring-0 transition-all gap-3'>
+              {loading || !data ? <LoadIconBtn className='mr-2' /> : <FaFilter className='text-sm ' />}
+
+              <button onClick={data && toggleFilterVisibility} className='z-20 w-full hover:underline py-2 text-left' disabled={loading}>
+                Critères de recherche
+              </button>
+
+              {showFilter && (
                 <Filterbox
-                  className={'absolute top-12 w-96 mb-5 mx-2 bg-kiddoGray rounded-lg' + (showFilter ? '' : 'filterbox__hidden')}
+                  className={'absolute top-12 left-6 w-96 p-3 pb-12 mb-5 mx-2 bg-kiddoGray rounded-lg' + (showFilter ? '' : 'filterbox__hidden')}
+                  // className={'absolute top-12 w-96 mb-5 mx-2 bg-kiddoGray rounded-lg' + (showFilter ? '' : 'filterbox__hidden')}
                   maxDist={maxDistMeters}
                   setMaxDist={setMaxDistMeters}
                   minChildAge={minChildAge}
