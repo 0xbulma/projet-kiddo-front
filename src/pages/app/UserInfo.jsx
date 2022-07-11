@@ -118,15 +118,15 @@ const UserInfo = () => {
           <div className="col-span-2">
             <article className="border-2 rounded-xl p-5 col-span-2 ">
               {/* checkbox form */}
-              <div className="flex items-center justify-around p-5">
+              <div className="flex items-center justify-around p-5 ">
                 <label className="userinfo__radio-container">
+                  Homme
                   <input
                     name="gender"
                     type="radio"
                     value="male"
                     onChange={handleChange}
-                  />{' '}
-                  Homme
+                  />
                   <span className="checkmark"></span>
                 </label>
                 <label className="userinfo__radio-container">
@@ -245,11 +245,14 @@ const UserInfo = () => {
           />
         </section>
         {/* childs input */}
-        <section className="container-user">
-          <h2 className="mb-4 border-b-2">Mes enfants</h2>
+        <section className="rounded-xl mb-2 border-gray-200">
+          <h2 className="mb-4 border-b-2 pt-10">Mes enfants</h2>
           <div className="flex justify-around pt-4">
             {user.children.map((e, i) => (
-              <article key={i} className="child-card flex-1 flex border p-8">
+              <article
+                key={i}
+                className="child-card rounded-xl flex-1 flex border p-8 ml-4  bg-zinc-100"
+              >
                 {user.children.length > 1 && (
                   <button
                     className="remove-child-button"
