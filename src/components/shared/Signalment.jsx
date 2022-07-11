@@ -23,9 +23,6 @@ function CommentSignalment(props) {
     if (reasons) {
       setReasonList(reasons.signalments);
     }
-    if (data) {
-      console.log('Send signalment : ', data);
-    }
   }, [reasons, data]);
 
   return (
