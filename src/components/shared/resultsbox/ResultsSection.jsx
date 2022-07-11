@@ -51,6 +51,11 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
   }, [dataAll]);
 
   useEffect(() => {
+    setPage(1);
+  }, [minChildAge, maxChildAge, maxDistMeters])
+  
+
+  useEffect(() => {
     getAllEvents({
       variables: {
         input: {
