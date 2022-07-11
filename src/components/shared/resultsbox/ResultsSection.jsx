@@ -148,28 +148,28 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
       <section className='section__grid-3'>
         <article className='section__grid-2 col-span-2 mb-0'>
           <div className='pb-8'>
-            <div className='flex bg-kiddoGray rounded-md shadow-sm shadow-kiddoShadow items-center justify-center py-2 mx-8 h-11 hover:ring-2 ring-0 transition-all'>
-              {loading || !data ? <LoadIconBtn className='mr-2' /> : <FaCrosshairs className='text-sm mx-5' />}
-              {data && (
-                <button onClick={onClickHandler} className='mx-3 w-full hover:underline py-2'>
-                  {(geoLoc.city && !loading) ? geoLoc.city : 'Activités autour de moi'}
+            <div className='flex bg-kiddoGray rounded-md shadow-sm shadow-kiddoShadow items-center py-2 px-5 mx-8 h-11 hover:ring-2 ring-0 transition-all gap-3' >
+              {loading || !data ? <LoadIconBtn className='mr-2' /> : <FaCrosshairs className='' />}
+            
+                <button onClick={onClickHandler} className='w-full hover:underline py-2 text-left' disabled={loading}>
+                  {(geoLoc.city) ? geoLoc.city : 'Activités autour de moi'}
                 </button>
-              )}
+            
             </div>
           </div>
 
           <div className='relative pb-8'>
-            <div className='flex bg-kiddoGray rounded-md shadow-sm shadow-kiddoShadow items-center justify-center py-2 mx-8 h-11 hover:ring-2 ring-0 transition-all'>
-              {loading || !data ? <LoadIconBtn className='mr-2' /> : <FaFilter className='text-sm mx-3' />}
-              {data && (
-                <button onClick={data && toggleFilterVisibility} className='z-20 w-full hover:underline py-2'>
+            <div className='flex bg-kiddoGray rounded-md shadow-sm shadow-kiddoShadow items-center justify-center py-2 px-5 mx-8 h-11 hover:ring-2 ring-0 transition-all gap-3'>
+              {loading || !data ? <LoadIconBtn className='mr-2' /> : <FaFilter className='text-sm ' />}
+          
+                <button onClick={data && toggleFilterVisibility} className='z-20 w-full hover:underline py-2 text-left' disabled={loading}>
                   Critères de recherche
                 </button>
-              )}
-              {data && showFilter && (
+          
+              {showFilter && (
                 <Filterbox
                   className={
-                    'absolute top-12 w-96 p-3 pb-12 mb-5 mx-2 bg-kiddoGray rounded-lg' + (showFilter ? '' : 'filterbox__hidden')
+                    'absolute top-12 left-6 w-96 p-3 pb-12 mb-5 mx-2 bg-kiddoGray rounded-lg' + (showFilter ? '' : 'filterbox__hidden')
                   }
                   maxDist={maxDistMeters}
                   setMaxDist={setMaxDistMeters}
