@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from 'react';
-import { CHECK_TOKEN, DISCONNECT_USER, GET_BY_ID } from '../graphql/query/users.query';
+import { CHECK_TOKEN, DISCONNECT_USER } from '../graphql/query/users.query';
 import { useLazyQuery } from '@apollo/client';
 
 export const AuthContextSchema = createContext({
@@ -19,7 +19,7 @@ function AuthContext(props) {
   const [disconnectUser] = useLazyQuery(DISCONNECT_USER);
 
   // Méthoge de récupération des données utilisateurs.
-  const [getUser] = useLazyQuery(GET_BY_ID);
+  // const [getUser] = useLazyQuery(GET_BY_ID);
 
   const [state, setState] = useState({
     isAuthChecked: false,
@@ -40,7 +40,7 @@ function AuthContext(props) {
         loggedInFunction(data.checkToken);
       },
       onError: (error) => {
-        console.error('AuthContext - LoggedOnToken : ', error);
+        console.log('Token Error: ', error);
         defineState(true, false, '', '');
       },
     });
@@ -53,9 +53,8 @@ function AuthContext(props) {
 
   // Déconnexion de l'utilisateur depuis la modale
   function loggedOutFunction(_id) {
+    defineState(true, false, '', '');
     disconnectUser({ variables: { id: _id } });
-
-    defineState(false, false, '', '');
 
     localStorage.removeItem('kiddo-user');
   }
@@ -82,11 +81,9 @@ function AuthContext(props) {
     if (!state.isAuthChecked) {
       state.loggedInOnToken();
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);
 
-  const getLocalUser = () => JSON.parse(localStorage.getItem('kiddo-user'));
+  // const getLocalUser = () => JSON.parse(localStorage.getItem('kiddo-user'));
 
   return <AuthContextSchema.Provider value={state}>{props.children}</AuthContextSchema.Provider>;
 }
