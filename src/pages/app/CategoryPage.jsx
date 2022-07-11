@@ -12,6 +12,7 @@ export default function CategoryPage(props) {
   const { category } = useParams();
 
   // GraphQl Request
+  // eslint-disable-next-line no-unused-vars
   const [getCategoryData, { error: categoryDataError, data: categoryData }] = useLazyQuery(GET_CATEGORY_BY_NAME);
 
   // Auto scroll to top page for avoid mi screen bug with navigate/link
@@ -24,7 +25,7 @@ export default function CategoryPage(props) {
     getCategoryData({ variables: { name: category } });
 
     // Redirect 404 if no category is found
-    if (categoryData?.category === null) navigate('/404');
+    if (categoryData?.category === null) navigate('/search');
   }, [categoryData, category, navigate]);
 
   return (
@@ -34,11 +35,9 @@ export default function CategoryPage(props) {
         <p>Se depenser en s’amuser, rien de mieux pour lier le plaisir et la santé en famille </p>
       </div>
 
-      {categoryData ? (
-        <ResultsSection key={categoryData.category._id} categoryId={categoryData.category._id} categoryName={categoryData.category.name} />
-      ) : (
-        categoryDataError && <p className='text-red-500 col-span-full text-xl'>Erreur lors du chargement des événements...</p>
-      )}
+     
+        <ResultsSection key={categoryData?.category._id} categoryId={categoryData?.category._id} categoryName={categoryData?.category.name} />
+     
     </div>
   );
 }

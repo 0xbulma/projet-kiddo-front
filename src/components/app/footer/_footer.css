@@ -27,7 +27,7 @@ div.footer__navigation--nav__items {
 }
 
 h3.nav__items--h3 {
-  @apply font-semibold leading-3 tracking-widest text-white;
+  @apply text-white;
 }
 
 ul.nav__items--list {
@@ -55,7 +55,7 @@ section.footer__legal {
 }
  
 div.footer__legal--nav {
-  @apply flex flex-row justify-around;
+  @apply flex flex-row justify-between;
 }
 
 a.footer__legal--nav-item {

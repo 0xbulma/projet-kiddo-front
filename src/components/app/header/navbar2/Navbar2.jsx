@@ -153,7 +153,7 @@ export default function Navbar2() {
                 </div>
               </li>
               <li>
-                <NavLink className='navbar2__link' to='/404' onClick={closeSubMenu}>
+                <NavLink className='navbar2__link' to='/create-event' onClick={closeSubMenu}>
                   Organiser une activités
                 </NavLink>
               </li>

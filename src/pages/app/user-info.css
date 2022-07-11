@@ -1,38 +1,66 @@
 .user-info-page section {
   margin-top: 2rem;
 }
-.user-container {
-  /* display: block; */
-  position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-/* Hide the browser's default checkbox */
-.user-container input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}
-/* Create a custom checkbox */
-.checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 25px;
-  width: 25px;
-  background-color: #eee;
+.userinfo__radio-container {
+    /* display: block; */
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  /* Hide the browser's default checkbox */
+  .userinfo__radio-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  /* Create a custom checkbox */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
   border-radius: 15px;
-}
-/* On mouse-over, add a grey background color */
-.user-container:hover input ~ .checkmark {
-  background-color: #ccc;
-}
+  }
+  /* On mouse-over, add a grey background color */
+  .userinfo__radio-container:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  
+  /*When the checkbox is checked, add a blue background */
+  .userinfo__radio-container input:checked ~ .checkmark {
+    background-color: #d3a8ed;
+  }
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  /* Show the checkmark when checked */
+  .userinfo__radio-container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  /* Style the checkmark/indicator */
+  .userinfo__radio-container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
 
 /*When the checkbox is checked, add a blue background */
 .user-container input:checked ~ .checkmark {
@@ -61,23 +89,18 @@
   transform: rotate(45deg);
 }
 
-.etiquette {
-  clip-path: polygon(0 0, 90% 0, 88% 50%, 90% 100%, 0 100%);
-  background-color: lightgray;
-}
-.etiquette:hover {
-  cursor: pointer;
-  transform: scale(1.05);
-}
+  .child-card {
+    position: relative;
+  }
+  .remove-child-button {
+    position: absolute;
+    top : 0.5rem;
+    right: 0.5rem;
+  }
+  .remove-child-button:hover{
+    color: grey;
+  }
 
-.child-card {
-  position: relative;
-}
-.remove-child-button {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-}
-.remove-child-button:hover {
-  color: grey;
-}
+  input[type=tel]{
+@apply rounded-xl mb-2 border-gray-200
+  }

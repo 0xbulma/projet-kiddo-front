@@ -22,8 +22,10 @@ export const GET_BY_ID = gql`
       created_at
       updated_at
       rank
+      gender
       token
       email
+      phone
       pseudo
       first_name
       last_name
@@ -84,6 +86,16 @@ export const GET_BY_ID = gql`
             child
           }
         }
+      children {
+        age
+        gender
+        name
+      }
+      description
+      adress {
+        city
+        zip_code
+        adress_line
       }
     }
   }
