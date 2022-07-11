@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 // import { useNavigate } from 'react-router';
 // graphQL
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation, useLazyQuery } from '@apollo/client';
 import { MODIFY_USER_INFO } from '../../graphql/mutation/users.mutation';
 import { GET_BY_ID } from '../../graphql/query/users.query';
 // children pics
@@ -28,21 +28,21 @@ const UserInfo = () => {
   const context = useAuthContext();
   // console.log('context', context);
   const [user, setUser] = useState({
-    gender: null,
-    first_name: null,
-    last_name: null,
-    pseudo: null,
-    phone: null,
-    email: null,
-    birthdate: null,
+    gender: '',
+    first_name: '',
+    last_name: '',
+    pseudo: '',
+    phone: '',
+    email: '',
+    birthdate: '',
     adress: {
-      city: null,
-      zip_code: null,
-      adress_line: null,
-      adress_line_2: null,
+      city: '',
+      zip_code: '',
+      adress_line: '',
+      adress_line_2: '',
     },
 
-    description: null,
+    description: '',
     children: nbChildren.length > 0 ? Array(nbChildren).fill({}) : [],
   });
   // fonction qui récupère les values du form
@@ -92,23 +92,33 @@ const UserInfo = () => {
       return { ...user, children: updateNbChildren };
     });
   };
-  const { data: userData, error: userError } = useQuery(GET_BY_ID, {
-    variables: {
-      id: context._id,
-    },
-  });
+  const [fetchData, { data: userData, error: userError, loading }] =
+    useLazyQuery(GET_BY_ID, {
+      variables: {
+        id: context._id,
+      },
+    });
+  useEffect(() => {
+    if (context._id != '') {
+      fetchData();
+    }
+  }, [context._id]);
+
+  useEffect(() => {
+    console.log('UserInfo UseEffect :', user);
+  }, [user]);
 
   useEffect(() => {
     if (userData) {
+      setUser(userData.getUserById);
       console.log('userData', userData);
     }
     if (userError) {
-      console.log('errorDATA', userError);
+      console.log('errorDATA', userError.networkError.result);
     }
 
     // if (!context.isAuth) navigate('../');
-    // console.log('UserInfo UseEffect :', user);
-  }, [user, userData, userError]);
+  }, [userData, userError]);
 
   // détermine la photo de profil enfant
   const getChildPic = (i) => {
@@ -122,6 +132,9 @@ const UserInfo = () => {
   };
 
   const [modifyUserInfo, { data, error }] = useMutation(MODIFY_USER_INFO);
+  if (loading) {
+    return <div>Chargement en cours</div>;
+  }
   if (error) {
     console.log('UserInfo Error :', error);
   }
@@ -148,6 +161,7 @@ const UserInfo = () => {
                     name="gender"
                     type="radio"
                     value="male"
+                    checked={user.gender === 'male'}
                     onChange={handleChange}
                   />
                   <span className="checkmark"></span>
@@ -157,6 +171,7 @@ const UserInfo = () => {
                   <input
                     name="gender"
                     type="radio"
+                    checked={user.gender === 'female'}
                     value="female"
                     onChange={handleChange}
                   />
@@ -166,6 +181,7 @@ const UserInfo = () => {
                   Autres
                   <input
                     name="gender"
+                    checked={user.gender === 'other'}
                     type="radio"
                     value="other"
                     onChange={handleChange}
@@ -176,7 +192,7 @@ const UserInfo = () => {
               {/* input form */}
               <div className="flex flex-col">
                 <input
-                  value={userData && userData.getUserById.first_name}
+                  value={user && user.first_name}
                   className="rounded-xl mb-2 border-gray-200"
                   name="first_name"
                   type="text"
@@ -184,6 +200,7 @@ const UserInfo = () => {
                   onChange={handleChange}
                 />
                 <input
+                  value={user && user.last_name}
                   className="rounded-xl mb-2 border-gray-200"
                   name="last_name"
                   type="text"
@@ -191,6 +208,7 @@ const UserInfo = () => {
                   onChange={handleChange}
                 />
                 <input
+                  value={user && user.pseudo}
                   name="pseudo"
                   className="rounded-xl mb-2 border-gray-200"
                   type="text"
@@ -198,14 +216,17 @@ const UserInfo = () => {
                   onChange={handleChange}
                 />
                 <PhoneInput
+                  international
+                  value={user && user.phone}
                   defaultCountry="FR"
                   className="rounded-xl mb-2 border-gray-200"
                   placeholder="Téléphone"
                   onChange={(value) => {
-                    setUser((user) => ({ ...user, phone: value }));
+                    setUser((user) => ({ ...user, phone: value.toString() }));
                   }}
                 />
                 <input
+                  value={user && user.email}
                   name="email"
                   className="rounded-xl mb-2 border-gray-200"
                   type="text"
@@ -216,6 +237,7 @@ const UserInfo = () => {
                   <p>Date de naissance :</p>
                 </label>
                 <input
+                  value={user && user.birthdate}
                   name="birthdate"
                   className="rounded-xl mb-2 border-gray-200"
                   type="date"
@@ -223,6 +245,7 @@ const UserInfo = () => {
                   onChange={handleChange}
                 />
                 <input
+                  value={user && user.adress.adress_line}
                   name="adress_line"
                   className="rounded-xl mb-2 border-gray-200"
                   type="text"
@@ -231,6 +254,7 @@ const UserInfo = () => {
                 />
                 <div>
                   <input
+                    value={user && user.adress.zip_code}
                     name="zip_code"
                     className="rounded-xl mb-2 border-gray-200"
                     type="text"
@@ -238,6 +262,7 @@ const UserInfo = () => {
                     onChange={handleChange}
                   />
                   <input
+                    value={user && user.adress.city}
                     name="city"
                     className="rounded-xl mb-2 border-gray-200"
                     type="text"
@@ -260,6 +285,7 @@ const UserInfo = () => {
         <section className="border-2 rounded-xl h-40 p-5">
           <h2>Presentation</h2>
           <input
+            value={user && user.description}
             name="description"
             className="rounded-xl mb-2 border-gray-200 w-full"
             type="text"
@@ -372,21 +398,21 @@ const UserInfo = () => {
           <div className="flex justify-center p-10">
             <Button
               onClick={() => {
-                console.log('UserInfo SaveBtnOnClick :', {
-                  id: context._id,
-                  input: {
-                    gender: user.gender,
-                    first_name: user.first_name,
-                    last_name: user.last_name,
-                    pseudo: user.pseudo,
-                    phone: user.phone,
-                    email: user.email,
-                    birthdate: user.birthdate,
-                    adress: user.adress,
-                    description: user.description,
-                    children: user.children,
-                  },
-                });
+                // console.log('UserInfo SaveBtnOnClick :', {
+                //   id: context._id,
+                //   input: {
+                //     gender: user.gender,
+                //     first_name: user.first_name,
+                //     last_name: user.last_name,
+                //     pseudo: user.pseudo,
+                //     phone: user.phone,
+                //     email: user.email,
+                //     birthdate: user.birthdate,
+                //     adress: user.adress,
+                //     description: user.description,
+                //     children: user.children,
+                //   },
+                // });
                 modifyUserInfo({
                   variables: {
                     id: context._id,
