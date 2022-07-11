@@ -30,3 +30,24 @@
   text-align: center;
   padding: 0.2em;
 }
+
+.dashboard__activity-card__ruban {
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard__activity-card__ruban::after {
+  content: attr(data-category);
+  background-color: var(--ruban-color);
+  overflow: hidden;
+
+  display: block;
+  position: absolute;
+  top: 40px;
+  left: -50px;
+  transform: rotate(-45deg);
+  width: 200px;
+  height: 25px;
+  text-align: center;
+  padding: 0;
+}

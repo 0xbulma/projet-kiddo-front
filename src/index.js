@@ -35,9 +35,9 @@ import Signalement from './pages/administration/sections/Report';
 // Import CSS
 import './style.css';
 import UserDashboard from './pages/app/userDashboard/UserDashboard';
-import UserDashboard_Activity from './pages/app/userDashboard/UserDashboard_Activity';
-import UserDashboard_Fav from './pages/app/userDashboard/UserDashboard_Fav';
-import UserDashboard_Notification from './pages/app/userDashboard/UserDashboard_Notification';
+import UserDashboardActivity from './pages/app/userDashboard/UserDashboardActivity';
+import UserDashboardFav from './pages/app/userDashboard/UserDashboardFav';
+import UserDashboardNotification from './pages/app/userDashboard/UserDashboardNotification';
 
 let isAdmin = true;
 
@@ -59,9 +59,9 @@ root.render(
             <Route path='/user' element={<UserLayout composant={<UserInfo />} />} />
             <Route path='/search' element={<UserLayout composant={<SearchPage />} />} />
             <Route path='/user/dashboard' element={<UserLayout composant={<UserDashboard />} />} />
-            <Route path='/user/dashboard/activity' element={<UserLayout composant={<UserDashboard_Activity />} />} />
-            <Route path='/user/dashboard/fav' element={<UserLayout composant={<UserDashboard_Fav />} />} />
-            <Route path='/user/dashboard/notification' element={<UserLayout composant={<UserDashboard_Notification />} />} />
+            <Route path='/user/dashboard/activity' element={<UserLayout composant={<UserDashboardActivity />} />} />
+            <Route path='/user/dashboard/fav' element={<UserLayout composant={<UserDashboardFav />} />} />
+            <Route path='/user/dashboard/notification' element={<UserLayout composant={<UserDashboardNotification />} />} />
             {isAdmin && (
               <Fragment>
                 <Route path='/administration' element={<AdminLayout composant={<AdminDashboard />} />} />

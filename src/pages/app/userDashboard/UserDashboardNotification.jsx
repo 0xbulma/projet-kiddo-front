@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router';
 
-export default function UserDashboard_Fav() {
+export default function UserDashboardNotification() {
   const navigate = useNavigate();
 
   const roots = [
@@ -20,7 +20,7 @@ export default function UserDashboard_Fav() {
       isSelected: false,
     },
     {
-      title: 'Favoris',
+      title: 'Notifications',
       path: '',
       isSelected: true,
     },
@@ -32,11 +32,11 @@ export default function UserDashboard_Fav() {
 
   return (
     <>
-      <section className='generic-container pt-28 mb-32'>
+      <section className='generic-container mt-32 min-h-screen'>
         <article className='mb-20'>
           <div className='flex'>
             {roots.map((item, index) => (
-              <div className='flex'>
+              <div className='flex' key={index}>
                 <p
                   onClick={() => handleRootClick(item.isSelected, item.path)}
                   className={`cursor-pointer hover:underline select-none ` + (item.isSelected && 'underline font-medium cursor-default')}>

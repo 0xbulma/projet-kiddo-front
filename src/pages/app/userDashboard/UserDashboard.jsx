@@ -31,11 +31,11 @@ export default function UserDashboard() {
 
   return (
     <>
-      <section className='generic-container pt-28 mb-32'>
+      <section className='generic-container mt-32 min-h-screen'>
         <article className='mb-20'>
-          <div className='flex'>
+          <div className='flex mb-10 text-sm'>
             {roots.map((item, index) => (
-              <div className='flex'>
+              <div className='flex' key={index}>
                 <p
                   onClick={() => handleRootClick(item.isSelected, item.path)}
                   className={`cursor-pointer hover:underline select-none ` + (item.isSelected && 'underline font-medium cursor-default')}>
@@ -48,7 +48,7 @@ export default function UserDashboard() {
           <h2>Mon tableau de bord</h2>
         </article>
 
-        <article className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-24 mb-10'>
+        <article className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-24'>
           <div className='z-0 relative flex justify-center items-center'>
             <span className='absolute -mr-96 p-40 bg-kiddoGreen rounded-full' />
           </div>
@@ -65,7 +65,7 @@ export default function UserDashboard() {
           </div>
 
           <div className='z-20 my-3 mx-10'>
-            <DashboardCard title='Mes notifications' icon={notifIcon} path='./notification' />
+            <DashboardCard title='Mes notifications' icon={notifIcon} path='./notification' isDisabled />
           </div>
           <div className='z-20 my-3 mx-10'>
             <DashboardCard title='Mon compte' icon={userIcon} path='../user' />
@@ -76,14 +76,17 @@ export default function UserDashboard() {
   );
 }
 
-function DashboardCard({ title, icon, path }) {
+function DashboardCard({ title, icon, path, isDisabled }) {
   const navigate = useNavigate();
   return (
     <>
       <article
-        className='w-full h-52 bg-kiddoGray flex flex-col items-center justify-center select-none rounded-lg shadow-sm shadow-kiddoShadow hover:ring-2 hover:ring-yellow-300 hover:shadow-yellow-300 transition-all hover:scale-[1.01] cursor-pointer'
-        onClick={() => navigate(path)}>
-        <img src={icon} alt='' className='w-10' />
+        className={
+          'w-full h-52 bg-kiddoGray flex flex-col items-center justify-center select-none rounded-lg shadow-sm shadow-kiddoShadow hover:ring-2 hover:ring-yellow-300 hover:shadow-yellow-300 transition-all hover:scale-[1.01] cursor-pointer ' +
+          (isDisabled && 'bg-gray-400 cursor-default hover:ring-0 hover:shadow-kiddoShadow hover:scale-100')
+        }
+        onClick={() => !isDisabled && navigate(path)}>
+        <img src={icon} alt='' className='w-10 ml-3' />
         <p>{title}</p>
       </article>
     </>
