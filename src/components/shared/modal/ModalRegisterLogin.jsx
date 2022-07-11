@@ -9,6 +9,7 @@ import { CONNECT_USER } from '../../../graphql/query/users.query';
 
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import useAuthContext from '../../../hooks/useAuthContext';
+import { RECOVER_PASSWORD_REQUEST } from '../../../graphql/mutation/users.mutation';
 
 function Register({ loginSubtitle, registerSubtitle, isLoginPage, closeModal }) {
   const navigate = useNavigate();
@@ -122,8 +123,13 @@ function Register({ loginSubtitle, registerSubtitle, isLoginPage, closeModal }) 
     }
   }, [createUserData, errorUserData, connectUserData, connectUserError]);
 
+  const [recoverPasswordRequest] = useMutation(RECOVER_PASSWORD_REQUEST);
   const handleForgerPassword = () => {
-    console.log('Handle Forget Password !');
+    if (dataInput.email) {
+      recoverPasswordRequest({ variables: { email: dataInput.email } });
+    } else {
+      setErrors(...errors, 'Vous devez renseigner votre Email pour reinitialiser votre mot de passe');
+    }
   };
 
   if (!displayLogin)

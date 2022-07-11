@@ -92,7 +92,6 @@ function Comment({ user, comment, refetchComments, commentTarget, targetID }) {
     }
 
     if (reactionData) {
-      console.log('Reaction data : ', reactionData);
       refetchComments();
     }
   }, [removeData, reactionData]);

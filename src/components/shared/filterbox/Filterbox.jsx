@@ -35,7 +35,6 @@ export default function Filterbox({ className, maxDist, setMaxDist, minChildAge,
         <ReactSlider
           value={[minChildAge, maxChildAge]}
           onAfterChange={(value, index) => {
-            console.log(value[1]);
             setMinChildAge(value[0]);
             setMaxChildAge(value[1]);
           }}
