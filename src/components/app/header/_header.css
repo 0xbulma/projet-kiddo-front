@@ -54,16 +54,16 @@ header.header {
 }
 
 .navbar2__searchinput {
-  @apply w-full outline-none rounded-3xl border-[rgb(228,227,227)] bg-[rgba(250,250,250,0.6)];
+  @apply w-full outline-none py-2 px-12 rounded-3xl border-[rgb(228,227,227)] bg-[rgba(250,250,250,0.6)] focus:border-kiddoOrange focus:border-2 focus:outline-none focus:shadow !important;
+}
+
+
+.navbar2__searchinput:focus {
+  --tw-ring-color: none;
 }
 
 .active {
   @apply text-kiddoOrange;
-}
-
-.navbar2__searchinput:focus {
-  @apply text-kiddoOrange border-2 shadow outline-none;
-  --tw-ring-color: none;
 }
 
 .navbar2__icon--searchinput {
