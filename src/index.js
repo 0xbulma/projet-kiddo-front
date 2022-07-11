@@ -18,6 +18,7 @@ import Kiddo from './pages/app/Kiddo';
 import Contact from './pages/app/Contact.jsx';
 import NotFound from './pages/app/NotFound.jsx';
 
+import CreateEvents from './pages/app/CreateEvents';
 import CategoryPage from './pages/app/CategoryPage';
 import EventPage from './pages/app/EventPage';
 import SearchPage from './pages/app/SearchPage';
@@ -54,6 +55,7 @@ root.render(
             <Route path='/contact' element={<UserLayout composant={<Contact />} />} />
             <Route path='/event/:eventId' element={<UserLayout composant={<EventPage />} />} />
             <Route path='/category/:category' element={<UserLayout composant={<CategoryPage />} />} />
+            <Route path='/create-event' element={<UserLayout composant={<CreateEvents />} />} />
             <Route path='*' element={<UserLayout composant={<NotFound />} />} />
             <Route path='/user' element={<UserLayout composant={<UserInfo />} />} />
             <Route path='/search/:params' element={<UserLayout composant={<SearchPage />} />} />
