@@ -95,5 +95,7 @@ export function MapLeafletPlaceHolder({ className }) {
         />
       </MapContainer> */}
     </div>
+
+    
   );
 }

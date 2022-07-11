@@ -24,7 +24,7 @@ export default function CategoryPage(props) {
     getCategoryData({ variables: { name: category } });
 
     // Redirect 404 if no category is found
-    if (categoryData?.category === null) navigate('/404');
+    if (categoryData?.category === null) navigate('/search');
   }, [categoryData, category, navigate]);
 
   return (
@@ -34,11 +34,9 @@ export default function CategoryPage(props) {
         <p>Se depenser en s’amuser, rien de mieux pour lier le plaisir et la santé en famille </p>
       </div>
 
-      {categoryData ? (
-        <ResultsSection key={categoryData.category._id} categoryId={categoryData.category._id} categoryName={categoryData.category.name} />
-      ) : (
-        categoryDataError && <p className='text-red-500 col-span-full text-xl'>Erreur lors du chargement des événements...</p>
-      )}
+     
+        <ResultsSection key={categoryData?.category._id} categoryId={categoryData?.category._id} categoryName={categoryData?.category.name} />
+     
     </div>
   );
 }
