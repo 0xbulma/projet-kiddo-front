@@ -8,6 +8,9 @@ export const GET_UPCOMING_EVENTS = gql`
         content {
           title
         }
+        main_owner {
+          _id
+        }
         content_media {
           photo_main_url
         }
@@ -39,6 +42,9 @@ export const GET_LAST_PUBLISHED_EVENTS = gql`
         _id
         content {
           title
+        }
+        main_owner {
+          _id
         }
         content_media {
           photo_main_url

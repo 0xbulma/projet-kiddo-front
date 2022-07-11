@@ -18,7 +18,6 @@ import { useNavigate } from 'react-router';
 const UserInfo = () => {
   const navigate = useNavigate();
   const context = useAuthContext();
-  // const contextUser = context.user;
 
   useEffect(() => {
     if (!context.isAuth) navigate('../');

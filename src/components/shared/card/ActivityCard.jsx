@@ -1,5 +1,5 @@
 import React from 'react';
-import activityPic from '../../../assets/images/GDN2.jpg';
+import activityPic from '../../../assets/images/activity_card_default.webp';
 
 import * as dateManager from '../../../utils/DateManager';
 

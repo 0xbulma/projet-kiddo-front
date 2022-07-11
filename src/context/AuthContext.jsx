@@ -16,7 +16,7 @@ function AuthContext(props) {
   const [checkToken] = useLazyQuery(CHECK_TOKEN);
 
   // Requête GraphQl obligatoire pour la suppression du token en HTTP Only
-  const [disconnectUser] = useLazyQuery(DISCONNECT_USER);
+  const [disconnectUser, { data: disconnectUserData }] = useLazyQuery(DISCONNECT_USER);
 
   // Méthoge de récupération des données utilisateurs.
   const [getUser] = useLazyQuery(GET_BY_ID);
@@ -40,7 +40,7 @@ function AuthContext(props) {
         loggedInFunction(data.checkToken);
       },
       onError: (error) => {
-        console.error('AuthContext - LoggedOnToken : ', error);
+        console.log('Token Error: ', error);
         defineState(true, false, '', '');
       },
     });
@@ -53,9 +53,8 @@ function AuthContext(props) {
 
   // Déconnexion de l'utilisateur depuis la modale
   function loggedOutFunction(_id) {
+    defineState(true, false, '', '');
     disconnectUser({ variables: { id: _id } });
-
-    defineState(false, false, '', '');
 
     localStorage.removeItem('kiddo-user');
   }
@@ -82,8 +81,6 @@ function AuthContext(props) {
     if (!state.isAuthChecked) {
       state.loggedInOnToken();
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);
 
   const getLocalUser = () => JSON.parse(localStorage.getItem('kiddo-user'));
