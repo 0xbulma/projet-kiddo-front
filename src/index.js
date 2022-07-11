@@ -10,7 +10,6 @@ import UserLayout from './pages/layout/UserLayout';
 import AdminLayout from './pages/layout/AdminLayout';
 
 import AuthContext from './context/AuthContext';
-import SearchContext from './context/SearchContext';
 
 //App layout components
 
@@ -19,6 +18,7 @@ import Kiddo from './pages/app/Kiddo';
 import Contact from './pages/app/Contact.jsx';
 import NotFound from './pages/app/NotFound.jsx';
 
+import CreateEvents from './pages/app/CreateEvents';
 import CategoryPage from './pages/app/CategoryPage';
 import EventPage from './pages/app/EventPage';
 import SearchPage from './pages/app/SearchPage';
@@ -34,6 +34,10 @@ import Signalement from './pages/administration/sections/Report';
 
 // Import CSS
 import './style.css';
+import UserDashboard from './pages/app/userDashboard/UserDashboard';
+import UserDashboard_Activity from './pages/app/userDashboard/UserDashboard_Activity';
+import UserDashboard_Fav from './pages/app/userDashboard/UserDashboard_Fav';
+import UserDashboard_Notification from './pages/app/userDashboard/UserDashboard_Notification';
 
 let isAdmin = true;
 
@@ -51,19 +55,21 @@ root.render(
             <Route path='/contact' element={<UserLayout composant={<Contact />} />} />
             <Route path='/event/:eventId' element={<UserLayout composant={<EventPage />} />} />
             <Route path='/category/:category' element={<UserLayout composant={<CategoryPage />} />} />
+            <Route path='/create-event' element={<UserLayout composant={<CreateEvents />} />} />
             <Route path='*' element={<UserLayout composant={<NotFound />} />} />
             <Route path='/user' element={<UserLayout composant={<UserInfo />} />} />
-            <Route path='/search' element={<UserLayout composant={<SearchPage />} />} />
+            <Route path='/search/:params' element={<UserLayout composant={<SearchPage />} />} />
+            <Route path='/user/dashboard' element={<UserLayout composant={<UserDashboard />} />} />
+            <Route path='/user/dashboard/activity' element={<UserLayout composant={<UserDashboard_Activity />} />} />
+            <Route path='/user/dashboard/fav' element={<UserLayout composant={<UserDashboard_Fav />} />} />
+            <Route path='/user/dashboard/notification' element={<UserLayout composant={<UserDashboard_Notification />} />} />
             {isAdmin && (
               <Fragment>
                 <Route path='/administration' element={<AdminLayout composant={<AdminDashboard />} />} />
                 <Route path='/administration/users' element={<AdminLayout composant={<AdminUser />} />} />
                 <Route path='/administration/users/:id' element={<AdminLayout composant={<AdminUserProfil />} />} />
                 <Route path='/administration/reports' element={<AdminLayout composant={<Signalement />} />} />
-                <Route
-                  path='/administration/userTest'
-                  element={<AdminLayout composant={<AdminUserTestMutation />} />}
-                />
+                <Route path='/administration/userTest' element={<AdminLayout composant={<AdminUserTestMutation />} />} />
               </Fragment>
             )}
           </Routes>

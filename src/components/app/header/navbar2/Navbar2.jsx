@@ -8,9 +8,6 @@ import ICalendar from '../../../../components/shared/icons/ICalendar';
 import useAuthContext from '../../../../hooks/useAuthContext';
 import ModalBackdrop from '../../../shared/modal/ModalBackdrop';
 import ModalRegisterLogin from '../../../shared/modal/ModalRegisterLogin';
-import { useLocation } from 'react-router-dom';
-
-import useSearchContext from '../../../../hooks/useSearchContext';
 
 import useEventListener from '../../../../hooks/useEventListener';
 import Navbar2Sub from './Navbar2Sub';
@@ -22,11 +19,9 @@ import logo from '../../../../assets/images/logo.svg';
 import './navbar2.css';
 
 export default function Navbar2() {
-  const search = useSearchContext();
-
-  let location = useLocation();
-
   const [isSubOpen, setIsSubOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [userInput, setUserInput] = useState('');
   const [isModal, setIsModal] = useState();
   const { isAuth, _id, loggedOut } = useAuthContext();
   const [showNav, setShowNav] = useState(true);
@@ -35,18 +30,16 @@ export default function Navbar2() {
   const [profileIsShown, setProfileIsShown] = useState(false);
 
   const prevScrollY = useRef(0);
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
   const handler = ({ key }) => {
     switch (key) {
       case 'Escape':
-        search.setIsSearchOpen();
+        setIsSearchOpen(false);
         break;
       case 'Enter':
-        if(search.userInput){
-          search.initSearch();
-        }
-        search.setIsSearchOpen();
+        initSearch();
+        showSearchInputHandler();
         break;
       default:
         return;
@@ -54,30 +47,46 @@ export default function Navbar2() {
   };
 
   const showSearchInputHandler = () => {
-    // if (userInput) {
-    //   return;
-    // }
+    if (userInput) {
+      return;
+    }
     if (isSubOpen) {
       setIsSubOpen(false);
     }
-    search.setIsSearchOpen();
+    setIsSearchOpen((bol) => !bol);
+    setUserInput('');
   };
 
-  const toggleSubMenu = () => {
-    setIsSubOpen(bol => !bol);
+  const showSubMenu = () => {
+    setIsSubOpen((bol) => !bol);
   };
-
-  const closeSearchAndSub = () => {
+  const closeSubMenu = () => {
     setIsSubOpen(false);
-    search.closeSearch();
-    search.clearUserInput();
+  };
+  const closeSearchInput = () => {
+    setIsSearchOpen(false);
+    setUserInput('');
   };
 
-  const onInputHandler = e => {
-    search.setUserInput(e.currentTarget.value);
+  const onInputHandler = (e) => {
+    setUserInput(e.currentTarget.value);
   };
 
-  const scrollHandler = e => {
+  const initSearch = () => {
+    if (userInput) {
+      navigate('/search/' + userInput);
+    }
+  };
+
+  useDebounce(
+    () => {
+      initSearch();
+    },
+    1000,
+    [userInput]
+  );
+
+  const scrollHandler = (e) => {
     const currentScrollY = window.scrollY;
     if (prevScrollY.current < currentScrollY && goingUp) {
       setGoingUp(false);
@@ -112,7 +121,7 @@ export default function Navbar2() {
   );
 
   const toggleProfile = () => {
-    setProfileIsShown(bol => !bol);
+    setProfileIsShown((bol) => !bol);
   };
 
   useEventListener('scroll', scrollHandler);
@@ -121,63 +130,55 @@ export default function Navbar2() {
   return (
     <>
       {isModal && (
-        <ModalBackdrop
-          composant={<ModalRegisterLogin closeModal={() => setIsModal(false)} />}
-          open={isModal}
-          onClose={() => setIsModal(false)}
-        />
+        <ModalBackdrop composant={<ModalRegisterLogin closeModal={() => setIsModal(false)} />} open={isModal} onClose={() => setIsModal(false)} />
       )}
 
-      <div
-        className={`navbar2__container ${scrollY > 2 && 'navbar2__container--scrolled'} ${
-          !showNav && 'navbar2__container--hidden'
-        }`}
-      >
+      <div className={`navbar2__container ${scrollY > 2 && 'navbar2__container--scrolled'} ${!showNav && 'navbar2__container--hidden'}`}>
         <nav className='navbar2__innercontainer generic-container'>
           <NavLink to='/'>
-            <img className='navbar2_logo' src={logo} alt='logo' onClick={closeSearchAndSub} />
+            <img className='navbar2_logo' src={logo} alt='logo' onClick={closeSubMenu} />
           </NavLink>
 
-          {!search.isSearchOpen && (
+          {!isSearchOpen && (
             <ul className='navbar2__linklist'>
               <li>
-                <NavLink className='navbar2__link' to='/kiddo' onClick={closeSearchAndSub}>
+                <NavLink className='navbar2__link' to='/kiddo' onClick={closeSubMenu}>
                   Découvrir Kiddo
                 </NavLink>
               </li>
               <li>
-                <div className={`navbar2__link flex items-center gap-2 ${location.pathname.includes('category') && 'active'}`} onClick={toggleSubMenu}>
+                <div className='navbar2__link flex items-center gap-2' onClick={showSubMenu}>
                   <span>Participer aux activités</span>
                   <FaChevronDown />
                 </div>
               </li>
               <li>
-                <NavLink className='navbar2__link' to='/404' onClick={closeSearchAndSub}>
+                <NavLink className='navbar2__link' to='/create-event' onClick={closeSubMenu}>
                   Organiser une activités
                 </NavLink>
               </li>
             </ul>
           )}
 
-          <div className={`navbar2__icongroup ${search.isSearchOpen && 'navbar2__icongroup--grow '}`}>
-            {search.isSearchOpen && (
+          <div className={`navbar2__icongroup ${isSearchOpen && 'navbar2__icongroup--grow '}`}>
+            {isSearchOpen && (
               <div className='navbar2__searchinput-container'>
                 <input
                   className='navbar2__searchinput focus:ring-0'
                   type='text'
                   autoFocus
                   placeholder='Trouver une activité...'
-                  value={search.userInput}
+                  value={userInput}
                   onChange={onInputHandler}
                 />
                 <ISearch onClick={showSearchInputHandler} className='navbar2__icon--searchinput' />
-                <FaTimesCircle onClick={search.closeSearch} className='navbar2__icon--searchinputleft' />
+                <FaTimesCircle onClick={closeSearchInput} className='navbar2__icon--searchinputleft' />
               </div>
             )}
-            {!search.isSearchOpen && <ISearch onClick={showSearchInputHandler} className='navbar2__icon' />}
+            {!isSearchOpen && <ISearch onClick={showSearchInputHandler} className='navbar2__icon' />}
 
-            <ICalendar className='navbar2__icon' onClick={closeSearchAndSub} />
-            <INotification className='navbar2__icon' onClick={closeSearchAndSub} />
+            <ICalendar className='navbar2__icon' />
+            <INotification className='navbar2__icon' />
 
             {isAuth && (
               <Menu as='div' className='relative'>
@@ -187,30 +188,24 @@ export default function Navbar2() {
                 <ProfileMenu
                   isShown={profileIsShown}
                   goToProfile={() => {
-                    closeSearchAndSub();
+                    closeSubMenu();
+                    closeSearchInput();
                     navigate('/user');
                   }}
                   logOut={() => {
-                    closeSearchAndSub();
+                    closeSubMenu();
+                    closeSearchInput();
                     navigate('/');
                     loggedOut(_id);
                   }}
                 />
               </Menu>
             )}
-            {!isAuth && (
-              <IProfile
-                className='navbar2__icon'
-                onClick={() => {
-                  closeSearchAndSub();
-                  setIsModal(true);
-                }}
-              />
-            )}
+            {!isAuth && <IProfile className='navbar2__icon' onClick={() => setIsModal(true)} />}
           </div>
         </nav>
+        {isSubOpen && <Navbar2Sub toggle={isSubOpen} />}
       </div>
-      {isSubOpen && <Navbar2Sub toggle={isSubOpen} />}
     </>
   );
 }

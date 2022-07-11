@@ -12,7 +12,6 @@ import getGeoLoc from '../../../utils/getGeoLoc';
 import PaginationComp from '../../../components/shared/PaginationComp';
 import Skelet from '../../../components/shared/loadingfiles/Skelet';
 import Filterbox from '../../../components/shared/filterbox/Filterbox';
-import getCity from '../../../utils/getCity';
 
 import { FaCrosshairs, FaFilter } from 'react-icons/fa';
 
@@ -35,7 +34,6 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
     isLoading: false,
     coords: null,
     isGeoLoc: false,
-    city: null,
   });
 
   // GraphQl Request
@@ -44,7 +42,6 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
   const [getAllEvents, { data: dataAll }] = useLazyQuery(GET_EVENTS_CATEGORY);
 
   useEffect(() => {
-    console.log(dataAll);
     if (dataAll) {
       setAllResults(() => [...dataAll.eventsComplexQuery.results]);
     }
@@ -52,8 +49,7 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
 
   useEffect(() => {
     setPage(1);
-  }, [minChildAge, maxChildAge, maxDistMeters])
-  
+  }, [minChildAge, maxChildAge, maxDistMeters]);
 
   useEffect(() => {
     getAllEvents({
@@ -119,58 +115,55 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
   }, [categoryId, page, geoLoc.coords, minChildAge, maxChildAge, maxDistMeters, searchInput]);
 
   const onClickHandler = () => {
-    setGeoLoc(geoLoc => ({ ...geoLoc, isLoading: true }));
-    let gps;
-
+    setGeoLoc((geoLoc) => ({ ...geoLoc, isLoading: true }));
     getGeoLoc()
-      .then(res => {
-        gps = res;
-        return getCity(res[1], res[0]);
-      })
-      .then(res => {
+      .then((res) => {
         setMaxDistMeters(200000);
-        return setGeoLoc(geoLoc => ({
+        return setGeoLoc((geoLoc) => ({
           ...geoLoc,
           isLoading: false,
           isGeoLoc: true,
-          coords: gps,
-          city: res
+          coords: res,
         }));
       })
-      .catch(err => {
+      .catch((err) => {
         alert(err.message);
-        return setGeoLoc(geoLoc => ({ ...geoLoc, isLoading: false, isGeoLoc: false, city:null }));
+        return setGeoLoc((geoLoc) => ({ ...geoLoc, isLoading: false, isGeoLoc: false }));
       });
   };
 
   return (
     <>
       <section className='section__grid-3'>
-        <article className='section__grid-2 col-span-2 mb-0'>
+        <article className='section__grid-2 col-span-2'>
           <div className='pb-8'>
-            <div className='flex bg-kiddoGray rounded-md shadow-sm shadow-kiddoShadow items-center py-2 px-5 mx-8 h-11 hover:ring-2 ring-0 transition-all gap-3' >
+            <div className='flex bg-kiddoGray rounded-md shadow-sm shadow-kiddoShadow items-center py-2 px-5 mx-8 h-11 hover:ring-2 ring-0 transition-all gap-3'>
               {geoLoc.isLoading ? <LoadIconBtn className='mr-2' /> : <FaCrosshairs className='' />}
-            
-                <button onClick={onClickHandler} className='w-full hover:underline py-2 text-left' disabled={loading}>
-                  {(geoLoc.city) ? geoLoc.city : 'Activités autour de moi'}
-                </button>
-            
+
+              <button onClick={onClickHandler} className='w-full hover:underline py-2 text-left' disabled={loading}>
+                {geoLoc.city ? geoLoc.city : 'Activités autour de moi'}
+
+                {/* <div className='flex bg-kiddoGray rounded-md shadow-sm shadow-kiddoShadow items-center justify-center py-2 mx-8 h-11 hover:ring-2 ring-0 transition-all'>
+              {loading || !data ? <LoadIconBtn className='mr-2' /> : <FaCrosshairs className='text-sm mx-5' />}
+              {data && (
+                <button onClick={onClickHandler} className='mx-3 w-full hover:underline py-2'>
+                  Activités autour de moi */}
+              </button>
             </div>
           </div>
 
           <div className='relative pb-8'>
             <div className='flex bg-kiddoGray rounded-md shadow-sm shadow-kiddoShadow items-center justify-center py-2 px-5 mx-8 h-11 hover:ring-2 ring-0 transition-all gap-3'>
               {loading || !data ? <LoadIconBtn className='mr-2' /> : <FaFilter className='text-sm ' />}
-          
-                <button onClick={data && toggleFilterVisibility} className='z-20 w-full hover:underline py-2 text-left' disabled={loading}>
-                  Critères de recherche
-                </button>
-          
+
+              <button onClick={data && toggleFilterVisibility} className='z-20 w-full hover:underline py-2 text-left' disabled={loading}>
+                Critères de recherche
+              </button>
+
               {showFilter && (
                 <Filterbox
-                  className={
-                    'absolute top-12 left-6 w-96 p-3 pb-12 mb-5 mx-2 bg-kiddoGray rounded-lg' + (showFilter ? '' : 'filterbox__hidden')
-                  }
+                  className={'absolute top-12 left-6 w-96 p-3 pb-12 mb-5 mx-2 bg-kiddoGray rounded-lg' + (showFilter ? '' : 'filterbox__hidden')}
+                  // className={'absolute top-12 w-96 mb-5 mx-2 bg-kiddoGray rounded-lg' + (showFilter ? '' : 'filterbox__hidden')}
                   maxDist={maxDistMeters}
                   setMaxDist={setMaxDistMeters}
                   minChildAge={minChildAge}
@@ -220,13 +213,13 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
         </article>
       </section>
 
-      <section className=''>
+      <section>
         {data?.eventsComplexQuery.count > 12 && (
           <PaginationComp
             totalItem={data.eventsComplexQuery.count}
             itemsPerPage={12}
             page={page}
-            onPageClick={page => {
+            onPageClick={(page) => {
               setPage(page);
               window.scrollTo(0, 0);
             }}
