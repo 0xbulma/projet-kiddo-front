@@ -10,7 +10,6 @@ import UserLayout from './pages/layout/UserLayout';
 import AdminLayout from './pages/layout/AdminLayout';
 
 import AuthContext from './context/AuthContext';
-import SearchContext from './context/SearchContext';
 
 //App layout components
 
@@ -57,7 +56,7 @@ root.render(
             <Route path='/category/:category' element={<UserLayout composant={<CategoryPage />} />} />
             <Route path='*' element={<UserLayout composant={<NotFound />} />} />
             <Route path='/user' element={<UserLayout composant={<UserInfo />} />} />
-            <Route path='/search' element={<UserLayout composant={<SearchPage />} />} />
+            <Route path='/search/:params' element={<UserLayout composant={<SearchPage />} />} />
             <Route path='/user/dashboard' element={<UserLayout composant={<UserDashboard />} />} />
             <Route path='/user/dashboard/activity' element={<UserLayout composant={<UserDashboard_Activity />} />} />
             <Route path='/user/dashboard/fav' element={<UserLayout composant={<UserDashboard_Fav />} />} />
