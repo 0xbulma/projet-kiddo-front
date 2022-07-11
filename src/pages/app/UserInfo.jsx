@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Button from '../../components/shared/Button';
 import childProfil from '../../assets/images/blank_child_profil.svg';
 import boyProfil from '../../assets/images/profil_male_child.svg';
@@ -9,14 +9,34 @@ import Etiquette from '../../components/shared/Etiquette';
 import { useMutation } from '@apollo/client';
 import { MODIFY_USER_INFO } from '../../graphql/mutation/users.mutation';
 import useAuthContext from './../../hooks/useAuthContext';
-
 import './user-info.css';
+import 'react-phone-number-input/style.css';
+import PhoneInput from 'react-phone-number-input';
 
 const UserInfo = () => {
+  const nbChildren = 1;
   const context = useAuthContext();
+  const [user, setUser] = useState({
+    gender: null,
+    first_name: null,
+    last_name: null,
+    pseudo: null,
+    phone: null,
+    email: null,
+    birthdate: null,
+    adress: {
+      city: null,
+      zip_code: null,
+      adress_line: null,
+      adress_line_2: null,
+    },
 
+    description: null,
+    children: nbChildren.length > 0 ? Array(nbChildren).fill({}) : [],
+  });
   // fonction qui récupère les values du form
   const handleChange = (e) => {
+    console.log('event', e.target);
     if (
       e.target.name === 'adress_line' ||
       e.target.name === 'zip_code' ||
@@ -62,30 +82,10 @@ const UserInfo = () => {
       return { ...user, children: updateNbChildren };
     });
   };
-  const nbChildren = 1;
 
-  const [user, setUser] = useState({
-    gender: null,
-    first_name: null,
-    last_name: null,
-    pseudo: null,
-    phone: null,
-    email: null,
-    birthdate: null,
-    adress: {
-      city: null,
-      zip_code: null,
-      adress_line: null,
-      adress_line_2: null,
-    },
-
-    description: null,
-    children: nbChildren.length > 0 ? Array(nbChildren).fill({}) : [],
-  });
-
-  // useEffect(() => {
-  //   console.log('UserInfo UseEffect :', user);
-  // }, [user]);
+  useEffect(() => {
+    console.log('UserInfo UseEffect :', user);
+  }, [user]);
 
   // détermine la photo de profil enfant
   const getChildPic = (i) => {
@@ -108,7 +108,7 @@ const UserInfo = () => {
 
   return (
     <>
-      <section className="container-user  min-h-full pt-28">
+      <section className="generic-container min-h-full pt-28">
         <h1 className="text-center">UserInfo</h1>
         <section className="grid grid-cols-3 mb-8">
           <article className=" flex flex-col items-center  ">
@@ -118,44 +118,42 @@ const UserInfo = () => {
           <div className="col-span-2">
             <article className="border-2 rounded-xl p-5 col-span-2 ">
               {/* checkbox form */}
-              <div className="flex items-center">
-                <p className="flex justify-around p-5">
-                  Je suis
-                  <label className="container">
-                    Homme
-                    <input
-                      name="gender"
-                      type="radio"
-                      value="male"
-                      onChange={handleChange}
-                    />
-                    <span className="checkmark"></span>
-                  </label>
-                  <label className="container">
-                    Femme
-                    <input
-                      name="gender"
-                      type="radio"
-                      value="female"
-                      onChange={handleChange}
-                    />
-                    <span className="checkmark"></span>
-                  </label>
-                  <label className="container">
-                    Autres
-                    <input
-                      name="gender"
-                      type="radio"
-                      value="other"
-                      onChange={handleChange}
-                    />
-                    <span className="checkmark"></span>
-                  </label>
-                </p>
+              <div className="flex items-center justify-around p-5">
+                <label className="userinfo__radio-container">
+                  <input
+                    name="gender"
+                    type="radio"
+                    value="male"
+                    onChange={handleChange}
+                  />{' '}
+                  Homme
+                  <span className="checkmark"></span>
+                </label>
+                <label className="userinfo__radio-container">
+                  Femme
+                  <input
+                    name="gender"
+                    type="radio"
+                    value="female"
+                    onChange={handleChange}
+                  />
+                  <span className="checkmark"></span>
+                </label>
+                <label className="userinfo__radio-container">
+                  Autres
+                  <input
+                    name="gender"
+                    type="radio"
+                    value="other"
+                    onChange={handleChange}
+                  />
+                  <span className="checkmark"></span>
+                </label>
               </div>
               {/* input form */}
               <div className="flex flex-col">
                 <input
+                  // value={user.first_name}
                   className="rounded-xl mb-2 border-gray-200"
                   name="first_name"
                   type="text"
@@ -176,12 +174,13 @@ const UserInfo = () => {
                   placeholder="Pseudo"
                   onChange={handleChange}
                 />
-                <input
-                  name="phone"
+                <PhoneInput
+                  defaultCountry="FR"
                   className="rounded-xl mb-2 border-gray-200"
-                  type="text"
                   placeholder="Téléphone"
-                  onChange={handleChange}
+                  onChange={(value) => {
+                    setUser((user) => ({ ...user, phone: value }));
+                  }}
                 />
                 <input
                   name="email"

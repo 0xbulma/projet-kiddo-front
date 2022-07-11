@@ -4,7 +4,7 @@
 margin-top: 2rem ;
 
 }
-.container {
+.userinfo__radio-container {
     /* display: block; */
     position: relative;
     padding-left: 35px;
@@ -16,7 +16,7 @@ margin-top: 2rem ;
     user-select: none;
   }
   /* Hide the browser's default checkbox */
-  .container input {
+  .userinfo__radio-container input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
@@ -34,12 +34,12 @@ margin-top: 2rem ;
   border-radius: 15px;
   }
   /* On mouse-over, add a grey background color */
-  .container:hover input ~ .checkmark {
+  .userinfo__radio-container:hover input ~ .checkmark {
     background-color: #ccc;
   }
   
   /*When the checkbox is checked, add a blue background */
-  .container input:checked ~ .checkmark {
+  .userinfo__radio-container input:checked ~ .checkmark {
     background-color: #d3a8ed;
   }
   /* Create the checkmark/indicator (hidden when not checked) */
@@ -49,11 +49,11 @@ margin-top: 2rem ;
     display: none;
   }
   /* Show the checkmark when checked */
-  .container input:checked ~ .checkmark:after {
+  .userinfo__radio-container input:checked ~ .checkmark:after {
     display: block;
   }
   /* Style the checkmark/indicator */
-  .container .checkmark:after {
+  .userinfo__radio-container .checkmark:after {
     left: 9px;
     top: 5px;
     width: 5px;
@@ -84,4 +84,8 @@ margin-top: 2rem ;
   }
   .remove-child-button:hover{
     color: grey;
+  }
+
+  input[type=tel]{
+@apply rounded-xl mb-2 border-gray-200
   }
