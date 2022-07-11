@@ -8,8 +8,7 @@ import ActivityCard from '../../components/shared/card/ActivityCard';
 import { CATEGORIES } from '../../utils/constants/categoryList';
 
 // Import: Assets & Style
-// import MAIN_BG from '../../assets/images/main_bg.svg';
-import hero_bg_1 from '../../assets/images/hero_bg_1.webp';
+import MAIN_BG from '../../assets/images/main_bg.svg';
 
 import ICON_CALENDAR from '../../assets/icons/icon_calendar.svg';
 import Skelet from '../../components/shared/loadingfiles/Skelet';
@@ -53,7 +52,7 @@ export default function HomePage() {
     <>
       {/* Main section */}
       <section className='relative h-screen w-full'>
-        <img src={hero_bg_1} alt='' className='absolute h-full w-full brightness-75 object-cover' />
+        <img src={MAIN_BG} alt='' className='absolute h-full w-full brightness-75 object-cover' />
         <article className='relative h-full top-20 text-center text-white'>
           <h1 className=''>Kiddo</h1>
           <h2 className='mt-10'>Des activités diverses en 1 clic</h2>
@@ -96,7 +95,7 @@ export default function HomePage() {
             </div>
           </div>
           <div className='section__grid-3'>
-            {lastPublishedLoading ? (
+            {upcomingLoading ? (
               <>
                 <Skelet />
                 <Skelet />
@@ -105,25 +104,28 @@ export default function HomePage() {
                 <Skelet />
                 <Skelet />
               </>
-            ) : lastPublishedError ? (
+            ) : upcomingError ? (
               <>
                 <p className='text-red-500 col-span-full text-xl'>Erreur lors du chargement des événements...</p>
               </>
             ) : (
-              lastPublishedEvents &&
-              lastPublishedEvents?.eventsComplexQuery.results.map((event, index) => {
-                return (
-                  <Link key={index} to={`/event/${event._id}`}>
-                    <ActivityCard
-                      title={event.content.title}
-                      category={event.categories.name}
-                      description={event.content.description}
-                      location={event.adress}
-                      date={event.event_date.start}
-                      price={event.price}
-                    />
-                  </Link>
-                );
+              upcomingEvents &&
+              // eslint-disable-next-line array-callback-return
+              upcomingEvents?.eventsComplexQuery.results.map((event, index) => {
+                if (event?.main_owner !== null) {
+                  return (
+                    <Link key={index} to={`/event/${event._id}`}>
+                      <ActivityCard
+                        title={event.content.title}
+                        category={event.categories.name}
+                        description={event.content.description}
+                        location={event.adress}
+                        date={event.event_date.start}
+                        price={event.price}
+                      />
+                    </Link>
+                  );
+                }
               })
             )}
           </div>
@@ -140,7 +142,7 @@ export default function HomePage() {
             </div>
           </div>
           <div className='section__grid-3'>
-            {upcomingLoading ? (
+            {lastPublishedLoading ? (
               <>
                 <Skelet />
                 <Skelet />
@@ -149,25 +151,28 @@ export default function HomePage() {
                 <Skelet />
                 <Skelet />
               </>
-            ) : upcomingError ? (
+            ) : lastPublishedError ? (
               <>
                 <p className='text-red-500 col-span-full text-xl'>Erreur lors du chargement des événements...</p>
               </>
             ) : (
-              upcomingEvents &&
-              upcomingEvents?.eventsComplexQuery.results.map((event, index) => {
-                return (
-                  <Link key={index} to={`/event/${event._id}`}>
-                    <ActivityCard
-                      title={event.content.title}
-                      category={event.categories.name}
-                      description={event.content.description}
-                      location={event.adress}
-                      date={event.event_date.start}
-                      price={event.price}
-                    />
-                  </Link>
-                );
+              lastPublishedEvents &&
+              // eslint-disable-next-line array-callback-return
+              lastPublishedEvents?.eventsComplexQuery.results.map((event, index) => {
+                if (event?.main_owner !== null) {
+                  return (
+                    <Link key={index} to={`/event/${event._id}`}>
+                      <ActivityCard
+                        title={event.content.title}
+                        category={event.categories.name}
+                        description={event.content.description}
+                        location={event.adress}
+                        date={event.event_date.start}
+                        price={event.price}
+                      />
+                    </Link>
+                  );
+                }
               })
             )}
           </div>

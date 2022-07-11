@@ -84,3 +84,19 @@ export const MODIFY_USER_INFO = gql`
     }
   }
 `;
+
+export const RECOVER_PASSWORD_REQUEST = gql`
+  mutation Mutation($email: Emailadress) {
+    recoverPassword(email: $email) {
+      _id
+    }
+  }
+`;
+
+export const RESET_PASSWORD = gql`
+  mutation Mutation($id: ObjectID, $email: Emailadress, $token: UUID, $password: String) {
+    resetPassword(_id: $id, email: $email, token: $token, password: $password) {
+      _id
+    }
+  }
+`;
