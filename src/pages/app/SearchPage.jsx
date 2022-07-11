@@ -11,7 +11,9 @@ export default function SearchPage(props) {
     <div className='container mx-auto pt-28 min-h-screen'>
       <div className='flex flex-col justify-center items-center py-12'>
         <h2>Recherche d'activités</h2>
-         <p>Mots-clés renseignés : {searchParams.get('q')}</p>
+        {searchParams.get('q')?.length >0 && (<p>Mots-clés renseignés : {searchParams.get('q')}</p>)}
+        {!searchParams.get('q') && (<p>Tous les évènements</p>)}
+  
       </div>
 
       <ResultsSection searchInput={searchParams.get('q')} />

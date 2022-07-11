@@ -149,7 +149,7 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
         <article className='section__grid-2 col-span-2 mb-0'>
           <div className='pb-8'>
             <div className='flex bg-kiddoGray rounded-md shadow-sm shadow-kiddoShadow items-center py-2 px-5 mx-8 h-11 hover:ring-2 ring-0 transition-all gap-3' >
-              {loading || !data ? <LoadIconBtn className='mr-2' /> : <FaCrosshairs className='' />}
+              {geoLoc.isLoading ? <LoadIconBtn className='mr-2' /> : <FaCrosshairs className='' />}
             
                 <button onClick={onClickHandler} className='w-full hover:underline py-2 text-left' disabled={loading}>
                   {(geoLoc.city) ? geoLoc.city : 'Activités autour de moi'}
