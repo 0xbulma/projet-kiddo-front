@@ -41,6 +41,20 @@ export const BOOK_EVENT = gql`
   }
 `;
 
+export const BOOK_EVENT_2 = gql`
+  mutation BookEvent($id: ObjectID!, $eventId: ObjectID!, $bookedAt: Date, $participant: ParticipantInput) {
+    bookEvent(_id: $id, eventId: $eventId, bookedAt: $bookedAt, participant: $participant) {
+      _id
+      booked_events {
+        event {
+          _id
+        }
+        booked_at
+      }
+    }
+  }
+`;
+
 export const PIN_EVENT = gql`
   mutation Mutation($id: ObjectID!, $eventId: ObjectID!) {
     pinEvent(_id: $id, eventId: $eventId) {

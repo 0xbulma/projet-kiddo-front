@@ -9,6 +9,7 @@ import image3 from '../../assets/images/carouselTest/3.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot, faCalendar, faPeopleGroup, faEuroSign, faClock } from '@fortawesome/free-solid-svg-icons';
 import { GET_BY_ID } from '../../graphql/query/events.query';
+import * as usersQuery from '../../graphql/query/users.query';
 
 import BlankProfilPic from '../../assets/admin/blank_profil_pic.png';
 import CommentSection from '../../components/shared/CommentSection';
@@ -20,7 +21,7 @@ import MapLeafletOneMarker from '../../components/shared/MapLeafletOneMarker';
 import useToggle from '../../hooks/useToggle';
 import ModalBackdrop from '../../components/shared/modal/ModalBackdrop';
 import ModalRegisterLogin from '../../components/shared/modal/ModalRegisterLogin';
-import { BOOK_EVENT, PIN_EVENT } from '../../graphql/mutation/users.mutation';
+import { BOOK_EVENT_2, PIN_EVENT } from '../../graphql/mutation/users.mutation';
 
 import ReactTooltip from 'react-tooltip';
 import { FaStar, FaInfo } from 'react-icons/fa';
@@ -32,21 +33,27 @@ export default function EventPage() {
 
   const [event, setEvent] = useState();
 
-  // fetchPolicy 'network-only' for getting user only on network for having modification
+  // fetchPolicy 'network-only' for getting event only on network for having modification
   const { loading, error, data } = useQuery(GET_BY_ID, { variables: { eventId: eventId }, fetchPolicy: 'network-only' });
 
-  // Auto scroll to top page for avoid mi screen bug with navigate/link
-  useEffect(() => {
-    if (!data) window.scroll(0, 0);
-  }, [data]);
+  const { loading: userLoading, error: userError, data: userData } = useQuery(usersQuery.GET_BY_ID, { variables: { id: authContext._id } });
 
   useEffect(() => {
     if (data) {
       setEvent(data.event);
     } else if (error) {
       console.log('Error : ', error);
+    } else if (!data) {
+      window.scroll(0, 0);
     }
-  }, [error, data]);
+
+    if (userData) {
+      // eslint-disable-next-line array-callback-return
+      userData.getUserById.booked_events.map((booked) => {
+        if (booked.event._id === eventId) toggleSubs(true);
+      });
+    }
+  }, [error, data, userLoading, userError, userData]);
 
   // Images temporaire
   const images = [image1, image2, image3, image1, image2, image3];
@@ -55,7 +62,7 @@ export default function EventPage() {
   const [displayModal, toggleModal] = useToggle(false);
   const [isSubs, toggleSubs] = useToggle(false);
 
-  const [bookEvent, { error: bookEventError, data: bookEventData }] = useMutation(BOOK_EVENT);
+  const [bookEvent, { error: bookEventError, data: bookEventData }] = useMutation(BOOK_EVENT_2);
 
   const handleSubsClick = () => {
     if (!authContext.isAuth) {
@@ -65,7 +72,18 @@ export default function EventPage() {
         variables: {
           id: authContext._id,
           eventId: eventId,
-          bookedAt: Date.now(),
+          bookedAt: null,
+          participant: {
+            user: authContext._id,
+            booked_at: null,
+            group_detail: [
+              {
+                isChild: false,
+                name: 'Toto',
+                age: 10,
+              },
+            ],
+          },
         },
       });
     }

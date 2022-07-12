@@ -14,9 +14,8 @@ import { getCategoryColorForCSS } from '../../../utils/constants/categoryColors'
 import useAuthContext from '../../../hooks/useAuthContext';
 import { GET_BY_ID } from '../../../graphql/query/users.query';
 import { useEffect } from 'react';
-import Skelet from '../../../components/shared/loadingfiles/Skelet';
 import { getCategoryById } from '../../../utils/constants/categoryList';
-import { BOOK_EVENT } from '../../../graphql/mutation/users.mutation';
+import { BOOK_EVENT_2 } from '../../../graphql/mutation/users.mutation';
 
 export default function UserDashboardActivity() {
   const navigate = useNavigate();
@@ -27,7 +26,7 @@ export default function UserDashboardActivity() {
 
   useEffect(() => {
     if (context.isAuth && context._id !== '') {
-      fetchUserData({ variables: { id: context._id } });
+      fetchUserData({ variables: { id: context._id }, fetchPolicy: 'network-only' });
     }
     if (userLoading) console.log('userLoading', userLoading);
     if (userError) console.log('userError', userError);
@@ -154,21 +153,34 @@ function DashboardActivityCard({ bookedEvent }) {
   const categoryName = getCategoryById(event?.categories._id);
   const categoryColor = getCategoryColorForCSS(categoryName);
 
-  const [bookEvent, { error: bookEventError, data: bookEventData }] = useMutation(BOOK_EVENT);
+  const [bookEvent, { data: removeBookData }] = useMutation(BOOK_EVENT_2);
+
+  const handleSubsClick = () => {
+    bookEvent({
+      variables: {
+        id: _id,
+        eventId: event._id,
+        bookedAt: null,
+        participant: {
+          user: _id,
+          booked_at: null,
+        },
+      },
+    });
+  };
 
   useEffect(() => {
-    if (bookEventData) {
-      console.log('Booked Event data !');
-      navigate('.');
+    if (removeBookData) {
+      navigate('./');
     }
-  }, bookEventData);
+  }, [removeBookData]);
 
   return (
     <>
       {event === undefined || event === null ? (
-        <Skelet />
-      ) : bookEventError ? (
-        <p className='text-red-500 text-lg font-medium'>Erreur lors du chargement de l'événement</p>
+        <>
+          <p>Aucun événement en cours...</p>
+        </>
       ) : (
         <>
           <article className='section__grid-2 bg-kiddoGray rounded-xl'>
@@ -203,17 +215,7 @@ function DashboardActivityCard({ bookedEvent }) {
                 <div className='p-1 bg-kiddoPurple mr-3 text-white'>
                   <FaTimes />
                 </div>
-                <p
-                  className='hover:underline select-none cursor-pointer'
-                  onClick={() =>
-                    bookEvent({
-                      variables: {
-                        id: _id,
-                        eventId: event._id,
-                        pinnedAt: Date.now(),
-                      },
-                    })
-                  }>
+                <p className='hover:underline select-none cursor-pointer' onClick={() => handleSubsClick()}>
                   Annuler ma participation
                 </p>
               </div>
