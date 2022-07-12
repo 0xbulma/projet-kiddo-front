@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 import useAuthContext from '../../../../hooks/useAuthContext';
 
 const navigation = navigationHeader.navigation;
-console.log(navigation);
 
 const nav = [
   { name: 'Découvrir Kiddo', href: '/kiddo' },
@@ -16,7 +15,6 @@ const nav = [
 ];
 
 let navig = navigation[1];
-console.log(navig);
 
 const submenu = navig.submenu;
 

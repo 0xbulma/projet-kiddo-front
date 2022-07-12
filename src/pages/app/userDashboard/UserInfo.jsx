@@ -99,21 +99,21 @@ const UserInfo = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [context]);
 
-  useEffect(() => {
-    console.log('UserInfo UseEffect :', user);
-  }, [user]);
+  // useEffect(() => {
+  //   console.log('UserInfo UseEffect :', user);
+  // }, [user]);
 
-  useEffect(() => {
-    if (userData) {
-      setUser(userData.getUserById);
-      console.log('userData', userData);
-    }
-    if (userError) {
-      console.log('errorDATA', userError.networkError.result);
-    }
+  // useEffect(() => {
+  //   if (userData) {
+  //     setUser(userData.getUserById);
+  //     console.log('userData', userData);
+  //   }
+  //   if (userError) {
+  //     console.log('errorDATA', userError.networkError.result);
+  //   }
 
-    // if (!context.isAuth) navigate('../');
-  }, [userData, userError]);
+  //   // if (!context.isAuth) navigate('../');
+  // }, [userData, userError]);
 
   // détermine la photo de profil enfant
   const getChildPic = (i) => {
@@ -130,12 +130,12 @@ const UserInfo = () => {
   if (loading) {
     return <div>Chargement en cours</div>;
   }
-  if (error) {
-    console.log('UserInfo Error :', error);
-  }
-  if (data) {
-    console.log('UserInfo Data :', data);
-  }
+  // if (error) {
+  //   console.log('UserInfo Error :', error);
+  // }
+  // if (data) {
+  //   console.log('UserInfo Data :', data);
+  // }
 
   // Roots
   const roots = [
@@ -183,8 +183,8 @@ const UserInfo = () => {
             <p className='border-2 p-6 rounded-xl'>Mon compte</p>
           </article>
           {/* all form inputs */}
-          <div className="col-span-2">
-            <article className="border-2 rounded-xl p-5 col-span-2 ">
+          <div className='col-span-2'>
+            <article className='border-2 rounded-xl p-5 col-span-2 '>
               {/* checkbox form */}
               <div className='flex items-center justify-around p-5 '>
                 <label className='userinfo__radio-container'>
@@ -296,7 +296,7 @@ const UserInfo = () => {
           </div>
         </section>
         {/* presentation */}
-        <section className="border-2 rounded-xl h-40 p-5">
+        <section className='border-2 rounded-xl h-40 p-5'>
           <h2>Presentation</h2>
           <input
             value={user && user.description}
@@ -315,98 +315,74 @@ const UserInfo = () => {
               <article key={i} className='child-card rounded-xl flex-1 flex border p-8 ml-4  bg-zinc-100'>
                 {user.children.length > 1 && (
                   <button
-                    className="remove-child-button"
+                    className='remove-child-button'
                     onClick={() => {
                       handleRemoveChild(i);
-                    }}
-                  >
+                    }}>
                     <FaTimesCircle />
                   </button>
                 )}
 
-                <div className="rounded-full p-4 flex justify-center items-center">
-                  <img src={getChildPic(i)} alt="child-profil" />
+                <div className='rounded-full p-4 flex justify-center items-center'>
+                  <img src={getChildPic(i)} alt='child-profil' />
                 </div>
-                <div className="pl-3">
+                <div className='pl-3'>
                   <input
                     value={user.children[i].name}
                     name={`children[${i}].name`}
-                    className="rounded-xl mb-2 border-gray-200 w-full"
-                    type="text"
-                    placeholder="Prénom"
-                    onChange={(e) =>
-                      handleChangeChildren(e.currentTarget.value, i, 'name')
-                    }
+                    className='rounded-xl mb-2 border-gray-200 w-full'
+                    type='text'
+                    placeholder='Prénom'
+                    onChange={(e) => handleChangeChildren(e.currentTarget.value, i, 'name')}
                   />
                   <select
                     name={`children[${i}].gender`}
-                    className="rounded-xl mb-2 border-gray-200 w-full"
-                    onChange={(e) =>
-                      handleChangeChildren(e.currentTarget.value, i, 'gender')
-                    }
-                    value={user.children[i].gender}
-                  >
+                    className='rounded-xl mb-2 border-gray-200 w-full'
+                    onChange={(e) => handleChangeChildren(e.currentTarget.value, i, 'gender')}
+                    value={user.children[i].gender}>
                     <option defaultValue>Précicez le genre</option>
-                    <option value="boy">Garçon</option>
-                    <option value="girl">Fille</option>
-                    <option value="other">Autre</option>
+                    <option value='boy'>Garçon</option>
+                    <option value='girl'>Fille</option>
+                    <option value='other'>Autre</option>
                   </select>
                   <label htmlFor={`children[${i}].age`}>
                     <p> date de naissance :</p>
                   </label>
                   <input
-                    placeholder="date de naissance"
+                    placeholder='date de naissance'
                     name={`children[${i}].age`}
                     value={user.children[i].age}
-                    className="rounded-xl mb-2 border-gray-200 w-full"
-                    type="date"
-                    onChange={(e) =>
-                      handleChangeChildren(e.currentTarget.value, i, 'age')
-                    }
+                    className='rounded-xl mb-2 border-gray-200 w-full'
+                    type='date'
+                    onChange={(e) => handleChangeChildren(e.currentTarget.value, i, 'age')}
                   />
                 </div>
               </article>
             ))}
           </div>
-          <div className="flex justify-center p-20">
+          <div className='flex justify-center p-20'>
             <Button onClick={handleAddChild}>ajouter un enfant </Button>
           </div>
 
           <article>
             <p>
-              <input type="checkbox" /> J'autorise un autre membre à amener mes
-              enfants aux activités
+              <input type='checkbox' /> J'autorise un autre membre à amener mes enfants aux activités
             </p>
-            <p className="pt-8 flex justify-around">
+            <p className='pt-8 flex justify-around'>
               Saisissez le nom et l'adresse du membre Kiddo :
-              <input
-                type="text"
-                className="rounded-xl mb-2 border-gray-200"
-                placeholder="Nom"
-              />
-              <input
-                type="text"
-                className="rounded-xl mb-2 border-gray-200"
-                placeholder="Adresse"
-              />
+              <input type='text' className='rounded-xl mb-2 border-gray-200' placeholder='Nom' />
+              <input type='text' className='rounded-xl mb-2 border-gray-200' placeholder='Adresse' />
             </p>
           </article>
         </section>
         <section>
           <h2>catégories d'activités recherchées</h2>
-          <article className="grid grid-cols-3 gap-5 p-8">
+          <article className='grid grid-cols-3 gap-5 p-8'>
             {CATEGORIES.map((etiquette, index) => {
-              return (
-                <Etiquette
-                  key={index}
-                  category={etiquette.type}
-                  name={etiquette.name}
-                  backgroundColor={etiquette.backgroundColor}
-                />
-              );
+              return <Etiquette key={index} category={etiquette.type} name={etiquette.name} backgroundColor={etiquette.backgroundColor} />;
             })}
           </article>
-          <div className="flex justify-center p-10">
+          <div className='flex justify-center p-10'>
             <Button
               onClick={() => {
                 // console.log('UserInfo SaveBtnOnClick :', {
@@ -441,8 +417,7 @@ const UserInfo = () => {
                     },
                   },
                 });
-              }}
-            >
+              }}>
               Valider
             </Button>
           </div>
