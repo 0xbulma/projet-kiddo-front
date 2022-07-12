@@ -29,14 +29,14 @@ function SearchContext(props) {
     },
 
     closeSearch: () => {
-      setState(sta => ({ ...sta, isSearchOpen: false }));
+      setState((sta) => ({ ...sta, isSearchOpen: false }));
     },
     openSearch: () => {
-      setState(sta => ({ ...sta, isSearchOpen: true }));
+      setState((sta) => ({ ...sta, isSearchOpen: true }));
     },
 
     setIsSearchOpen: () => {
-      setState(sta => {
+      setState((sta) => {
         if (sta.isSearchOpen) {
           return { ...sta, isSearchOpen: false };
         }
@@ -46,22 +46,21 @@ function SearchContext(props) {
       });
     },
 
-    setUserInput: input => {
-      setState(sta => ({ ...sta, userInput: input }));
+    setUserInput: (input) => {
+      setState((sta) => ({ ...sta, userInput: input }));
     },
 
     clearUserInput: () => {
-      setState(sta => ({ ...sta, userInput: '' }));
+      setState((sta) => ({ ...sta, userInput: '' }));
     },
   });
-
 
   useDebounce(
     () => {
       if (state.userInput) {
         setSearchParams({ q: state.userInput });
       }
-      if (state.userInput === ''){
+      if (state.userInput === '') {
         setSearchParams('');
       }
       if (location.pathname !== '/search' && state.userInput) {

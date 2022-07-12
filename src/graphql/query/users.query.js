@@ -16,19 +16,99 @@ export const GET_ALL = gql`
 `;
 
 export const GET_BY_ID = gql`
-  query Query($id: ObjectID!) {
+  query GetUserById($id: ObjectID!) {
     getUserById(_id: $id) {
       _id
       created_at
       updated_at
       rank
+      gender
       token
       email
+      phone
       pseudo
       first_name
       last_name
       birthdate
       profil_picture
+      children {
+        age
+        gender
+        name
+      }
+      description
+      adress {
+        city
+        zip_code
+        adress_line
+      }
+      pinned_events {
+        pinned_at
+        event {
+          _id
+          categories {
+            _id
+            name
+          }
+          content {
+            title
+          }
+          content_media {
+            photos_url
+          }
+          adress {
+            city
+            zip_code
+            adress_line
+          }
+          event_date {
+            start
+          }
+          price {
+            adult
+            child
+          }
+        }
+      }
+      booked_events {
+        booked_at
+        event {
+          _id
+          categories {
+            _id
+            name
+          }
+          content {
+            title
+          }
+          content_media {
+            photos_url
+          }
+          adress {
+            city
+            zip_code
+            adress_line
+          }
+          event_date {
+            start
+          }
+          price {
+            adult
+            child
+          }
+        }
+      }
+      children {
+        age
+        gender
+        name
+      }
+      description
+      adress {
+        city
+        zip_code
+        adress_line
+      }
     }
   }
 `;

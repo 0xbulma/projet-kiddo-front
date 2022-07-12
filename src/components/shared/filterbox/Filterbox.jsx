@@ -7,7 +7,7 @@ export default function Filterbox({ className, maxDist, setMaxDist, minChildAge,
   return (
     <div className={`${className} rounded-lg shadow-md z-10 `}>
       {isGeoLoc && (
-        <div className='fitlerbox__group mb-5 py-3'>
+        <div className='fitlerbox__group mb-5 py-3 pt-5'>
           <label className='filterbox__label underline'>Distance maximale</label>
           <ReactSlider
             value={maxDist / 1000}

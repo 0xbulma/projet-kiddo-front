@@ -1,38 +1,44 @@
 // import NavItem from "./NavItem";
-import { Fragment } from 'react';
 import { Popover } from '@headlessui/react';
 
-import { classNames } from '../../../../utils/lib/classNames';
-import Submenu from './Submenu';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { FaChevronDown } from 'react-icons/fa';
 
-export default function Nav(props) {
+export default function Nav({
+  isSearchOpen, navigation, showSubMenu
+}) {
   return (
-    <Popover.Group as='nav' className='flex space-x-10'>
-      {props.navigation.map((item, index) => {
-        return (
-          <Fragment key={index}>
-            {item === props.navigation[1] ? (
-              <Popover>
-                {({ open }) => (
-                  <Fragment>
-                    <Popover.Button
-                      className={classNames((open ? 'text-gray-900' : 'text-black') + ' text-base font-medium hover:text-gray-900 hover:underline')}>
-                      <p>{item.name}</p>
-                    </Popover.Button>
-
-                    <Submenu item={item} />
-                  </Fragment>
-                )}
-              </Popover>
-            ) : (
-              <Link to={item.href} className='text-base font-medium text-black hover:text-gray-900 focus:underline after:underline hover:underline'>
-                {item.name}
-              </Link>
-            )}
-          </Fragment>
-        );
-      })}
-    </Popover.Group>
+    <>
+      {
+        !isSearchOpen && (
+          <Popover.Group as='nav' className='flex space-x-10'>
+            {navigation.map((item, index) => {
+              return (
+                <ul className="navbar2__linklist" key={index}>
+                  {item === navigation[1] ? (
+                      <li>
+                        <div
+                          onClick={showSubMenu}
+                          className='navbar2__link flex items-center gap-2'
+                        >
+                          <span>{item.name}</span>
+                          <FaChevronDown />
+                        </div>
+                      </li>
+                  ) : (
+                    <li>
+                      <NavLink to={item.href} className='navbar2__link'>
+                        {item.name}
+                      </NavLink>
+                    </li>
+                    
+                  )}
+                </ul>
+              );
+            })}
+          </Popover.Group>
+        )
+      }
+    </>
   );
 }

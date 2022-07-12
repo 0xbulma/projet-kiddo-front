@@ -17,7 +17,7 @@ import ModalBackdrop from './modal/ModalBackdrop';
 //Import asset
 import BlankProfilPic from '../../assets/admin/blank_profil_pic.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPaperPlane, faHeart, faFlag, faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import { faPaperPlane, faHeart, faFlag, faDotCircle, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import CommentSignalment from './Signalment';
 
 //commentTarget = 0 > user | 1 > event | 2 > article
@@ -78,7 +78,7 @@ function Comment({ user, comment, refetchComments, commentTarget, targetID }) {
   const [hiddingResponse, toggleHiddingResponse] = useToggle(false);
   const [isResponding, toggleResponding] = useToggle(false);
 
-  const [removeComment, { called, data: removeData }] = useMutation(CommentsMutation.REMOVE_COMMENT);
+  const [removeComment, { called, loading: loadingRemove, data: removeData }] = useMutation(CommentsMutation.REMOVE_COMMENT);
 
   //Temp Like _id
   const reactionId = '62bef2b93fdb4c2bc213dac0';
@@ -136,9 +136,12 @@ function Comment({ user, comment, refetchComments, commentTarget, targetID }) {
                 <ReactTooltip effect='solid' place='top' />
                 <FontAwesomeIcon
                   icon={faTrashCan}
-                  className='comment__icon mx-2 text-red-600 hover:scale-125 transition-all cursor-pointer  select-none'
-                  data-tip='Supprimer ce commentaire'
-                  onClick={() => removeComment({ variables: { _id: comment._id } })}
+                  className={
+                    'comment__icon mx-2 text-red-600 hover:scale-125 transition-all cursor-pointer select-none ' +
+                    (loadingRemove && 'animate-bounce text-green-800 cursor-default')
+                  }
+                  data-tip={loadingRemove ? 'Suppression en cours ' : 'Supprimer ce commentaire'}
+                  onClick={() => !loadingRemove && removeComment({ variables: { _id: comment._id } })}
                 />
               </>
             )}
@@ -236,8 +239,11 @@ function Comment({ user, comment, refetchComments, commentTarget, targetID }) {
                       <ReactTooltip effect='solid' place='top' />
                       <FontAwesomeIcon
                         icon={faTrashCan}
-                        className='comment__icon mr-2 text-red-600 hover:scale-125 transition-all cursor-pointer select-none'
-                        data-tip='Supprimer ce commentaire'
+                        className={
+                          'comment__icon mr-2 text-red-600 hover:scale-125 transition-all cursor-pointer select-none' +
+                          (loadingRemove && 'animate-bounce text-green-800 cursor-default')
+                        }
+                        data-tip={loadingRemove ? 'Suppression en cours ' : 'Supprimer ce commentaire'}
                         onClick={() => removeComment({ variables: { _id: comment._id } })}
                       />
                     </>
@@ -325,13 +331,17 @@ function WriteComment({ user, parent, commentTarget, targetID, refetchComments, 
     },
   };
 
-  const [createComment, { called, data }] = useMutation(CommentsMutation.CREATE_COMMENT);
+  const [createComment, { called, loading, error, data }] = useMutation(CommentsMutation.CREATE_COMMENT);
 
   useEffect(() => {
     if (called && data) {
       if (toggleResponding !== undefined) toggleResponding();
       refetchComments();
       setAreaValue('');
+    }
+
+    if (error) {
+      alert("Erreur lors de l'envoi du commentaire : \n", error);
     }
   }, [data]);
 
@@ -365,7 +375,7 @@ function WriteComment({ user, parent, commentTarget, targetID, refetchComments, 
         <textarea
           name='message'
           id='message'
-          placeholder='Laisser un commentaire'
+          placeholder={loading ? 'Envoi en cours...' : 'Laisser un commentaire'}
           className='p-4 bg-transparent rounded-b-lg -hidden border-0 focus:ring-0'
           value={areaValue}
           onChange={(e) => setAreaValue(e.currentTarget.value)}
@@ -375,8 +385,11 @@ function WriteComment({ user, parent, commentTarget, targetID, refetchComments, 
       <article className='self-center'>
         <FontAwesomeIcon
           icon={icon}
-          className='comment__icon ml-4 p-2 rounded-full text-xl kiddoSection shadow-md shadow-kiddoShadow border-2 hover:scale-105 transition-all cursor-pointer select-none'
-          onClick={() => createComment({ variables: requestVariables })}
+          className={
+            'comment__icon ml-4 p-2 rounded-full text-xl kiddoSection shadow-md shadow-kiddoShadow border-2 hover:scale-105 transition-all cursor-pointer select-none ' +
+            (loading && ' animate-bounce ring-2 text-blue-700 cursor-default')
+          }
+          onClick={() => !loading && createComment({ variables: requestVariables })}
         />
       </article>
     </section>
