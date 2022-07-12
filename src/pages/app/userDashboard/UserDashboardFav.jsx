@@ -14,9 +14,7 @@ import { getCategoryColorForCSS } from '../../../utils/constants/categoryColors'
 import useAuthContext from '../../../hooks/useAuthContext';
 import { GET_BY_ID } from '../../../graphql/query/users.query';
 import { useEffect } from 'react';
-import Skelet from '../../../components/shared/loadingfiles/Skelet';
 import { getCategoryById } from '../../../utils/constants/categoryList';
-import { PIN_EVENT } from '../../../graphql/mutation/users.mutation';
 
 export default function UserDashboardFav() {
   const navigate = useNavigate();
@@ -116,6 +114,88 @@ export default function UserDashboardFav() {
           </article>
         </article>
       </section>
+    </>
+  );
+}
+
+function DashboardActivityCard({ bookedEvent }) {
+  const navigate = useNavigate();
+  const { _id } = useAuthContext();
+  const event = bookedEvent?.event;
+
+  const categoryName = getCategoryById(event?.categories._id);
+  const categoryColor = getCategoryColorForCSS(categoryName);
+
+  const [bookEvent, { data: removeBookData }] = useMutation();
+
+  const handleSubsClick = () => {
+    bookEvent({
+      variables: {
+        id: _id,
+        eventId: event._id,
+        bookedAt: null,
+        participant: {
+          user: _id,
+          booked_at: null,
+        },
+      },
+    });
+  };
+
+  useEffect(() => {
+    if (removeBookData) {
+      navigate('./');
+    }
+  }, [removeBookData]);
+
+  return (
+    <>
+      {event === undefined || event === null ? (
+        <>
+          <p>Aucun événement en cours...</p>
+        </>
+      ) : (
+        <>
+          <article className='section__grid-2 bg-kiddoGray rounded-xl'>
+            <div className='dashboard__activity-card__ruban' data-category={categoryName} style={{ '--ruban-color': categoryColor }}>
+              <img src={activityPic} alt='' className='relative w-full h-64 object-fill over rounded-l-xl' />
+            </div>
+            <div className='flex flex-col justify-around'>
+              <p className='font-medium mr-auto truncate'>{event.content.title}</p>
+              <div className='flex items-center'>
+                <FaMapMarkerAlt className='mr-3' />
+                <p className='truncate'>
+                  {event.adress.city} ({event.adress.zip_code.substring(0, 2)})
+                </p>
+              </div>
+              <div className='flex items-center'>
+                <FaCalendarAlt className='mr-3' />
+                <p>{dateManager.getDate(event.event_date.start)}</p>
+              </div>
+
+              <div className='flex items-center'>
+                <div className='p-1 bg-kiddoPurple mr-3 text-white'>
+                  <FaShareSquare />
+                </div>
+                <p
+                  className='hover:underline select-none cursor-pointer'
+                  onClick={() => alert(`Lien de partage : \nhttp://localhost:3000/event/${event._id}`)}>
+                  Partager à un.e ami.e
+                </p>
+              </div>
+
+              <div className='flex items-center'>
+                <div className='p-1 bg-kiddoPurple mr-3 text-white'>
+                  <FaTimes />
+                </div>
+                <p className='hover:underline select-none cursor-pointer' onClick={() => handleSubsClick()}>
+                  Annuler ma participation
+                </p>
+              </div>
+            </div>
+          </article>
+        </>
+      )}
     </>
   );
 }
