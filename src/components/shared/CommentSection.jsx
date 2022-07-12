@@ -226,7 +226,9 @@ function Comment({ user, comment, refetchComments, commentTarget, targetID }) {
                   <p className='font-medium'>
                     {comment.sender.first_name !== null
                       ? comment.sender.first_name + (comment.sender.last_name !== null && ' ' + comment.sender.last_name)
-                      : comment.sender.email}
+                      : comment.sender.email !== null
+                      ? comment.sender.email
+                      : 'Nom Prénom'}
                   </p>
                   <p className='mr-3 font-thin text-sm'>{new Date(comment.created_at).toLocaleString().replace(' ', ' à ')}</p>
                 </div>

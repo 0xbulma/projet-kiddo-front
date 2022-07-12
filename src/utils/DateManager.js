@@ -51,3 +51,18 @@ export function getUserAge(timestamp) {
 
   return age;
 }
+
+export function getChildAge(timestamp) {
+  const today = new Date();
+  const birthDate = new Date(timestamp);
+
+  const m = today.getMonth() - birthDate.getMonth();
+  let age = today.getFullYear() - birthDate.getFullYear();
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+
+  if (age === 0) return m + ' mois';
+
+  return age + ' ans';
+}

@@ -1,11 +1,21 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import activityIcon from '../../../assets/icons/icon_dashboard_run.svg';
 import favIcon from '../../../assets/icons/icon_star.svg';
 import notifIcon from '../../../assets/icons/icon_notification.svg';
 import userIcon from '../../../assets/icons/icon_user.svg';
+import useAuthContext from '../../../hooks/useAuthContext';
 import { useNavigate } from 'react-router';
+import { useEffect } from 'react';
 
 export default function UserDashboard() {
   const navigate = useNavigate();
+  const context = useAuthContext();
+
+  useEffect(() => {
+    if (context.isAuthChecked && !context.isAuth) {
+      navigate('../');
+    }
+  }, []);
 
   const roots = [
     {

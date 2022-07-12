@@ -59,18 +59,22 @@ function Register({ loginSubtitle, registerSubtitle, isLoginPage, closeModal }) 
 
     // Si il n'y a pas d'erreur procéder à la connexion
     if (tempErrors.length === 0) {
-      if (dataInput.password === dataInput.verifyPassword) {
-        setErrors([]);
-        createUser({
-          variables: {
-            input: {
-              password: dataInput.password,
-              email: dataInput.email,
+      if (dataInput.password.length < 8) {
+        if (dataInput.password === dataInput.verifyPassword) {
+          setErrors([]);
+          createUser({
+            variables: {
+              input: {
+                password: dataInput.password,
+                email: dataInput.email,
+              },
             },
-          },
-        });
+          });
+        } else {
+          setErrors(['Les mots de passe ne correspondent pas !']);
+        }
       } else {
-        setErrors(['Les mots de passe ne correspondent pas !']);
+        setErrors(['Entrez un mot de passe de minimum 8 caractères']);
       }
     } else {
       setErrors(tempErrors);
@@ -99,7 +103,7 @@ function Register({ loginSubtitle, registerSubtitle, isLoginPage, closeModal }) 
           navigate('/dashboard/user');
           window.scrollTo(0, 0);
           closeModal();
-        }, 2000);
+        }, 1000);
       } else {
         setErrors(['Erreur de la création de votre compte, veuillez contacter un administrateur ! (Erreur: 001)']);
       }
@@ -114,7 +118,7 @@ function Register({ loginSubtitle, registerSubtitle, isLoginPage, closeModal }) 
           loggedIn(connectUserData.connectUser);
           window.scrollTo(0, 0);
           closeModal();
-        }, 2000);
+        }, 1000);
       } else {
         setErrors(['Erreur de votre connexion, veuillez contacter un administrateur ! (Erreur: 002)']);
       }

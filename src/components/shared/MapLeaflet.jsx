@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, Popup, Marker, ZoomControl } from 'react-leafl
 import './mapLeaflet.css';
 import { useState, useEffect } from 'react';
 import L from 'leaflet';
+import { useNavigate } from 'react-router';
 
 const customIcon = L.icon({
   iconUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Google_Maps_icon_%282020%29.svg/536px-Google_Maps_icon_%282020%29.svg.png',
@@ -11,6 +12,7 @@ const customIcon = L.icon({
 });
 
 export default function MapLeaflet({ currentLocation, items, className, maxDistMeters }) {
+  const navigate = useNavigate();
   const [center, setCenter] = useState([48.864716, 2.349014]);
   const [zoom, setZoom] = useState(5);
   const [map, setMap] = useState(null);
@@ -63,21 +65,24 @@ export default function MapLeaflet({ currentLocation, items, className, maxDistM
             return (
               <Marker key={index} position={gpsCoord} icon={customIcon}>
                 <Popup>
-                  <span className='text-lg'>
-                    {item.content.title} <br />
+                  <div className='text-lg'>
+                    <span className='text-kiddoBlue hover:underline cursor-pointer' onClick={() => navigate(`../event/${item._id}`)}>
+                      {item.content.title}
+                    </span>
                     <span
-                      className='text-kiddoPurple hover:underline cursor-pointer'
+                      className='text-kiddoYellow hover:underline cursor-pointer'
                       onClick={() => openInNewTab(`https://www.google.com/maps/dir//${gpsCoord}/`)}>
+                      <br />
                       Consulter l'itinéraire
                     </span>
-                  </span>
+                  </div>
                 </Popup>
               </Marker>
             );
           })}
       </MapContainer>
     ),
-    [center, className, currentLocation, items, zoom]
+    [center, className, currentLocation, items, zoom, navigate]
   );
 
   return <div className='sticky square top-4 lg:mt-[5.7rem] flex w-full shadow-md shadow-kiddoGray'>{displayMap}</div>;
@@ -95,7 +100,5 @@ export function MapLeafletPlaceHolder({ className }) {
         />
       </MapContainer> */}
     </div>
-
-    
   );
 }
