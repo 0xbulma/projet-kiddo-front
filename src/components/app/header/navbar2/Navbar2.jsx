@@ -188,7 +188,7 @@ export default function Navbar2() {
                   isShown={profileIsShown}
                   goToProfile={() => {
                     closeSearchAndSub();
-                    navigate('/user');
+                    navigate('/dashboard/user');
                   }}
                   logOut={() => {
                     closeSearchAndSub();

@@ -18,7 +18,7 @@ function Register({ loginSubtitle, registerSubtitle, isLoginPage, closeModal }) 
   // Vérification si l'utilisateur est déjà connecté (prévention bug)
   useEffect(() => {
     if (isAuth) {
-      navigate('/user');
+      navigate('/dashboard/user');
       window.scrollTo(0, 0);
       closeModal();
     }
@@ -96,7 +96,7 @@ function Register({ loginSubtitle, registerSubtitle, isLoginPage, closeModal }) 
       if (createUserData.createUser.email === dataInput.email) {
         setTimeout(() => {
           loggedIn(createUserData.createUser);
-          navigate('/user');
+          navigate('/dashboard/user');
           window.scrollTo(0, 0);
           closeModal();
         }, 2000);
