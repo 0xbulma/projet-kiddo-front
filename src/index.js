@@ -25,11 +25,16 @@ import SearchPage from './pages/app/SearchPage';
 
 //Admin layout components
 
+import UserDashboard from './pages/app/userDashboard/UserDashboard';
+import UserDashboardActivity from './pages/app/userDashboard/UserDashboardActivity';
+import UserDashboardFav from './pages/app/userDashboard/UserDashboardFav';
+import UserDashboardNotification from './pages/app/userDashboard/UserDashboardNotification';
+
 import AdminDashboard from './pages/administration/Dashboard';
 import AdminUser from './pages/administration/sections/user/User';
 import AdminUserProfil from './pages/administration/sections/user/UserProfil';
 import AdminUserTestMutation from './pages/administration/sections/user/UserTestMutation';
-import UserInfo from './pages/app/UserInfo';
+import UserInfo from './pages/app/userDashboard/UserInfo';
 import Signalement from './pages/administration/sections/Report';
 
 // Import CSS
@@ -52,7 +57,12 @@ root.render(
             <Route path='/event/:eventId' element={<UserLayout composant={<EventPage />} />} />
             <Route path='/category/:category' element={<UserLayout composant={<CategoryPage />} />} />
             <Route path='*' element={<UserLayout composant={<NotFound />} />} />
-            <Route path='/user' element={<UserLayout composant={<UserInfo />} />} />
+            <Route path='/dashboard' element={<UserLayout composant={<UserDashboard />} />} />
+            <Route path='/dashboard/activity' element={<UserLayout composant={<UserDashboardActivity />} />} />
+            <Route path='/dashboard/fav' element={<UserLayout composant={<UserDashboardFav />} />} />
+            <Route path='/dashboard/notification' element={<UserLayout composant={<UserDashboardNotification />} />} />
+            <Route path='/dashboard/user' element={<UserLayout composant={<UserInfo />} />} />
+
             <Route path='/search' element={<UserLayout composant={<SearchPage />} />} />
             {isAdmin && (
               <Fragment>
