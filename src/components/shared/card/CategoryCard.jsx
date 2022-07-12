@@ -6,7 +6,7 @@ import ReactTooltip from 'react-tooltip';
 import icon_arrow from '../../../assets/icons/icon_category_arrow.svg';
 
 const handleFavClick = () => {
-  console.log('Handle Fav Click');
+  alert('Mise en favoris non raccordée au Back');
 };
 
 const CategoryCard = ({ type, name, imageUrl }) => {

@@ -12,8 +12,6 @@ import { getCategoryColorForCSS } from '../../../utils/constants/categoryColors'
 
 export default function ActivityCard({ title, category, location, date, price, img }) {
   const categoryColor = getCategoryColorForCSS(category);
-  console.log(`${process.env.REACT_APP_PROD_STATIC_ENDPOINT}${img}`);
-
   return (
     <>
       <article

@@ -63,7 +63,7 @@ export default function Navbar() {
   const showSubMenu = () => {
     setIsSubOpen((bol) => !bol);
   };
-  
+
   const closeSubMenu = () => {
     setIsSubOpen(false);
   };
@@ -130,20 +130,19 @@ export default function Navbar() {
 
   useEventListener('scroll', scrollHandler);
   useEventListener('keydown', handler);
-  
+
   return (
     <>
       {isModal && (
         <ModalBackdrop composant={<ModalRegisterLogin closeModal={() => setIsModal(false)} />} open={isModal} onClose={() => setIsModal(false)} />
       )}
-      
+
       <section className={`navbar2__container ${scrollY > 2 && 'navbar2__container--scrolled'} ${!showNav && 'navbar2__container--hidden'}`}>
         <div className='navbar2__innercontainer generic-container'>
           <Logo titleProp={titleProp} className='md:w-36 w-28 md:navbar2_logo' />
           <div className='flex flex-row justify-between gap-x-2 md:-my-2 md:-mr-2 md:hidden'>
-            <button type="button" className='text-black bg-white rounded-md hover:text-gray-500 hover:bg-gray-100'>
-            {
-              isSearchOpen ? (
+            <button type='button' className='text-black bg-white rounded-md hover:text-gray-500 hover:bg-gray-100'>
+              {isSearchOpen ? (
                 <div className='navbar2__searchinput-container'>
                   <input
                     className='navbar2__searchinput focus:ring-0'
@@ -158,18 +157,17 @@ export default function Navbar() {
                 </div>
               ) : (
                 <ISearch onClick={showSearchInputHandler} className='navbar2__icon' />
-              )
-            }
+              )}
             </button>
             <Popover.Button className='inline-flex justify-center p-2 text-black bg-white rounded-md hover:text-gray-500 hover:bg-gray-100'>
               <span className='sr-only'>Open menu</span>
               <MenuIcon className='w-6 h-6' aria-hidden='true' />
             </Popover.Button>
           </div>
-          <div className="hidden md:flex-1 md:flex md:items-center md:justify-around">
+          <div className='hidden md:flex-1 md:flex md:items-center md:justify-around'>
             <Nav navigation={navigation} isSearchOpen={isSearchOpen} showSubMenu={showSubMenu} />
-            <NavIcon 
-              navIcon={navIcon} 
+            <NavIcon
+              navIcon={navIcon}
               isSearchOpen={isSearchOpen}
               onInputHandler={onInputHandler}
               userInput={userInput}
