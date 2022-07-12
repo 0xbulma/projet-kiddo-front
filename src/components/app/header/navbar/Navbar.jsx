@@ -22,7 +22,7 @@ const titleProp = navigationHeader.titleProp;
 const navigation = navigationHeader.navigation;
 const navIcon = navigationHeader.navIcon;
 
-export default function Navbar({}) {
+export default function Navbar() {
   const [isSubOpen, setIsSubOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [userInput, setUserInput] = useState('');
