@@ -1,32 +1,33 @@
-.pagination__container{
-@apply flex py-5 px-2 border-t-2 justify-center items-center gap-1
+.pagination__container {
+  @apply flex py-5 px-2 border-t-2 justify-center items-center gap-2;
 }
 
-.pagination__page{
-  @apply flex justify-center items-center;
+.pagination__pages {
+  @apply flex justify-center items-center bg-purple-100 rounded-lg;
 }
 
-.pagination__link{
-  @apply grow py-3 px-5 border-black border hover:bg-red-400;
+.pagination__page__hovered {
+  @apply grow py-3 px-5 hover:bg-red-300 rounded-lg transition-all;
 }
 
-.pagination__active{
-  @apply bg-red-400 
+.pagination__page__selected {
+  @apply bg-red-300;
 }
 
-.pagination__prevnext{
-  @apply flex justify-center items-center
+.pagination__next,
+.pagination__prev {
+  @apply flex justify-center items-center bg-blue-100 mx-4 rounded-full;
 }
 
-.pagination__prevnext-link{
-  @apply py-3 px-5 border-black border hover:bg-red-400
+.pagination__next__hovered,
+.pagination__prev__hovered {
+  @apply py-3 px-5 hover:bg-green-300 rounded-full transition-all text-xl;
 }
 
-.pagination__break{
-  @apply flex justify-center items-center;
+.pagination__break {
+  @apply flex justify-center items-center bg-purple-100 mx-4 rounded-md;
 }
 
-.pagination__break-link{
-  @apply py-3 px-4 border-black border hover:bg-red-400
+.pagination__break-link {
+  @apply py-3 px-5 hover:bg-green-300 rounded-lg transition-all;
 }
-

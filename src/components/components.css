@@ -1,8 +1,20 @@
 /* ----------------------------------------------------------- App ------------------------------------------------------------ */
 
 /* @import './app/app.css'; */
+@import './shared/modal/modal.css';
 @import './shared/commentSection.css';
 
+.activity-card:hover {
+  --tw-ring-color: var(--ruban-color);
+}
+
+.category-card:hover {
+  --tw-ring-color: var(--ruban-color);
+}
+
+.category-card-ruban {
+  background-color: var(--ruban-color);
+}
 /* ----------------------------------------------------------- Admin ------------------------------------------------------------ */
 
 @import './administration/_administration.css';

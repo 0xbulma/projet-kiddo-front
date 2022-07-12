@@ -1,37 +1,37 @@
-import React from "react";
-import { FaCopyright } from "react-icons/fa";
+import React from 'react';
+import { getCategoryColorForCSS } from '../../../utils/constants/categoryColors';
+// Import: assets
+import { FaStar } from 'react-icons/fa';
+import ReactTooltip from 'react-tooltip';
+import icon_arrow from '../../../assets/icons/icon_category_arrow.svg';
 
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faCopyright } from "@fortawesome/free-solid-svg-icons";
-// import activityPic from "../../assets/img/GDN2.jpg";
-import "./category-card.css";
-// import logo from "../../../public/logo.png";
+const handleFavClick = () => {
+  console.log('Handle Fav Click');
+};
 
-const CategoryCard = ({ name, url, color }) => {
+const CategoryCard = ({ type, name, imageUrl }) => {
+  const categoryColor = getCategoryColorForCSS(type);
+
   return (
-    <div>
-      <article className="card-categ-contain">
+    <>
+      <article
+        className='category-card relative shadow-sm shadow-kiddoShadow rounded-xl cursor-pointer transition-all hover:ring-4'
+        style={{ '--ruban-color': categoryColor }}>
         <div>
-          <img
-            src={url}
-            alt="activity"
-            style={{ width: "100%", height: "235px" }}
+          <img src={imageUrl} alt='' className='relative w-full h-64 rounded-t-xl object-fill' />
+          <ReactTooltip type='success' effect='solid' place='top' />
+          <FaStar
+            className='absolute top-0 left-full -ml-12 mt-3 text-white bg-gray-400 bg-opacity-25 w-8 h-8 p-1 rounded-full hover:bg-white hover:text-yellow-300 hover:animate-spin transition-all'
+            onClick={() => handleFavClick}
+            data-tip='Mettre en favoris'
           />
         </div>
-        <div className="category-card-icon">
-          <FaCopyright className="category-card-icons" />
-        </div>
-
-        <div className={"category-card-footer " + color}>
-          <div>
-            <h3>Activités {name}</h3>
-          </div>
-          <div>
-            <button>Découvrir</button>
-          </div>
+        <div className='category-card-ruban flex font-medium rounded-b-xl py-4 px-3 hover:underline' style={{ '--ruban-color': categoryColor }}>
+          <p className='ml-auto'>Activités {name}</p>
+          <img src={icon_arrow} alt='' className='ml-auto' />
         </div>
       </article>
-    </div>
+    </>
   );
 };
 

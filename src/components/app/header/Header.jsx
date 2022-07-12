@@ -7,8 +7,8 @@ import './_header.css';
 
 export default function Header() {
   return (
-    <Popover className={`header`}>
-      <Navbar />
+    <Popover className="header">
+      <Navbar /> 
       <Menu />
     </Popover>
   );

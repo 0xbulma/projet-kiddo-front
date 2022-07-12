@@ -1,45 +1,43 @@
-// import NavItem from "./NavItem";
-import { Fragment } from 'react';
-import { Popover } from '@headlessui/react';
+import { NavLink, useLocation } from 'react-router-dom';
+import { FaChevronDown } from 'react-icons/fa';
 
-import { classNames } from '../../../../utils/lib/classNames';
-import Submenu from './Submenu';
-import { Link } from 'react-router-dom';
-
-export default function Nav({ navigation }) {
+export default function Nav({
+  isSearchOpen, navigation, closeSearchAndSub, toggleSubMenu
+}) {
+  
+  let location = useLocation();
+  
   return (
-    <Popover.Group as='nav' className='flex space-x-10'>
-      {navigation.map((item, index) => {
-        return (
-          <Fragment key={index}>
-            {
-              item === navigation[1] ? (
-                <Popover>
-                  {({ open }) => (
-                    <Fragment>
-                      <Popover.Button
-                        className={
-                          classNames(
-                            open ? 'text-gray-900' : 'text-black',
-                            'group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none hover:underline active:underline afte:underline'
-                          )
-                        }
-                      >
-                        <span>{item.name}</span>
-                      </Popover.Button>
-                      <Submenu item={item} />
-                    </Fragment>
+    <>
+      {
+        !isSearchOpen && (
+          <>
+            {navigation.map((item, index) => {
+              return (
+                <ul className="navbar2__linklist" key={index}>
+                  {item === navigation[1] ? (
+                      <li>
+                        <div
+                          className={`navbar2__link flex items-center gap-2 ${location.pathname.includes('category') && 'active'}`} onClick={toggleSubMenu}
+                        >
+                          <span>{item.name}</span>
+                          <FaChevronDown />
+                        </div>
+                      </li>
+                  ) : (
+                    <li>
+                      <NavLink to={item.href} className='navbar__link' onClick={closeSearchAndSub}>
+                        {item.name}
+                      </NavLink>
+                    </li>
+                    
                   )}
-                </Popover>
-              ) : (
-                <Link to={item.href} className='text-base font-medium text-black hover:text-gray-900 focus:underline after:underline hover:underline'>
-                  {item.name}
-                </Link>
-              )
-            }
-          </Fragment>
-        );
-      })}
-    </Popover.Group>
+                </ul>
+              );
+            })}
+          </>
+        )
+      }
+    </>
   );
 }

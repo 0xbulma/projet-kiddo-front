@@ -8,17 +8,23 @@ export const GET_UPCOMING_EVENTS = gql`
         content {
           title
         }
+        main_owner {
+          _id
+        }
         content_media {
           photo_main_url
         }
         price {
           adult
+          child
         }
         event_date {
           start
         }
         adress {
           city
+          zip_code
+          adress_line
         }
         categories {
           name
@@ -37,17 +43,23 @@ export const GET_LAST_PUBLISHED_EVENTS = gql`
         content {
           title
         }
+        main_owner {
+          _id
+        }
         content_media {
           photo_main_url
         }
         price {
           adult
+          child
         }
         event_date {
           start
         }
         adress {
           city
+          zip_code
+          adress_line
         }
         categories {
           name
@@ -95,6 +107,7 @@ export const GET_BY_ID = gql`
           _id
           first_name
           birthdate
+          profil_picture
         }
         booked_at
         group_detail {
@@ -131,6 +144,7 @@ export const GET_BY_ID = gql`
         first_name
         last_name
         birthdate
+        profil_picture
         children {
           id
           name
@@ -144,6 +158,7 @@ export const GET_BY_ID = gql`
         first_name
         last_name
         birthdate
+        profil_picture
         children {
           id
           name
@@ -170,6 +185,7 @@ export const GET_EVENTS_CATEGORY = gql`
         }
         price {
           adult
+          child
         }
         event_date {
           start

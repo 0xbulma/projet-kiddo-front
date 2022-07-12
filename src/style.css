@@ -12,123 +12,105 @@
 @import '../src/components/components.css';
 @import '../src/pages/pages.css';
 
-/* Déclarations globales */
-/* h1 {
-  @apply font-['Nunito'] text-[5.375rem];
-}
-
-h2 {
-  @apply font-['Nunito'] text-[2.813rem];
-}
-
-h3 {
-  @apply font-['Nunito'] text-[1.125rem];
-}
-
-p,
-a {
-  @apply font-['Poppins'] text-[1rem];
-}
-
-span {
-  @apply font-['Alegreya+Sans'] text-[1rem];
-} */
-
+/* Variables */
 :root {
-  /* les couleurs des categories*/
-  --categorieCulturelle:#FC664E;
-  --categorieSportive:#3AC9BB;
-  --categorieArtistique:#A59DF1;
-  --categorieManuelle:#FFC20B;
-  --categorieEveilcorporelle:#FB9058;
-  --categorieAutre:#41C6F0 ;
-      /* les couleurs des backgrounds des différents éléments*/
-  --backgroundcolor:#FBFBFB;
-  --navbarre:#FBFBFB;
-  --backgroundcolorsection:#EDEBFC;
-  --footer:#6929BA; 
-      /* les couleurs liées aux cards*/
-  --cardactivitybottom:#F5F5F5;
-      /* les couleurs des textes */
-  --bodytextnoir:#0F0F0F;
-  --bodytextblanc:#FBFBFB;
+  --bg-orange: #fc664e;
+  --bg-green: #3ac9bb;
+  --bg-purple: #a59df1;
+  --bg-yellow: #ffc20b;
+  --bg-salmon: #fb9058;
+  --bg-blue: #41c6f0;
 
-      /* les polices des titres et du body */
-  --fonttitles:'Nunito', sans-serif; /* le sans-serif c'est une police de back-up */
-  --fontbody:'Poppins', sans-serif; /* le sans-serif c'est une police de back-up */
-  --fontsizebody:18px;
+  --bg-color: #fbfbfb;
+  --bg-color-section: #edebfc;
+  --bg-navbar-color: #fbfbfb;
+  --bg-footer-color: #6929ba;
+  --bg-card-color: #f5f5f5;
+
+  --body-text: #0f0f0f;
+  --font-titles: 'Nunito', sans-serif;
+  --font-body: 'Poppins', sans-serif;
+  --font-size-body: 18px;
 }
 
-body{
-  font-family: var(--fontbody);
-  font-size: var(--fontsizebody);
+/* Déclarations globales */
+*,
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--font-size-body);
 }
 
 h1,
 h2,
 h3,
 h4 {
-  font-family: var(--fonttitles);
+  font-family: var(--font-titles);
 }
 
-/* definition de la taille de police des différents élements */
-
 h1 {
-  font-size: 4.7em ;
+  @apply text-[4.0em] md:text-[4.5em];
 }
 
 h2 {
-  font-size: 2.5em ;
+  @apply text-[2em] md:text-[2.5em];
 }
 
 h3 {
-  font-size: 2em;
+  @apply text-[1.5em] md:text-[2em];
 }
 
-.bodymini {
-  font-size: 0.9em;
-}
-.tags {
-  font-size: 0.83em;
+/* Generic classes */
+.generic-container {
+  @apply md:container md:mx-auto;
 }
 
-.bouton {
-  font-size: 1,2em;
+.section__grid-4 {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mx-8 md:mx-4 mb-10;
 }
 
-.input {
-  font-size: 1,1em;  
-}
-/* fin */
-
-
-/* les classe categories avec le variant */
-.categorieCulturelle {
-  background-color: var(--categorieCulturelle);
+.section__grid-3 {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mx-8 md:mx-4 mb-10;
 }
 
-.categorieSportive {
-  background-color: var(--categorieSportive);
-
+.section__grid-2 {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-4 mx-8 md:mx-4 mb-10;
 }
 
-.categorieArtistique {
-  background-color: var(--categorieArtistique);
+.orange-bg {
+  background-color: var(--bg-orange);
 }
 
-.categorieManuelle {
-  background-color: var(--categorieManuelle);
+.green-bg {
+  background-color: var(--bg-green);
 }
 
-.categorieEveilcorporelle {
-  background-color: var(--categorieEveilcorporelle);
-
+.purple-bg {
+  background-color: var(--bg-purple);
 }
 
-.categorieAutre {
-  background-color: var(--categorieAutre);
+.yellow-bg {
+  background-color: var(--bg-yellow);
 }
 
+.salmon-bg {
+  background-color: var(--bg-salmon);
+}
+
+.blue-bg {
+  background-color: var(--bg-blue);
+}
+
+.green-bg-gradient {
+  @apply bg-gradient-to-r from-kiddoGreen to-[#3ac9bb];
+}
+
+.blue-bg-gradient {
+  @apply bg-gradient-to-r from-kiddoBlue to-[#41c6f0];
+}
 
 /* Scrollbar */
 ::-webkit-scrollbar {
@@ -143,33 +125,4 @@ h3 {
   background-color: #f26651;
   border-radius: 5px;
   border: 1px solid #b84938;
-}
-
-/***********************************/
-/* OLD SHARED COMPONENT RESPONSIVE */
-/***********************************/
-
-div.index {
-  @apply flex flex-col justify-between w-full h-full min-h-screen bg-gray-200;
-}
-
-.container-user {
-  @apply container mx-auto lg:py-6;
-}
-
-.container-section {
-  @apply py-5;
-}
-
-/* CONTAINER USER */
-/* .container-user {
-    @apply container mx-auto lg:py-6
-} 
-
-.container-user {
-  @apply container mx-auto my-4 border-2 border-black lg:py-6;
-}*/
-
-.generic-container {
-  @apply container mx-auto;
 }
