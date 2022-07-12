@@ -308,7 +308,7 @@ export default function EventPage() {
             </div>
           </section>
 
-          {authContext.isAuth && (
+          {isSubs && (
             <>
               <section className='container mx-auto my-12'>
                 <article className='flex justify-between'>
