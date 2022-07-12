@@ -1,25 +1,25 @@
-// import NavItem from "./NavItem";
-import { Popover } from '@headlessui/react';
-
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { FaChevronDown } from 'react-icons/fa';
+import { Fragment } from 'react';
 
 export default function Nav({
-  isSearchOpen, navigation, showSubMenu
+  isSearchOpen, navigation, closeSearchAndSub, toggleSubMenu
 }) {
+  
+  let location = useLocation();
+  
   return (
     <>
       {
         !isSearchOpen && (
-          <Popover.Group as='nav' className='flex space-x-10'>
+          <ul className="navbar2__linklist">
             {navigation.map((item, index) => {
               return (
-                <ul className="navbar2__linklist" key={index}>
+                <Fragment key={index}>
                   {item === navigation[1] ? (
                       <li>
                         <div
-                          onClick={showSubMenu}
-                          className='navbar2__link flex items-center gap-2'
+                          className={`navbar2__link flex items-center gap-2 ${location.pathname.includes('category') && 'active'}`} onClick={toggleSubMenu}
                         >
                           <span>{item.name}</span>
                           <FaChevronDown />
@@ -27,16 +27,16 @@ export default function Nav({
                       </li>
                   ) : (
                     <li>
-                      <NavLink to={item.href} className='navbar2__link'>
+                      <NavLink to={item.href} className='navbar__link' onClick={closeSearchAndSub}>
                         {item.name}
                       </NavLink>
                     </li>
                     
                   )}
-                </ul>
+                </Fragment>
               );
             })}
-          </Popover.Group>
+          </ul>
         )
       }
     </>

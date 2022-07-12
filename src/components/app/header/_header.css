@@ -3,11 +3,11 @@ header.header {
 }
 
 div.header__navbar {
-  @apply flex flex-row items-center justify-around h-20 mx-auto;
+  @apply relative z-20;
 }
 
-div.header__navbar--flex2 {
-  @apply flex items-center justify-between px-4 py-5 mx-auto max-w-7xl sm:px-6 sm:py-4 lg:px-8 md:justify-start md:space-x-10;
+div.header__navbar--flex {
+  @apply max-w-7xl mx-auto flex justify-between items-center px-4 py-5 sm:px-6 sm:py-4 lg:px-8 md:justify-start md:space-x-10;
 }
 
 .navbar__nav {
@@ -19,12 +19,26 @@ li.navbar__nar-item {
 }
 
 li.navbar__nar-item button {
-  font-size: inherit;
-  @apply w-full bg-transparent border-none cursor-pointer text-inherit;
+  @apply w-full bg-transparent border-none cursor-pointer;
 }
 
+/* **************** Subnav ******************** */
+
+.navbar__subnav {
+  @apply  md:block absolute z-10 top-full inset-x-0 transform shadow-lg bg-white;
+}
+
+.subnav__content {
+  @apply max-w-7xl mx-auto space-y-6 px-4 py-5 sm:flex sm:space-y-0 sm:space-x-10 sm:px-6 lg:px-8;
+}
+
+.subnav__content--link {
+  @apply flex items-center p-3 -m-3 text-base font-medium text-gray-900 rounded-md hover:bg-gray-100;
+}
+
+/* ****************  ******************** */
+
 a.nav-link {
-  font-size: inherit;
   @apply block no-underline;
 }
 
@@ -33,9 +47,5 @@ a.nav__icon-link {
 }
 
 .nav-icon {
-  @apply w-7 h-7;
+  @apply w-7 h-7 hover:scale-110;
 }
-/* 
-ul.dropdown {
-  @apply hidden;
-} */

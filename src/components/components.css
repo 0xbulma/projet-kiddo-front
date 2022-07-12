@@ -18,29 +18,3 @@
 /* ----------------------------------------------------------- Admin ------------------------------------------------------------ */
 
 @import './administration/_administration.css';
-
-/* ----------------------------------------------------------- Header ------------------------------------------------------------ */
-
-div.header {
-  @apply relative bg-white;
-}
-
-nav.Navbar {
-  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
-}
-
-nav.header__Navbar {
-  @apply px-4 mx-auto max-w-7xl sm:px-6 lg:px-8;
-}
-
-nav.header__Navbar > div.header__Navbar#div {
-  @apply border-b border-gray-200;
-}
-
-nav.header__Navbar > div.header__Navbar#Flex {
-  @apply border-b border-gray-200;
-}
-
-div.header__Navbar > div:first-child {
-  @apply flex items-center justify-between h-16;
-}

@@ -4,7 +4,7 @@ import { Fragment } from 'react';
 import { XIcon } from '@heroicons/react/outline';
 import Logo from '../../../shared/Logo';
 import { navigationHeader } from '../../../../utils/constants/navigation';
-import { Link } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import useAuthContext from '../../../../hooks/useAuthContext';
 
 const navigation = navigationHeader.navigation;
@@ -23,7 +23,9 @@ const titleProp = navigationHeader.titleProp;
 // const isLoggedIn = false;
 
 export default function Menu() {
-  const { isAuth } = useAuthContext();
+  const { isAuth, _id, loggedOut } = useAuthContext();
+    
+  const navigate = useNavigate();
 
   return (
     <Transition
@@ -34,7 +36,7 @@ export default function Menu() {
       leave='duration-100 ease-in'
       leaveFrom='opacity-100 scale-100'
       leaveTo='opacity-0 scale-95'>
-      <Popover.Panel focus className='absolute z-30 top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden'>
+      <Popover.Panel focus className='absolute z-40 top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden'>
         <div className='rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50'>
           <div className='pt-5 pb-6 px-5 sm:pb-8'>
             <div className='flex items-center justify-between'>
@@ -50,12 +52,12 @@ export default function Menu() {
               <nav>
                 <div className='flex flex-col text-center items-center gap-9 sm:grid-cols-2 sm:gap-y-8 sm:gap-x-4'>
                   {nav.map((item) => (
-                    <a
+                    <NavLink
                       key={item.name}
-                      href={item.href}
+                      to={item.href}
                       className='-m-3 flex items-center p-3 hover:bg-gray-50 text-center border-2 rounded-full border-yellow-500'>
                       <div className='text-base font-medium text-gray-900'>{item.name}</div>
-                    </a>
+                    </NavLink>
                   ))}
                 </div>
               </nav>
@@ -80,21 +82,34 @@ export default function Menu() {
                 <div className='mt-6'>
                   {!isAuth ? (
                     <>
-                      <a
-                        href='/'
+                      <NavLink
+                        to='/'
                         className='w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-kiddoSalmon hover:kiddoOrange'>
                         S'inscrire
-                      </a>
+                      </NavLink>
                     </>
                   ) : (
                     <div className='flex flex-col gap-y-2'>
-                      <button className='group active:kiddoSalmon hover:kiddoSalmon active:text-white text-gray-900 flex w-full items-center border border-black rounded-md px-2 py-2 text-sm'>
+                      <button
+                        onClick={() => {
+                          navigate('/dashboard');
+                        }}
+                        className='group active:kiddoSalmon hover:kiddoSalmon active:text-white text-gray-900 flex w-full items-center border border-black rounded-md px-2 py-2 text-sm'>
                         Tableau de bord
                       </button>
-                      <button className='group active:kiddoSalmon hover:kiddoSalmon active:text-white text-gray-900 flex w-full items-center border border-black rounded-md px-2 py-2 text-sm'>
+                      <button
+                        onClick={() => {
+                          navigate('/dashboard/user');
+                        }} 
+                        className='group active:kiddoSalmon hover:kiddoSalmon active:text-white text-gray-900 flex w-full items-center border border-black rounded-md px-2 py-2 text-sm'>
                         Mon Profil
                       </button>
-                      <button className='group active:kiddoSalmon hover:kiddoSalmon active:text-white text-gray-900 flex w-full items-center border border-black rounded-md px-2 py-2 text-sm -mb-2'>
+                      <button
+                        onClick={() => {
+                          navigate('/');
+                          loggedOut(_id);
+                        }}
+                        className='group active:kiddoSalmon hover:kiddoSalmon active:text-white text-gray-900 flex w-full items-center border border-black rounded-md px-2 py-2 text-sm -mb-2'>
                         Déconnexion
                       </button>
                     </div>

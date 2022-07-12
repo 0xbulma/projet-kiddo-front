@@ -1,5 +1,3 @@
-'@fortawesome/free-regular-svg-icons'
-
 import { navigationFooter, navigationHeader } from '../../../utils/constants/navigation';
 
 import './_footer.css';
