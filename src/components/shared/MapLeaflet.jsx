@@ -86,13 +86,16 @@ export default function MapLeaflet({ currentLocation, items, className, maxDistM
 export function MapLeafletPlaceHolder({ className }) {
   return (
     <div className='sticky square top-4 flex w-full lg:mt-[5.7rem]'>
-      <MapContainer className={`grow`} center={[48.8566, 2.3522]} zoom={9} scrollWheelZoom={false} zoomControl={false}>
+      <div className='rounded-lg grow bg-[#ddd]'></div>
+      {/* <MapContainer className={`rounded-lg grow`} center={[48.8566, 2.3522]} zoom={9} scrollWheelZoom={false} zoomControl={false}>
         <ZoomControl position='topright' />
         <TileLayer
           attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, Team Kiddo'
           url='https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png'
         />
-      </MapContainer>
+      </MapContainer> */}
     </div>
+
+    
   );
 }

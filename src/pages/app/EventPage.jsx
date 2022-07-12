@@ -42,9 +42,7 @@ export default function EventPage() {
 
   useEffect(() => {
     if (data) {
-      if (data.event.main_owner === null) {
-        setEvent(null);
-      } else setEvent(data.event);
+      setEvent(data.event);
     } else if (error) {
       console.log('Error : ', error);
     }
@@ -283,7 +281,7 @@ export default function EventPage() {
           <h2 className='text-center mt-10'>Chargement en cours...</h2>
         </div>
       ) : (
-        (error || !event) && <h2 className='min-h-screen text-center text-red-500 pt-28 '>Erreur lors du chargment de l'événement !</h2>
+        error && <h2 className='min-h-screen text-center text-red-500 pt-28 '>Erreur lors du chargment de l'événement !</h2>
       )}
     </>
   );

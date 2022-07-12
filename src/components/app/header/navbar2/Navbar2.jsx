@@ -8,20 +8,25 @@ import ICalendar from '../../../../components/shared/icons/ICalendar';
 import useAuthContext from '../../../../hooks/useAuthContext';
 import ModalBackdrop from '../../../shared/modal/ModalBackdrop';
 import ModalRegisterLogin from '../../../shared/modal/ModalRegisterLogin';
+import { useLocation } from 'react-router-dom';
+
+import useSearchContext from '../../../../hooks/useSearchContext';
 
 import useEventListener from '../../../../hooks/useEventListener';
 import Navbar2Sub from './Navbar2Sub';
 import { FaChevronDown, FaTimesCircle } from 'react-icons/fa';
 import { Menu } from '@headlessui/react';
-import ProfileMenu from './ProfileMenu';
+import ProfileMenu from '../navbar/ProfileMenu';
 import useDebounce from '../../../../hooks/useDebounce';
 import logo from '../../../../assets/images/logo.svg';
 import './navbar2.css';
 
 export default function Navbar2() {
+  const search = useSearchContext();
+
+  let location = useLocation();
+
   const [isSubOpen, setIsSubOpen] = useState(false);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [userInput, setUserInput] = useState('');
   const [isModal, setIsModal] = useState();
   const { isAuth, _id, loggedOut } = useAuthContext();
   const [showNav, setShowNav] = useState(true);
@@ -30,16 +35,18 @@ export default function Navbar2() {
   const [profileIsShown, setProfileIsShown] = useState(false);
 
   const prevScrollY = useRef(0);
-
   const navigate = useNavigate();
+
   const handler = ({ key }) => {
     switch (key) {
       case 'Escape':
-        setIsSearchOpen(false);
+        search.setIsSearchOpen();
         break;
       case 'Enter':
-        initSearch();
-        showSearchInputHandler();
+        if(search.userInput){
+          search.initSearch();
+        }
+        search.setIsSearchOpen();
         break;
       default:
         return;
@@ -47,46 +54,30 @@ export default function Navbar2() {
   };
 
   const showSearchInputHandler = () => {
-    if (userInput) {
-      return;
-    }
+    // if (userInput) {
+    //   return;
+    // }
     if (isSubOpen) {
       setIsSubOpen(false);
     }
-    setIsSearchOpen((bol) => !bol);
-    setUserInput('');
+    search.setIsSearchOpen();
   };
 
-  const showSubMenu = () => {
-    setIsSubOpen((bol) => !bol);
+  const toggleSubMenu = () => {
+    setIsSubOpen(bol => !bol);
   };
-  const closeSubMenu = () => {
+
+  const closeSearchAndSub = () => {
     setIsSubOpen(false);
-  };
-  const closeSearchInput = () => {
-    setIsSearchOpen(false);
-    setUserInput('');
+    search.closeSearch();
+    search.clearUserInput();
   };
 
-  const onInputHandler = (e) => {
-    setUserInput(e.currentTarget.value);
+  const onInputHandler = e => {
+    search.setUserInput(e.currentTarget.value);
   };
 
-  const initSearch = () => {
-    if (userInput) {
-      navigate('/search/' + userInput);
-    }
-  };
-
-  useDebounce(
-    () => {
-      initSearch();
-    },
-    1000,
-    [userInput]
-  );
-
-  const scrollHandler = (e) => {
+  const scrollHandler = e => {
     const currentScrollY = window.scrollY;
     if (prevScrollY.current < currentScrollY && goingUp) {
       setGoingUp(false);
@@ -121,7 +112,7 @@ export default function Navbar2() {
   );
 
   const toggleProfile = () => {
-    setProfileIsShown((bol) => !bol);
+    setProfileIsShown(bol => !bol);
   };
 
   useEventListener('scroll', scrollHandler);
@@ -130,55 +121,63 @@ export default function Navbar2() {
   return (
     <>
       {isModal && (
-        <ModalBackdrop composant={<ModalRegisterLogin closeModal={() => setIsModal(false)} />} open={isModal} onClose={() => setIsModal(false)} />
+        <ModalBackdrop
+          composant={<ModalRegisterLogin closeModal={() => setIsModal(false)} />}
+          open={isModal}
+          onClose={() => setIsModal(false)}
+        />
       )}
 
-      <div className={`navbar2__container ${scrollY > 2 && 'navbar2__container--scrolled'} ${!showNav && 'navbar2__container--hidden'}`}>
+      <div
+        className={`navbar2__container ${scrollY > 2 && 'navbar2__container--scrolled'} ${
+          !showNav && 'navbar2__container--hidden'
+        }`}
+      >
         <nav className='navbar2__innercontainer generic-container'>
           <NavLink to='/'>
-            <img className='navbar2_logo' src={logo} alt='logo' onClick={closeSubMenu} />
+            <img className='navbar2_logo' src={logo} alt='logo' onClick={closeSearchAndSub} />
           </NavLink>
 
-          {!isSearchOpen && (
+          {!search.isSearchOpen && (
             <ul className='navbar2__linklist'>
               <li>
-                <NavLink className='navbar2__link' to='/kiddo' onClick={closeSubMenu}>
+                <NavLink className='navbar2__link' to='/kiddo' onClick={closeSearchAndSub}>
                   Découvrir Kiddo
                 </NavLink>
               </li>
               <li>
-                <div className='navbar2__link flex items-center gap-2' onClick={showSubMenu}>
+                <div className={`navbar2__link flex items-center gap-2 ${location.pathname.includes('category') && 'active'}`} onClick={toggleSubMenu}>
                   <span>Participer aux activités</span>
                   <FaChevronDown />
                 </div>
               </li>
               <li>
-                <NavLink className='navbar2__link' to='/404' onClick={closeSubMenu}>
+                <NavLink className='navbar2__link' to='/404' onClick={closeSearchAndSub}>
                   Organiser une activités
                 </NavLink>
               </li>
             </ul>
           )}
 
-          <div className={`navbar2__icongroup ${isSearchOpen && 'navbar2__icongroup--grow '}`}>
-            {isSearchOpen && (
+          <div className={`navbar2__icongroup ${search.isSearchOpen && 'navbar2__icongroup--grow '}`}>
+            {search.isSearchOpen && (
               <div className='navbar2__searchinput-container'>
                 <input
                   className='navbar2__searchinput focus:ring-0'
                   type='text'
                   autoFocus
                   placeholder='Trouver une activité...'
-                  value={userInput}
+                  value={search.userInput}
                   onChange={onInputHandler}
                 />
                 <ISearch onClick={showSearchInputHandler} className='navbar2__icon--searchinput' />
-                <FaTimesCircle onClick={closeSearchInput} className='navbar2__icon--searchinputleft' />
+                <FaTimesCircle onClick={search.closeSearch} className='navbar2__icon--searchinputleft' />
               </div>
             )}
-            {!isSearchOpen && <ISearch onClick={showSearchInputHandler} className='navbar2__icon' />}
+            {!search.isSearchOpen && <ISearch onClick={showSearchInputHandler} className='navbar2__icon' />}
 
-            <ICalendar className='navbar2__icon' />
-            <INotification className='navbar2__icon' />
+            <ICalendar className='navbar2__icon' onClick={closeSearchAndSub} />
+            <INotification className='navbar2__icon' onClick={closeSearchAndSub} />
 
             {isAuth && (
               <Menu as='div' className='relative'>
@@ -187,25 +186,35 @@ export default function Navbar2() {
                 </Menu.Button>
                 <ProfileMenu
                   isShown={profileIsShown}
+                  goToDashboard={() => {
+                    closeSearchAndSub();
+                    navigate('/dashboard');
+                  }}
                   goToProfile={() => {
-                    closeSubMenu();
-                    closeSearchInput();
-                    navigate('/user');
+                    closeSearchAndSub();
+                    navigate('/dashboard/user');
                   }}
                   logOut={() => {
-                    closeSubMenu();
-                    closeSearchInput();
+                    closeSearchAndSub();
                     navigate('/');
                     loggedOut(_id);
                   }}
                 />
               </Menu>
             )}
-            {!isAuth && <IProfile className='navbar2__icon' onClick={() => setIsModal(true)} />}
+            {!isAuth && (
+              <IProfile
+                className='navbar2__icon'
+                onClick={() => {
+                  closeSearchAndSub();
+                  setIsModal(true);
+                }}
+              />
+            )}
           </div>
         </nav>
-        {isSubOpen && <Navbar2Sub toggle={isSubOpen} />}
       </div>
+      {isSubOpen && <Navbar2Sub toggle={isSubOpen} />}
     </>
   );
 }

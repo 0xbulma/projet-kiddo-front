@@ -5,7 +5,7 @@ import './filterbox.css';
 
 export default function Filterbox({ className, maxDist, setMaxDist, minChildAge, setMinChildAge, maxChildAge, setMaxChildAge, isGeoLoc }) {
   return (
-    <div className={`${className} rounded-lg shadow-md shadow-kiddoShadow z-10 ` + (isGeoLoc ? 'h-40' : 'h-20')}>
+    <div className={`${className} rounded-lg shadow-md z-10 `}>
       {isGeoLoc && (
         <div className='fitlerbox__group mb-5 py-3 pt-5'>
           <label className='filterbox__label underline'>Distance maximale</label>
@@ -31,7 +31,7 @@ export default function Filterbox({ className, maxDist, setMaxDist, minChildAge,
       )}
 
       <div className='fitlerbox__group'>
-        <label className='filterbox__label underline'>Age d'enfants</label>
+        <label className='filterbox__label underline'>Age des Kiddos</label>
         <ReactSlider
           value={[minChildAge, maxChildAge]}
           onAfterChange={(value, index) => {

@@ -10,8 +10,9 @@ import icon_arrow from '../../../assets/icons/icon_category_arrow.svg';
 
 import { getCategoryColorForCSS } from '../../../utils/constants/categoryColors';
 
-export default function ActivityCard({ title, category, location, date, price }) {
+export default function ActivityCard({ title, category, location, date, price, img }) {
   const categoryColor = getCategoryColorForCSS(category);
+  console.log(`${process.env.REACT_APP_PROD_STATIC_ENDPOINT}${img}`);
 
   return (
     <>
@@ -19,7 +20,7 @@ export default function ActivityCard({ title, category, location, date, price })
         className={`activity-card overflow-hidden relative shadow-sm shadow-kiddoShadow rounded-xl cursor-pointer transition-all hover:ring-4 bg-kiddoGray`}
         style={{ '--ruban-color': categoryColor }}>
         <div className='activity-card__ruban' data-category={category} style={{ '--ruban-color': categoryColor }}>
-          <img src={activityPic} alt='' className='relative w-full h-64 rounded-t-xl object-fill' />
+          <img src={img ? `${process.env.REACT_APP_PROD_STATIC_ENDPOINT}${img}` : activityPic} alt='' className='relative w-full h-64 rounded-t-xl object-cover' />
           <ReactTooltip type='light' effect='solid' place='top' />
           <FaStar
             className='absolute top-0 left-full -ml-12 mt-3 text-white bg-gray-400 bg-opacity-25 w-8 h-8 p-[6px] rounded-full hover:bg-white hover:text-yellow-300 hover:animate-spin transition-all'
