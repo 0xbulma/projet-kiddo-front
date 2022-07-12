@@ -59,7 +59,7 @@ function Register({ loginSubtitle, registerSubtitle, isLoginPage, closeModal }) 
 
     // Si il n'y a pas d'erreur procéder à la connexion
     if (tempErrors.length === 0) {
-      if (dataInput.password.length < 8) {
+      if (dataInput.password.toString().length > 8) {
         if (dataInput.password === dataInput.verifyPassword) {
           setErrors([]);
           createUser({
@@ -79,6 +79,8 @@ function Register({ loginSubtitle, registerSubtitle, isLoginPage, closeModal }) 
     } else {
       setErrors(tempErrors);
     }
+
+    setDataInput({ ...dataInput, email: 'tutu', cgu: false });
   };
 
   const tryConnectUser = () => {
@@ -172,7 +174,7 @@ function Register({ loginSubtitle, registerSubtitle, isLoginPage, closeModal }) 
             <div className='flex items-center mt-5'>
               <input
                 type='checkbox'
-                value={dataInput.cgu}
+                checked={dataInput.cgu}
                 className='modal-form__checkbox w-5 h-5 mr-2 cursor-pointer'
                 onChange={(e) => {
                   setDataInput({ ...dataInput, cgu: !dataInput.cgu });
