@@ -122,6 +122,7 @@ export default function HomePage() {
                         location={event.adress}
                         date={event.event_date.start}
                         price={event.price}
+                        img={event.content_media.photo_main_url}
                       />
                     </Link>
                   );
@@ -169,6 +170,7 @@ export default function HomePage() {
                         location={event.adress}
                         date={event.event_date.start}
                         price={event.price}
+                        img={event.content_media.photo_main_url}
                       />
                     </Link>
                   );
