@@ -16,7 +16,7 @@ import useEventListener from '../../../../hooks/useEventListener';
 import Navbar2Sub from './Navbar2Sub';
 import { FaChevronDown, FaTimesCircle } from 'react-icons/fa';
 import { Menu } from '@headlessui/react';
-import ProfileMenu from './ProfileMenu';
+import ProfileMenu from '../navbar/ProfileMenu';
 import useDebounce from '../../../../hooks/useDebounce';
 import logo from '../../../../assets/images/logo.svg';
 import './navbar2.css';
@@ -186,6 +186,10 @@ export default function Navbar2() {
                 </Menu.Button>
                 <ProfileMenu
                   isShown={profileIsShown}
+                  goToDashboard={() => {
+                    closeSearchAndSub();
+                    navigate('/dashboard');
+                  }}
                   goToProfile={() => {
                     closeSearchAndSub();
                     navigate('/dashboard/user');
