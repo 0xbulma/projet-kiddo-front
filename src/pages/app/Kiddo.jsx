@@ -5,8 +5,13 @@ import img2 from '../../assets/images/kiddo/kiddo_img_2.png';
 import img3 from '../../assets/images/kiddo/kiddo_img_3.png';
 import img4 from '../../assets/images/kiddo/kiddo_img_4.png';
 import img5 from '../../assets/images/kiddo/kiddo_img_5.png';
+import { useEffect } from 'react';
 
 export default function Kiddo() {
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
+
   return (
     <>
       <section className='generic-container min-h-screen pt-28'>
