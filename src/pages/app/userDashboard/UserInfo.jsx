@@ -32,12 +32,12 @@ const UserInfo = () => {
     first_name: '',
     last_name: '',
     pseudo: '',
-    phone: '',
+    phone: '+33000000000',
     email: '',
-    birthdate: '',
+    birthdate: null,
     adress: {
       city: '',
-      zip_code: '',
+      zip_code: '00000',
       adress_line: '',
       adress_line_2: '',
     },
@@ -87,17 +87,23 @@ const UserInfo = () => {
       return { ...user, children: updateNbChildren };
     });
   };
-  const [fetchData, { loading }] = useLazyQuery(GET_BY_ID, {
-    variables: {
-      id: context._id,
-    },
-  });
+
+  const [fetchData, { loading, data }] = useLazyQuery(GET_BY_ID);
+
   useEffect(() => {
     if (context._id !== '') {
-      fetchData();
+      fetchData({
+        variables: {
+          id: context._id,
+        },
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [context]);
+
+  useEffect(() => {
+    console.log('User data : ', data);
+  }, [data]);
 
   // détermine la photo de profil enfant
   const getChildPic = (i) => {
@@ -356,21 +362,6 @@ const UserInfo = () => {
           <div className='flex justify-center p-10'>
             <Button
               onClick={() => {
-                // console.log('UserInfo SaveBtnOnClick :', {
-                //   id: context._id,
-                //   input: {
-                //     gender: user.gender,
-                //     first_name: user.first_name,
-                //     last_name: user.last_name,
-                //     pseudo: user.pseudo,
-                //     phone: user.phone,
-                //     email: user.email,
-                //     birthdate: user.birthdate,
-                //     adress: user.adress,
-                //     description: user.description,
-                //     children: user.children,
-                //   },
-                // });
                 modifyUserInfo({
                   variables: {
                     id: context._id,
