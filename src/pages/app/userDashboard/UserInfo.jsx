@@ -87,7 +87,7 @@ const UserInfo = () => {
       return { ...user, children: updateNbChildren };
     });
   };
-  const [fetchData, { data: userData, error: userError, loading }] = useLazyQuery(GET_BY_ID, {
+  const [fetchData, { loading }] = useLazyQuery(GET_BY_ID, {
     variables: {
       id: context._id,
     },
@@ -98,22 +98,6 @@ const UserInfo = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [context]);
-
-  // useEffect(() => {
-  //   console.log('UserInfo UseEffect :', user);
-  // }, [user]);
-
-  // useEffect(() => {
-  //   if (userData) {
-  //     setUser(userData.getUserById);
-  //     console.log('userData', userData);
-  //   }
-  //   if (userError) {
-  //     console.log('errorDATA', userError.networkError.result);
-  //   }
-
-  //   // if (!context.isAuth) navigate('../');
-  // }, [userData, userError]);
 
   // détermine la photo de profil enfant
   const getChildPic = (i) => {
@@ -126,16 +110,10 @@ const UserInfo = () => {
     }
   };
 
-  const [modifyUserInfo, { data, error }] = useMutation(MODIFY_USER_INFO);
+  const [modifyUserInfo] = useMutation(MODIFY_USER_INFO);
   if (loading) {
     return <div>Chargement en cours</div>;
   }
-  // if (error) {
-  //   console.log('UserInfo Error :', error);
-  // }
-  // if (data) {
-  //   console.log('UserInfo Data :', data);
-  // }
 
   // Roots
   const roots = [
@@ -283,13 +261,6 @@ const UserInfo = () => {
                     placeholder='Ville'
                     onChange={handleChange}
                   />
-                  {/* <input
-                    name="country"
-                    className="rounded-xl mb-2 border-gray-200"
-                    type="text"
-                    placeholder="pays"
-                    onChange={handleChange}
-                  /> */}
                 </div>
               </div>
             </article>
