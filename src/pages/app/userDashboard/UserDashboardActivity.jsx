@@ -6,6 +6,7 @@ import activityPic from '../../../assets/images/activity_card_default.webp';
 import ActivityCard from '../../../components/shared/card/ActivityCard';
 
 import * as dateManager from '../../../utils/DateManager';
+import Skelet from '../../../components/shared/loadingfiles/Skelet';
 
 // Import: assets
 import { FaShareSquare, FaMapMarkerAlt, FaCalendarAlt, FaTimes } from 'react-icons/fa';
@@ -21,19 +22,24 @@ export default function UserDashboardActivity() {
   const navigate = useNavigate();
   const context = useAuthContext();
 
-  const [fetchUserData, { loading: userLoading, error: userError, data: userData }] = useLazyQuery(GET_BY_ID);
+  useEffect(() => {
+    if (context.isAuthChecked && !context.isAuth) {
+      navigate('../');
+    }
+  }, []);
+
+  const [fetchUserData, { loading: userLoading, data: userData }] = useLazyQuery(GET_BY_ID);
   const [bookedEvents, setBookedEvents] = useState([]);
 
   useEffect(() => {
-    if (context.isAuth && context._id !== '') {
-      fetchUserData({ variables: { id: context._id }, fetchPolicy: 'network-only' });
-    }
-    if (userLoading) console.log('userLoading', userLoading);
-    if (userError) console.log('userError', userError);
+    fetchUserData({ variables: { id: context._id }, fetchPolicy: 'network-only' });
+  }, []);
+
+  useEffect(() => {
     if (userData) {
       setBookedEvents(userData.getUserById.booked_events);
     }
-  }, [userLoading, userError, userData, context]);
+  }, [userData]);
 
   const roots = [
     {
@@ -66,7 +72,7 @@ export default function UserDashboardActivity() {
     <>
       <section className='generic-container pt-32 min-h-screen'>
         <article className='mb-20'>
-          <div className='flex flex mb-10 text-sm'>
+          <div className='flex mb-10 text-sm'>
             {roots.map((item, index) => (
               <div className='flex' key={index}>
                 <p
@@ -84,10 +90,10 @@ export default function UserDashboardActivity() {
         <article className='grid grid-cols-1 lg:grid-cols-2 mx-24 mb-10'>
           <article>
             <div className='mx-36 mb-10'>
-              <DashboardCard title='Je participe' path='../http://localhost:3000/search' />
+              <DashboardCard title='Je participe' path='../search' />
             </div>
             <div className='mx-36 mb-20'>
-              <DashboardCard title="J'organise" path='../http://localhost:3000/search' />
+              <DashboardCard title="J'organise" path='../search' />
             </div>
             <div className='flex flex-col items-center justify-center'>
               <span className='z-10 py-32 px-36 bg-kiddoYellow rounded-tl-full ' />
@@ -97,7 +103,7 @@ export default function UserDashboardActivity() {
           <article>
             <div>
               <h3 className='border-b border-gray-500 pb-5 mb-10'>En cours</h3>
-              <DashboardActivityCard bookedEvent={bookedEvents && bookedEvents[0]} />
+              {userLoading ? <Skelet /> : <DashboardActivityCard bookedEvent={bookedEvents && bookedEvents[0]} />}
             </div>
             <div>
               <h3 className='border-b border-gray-500 pb-5 my-10'>Historique des activités</h3>
@@ -171,7 +177,7 @@ function DashboardActivityCard({ bookedEvent }) {
 
   useEffect(() => {
     if (removeBookData) {
-      navigate('./');
+      navigate('../dashboard/');
     }
   }, [removeBookData]);
 

@@ -1,7 +1,17 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useNavigate } from 'react-router';
+import useAuthContext from '../../../hooks/useAuthContext';
+import { useEffect } from 'react';
 
 export default function UserDashboardNotification() {
   const navigate = useNavigate();
+  const context = useAuthContext();
+
+  useEffect(() => {
+    if (context.isAuthChecked && !context.isAuth) {
+      navigate('../');
+    }
+  }, []);
 
   const roots = [
     {
@@ -49,9 +59,7 @@ export default function UserDashboardNotification() {
           <h2>Mon tableau de bord</h2>
         </article>
 
-        <article className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-24 mb-10'>
-          <h2>Toto</h2>
-        </article>
+        <article className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-24 mb-10'></article>
       </section>
     </>
   );

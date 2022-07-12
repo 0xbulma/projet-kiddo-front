@@ -14,13 +14,14 @@ import * as usersQuery from '../../graphql/query/users.query';
 import BlankProfilPic from '../../assets/admin/blank_profil_pic.png';
 import CommentSection from '../../components/shared/CommentSection';
 import { useNavigate, useParams } from 'react-router';
-import { useQuery, useMutation } from '@apollo/client';
+import { useQuery, useMutation, useLazyQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
 import * as dateManager from '../../utils/DateManager';
 import MapLeafletOneMarker from '../../components/shared/MapLeafletOneMarker';
 import useToggle from '../../hooks/useToggle';
 import ModalBackdrop from '../../components/shared/modal/ModalBackdrop';
 import ModalRegisterLogin from '../../components/shared/modal/ModalRegisterLogin';
+import ModalSubEvent from '../../components/shared/modal/ModalSubEvent';
 import { BOOK_EVENT_2, PIN_EVENT } from '../../graphql/mutation/users.mutation';
 
 import ReactTooltip from 'react-tooltip';
@@ -32,19 +33,26 @@ export default function EventPage() {
   const authContext = useAuthContext();
 
   const [event, setEvent] = useState();
+  const [displaySubModal, toggleSubModal] = useToggle(false);
 
   // fetchPolicy 'network-only' for getting event only on network for having modification
-  const { loading, error, data } = useQuery(GET_BY_ID, { variables: { eventId: eventId }, fetchPolicy: 'network-only' });
+  const { loading, error, data, refetch } = useQuery(GET_BY_ID, { variables: { eventId: eventId }, fetchPolicy: 'network-only' });
 
-  const { loading: userLoading, error: userError, data: userData } = useQuery(usersQuery.GET_BY_ID, { variables: { id: authContext._id } });
+  const [fetchUser, { loading: userLoading, error: userError, data: userData }] = useLazyQuery(usersQuery.GET_BY_ID);
 
   useEffect(() => {
+    if (!data) {
+      window.scroll(0, 0);
+    }
+
     if (data) {
       setEvent(data.event);
     } else if (error) {
       console.log('Error : ', error);
-    } else if (!data) {
-      window.scroll(0, 0);
+    }
+
+    if (authContext.isAuthChecked && authContext.isAuth) {
+      fetchUser({ variables: { id: authContext._id } });
     }
 
     if (userData) {
@@ -60,9 +68,10 @@ export default function EventPage() {
 
   // Bouton inscription
   const [displayModal, toggleModal] = useToggle(false);
+
   const [isSubs, toggleSubs] = useToggle(false);
 
-  const [bookEvent, { error: bookEventError, data: bookEventData }] = useMutation(BOOK_EVENT_2);
+  const [bookEvent, { error: bookEventError, loading: bookEventLoading, data: bookEventData }] = useMutation(BOOK_EVENT_2);
 
   const handleSubsClick = () => {
     if (!authContext.isAuth) {
@@ -76,13 +85,7 @@ export default function EventPage() {
           participant: {
             user: authContext._id,
             booked_at: null,
-            group_detail: [
-              {
-                isChild: false,
-                name: 'Toto',
-                age: 10,
-              },
-            ],
+            group_detail: [],
           },
         },
       });
@@ -91,12 +94,19 @@ export default function EventPage() {
 
   useEffect(() => {
     if (bookEventData) {
+      refetch();
       toggleSubs();
     }
     if (bookEventError) {
       alert(bookEventError);
     }
   }, [bookEventError, bookEventData]);
+
+  const handleFinishSubs = () => {
+    refetch();
+    toggleSubs(true);
+    toggleSubModal(false);
+  };
 
   //Mis en favoris
   const [isPin, togglePin] = useToggle(false);
@@ -170,17 +180,29 @@ export default function EventPage() {
             <div>
               <div className='mt-5'>
                 {!isSubs ? (
-                  <button
-                    onClick={handleSubsClick}
-                    className='bg-kiddoGreen px-8 py-2 w-96 rounded-2xl mt-2 font-medium mb-5 hover:underline shadow-md shadow-kiddoShadow hover:scale-[1.01] transition-all'>
-                    S'inscrire à l'activité
-                  </button>
+                  <>
+                    <button
+                      onClick={authContext.isAuth ? toggleSubModal : toggleModal}
+                      className='bg-kiddoGreen px-8 py-2 w-96 rounded-2xl mt-2 font-medium mb-5 hover:underline shadow-md shadow-kiddoShadow hover:scale-[1.01] transition-all'>
+                      S'inscrire à l'activité
+                    </button>
+                    {displaySubModal && authContext.isAuth && (
+                      <ModalBackdrop
+                        composant={<ModalSubEvent eventId={eventId} closeModal={() => handleFinishSubs()} />}
+                        open={displaySubModal}
+                        onClose={() => toggleSubModal(false)}
+                      />
+                    )}
+                  </>
                 ) : (
                   <div className='relative flex items-center justify-center'>
                     <p className='absolute -top-5 text-center italic text-md'>Inscrit.e à l'activité</p>
                     <button
-                      onClick={handleSubsClick}
-                      className='bg-kiddoPurple px-8 py-2 w-96 rounded-2xl mt-2 font-medium mb-5 hover:underline shadow-md shadow-kiddoShadow hover:scale-[1.01] transition-all'>
+                      onClick={() => !bookEventLoading && handleSubsClick()}
+                      className={
+                        `bg-kiddoPurple px-8 py-2 w-96 rounded-2xl mt-2 font-medium mb-5 hover:underline shadow-md shadow-kiddoShadow hover:scale-[1.01] transition-all ` +
+                        (bookEventLoading && 'animate-pulse cursor-default')
+                      }>
                       Se désinscrire de l'activité
                     </button>
                   </div>
@@ -241,17 +263,29 @@ export default function EventPage() {
             <div>
               <div className='mt-5'>
                 {!isSubs ? (
-                  <button
-                    onClick={handleSubsClick}
-                    className='bg-kiddoGreen px-8 py-2 w-96 rounded-2xl mt-2 font-medium mb-5 hover:underline shadow-md shadow-kiddoShadow hover:scale-[1.01] transition-all'>
-                    S'inscrire à l'activité
-                  </button>
+                  <>
+                    <button
+                      onClick={authContext.isAuth ? toggleSubModal : toggleModal}
+                      className='bg-kiddoGreen px-8 py-2 w-96 rounded-2xl mt-2 font-medium mb-5 hover:underline shadow-md shadow-kiddoShadow hover:scale-[1.01] transition-all'>
+                      S'inscrire à l'activité
+                    </button>
+                    {displaySubModal && authContext.isAuth && (
+                      <ModalBackdrop
+                        composant={<ModalSubEvent eventId={eventId} closeModal={() => handleFinishSubs()} />}
+                        open={displaySubModal}
+                        onClose={() => toggleSubModal(false)}
+                      />
+                    )}
+                  </>
                 ) : (
                   <div className='relative flex items-center justify-center'>
                     <p className='absolute -top-5 text-center italic text-md'>Inscrit.e à l'activité</p>
                     <button
-                      onClick={handleSubsClick}
-                      className='bg-kiddoPurple px-8 py-2 w-96 rounded-2xl mt-2 font-medium mb-5 hover:underline shadow-md shadow-kiddoShadow hover:scale-[1.01] transition-all'>
+                      onClick={() => !bookEventLoading && handleSubsClick()}
+                      className={
+                        `bg-kiddoPurple px-8 py-2 w-96 rounded-2xl mt-2 font-medium mb-5 hover:underline shadow-md shadow-kiddoShadow hover:scale-[1.01] transition-all ` +
+                        (bookEventLoading && 'animate-pulse cursor-default')
+                      }>
                       Se désinscrire de l'activité
                     </button>
                   </div>
@@ -284,10 +318,14 @@ export default function EventPage() {
                     <span className='text-sm'>Plus que {event.group_size - event.group_participants.length} places</span>
                   </div>
                 </article>
-                <article className='flex items-center justify-around py-10'>
-                  {event.group_participants.map((group, index) => (
-                    <CardParticipant key={index} user={group.user} participants={group.group_detail} />
-                  ))}
+                <article className='flex items-center justify-center py-10'>
+                  {event.group_participants.map((group, index) => {
+                    return (
+                      <div className='mx-5' key={index}>
+                        <CardParticipant user={group.user} participants={group.group_detail} />
+                      </div>
+                    );
+                  })}
                 </article>
               </section>
               <CommentSection commentTarget={1} targetID={eventId} sectionName='Questions-réponses concernant l’activité' />
