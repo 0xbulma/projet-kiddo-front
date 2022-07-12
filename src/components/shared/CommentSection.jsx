@@ -17,7 +17,7 @@ import ModalBackdrop from './modal/ModalBackdrop';
 //Import asset
 import BlankProfilPic from '../../assets/admin/blank_profil_pic.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPaperPlane, faHeart, faFlag, faDotCircle, faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import { faPaperPlane, faHeart, faFlag, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import CommentSignalment from './Signalment';
 
 //commentTarget = 0 > user | 1 > event | 2 > article

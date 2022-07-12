@@ -120,22 +120,6 @@ export default function UserDashboardFav() {
   );
 }
 
-function DashboardCard({ title, path, isDisabled }) {
-  const navigate = useNavigate();
-  return (
-    <>
-      <article
-        className={
-          'w-full h-52 bg-kiddoGray flex flex-col items-center justify-center select-none rounded-lg shadow-sm shadow-kiddoShadow hover:shadow-md hover:shadow-blue-400 transition-all hover:scale-[1.01] cursor-pointer ' +
-          (isDisabled && 'bg-gray-400 cursor-default hover:ring-0 hover:shadow-kiddoShadow hover:scale-100')
-        }
-        onClick={() => !isDisabled && navigate(path)}>
-        <p>{title}</p>
-      </article>
-    </>
-  );
-}
-
 function DashboardActivityCard({ pinnedEvent }) {
   const navigate = useNavigate();
   const { _id } = useAuthContext();
