@@ -208,6 +208,7 @@ export default function ResultsSection({ categoryId, categoryName, searchInput }
                     location={data.adress}
                     date={data.event_date.start}
                     price={data.price}
+                    img={data.content_media.photo_main_url}
                   />
                 </Link>
               );
