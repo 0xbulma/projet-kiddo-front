@@ -1,5 +1,6 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import { FaChevronDown } from 'react-icons/fa';
+import { Fragment } from 'react';
 
 export default function Nav({
   isSearchOpen, navigation, closeSearchAndSub, toggleSubMenu
@@ -11,10 +12,10 @@ export default function Nav({
     <>
       {
         !isSearchOpen && (
-          <>
+          <ul className="navbar2__linklist">
             {navigation.map((item, index) => {
               return (
-                <ul className="navbar2__linklist" key={index}>
+                <Fragment key={index}>
                   {item === navigation[1] ? (
                       <li>
                         <div
@@ -32,10 +33,10 @@ export default function Nav({
                     </li>
                     
                   )}
-                </ul>
+                </Fragment>
               );
             })}
-          </>
+          </ul>
         )
       }
     </>

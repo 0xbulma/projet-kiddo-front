@@ -22,8 +22,8 @@ import "../navbar2/navbar2.css";
 const titleProp = navigationHeader.titleProp;
 const navigation = navigationHeader.navigation;
 const navIcon = navigationHeader.navIcon;
-// eslint-disable-next-line
-export default function Navbar({}) {
+
+export default function Navbar() {
   const search = useSearchContext();
 
   const [isSubOpen, setIsSubOpen] = useState(false);
@@ -120,11 +120,11 @@ export default function Navbar({}) {
       )}
       
       <section 
-        className={`navbar2__container ${scrollY > 2 && 'navbar2__container--scrolled'} ${
+        className={`py-[4px] navbar2__container ${scrollY > 2 && 'navbar2__container--scrolled'} ${
           !showNav && 'navbar2__container--hidden'
         }`}>
         <nav className='navbar2__innercontainer generic-container'>
-          <Logo titleProp={titleProp} className='w-28 md:navbar2_logo' />
+          <Logo titleProp={titleProp} className='w-28 navbar2_logo' />
           
           <div className='flex flex-row justify-between gap-x-2 md:-my-2 md:-mr-2 md:hidden'>
             <button type="button" className='text-black bg-white rounded-md hover:text-gray-500 hover:bg-gray-100'>
@@ -153,6 +153,8 @@ export default function Navbar({}) {
             </Popover.Button>
           </div>
           
+          
+            
           <div className="hidden md:flex-1 md:flex md:items-center md:justify-between">
             <Nav 
               navigation={navigation} 
@@ -160,6 +162,7 @@ export default function Navbar({}) {
               closeSearchAndSub={closeSearchAndSub}
               toggleSubMenu={toggleSubMenu}
             />
+          
             <NavIcon 
               navIcon={navIcon} 
               isSearchOpen={search.isSearchOpen}
@@ -172,6 +175,7 @@ export default function Navbar({}) {
               setIsModal={setIsModal}
               toggleProfile={toggleProfile}
             />
+            
           </div>
         </nav>
       </section>

@@ -8,7 +8,7 @@ export default function UserLayout({ composant }) {
   return (
     <>
       {/* <Navbar2 /> */}
-      <Header />
+      <Header /> 
       <div>{composant}</div>
       <Footer />
     </>
