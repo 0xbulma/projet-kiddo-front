@@ -31,17 +31,6 @@ export const GET_BY_ID = gql`
       last_name
       birthdate
       profil_picture
-      children {
-        age
-        gender
-        name
-      }
-      description
-      adress {
-        city
-        zip_code
-        adress_line
-      }
       pinned_events {
         pinned_at
         event {

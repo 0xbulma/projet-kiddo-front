@@ -8,21 +8,13 @@ import ProfileMenu from './ProfileMenu';
 
 // const isLoggedIn = true;
 
-export default function NavIcon({
-  navIcon,
-  isSearchOpen,
-  closeSearchInput,
-  closeSubMenu,
-  profileIsShown,
-  setIsModal,
-  onInputHandler,
-  showSearchInputHandler,
-  userInput,
-  toggleProfile,
+export default function NavIcon({ 
+  navIcon, isSearchOpen, closeSearchInput, closeSubMenu, profileIsShown, setIsModal, onInputHandler, showSearchInputHandler, userInput, toggleProfile
 }) {
+  
   const { isAuth, _id, loggedOut } = useAuthContext();
   const navigate = useNavigate();
-
+  
   return (
     <div className={`navbar2__icongroup ${isSearchOpen && 'navbar2__icongroup--grow '}`}>
       {navIcon.map((item, index) => {
@@ -88,5 +80,5 @@ export default function NavIcon({
         );
       })}
     </div>
-  );
+  )
 }

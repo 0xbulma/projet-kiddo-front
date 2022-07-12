@@ -19,6 +19,7 @@ import Kiddo from './pages/app/Kiddo';
 import Contact from './pages/app/Contact.jsx';
 import NotFound from './pages/app/NotFound.jsx';
 
+import CreateEvents from './pages/app/CreateEvents';
 import CategoryPage from './pages/app/CategoryPage';
 import EventPage from './pages/app/EventPage';
 import SearchPage from './pages/app/SearchPage';
@@ -56,6 +57,7 @@ root.render(
             <Route path='/contact' element={<UserLayout composant={<Contact />} />} />
             <Route path='/event/:eventId' element={<UserLayout composant={<EventPage />} />} />
             <Route path='/category/:category' element={<UserLayout composant={<CategoryPage />} />} />
+            <Route path='/create-event' element={<UserLayout composant={<CreateEvents />} />} />
             <Route path='*' element={<UserLayout composant={<NotFound />} />} />
             <Route path='/dashboard' element={<UserLayout composant={<UserDashboard />} />} />
             <Route path='/dashboard/activity' element={<UserLayout composant={<UserDashboardActivity />} />} />
@@ -70,10 +72,7 @@ root.render(
                 <Route path='/administration/users' element={<AdminLayout composant={<AdminUser />} />} />
                 <Route path='/administration/users/:id' element={<AdminLayout composant={<AdminUserProfil />} />} />
                 <Route path='/administration/reports' element={<AdminLayout composant={<Signalement />} />} />
-                <Route
-                  path='/administration/userTest'
-                  element={<AdminLayout composant={<AdminUserTestMutation />} />}
-                />
+                <Route path='/administration/userTest' element={<AdminLayout composant={<AdminUserTestMutation />} />} />
               </Fragment>
             )}
           </Routes>
