@@ -20,7 +20,7 @@ export default function Footer() {
       <h2 className="sr-only" id="footer-heading">
         Footer
       </h2>
-      <div className="footer-nav">
+      <div className="footer-nav generic-container">
         <section className="footer__content">
           <div className="footer__logo">
             <Logo titleProp={titleProps} className="w-56 h-56 -mt-16 ml-24" />

@@ -3,6 +3,7 @@ import { useQuery } from '@apollo/client';
 import { GET_UPCOMING_EVENTS, GET_LAST_PUBLISHED_EVENTS } from '../../graphql/query/events.query';
 import CategoryCard from '../../components/shared/card/CategoryCard';
 import ActivityCard from '../../components/shared/card/ActivityCard';
+import { useNavigate } from 'react-router-dom';
 
 // Import: Data categories
 import { CATEGORIES } from '../../utils/constants/categoryList';
@@ -17,6 +18,8 @@ import Skelet from '../../components/shared/loadingfiles/Skelet';
 const CURRENT_DATE = Date.now();
 
 export default function HomePage() {
+  let navigate = useNavigate();
+
   // GraphQL requests
   const {
     error: lastPublishedError,
@@ -48,6 +51,16 @@ export default function HomePage() {
     },
   });
 
+  const navigateHandler = () => {
+    navigate('/search');
+    window.scrollTo(({
+      top: 100,
+      left: 100,
+      behavior: 'auto'
+    }));
+  }
+
+
   return (
     <>
       {/* Main section */}
@@ -63,8 +76,8 @@ export default function HomePage() {
       {/* Button section */}
       <section>
         <article className='section__grid-4 mb-16 gap-8 mx-8 mt-2 md:-mt-10'>
-          <button className='main-button green-bg-gradient lg:col-start-2'>Participer aux activités</button>
-          <button className='main-button blue-bg-gradient lg:col-start-3'>Organise des activités</button>
+          <button className='main-button green-bg-gradient lg:col-start-2' onClick={navigateHandler}>Participer aux activités</button>
+          <button className='main-button blue-bg-gradient lg:col-start-3' onClick={navigateHandler}>Organise des activités</button>
         </article>
       </section>
 
@@ -91,7 +104,7 @@ export default function HomePage() {
             <h2 className='home-section__title'>Activités prévues cette semaine</h2>
             <div className='flex items-center'>
               <img src={ICON_CALENDAR} alt='' />
-              <p className='md:ml-4 md:mr-10 text-xl md:text-2xl underline'>Calendrier des activités</p>
+              <button className='md:ml-4 md:mr-10 text-xl md:text-2xl underline' onClick={navigateHandler}>Calendrier des activités</button>
             </div>
           </div>
           <div className='section__grid-3'>
@@ -122,6 +135,7 @@ export default function HomePage() {
                         location={event.adress}
                         date={event.event_date.start}
                         price={event.price}
+                        img={event.content_media.photo_main_url}
                       />
                     </Link>
                   );
@@ -138,7 +152,7 @@ export default function HomePage() {
           <div className='flex flex-col md:flex-row justify-between items-center mb-5'>
             <h2 className='home-section__title'>Nouvelles activités publiées</h2>
             <div className='flex items-center'>
-              <p className='md:ml-4 md:mr-10 mt-5 md:mt-0 text-xl md:text-2xl underline'>Voir plus d'activités</p>
+              <button className='md:ml-4 md:mr-10 mt-5 md:mt-0 text-xl md:text-2xl underline' onClick={navigateHandler}>Voir plus d'activités</button>
             </div>
           </div>
           <div className='section__grid-3'>
@@ -169,6 +183,7 @@ export default function HomePage() {
                         location={event.adress}
                         date={event.event_date.start}
                         price={event.price}
+                        img={event.content_media.photo_main_url}
                       />
                     </Link>
                   );

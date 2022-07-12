@@ -112,7 +112,7 @@ export default function Navbar() {
 
   useEventListener('scroll', scrollHandler);
   useEventListener('keydown', handler);
-  
+
   return (
     <>
       {isModal && (
@@ -144,8 +144,7 @@ export default function Navbar() {
                 </div>
               ) : (
                 <ISearch onClick={showSearchInputHandler} className='navbar2__icon' />
-              )
-            }
+              )}
             </button>
             <Popover.Button className='inline-flex justify-center p-2 text-black bg-white rounded-md hover:text-gray-500 hover:bg-gray-100'>
               <span className='sr-only'>Open menu</span>

@@ -14,9 +14,7 @@ import { getCategoryColorForCSS } from '../../../utils/constants/categoryColors'
 import useAuthContext from '../../../hooks/useAuthContext';
 import { GET_BY_ID } from '../../../graphql/query/users.query';
 import { useEffect } from 'react';
-import Skelet from '../../../components/shared/loadingfiles/Skelet';
 import { getCategoryById } from '../../../utils/constants/categoryList';
-import { PIN_EVENT } from '../../../graphql/mutation/users.mutation';
 
 export default function UserDashboardFav() {
   const navigate = useNavigate();
@@ -120,32 +118,42 @@ export default function UserDashboardFav() {
   );
 }
 
-function DashboardActivityCard({ pinnedEvent }) {
+function DashboardActivityCard({ bookedEvent }) {
   const navigate = useNavigate();
   const { _id } = useAuthContext();
-  const event = pinnedEvent?.event;
-
-  console.log('Pinned Event : ', pinnedEvent);
-  console.log('Event :', event);
+  const event = bookedEvent?.event;
 
   const categoryName = getCategoryById(event?.categories._id);
   const categoryColor = getCategoryColorForCSS(categoryName);
 
-  const [bookEvent, { error: pinnedEventError, data: pinnedEventData }] = useMutation(PIN_EVENT);
+  const [bookEvent, { data: removeBookData }] = useMutation();
+
+  const handleSubsClick = () => {
+    bookEvent({
+      variables: {
+        id: _id,
+        eventId: event._id,
+        bookedAt: null,
+        participant: {
+          user: _id,
+          booked_at: null,
+        },
+      },
+    });
+  };
 
   useEffect(() => {
-    if (pinnedEventData) {
-      console.log('pinnedEvent Event data !');
-      navigate('.');
+    if (removeBookData) {
+      navigate('./');
     }
-  }, pinnedEventData);
+  }, [removeBookData]);
 
   return (
     <>
       {event === undefined || event === null ? (
-        <Skelet />
-      ) : pinnedEventError ? (
-        <p className='text-red-500 text-lg font-medium'>Erreur lors du chargement de l'événement</p>
+        <>
+          <p>Aucun événement en cours...</p>
+        </>
       ) : (
         <>
           <article className='section__grid-2 bg-kiddoGray rounded-xl'>
@@ -180,17 +188,7 @@ function DashboardActivityCard({ pinnedEvent }) {
                 <div className='p-1 bg-kiddoPurple mr-3 text-white'>
                   <FaTimes />
                 </div>
-                <p
-                  className='hover:underline select-none cursor-pointer'
-                  onClick={() =>
-                    bookEvent({
-                      variables: {
-                        id: _id,
-                        eventId: event._id,
-                        pinnedAt: Date.now(),
-                      },
-                    })
-                  }>
+                <p className='hover:underline select-none cursor-pointer' onClick={() => handleSubsClick()}>
                   Annuler ma participation
                 </p>
               </div>

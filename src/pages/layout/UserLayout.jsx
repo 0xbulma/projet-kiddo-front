@@ -4,7 +4,6 @@ import Header from '../../components/app/header/Header'
 
 
 export default function UserLayout({ composant }) {
-
   return (
     <>
       {/* <Navbar2 /> */}
