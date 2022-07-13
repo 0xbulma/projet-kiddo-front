@@ -44,6 +44,10 @@ import './style.css';
 let isAdmin = true;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+console.log("Launch REACT Project with NODE_ENV :", process.env.NODE_ENV);
+console.log("Front URL is : ", (process.env.REACT_APP_ENV === 'DEV'
+? process.env.REACT_APP_DEV_GRAPHQL_ENDPOINT
+: process.env.REACT_APP_PROD_GRAPHQL_ENDPOINT));
 
 root.render(
   // <React.StrictMode>

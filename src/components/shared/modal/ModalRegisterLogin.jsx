@@ -80,7 +80,7 @@ function Register({ loginSubtitle, registerSubtitle, isLoginPage, closeModal }) 
       setErrors(tempErrors);
     }
 
-    setDataInput({ ...dataInput, email: 'tutu', cgu: false });
+    setDataInput({ ...dataInput, cgu: false });
   };
 
   const tryConnectUser = () => {
